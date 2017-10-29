@@ -12,7 +12,8 @@
   "repository": "https://github.com/r-wittmann/ibc-portal-frontend.git",
   "dependencies": {
     "react": "^15.5.4",
-    "react-dom": "^15.5.4"
+    "react-dom": "^15.5.4",
+    "react-router-dom": "^4.2.2"
   },
   "devDependencies": {
     "react-scripts": "0.9.5"
