@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import HomePage from './HomePage';
 import Login from './Login';
+import Register from './Register';
 
 import Companies from './company/Companies';
 import Company from './company/Company';
@@ -32,6 +33,7 @@ class App extends Component {
                 {!backendService.isAuthenticated() ? (
                     <Switch>
                         <Route exact path={'/login'} component={Login}/>
+                        <Route exact path={'/register'} component={Register}/>
                         <Redirect to={'/login'}/>
                     </Switch>
                 ) : (

@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import backendService from '../backendService';
 
-class Login extends Component {
+class Register extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: 'new user',
-            password: 'test123'
+            email: '',
+            password: ''
         };
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleSubmit = (event) => {
-        backendService.login(this.state.email, this.state.password)
-            .then(() => this.props.history.push('/home'));
+        backendService.register(this.state.email, this.state.password)
+            .then(() => this.props.history.push('/login'));
         event.preventDefault();
     };
 
@@ -21,8 +21,8 @@ class Login extends Component {
         return (
             <div>
                 <div>
-                    Login
-                    <button onClick={() => this.props.history.push('/register')}>Register</button>
+                    Register
+                    <button onClick={() => this.props.history.push('/login')}>Login</button>
                 </div>
                 <form onSubmit={this.handleSubmit}>
                     <div>
@@ -43,7 +43,7 @@ class Login extends Component {
                         </label>
                     </div>
                     <div>
-                        <input type={'submit'} value={'Login'}/>
+                        <input type={'submit'} value={'Register'}/>
                     </div>
                 </form>
             </div>
@@ -51,4 +51,4 @@ class Login extends Component {
     }
 }
 
-export default Login;
+export default Register;
