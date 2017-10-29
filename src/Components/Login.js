@@ -25,13 +25,18 @@ class Login extends Component {
                     <div>
                         <label>
                             E-Mail:
-                            <input type={'text'} onChange={(event) => this.setState({ email: event.target.value })}/>
+                            <input
+                                type={'text'}
+                                value={this.state.email}
+                                onChange={(event) => this.setState({ email: event.target.value })}/>
                         </label>
                     </div>
                     <div>
                         <label>Password:
-                            <input type={'password'}
-                                   onChange={(event) => this.setState({ password: event.target.value })}/>
+                            <input
+                                type={'password'}
+                                value={this.state.password}
+                                onChange={(event) => this.setState({ password: event.target.value })}/>
                         </label>
                     </div>
                     <div>

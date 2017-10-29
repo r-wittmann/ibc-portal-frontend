@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import HomePage from './HomePage';
 import Login from './Login';
-import Companies from './Companies';
-import Company from './Company';
-import CompanyCreate from './CompanyCreate';
+import Companies from './company/Companies';
+import Company from './company/Company';
+import CompanyCreate from './company/CompanyCreate';
 import backendService from '../backendService';
 
 class App extends Component {

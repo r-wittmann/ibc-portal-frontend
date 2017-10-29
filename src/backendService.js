@@ -90,6 +90,28 @@ class BackendService {
             .then(checkStatus)
             .then(convertResponseToJson);
     }
+
+    static updateCompany(id, company) {
+        return fetch(`${baseUrl}/api/companies/${id}`, {
+            method: 'PUT',
+            headers: {
+                'x-access-token': localStorage.getItem('ibc-user-token'),
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({ company })
+        })
+            .then(checkStatus)
+            .then(convertResponseToJson);
+    }
+
+    static deleteCompany(id) {
+        return fetch(`${baseUrl}/api/companies/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'x-access-token': localStorage.getItem('ibc-user-token')
+            }
+        })
+    }
 }
 
 export default BackendService

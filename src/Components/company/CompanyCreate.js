@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import backendService from '../backendService';
+import backendService from '../../backendService';
 
 class CompanyCreate extends Component {
     constructor(props) {
@@ -26,13 +25,19 @@ class CompanyCreate extends Component {
                     <div>
                         <label>
                             Name:
-                            <input type={'text'} onChange={(event) => this.setState({name: event.target.value})}/>
+                            <input
+                                type={'text'}
+                                value={this.state.name}
+                                onChange={(event) => this.setState({name: event.target.value})}/>
                         </label>
                     </div>
                     <div>
                         <label>
                             Address:
-                            <input type={'text'} onChange={(event) => this.setState({address: event.target.value})}/>
+                            <input
+                                type={'text'}
+                                value={this.state.address}
+                                onChange={(event) => this.setState({address: event.target.value})}/>
                         </label>
                     </div>
                     <div>
@@ -40,9 +45,9 @@ class CompanyCreate extends Component {
                     </div>
                 </form>
                 <div>
-                    <Link to={'/companies'}>
-                        Back
-                    </Link>
+                    <button onClick={() => this.props.history.push('/companies')}>
+                        back
+                    </button>
                 </div>
             </div>
         );

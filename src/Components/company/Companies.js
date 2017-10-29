@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import backendService from '../backendService';
+import backendService from '../../backendService';
 
 class Companies extends Component {
     constructor(props) {
@@ -27,14 +27,14 @@ class Companies extends Component {
                     )}
                 </div>
                 <div>
-                    <Link to={'/companies/create'}>
+                    <button onClick={() => this.props.history.push('/companies/create')}>
                         create new company
-                    </Link>
+                    </button>
                 </div>
                 <div>
-                    <Link to={'/home'}>
+                    <button onClick={() => this.props.history.push('/home')}>
                         home
-                    </Link>
+                    </button>
                 </div>
             </div>
         );
