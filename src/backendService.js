@@ -7,6 +7,9 @@ const checkStatus = (response) => {
     if (response.status >= 200 && response.status < 300) {
         return response;
     }
+    if (response.status === 403) {
+        localStorage.removeItem('ibc-user-token');
+    }
     const error = new Error(response.statusText);
     error.response = response;
     throw error;
