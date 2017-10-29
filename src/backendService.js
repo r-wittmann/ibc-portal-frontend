@@ -173,6 +173,67 @@ class BackendService {
             }
         })
     }
+
+    // =================
+    // Posting endpoints
+    // =================
+
+    static getPostings() {
+        return fetch(`${baseUrl}/api/postings`, {
+            method: 'GET',
+            headers: {
+                'x-access-token': localStorage.getItem('ibc-user-token')
+            },
+        })
+            .then(checkStatus)
+            .then(convertResponseToJson);
+    }
+
+    static getPostingById(id) {
+        return fetch(`${baseUrl}/api/postings/${id}`, {
+            method: 'GET',
+            headers: {
+                'x-access-token': localStorage.getItem('ibc-user-token')
+            },
+        })
+            .then(checkStatus)
+            .then(convertResponseToJson);
+    }
+
+    static createPosting(title, subtitle, content, company, recruiter) {
+        return fetch(`${baseUrl}/api/postings`, {
+            method: 'POST',
+            headers: {
+                'x-access-token': localStorage.getItem('ibc-user-token'),
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({ title: title, subtitle: subtitle, content: content, company: company, recruiter: recruiter })
+        })
+            .then(checkStatus)
+            .then(convertResponseToJson);
+    }
+
+    static updatePosting(id, posting) {
+        return fetch(`${baseUrl}/api/postings/${id}`, {
+            method: 'PUT',
+            headers: {
+                'x-access-token': localStorage.getItem('ibc-user-token'),
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({ posting })
+        })
+            .then(checkStatus)
+            .then(convertResponseToJson);
+    }
+
+    static deletePosting(id) {
+        return fetch(`${baseUrl}/api/postings/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'x-access-token': localStorage.getItem('ibc-user-token')
+            }
+        })
+    }
 }
 
 export default BackendService

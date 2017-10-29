@@ -11,6 +11,10 @@ import Recruiters from "./recruiter/Recruiters";
 import Recruiter from "./recruiter/Recruiter";
 import RecruiterCreate from "./recruiter/RecruiterCreate";
 
+import Postings from "./postings/Postings";
+import Posting from "./postings/Posting";
+import PostingCreate from "./postings/PostingCreate";
+
 import backendService from '../backendService';
 
 class App extends Component {
@@ -41,9 +45,9 @@ class App extends Component {
                         <Route exact path={'/recruiters'} component={Recruiters}/>
                         <Route exact path={'/recruiters/create'} component={RecruiterCreate}/>
                         <Route exact path={'/recruiters/:id'} component={Recruiter}/>
-                        <Route exact path={'/recruiters/:id'}/>
-                        <Route exact path={'/postings'}/>
-                        <Route exact path={'/postings/:id'}/>
+                        <Route exact path={'/postings'} component={Postings}/>
+                        <Route exact path={'/postings/create'} component={PostingCreate}/>
+                        <Route exact path={'/postings/:id'} component={Posting}/>
                     </Switch>
                 )}
 
