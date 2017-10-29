@@ -60,8 +60,69 @@ class BackendService {
             .then((json) => localStorage.setItem('ibc-user-token', json.token));
     }
 
+    static adminLogin(email, password) {
+        return fetch(`${baseUrl}/admin/authenticate`, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({ name: email, password: password })
+        })
+            .then(checkStatus)
+            .then(convertResponseToJson)
+            .then((json) => localStorage.setItem('ibc-user-token', json.token));
+    }
+
     static logout() {
         localStorage.removeItem('ibc-user-token');
+    }
+
+    // ====================
+    // admin user endpoints
+    // ====================
+
+    static getUsers() {
+        return fetch(`${baseUrl}/admin/users`, {
+            method: 'GET',
+            headers: {
+                'x-access-token': localStorage.getItem('ibc-user-token')
+            },
+        })
+            .then(checkStatus)
+            .then(convertResponseToJson);
+    }
+
+    static getUserById(id) {
+        return fetch(`${baseUrl}/admin/users/${id}`, {
+            method: 'GET',
+            headers: {
+                'x-access-token': localStorage.getItem('ibc-user-token')
+            },
+        })
+            .then(checkStatus)
+            .then(convertResponseToJson);
+    }
+
+    static acceptUser(id) {
+        return fetch(`${baseUrl}/admin/users/${id}/accept`, {
+            method: 'PATCH',
+            headers: {
+                'x-access-token': localStorage.getItem('ibc-user-token')
+            },
+        })
+            .then(checkStatus)
+            .then(convertResponseToJson);
+    }
+
+    static deleteUser(id) {
+        return fetch(`${baseUrl}/admin/users/${id}/decline`, {
+            method: 'DELETE',
+            headers: {
+                'x-access-token': localStorage.getItem('ibc-user-token')
+            },
+        })
+            .then(checkStatus)
+            .then(convertResponseToJson);
     }
 
     // =================

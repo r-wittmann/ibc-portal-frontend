@@ -3,6 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import HomePage from './HomePage';
 import Login from './Login';
 import Register from './Register';
+import AdminLogin from './AdminLogin';
 
 import Companies from './company/Companies';
 import Company from './company/Company';
@@ -15,6 +16,9 @@ import RecruiterCreate from "./recruiter/RecruiterCreate";
 import Postings from "./postings/Postings";
 import Posting from "./postings/Posting";
 import PostingCreate from "./postings/PostingCreate";
+
+import Users from './users/Users';
+import User from './users/User';
 
 import backendService from '../backendService';
 
@@ -34,6 +38,7 @@ class App extends Component {
                     <Switch>
                         <Route exact path={'/login'} component={Login}/>
                         <Route exact path={'/register'} component={Register}/>
+                        <Route exact path={'/admin/login'} component={AdminLogin}/>
                         <Redirect to={'/login'}/>
                     </Switch>
                 ) : (
@@ -50,6 +55,8 @@ class App extends Component {
                         <Route exact path={'/postings'} component={Postings}/>
                         <Route exact path={'/postings/create'} component={PostingCreate}/>
                         <Route exact path={'/postings/:id'} component={Posting}/>
+                        <Route exact path={'/admin/users'} component={Users}/>
+                        <Route exact path={'/admin/users/:id'} component={User}/>
                     </Switch>
                 )}
 
