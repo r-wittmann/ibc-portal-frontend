@@ -1,0 +1,20 @@
+{
+  "name": "ibc-portal-frontend",
+  "version": "0.0.1",
+  "description": "Frontend for IBC job portal prototype",
+  "main": "index.js",
+  "scripts": {
+    "dev": "react-scripts start",
+    "build": "react-scripts build"
+  },
+  "author": "Rainer Wittmann <r-wittmann@gmx.net>",
+  "license": "MIT",
+  "repository": "https://github.com/r-wittmann/ibc-portal-frontend.git",
+  "dependencies": {
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4"
+  },
+  "devDependencies": {
+    "react-scripts": "0.9.5"
+  }
+}
