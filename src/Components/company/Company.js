@@ -38,7 +38,7 @@ class Company extends Component {
                                     Name:
                                     <input
                                         type={'text'}
-                                        value={this.state.company ? this.state.company.name : ''}
+                                        value={this.state.company.name}
                                         onChange={(event) => this.setState({
                                             company: Object.assign({}, this.state.company, { name: event.target.value })
                                         })}/>
@@ -49,7 +49,7 @@ class Company extends Component {
                                     Address:
                                     <input
                                         type={'text'}
-                                        value={this.state.company ? this.state.company.address : ''}
+                                        value={this.state.company.address}
                                         onChange={(event) => this.setState({
                                             company: Object.assign({}, this.state.company, { address: event.target.value })
                                         })}/>

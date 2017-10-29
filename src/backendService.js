@@ -112,6 +112,67 @@ class BackendService {
             }
         })
     }
+
+    // ===================
+    // Recruiter endpoints
+    // ===================
+
+    static getRecruiters() {
+        return fetch(`${baseUrl}/api/recruiters`, {
+            method: 'GET',
+            headers: {
+                'x-access-token': localStorage.getItem('ibc-user-token')
+            },
+        })
+            .then(checkStatus)
+            .then(convertResponseToJson);
+    }
+
+    static getRecruiterById(id) {
+        return fetch(`${baseUrl}/api/recruiters/${id}`, {
+            method: 'GET',
+            headers: {
+                'x-access-token': localStorage.getItem('ibc-user-token')
+            },
+        })
+            .then(checkStatus)
+            .then(convertResponseToJson);
+    }
+
+    static createRecruiter(name, email, telephone) {
+        return fetch(`${baseUrl}/api/recruiters`, {
+            method: 'POST',
+            headers: {
+                'x-access-token': localStorage.getItem('ibc-user-token'),
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({ name: name, email: email, telephone: telephone })
+        })
+            .then(checkStatus)
+            .then(convertResponseToJson);
+    }
+
+    static updateRecruiter(id, recruiter) {
+        return fetch(`${baseUrl}/api/recruiters/${id}`, {
+            method: 'PUT',
+            headers: {
+                'x-access-token': localStorage.getItem('ibc-user-token'),
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({ recruiter })
+        })
+            .then(checkStatus)
+            .then(convertResponseToJson);
+    }
+
+    static deleteRecruiter(id) {
+        return fetch(`${baseUrl}/api/recruiters/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'x-access-token': localStorage.getItem('ibc-user-token')
+            }
+        })
+    }
 }
 
 export default BackendService
