@@ -52,6 +52,10 @@ class BackendService {
         localStorage.removeItem('ibc-user-token');
     }
 
+    // =================
+    // Company endpoints
+    // =================
+
     static getCompanies() {
         return fetch(`${baseUrl}/api/companies`, {
             method: 'GET',
@@ -60,7 +64,31 @@ class BackendService {
             },
         })
             .then(checkStatus)
-            .then(convertResponseToJson)
+            .then(convertResponseToJson);
+    }
+
+    static getCompanyById(id) {
+        return fetch(`${baseUrl}/api/companies/${id}`, {
+            method: 'GET',
+            headers: {
+                'x-access-token': localStorage.getItem('ibc-user-token')
+            },
+        })
+            .then(checkStatus)
+            .then(convertResponseToJson);
+    }
+
+    static createCompany(name, address) {
+        return fetch(`${baseUrl}/api/companies`, {
+            method: 'POST',
+            headers: {
+                'x-access-token': localStorage.getItem('ibc-user-token'),
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({ name: name, address: address })
+        })
+            .then(checkStatus)
+            .then(convertResponseToJson);
     }
 }
 

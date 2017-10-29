@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import backendService from '../backendService';
 
 class Companies extends Component {
-    constructor (props) {
+    constructor(props) {
         super(props);
         this.state = {
             companies: []
@@ -12,7 +12,7 @@ class Companies extends Component {
 
     componentDidMount() {
         backendService.getCompanies()
-            .then((response) => this.setState({companies: response}));
+            .then((companies) => this.setState({ companies }));
     }
 
     render() {
@@ -20,9 +20,16 @@ class Companies extends Component {
             <div>
                 <div>Companies</div>
                 <div>
-                {this.state.companies.map((company) =>
-                    <div key={company._id}>{company.name}</div>
-                )}
+                    {this.state.companies.map((company) =>
+                        <div key={company._id}>
+                            <Link to={`/companies/${company._id}`}>{company.name}</Link>
+                        </div>
+                    )}
+                </div>
+                <div>
+                    <Link to={'/companies/create'}>
+                        create new company
+                    </Link>
                 </div>
                 <div>
                     <Link to={'/home'}>

@@ -3,6 +3,8 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import HomePage from './HomePage';
 import Login from './Login';
 import Companies from './Companies';
+import Company from './Company';
+import CompanyCreate from './CompanyCreate';
 import backendService from '../backendService';
 
 class App extends Component {
@@ -28,7 +30,8 @@ class App extends Component {
                         <Redirect exact from={'/login'} to="/home"/>
                         <Route exact path={'/home'} component={HomePage}/>
                         <Route exact path={'/companies'} component={Companies}/>
-                        <Route exact path={'/companies/:id'}/>
+                        <Route exact path={'/companies/create'} component={CompanyCreate}/>
+                        <Route exact path={'/companies/:id'} component={Company}/>
                         <Route exact path={'/recruiters'}/>
                         <Route exact path={'/recruiters/:id'}/>
                         <Route exact path={'/postings'}/>
