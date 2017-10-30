@@ -17,7 +17,7 @@ class Users extends Component {
 
     handleLogout = (event) => {
         backendService.logout();
-        this.props.history.push('/admin-login');
+        this.props.history.push('/admin/login');
         event.preventDefault();
     };
 
