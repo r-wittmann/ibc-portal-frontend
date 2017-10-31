@@ -6,13 +6,19 @@ class Users extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            users: []
+            acceptedUsers: [],
+            unacceptedUsers: []
         };
     }
 
     componentDidMount() {
         backendService.getUsers()
-            .then((users) => this.setState({ users }));
+            .then((users) => {
+                this.setState({
+                    acceptedUsers: users.filter(user => user.regAccepted === true),
+                    unacceptedUsers: users.filter(user => user.regAccepted === false)
+                })
+            });
     }
 
     handleLogout = (event) => {
@@ -24,14 +30,26 @@ class Users extends Component {
     render() {
         return (
             <div>
-                <div>Users</div>
+                <div>Accepted Users</div>
                 <div>
-                    {this.state.users.map((user) =>
+                    {this.state.acceptedUsers.map((user) =>
                         <div key={user._id}>
                             <Link to={`/admin/users/${user._id}`}>{user.name}</Link>
                         </div>
                     )}
                 </div>
+                {this.state.unacceptedUsers.length > 0 && (
+                    <div>
+                        <div>Unaccepted Users</div>
+                        <div>
+                            {this.state.unacceptedUsers.map((user) =>
+                                <div key={user._id}>
+                                    <Link to={`/admin/users/${user._id}`}>{user.name}</Link>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                )}
                 <div>
                     <div>
                         <button onClick={this.handleLogout}>Logout</button>
