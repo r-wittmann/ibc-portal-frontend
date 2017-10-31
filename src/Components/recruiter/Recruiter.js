@@ -1,26 +1,40 @@
 import React, { Component } from 'react';
 import backendService from '../../backendService';
+import InputLabel from "../commons/InputLabel";
+import defaultRecruiter from '../commons/defaultRecruiter';
 
 class Recruiter extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            recruiter: undefined
+            recruiter: undefined,
+            create: this.props.match.params.id === 'create'
         };
-        this.handleDelete = this.handleDelete.bind(this);
     }
 
     componentDidMount() {
-        backendService.getRecruiterById(this.props.match.params.id)
-            .then(recruiter => this.setState({ recruiter }))
+        if (!this.state.create) {
+            backendService.getRecruiterById(this.props.match.params.id)
+                .then(recruiter => this.setState({ recruiter }));
+        } else {
+            this.setState({ recruiter: defaultRecruiter });
+        }
     }
 
-    handleSubmit = () => {
-        backendService.updateRecruiter(this.props.match.params.id, this.state.recruiter)
-            .then(recruiter => this.setState({ recruiter }))
+    handleSubmit = (event) => {
+        event.preventDefault();
+        if (!this.state.create) {
+            backendService.updateRecruiter(this.props.match.params.id, this.state.recruiter)
+                .then(response => this.setState({ recruiter: response.recruiter }))
+        } else {
+            backendService.createRecruiter(this.state.recruiter)
+                .then(response => this.props.history.push(`/recruiters/${response.id}`));
+        }
+
     };
 
     handleDelete = () => {
+        event.preventDefault();
         backendService.deleteRecruiter(this.state.recruiter._id);
         this.props.history.push('/home');
     };
@@ -29,55 +43,44 @@ class Recruiter extends Component {
         return (
             <div>
                 <div>Recruiter</div>
-                <div>
-                    {this.state.recruiter && (
-                        <form onSubmit={this.handleSubmit}>
-                            <div>
-                                <label>
-                                    Name:
-                                    <input
-                                        type={'text'}
-                                        value={this.state.recruiter.name}
-                                        onChange={(event) => this.setState({
-                                            recruiter: Object.assign({}, this.state.recruiter, { name: event.target.value })
-                                        })}/>
-                                </label>
-                            </div>
-                            <div>
-                                <label>
-                                    Email:
-                                    <input
-                                        type={'text'}
-                                        value={this.state.recruiter.email}
-                                        onChange={(event) => this.setState({
-                                            recruiter: Object.assign({}, this.state.recruiter, { email: event.target.value })
-                                        })}/>
-                                </label>
-                            </div>
-                            <div>
-                                <label>
-                                    Telephone:
-                                    <input
-                                        type={'text'}
-                                        value={this.state.recruiter.telephone}
-                                        onChange={(event) => this.setState({
-                                            recruiter: Object.assign({}, this.state.recruiter, { telephone: event.target.value })
-                                        })}/>
-                                </label>
-                            </div>
-                            <div>
-                                <input type={'submit'} value={'Submit'}/>
-                            </div>
-                        </form>
-                    )}
+                {this.state.recruiter && (
+                    <form onSubmit={this.handleSubmit}>
+                        <InputLabel
+                            label={'Name'}
+                            value={this.state.recruiter.name}
+                            onChange={(name) => this.setState({
+                                recruiter: Object.assign({}, this.state.recruiter, { name })
+                            })}/>
+                        <InputLabel
+                            label={'Email'}
+                            value={this.state.recruiter.email}
+                            onChange={(email) => this.setState({
+                                recruiter: Object.assign({}, this.state.recruiter, { email })
+                            })}/>
+                        <InputLabel
+                            label={'Telephone'}
+                            value={this.state.recruiter.telephone}
+                            onChange={(telephone) => this.setState({
+                                recruiter: Object.assign({}, this.state.recruiter, { telephone })
+                            })}/>
+                        <InputLabel
+                            label={'Position'}
+                            value={this.state.recruiter.position}
+                            onChange={(position) => this.setState({
+                                recruiter: Object.assign({}, this.state.recruiter, { position })
+                            })}/>
+                        <div>
+                            <input type={'submit'} value={this.state.create ? 'Save' : 'Update'}/>
+                        </div>
+                    </form>
+                )}
+                {!this.state.create && (
                     <div>
                         <button onClick={this.handleDelete}>delete this recruiter</button>
                     </div>
-                    <div>
-                        <button onClick={() => this.props.history.push('/recruiters')}>
-                            back
-                        </button>
-                    </div>
+                )}
+                <div>
+                    <button onClick={() => this.props.history.push('/recruiters')}>back</button>
                 </div>
             </div>
         );

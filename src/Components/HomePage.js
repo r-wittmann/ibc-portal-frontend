@@ -3,16 +3,11 @@ import { Link } from 'react-router-dom';
 import backendService from '../backendService';
 
 class HomePage extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {};
-        this.handleLogout = this.handleLogout.bind(this);
-    }
 
     handleLogout = (event) => {
+        event.preventDefault();
         backendService.logout();
         this.props.history.push('/login');
-        event.preventDefault();
     };
 
     render() {

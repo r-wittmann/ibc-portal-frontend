@@ -7,7 +7,6 @@ class User extends Component {
         this.state = {
             user: undefined
         };
-        this.handleDelete = this.handleDelete.bind(this);
     }
 
     componentDidMount() {
@@ -18,12 +17,12 @@ class User extends Component {
     }
 
     handleAccept = () => {
-        backendService.acceptUser(this.props.match.params.id)
+        backendService.acceptUser(this.state.user._id)
             .then(() => this.props.history.push('/admin/users'));
     };
 
     handleDelete = () => {
-        backendService.deleteUser(this.props.match.params.id)
+        backendService.deleteUser(this.state.user._id)
             .then(() => this.props.history.push('/admin/users'));
     };
 
@@ -40,7 +39,7 @@ class User extends Component {
                             Approved: {this.state.user.regAccepted.toString()}
                         </div>
 
-                        < button onClick={this.handleDelete}>delete</button>
+                        <button onClick={this.handleDelete}>delete</button>
                         {this.state.user && !this.state.user.regAccepted && (
                             <button onClick={this.handleAccept}>accept</button>
                         )}

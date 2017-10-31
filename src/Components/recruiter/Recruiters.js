@@ -19,13 +19,11 @@ class Recruiters extends Component {
         return (
             <div>
                 <div>Recruiters</div>
-                <div>
-                    {this.state.recruiters.map((recruiter) =>
-                        <div key={recruiter._id}>
-                            <Link to={`/recruiters/${recruiter._id}`}>{recruiter.name}</Link>
-                        </div>
-                    )}
-                </div>
+                {this.state.recruiters.map((recruiter) =>
+                    <div key={recruiter._id}>
+                        <Link to={`/recruiters/${recruiter._id}`}>{recruiter.name}</Link>
+                    </div>
+                )}
                 <div>
                     <button onClick={() => this.props.history.push('/recruiters/create')}>
                         create new recruiter

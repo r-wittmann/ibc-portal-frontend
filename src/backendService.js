@@ -151,14 +151,14 @@ class BackendService {
             .then(convertResponseToJson);
     }
 
-    static createCompany(name, address) {
+    static createCompany(company) {
         return fetch(`${baseUrl}/api/companies`, {
             method: 'POST',
             headers: {
                 'x-access-token': localStorage.getItem('ibc-user-token'),
                 'content-type': 'application/json'
             },
-            body: JSON.stringify({ name: name, address: address })
+            body: JSON.stringify(company)
         })
             .then(checkStatus)
             .then(convertResponseToJson);
@@ -171,7 +171,7 @@ class BackendService {
                 'x-access-token': localStorage.getItem('ibc-user-token'),
                 'content-type': 'application/json'
             },
-            body: JSON.stringify({ company })
+            body: JSON.stringify(company)
         })
             .then(checkStatus)
             .then(convertResponseToJson);
@@ -212,14 +212,14 @@ class BackendService {
             .then(convertResponseToJson);
     }
 
-    static createRecruiter(name, email, telephone) {
+    static createRecruiter(recruiter) {
         return fetch(`${baseUrl}/api/recruiters`, {
             method: 'POST',
             headers: {
                 'x-access-token': localStorage.getItem('ibc-user-token'),
                 'content-type': 'application/json'
             },
-            body: JSON.stringify({ name: name, email: email, telephone: telephone })
+            body: JSON.stringify(recruiter)
         })
             .then(checkStatus)
             .then(convertResponseToJson);
@@ -232,7 +232,7 @@ class BackendService {
                 'x-access-token': localStorage.getItem('ibc-user-token'),
                 'content-type': 'application/json'
             },
-            body: JSON.stringify({ recruiter })
+            body: JSON.stringify(recruiter)
         })
             .then(checkStatus)
             .then(convertResponseToJson);

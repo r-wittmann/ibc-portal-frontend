@@ -22,38 +22,32 @@ class Users extends Component {
     }
 
     handleLogout = (event) => {
+        event.preventDefault();
         backendService.logout();
         this.props.history.push('/admin/login');
-        event.preventDefault();
     };
 
     render() {
         return (
             <div>
                 <div>Accepted Users</div>
-                <div>
-                    {this.state.acceptedUsers.map((user) =>
-                        <div key={user._id}>
-                            <Link to={`/admin/users/${user._id}`}>{user.name}</Link>
-                        </div>
-                    )}
-                </div>
+                {this.state.acceptedUsers.map((user) =>
+                    <div key={user._id}>
+                        <Link to={`/admin/users/${user._id}`}>{user.name}</Link>
+                    </div>
+                )}
                 {this.state.unacceptedUsers.length > 0 && (
                     <div>
                         <div>Unaccepted Users</div>
-                        <div>
-                            {this.state.unacceptedUsers.map((user) =>
-                                <div key={user._id}>
-                                    <Link to={`/admin/users/${user._id}`}>{user.name}</Link>
-                                </div>
-                            )}
-                        </div>
+                        {this.state.unacceptedUsers.map((user) =>
+                            <div key={user._id}>
+                                <Link to={`/admin/users/${user._id}`}>{user.name}</Link>
+                            </div>
+                        )}
                     </div>
                 )}
                 <div>
-                    <div>
-                        <button onClick={this.handleLogout}>Logout</button>
-                    </div>
+                    <button onClick={this.handleLogout}>Logout</button>
                 </div>
             </div>
         );

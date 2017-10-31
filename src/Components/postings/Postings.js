@@ -19,13 +19,11 @@ class Postings extends Component {
         return (
             <div>
                 <div>Postings</div>
-                <div>
-                    {this.state.postings.map((posting) =>
-                        <div key={posting._id}>
-                            <Link to={`/postings/${posting._id}`}>{posting.title}</Link>
-                        </div>
-                    )}
-                </div>
+                {this.state.postings.map((posting) =>
+                    <div key={posting._id}>
+                        <Link to={`/postings/${posting._id}`}>{posting.title}</Link>
+                    </div>
+                )}
                 <div>
                     <button onClick={() => this.props.history.push('/postings/create')}>
                         create new posting

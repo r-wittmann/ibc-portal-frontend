@@ -8,7 +8,7 @@ class InputLabel extends Component {
                 <label>
                     {this.props.label}:
                     <input
-                        type={'text'}
+                        type={this.props.type ? this.props.type : 'text'}
                         value={this.props.value}
                         onChange={(event) => this.props.onChange(event.target.value)}/>
                 </label>

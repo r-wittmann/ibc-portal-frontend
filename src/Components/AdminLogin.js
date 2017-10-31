@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import backendService from '../backendService';
+import InputLabel from "./commons/InputLabel";
 
 class AdminLogin extends Component {
     constructor(props) {
@@ -8,13 +9,12 @@ class AdminLogin extends Component {
             email: 'admin',
             password: 'L4V%nuv@*6g_mY9#'
         };
-        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleSubmit = (event) => {
+        event.preventDefault();
         backendService.adminLogin(this.state.email, this.state.password)
             .then(() => this.props.history.push('/admin/users'));
-        event.preventDefault();
     };
 
     render() {
@@ -24,23 +24,15 @@ class AdminLogin extends Component {
                     Login
                 </div>
                 <form onSubmit={this.handleSubmit}>
-                    <div>
-                        <label>
-                            Name
-                            <input
-                                type={'text'}
-                                value={this.state.email}
-                                onChange={(event) => this.setState({ email: event.target.value })}/>
-                        </label>
-                    </div>
-                    <div>
-                        <label>Password:
-                            <input
-                                type={'password'}
-                                value={this.state.password}
-                                onChange={(event) => this.setState({ password: event.target.value })}/>
-                        </label>
-                    </div>
+                    <InputLabel
+                        label={'Name'}
+                        value={this.state.email}
+                        onChange={(email) => this.setState({ email })}/>
+                    <InputLabel
+                        label={'Password'}
+                        type={'password'}
+                        value={this.state.password}
+                        onChange={(password) => this.setState({ password })}/>
                     <div>
                         <input type={'submit'} value={'Login'}/>
                     </div>

@@ -19,13 +19,11 @@ class Companies extends Component {
         return (
             <div>
                 <div>Companies</div>
-                <div>
-                    {this.state.companies.map((company) =>
-                        <div key={company._id}>
-                            <Link to={`/companies/${company._id}`}>{company.name}</Link>
-                        </div>
-                    )}
-                </div>
+                {this.state.companies.map((company) =>
+                    <div key={company._id}>
+                        <Link to={`/companies/${company._id}`}>{company.name}</Link>
+                    </div>
+                )}
                 <div>
                     <button onClick={() => this.props.history.push('/companies/create')}>
                         create new company

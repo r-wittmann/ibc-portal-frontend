@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import backendService from '../backendService';
+import InputLabel from "./commons/InputLabel";
 
 class Login extends Component {
     constructor(props) {
@@ -8,13 +9,12 @@ class Login extends Component {
             email: 'new user',
             password: 'test123'
         };
-        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleSubmit = (event) => {
+        event.preventDefault();
         backendService.login(this.state.email, this.state.password)
             .then(() => this.props.history.push('/home'));
-        event.preventDefault();
     };
 
     render() {
@@ -25,23 +25,15 @@ class Login extends Component {
                     <button onClick={() => this.props.history.push('/register')}>Register</button>
                 </div>
                 <form onSubmit={this.handleSubmit}>
-                    <div>
-                        <label>
-                            E-Mail:
-                            <input
-                                type={'text'}
-                                value={this.state.email}
-                                onChange={(event) => this.setState({ email: event.target.value })}/>
-                        </label>
-                    </div>
-                    <div>
-                        <label>Password:
-                            <input
-                                type={'password'}
-                                value={this.state.password}
-                                onChange={(event) => this.setState({ password: event.target.value })}/>
-                        </label>
-                    </div>
+                    <InputLabel
+                        label={'Email'}
+                        value={this.state.email}
+                        onChange={(email) => this.setState({ email })}/>
+                    <InputLabel
+                        label={'Password'}
+                        type={'password'}
+                        value={this.state.password}
+                        onChange={(password) => this.setState({ password })}/>
                     <div>
                         <input type={'submit'} value={'Login'}/>
                     </div>
