@@ -16,7 +16,6 @@ class Company extends Component {
     }
 
     handleSubmit = () => {
-        console.log(this.state.company);
         backendService.updateCompany(this.props.match.params.id, this.state.company)
             .then(company => this.setState({ company }))
     };

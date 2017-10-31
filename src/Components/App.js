@@ -15,7 +15,6 @@ import RecruiterCreate from "./recruiter/RecruiterCreate";
 
 import Postings from "./postings/Postings";
 import Posting from "./postings/Posting";
-import PostingCreate from "./postings/PostingCreate";
 
 import Users from './users/Users';
 import User from './users/User';
@@ -53,7 +52,6 @@ class App extends Component {
                         <Route exact path={'/recruiters/create'} component={RecruiterCreate}/>
                         <Route exact path={'/recruiters/:id'} component={Recruiter}/>
                         <Route exact path={'/postings'} component={Postings}/>
-                        <Route exact path={'/postings/create'} component={PostingCreate}/>
                         <Route exact path={'/postings/:id'} component={Posting}/>
                         <Route exact path={'/admin/users'} component={Users}/>
                         <Route exact path={'/admin/users/:id'} component={User}/>

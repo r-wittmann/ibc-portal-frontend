@@ -273,14 +273,14 @@ class BackendService {
             .then(convertResponseToJson);
     }
 
-    static createPosting(title, subtitle, content, company, recruiter) {
+    static createPosting(posting) {
         return fetch(`${baseUrl}/api/postings`, {
             method: 'POST',
             headers: {
                 'x-access-token': localStorage.getItem('ibc-user-token'),
                 'content-type': 'application/json'
             },
-            body: JSON.stringify({ title: title, subtitle: subtitle, content: content, company: company, recruiter: recruiter })
+            body: JSON.stringify(posting)
         })
             .then(checkStatus)
             .then(convertResponseToJson);
@@ -293,7 +293,7 @@ class BackendService {
                 'x-access-token': localStorage.getItem('ibc-user-token'),
                 'content-type': 'application/json'
             },
-            body: JSON.stringify({ posting })
+            body: JSON.stringify(posting)
         })
             .then(checkStatus)
             .then(convertResponseToJson);

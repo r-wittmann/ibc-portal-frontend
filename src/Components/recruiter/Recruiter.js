@@ -16,7 +16,6 @@ class Recruiter extends Component {
     }
 
     handleSubmit = () => {
-        console.log(this.state.recruiter);
         backendService.updateRecruiter(this.props.match.params.id, this.state.recruiter)
             .then(recruiter => this.setState({ recruiter }))
     };
