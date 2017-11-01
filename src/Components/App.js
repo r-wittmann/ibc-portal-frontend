@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import HomePage from './HomePage';
-import Login from './Login';
-import Register from './Register';
-import AdminLogin from './AdminLogin';
+
+import Login from './loginSignUp/Login';
+import AdminLogin from './loginSignUp/AdminLogin';
 
 import Companies from './company/Companies';
 import Company from './company/Company';
@@ -26,7 +26,6 @@ class App extends Component {
             !backendService.isAuthenticated() ? (
                 <Switch>
                     <Route exact path={'/login'} component={Login}/>
-                    <Route exact path={'/register'} component={Register}/>
                     <Route exact path={'/admin/login'} component={AdminLogin}/>
                     <Redirect to={'/login'}/>
                 </Switch>

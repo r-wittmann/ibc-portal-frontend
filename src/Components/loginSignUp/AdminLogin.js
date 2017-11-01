@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
-import backendService from '../backendService';
-import InputLabel from "./commons/InputLabel";
+import backendService from '../../backendService';
+import InputLabel from "../commons/InputLabel";
 
-class Login extends Component {
+class AdminLogin extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: 'new user',
-            password: 'test123'
+            email: 'admin',
+            password: 'L4V%nuv@*6g_mY9#'
         };
     }
 
     handleSubmit = (event) => {
         event.preventDefault();
-        backendService.login(this.state.email, this.state.password)
-            .then(() => this.props.history.push('/home'));
+        backendService.adminLogin(this.state.email, this.state.password)
+            .then(() => this.props.history.push('/admin/users'));
     };
 
     render() {
@@ -22,11 +22,10 @@ class Login extends Component {
             <div>
                 <div>
                     Login
-                    <button onClick={() => this.props.history.push('/register')}>Register</button>
                 </div>
                 <form onSubmit={this.handleSubmit}>
                     <InputLabel
-                        label={'Email'}
+                        label={'Name'}
                         value={this.state.email}
                         onChange={(email) => this.setState({ email })}/>
                     <InputLabel
@@ -43,4 +42,4 @@ class Login extends Component {
     }
 }
 
-export default Login;
+export default AdminLogin;
