@@ -6,7 +6,7 @@ class AdminLogin extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: 'admin',
+            email: 'ibc.job.portal@gmail.com',
             password: 'L4V%nuv@*6g_mY9#'
         };
     }

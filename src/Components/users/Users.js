@@ -33,7 +33,7 @@ class Users extends Component {
                 <div>Accepted Users</div>
                 {this.state.acceptedUsers.map((user) =>
                     <div key={user._id}>
-                        <Link to={`/admin/users/${user._id}`}>{user.name}</Link>
+                        <Link to={`/admin/users/${user._id}`}>{user.email}</Link>
                     </div>
                 )}
                 {this.state.unacceptedUsers.length > 0 && (
@@ -41,7 +41,7 @@ class Users extends Component {
                         <div>Unaccepted Users</div>
                         {this.state.unacceptedUsers.map((user) =>
                             <div key={user._id}>
-                                <Link to={`/admin/users/${user._id}`}>{user.name}</Link>
+                                <Link to={`/admin/users/${user._id}`}>{user.email}</Link>
                             </div>
                         )}
                     </div>

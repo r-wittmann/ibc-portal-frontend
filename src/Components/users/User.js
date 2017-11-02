@@ -33,7 +33,22 @@ class User extends Component {
                 {this.state.user && (
                     <div>
                         <div>
-                            Email: {this.state.user.name}
+                            Email: {this.state.user.email}
+                        </div>
+                        <div>
+                            Firma: {this.state.user.company}
+                        </div>
+                        <div>
+                            Straße: {this.state.user.street}
+                        </div>
+                        <div>
+                            Ort: {this.state.user.city}
+                        </div>
+                        <div>
+                            Bezahlmethode: {this.state.user.payment}
+                        </div>
+                        <div>
+                            Admin: {this.state.user.admin.toString()}
                         </div>
                         <div>
                             Approved: {this.state.user.regAccepted.toString()}

@@ -35,13 +35,13 @@ class BackendService {
         return localStorage.getItem('ibc-user-token');
     }
 
-    static register(email, password) {
+    static register(user) {
         return fetch(`${baseUrl}/api/register`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify({ name: email, password: password })
+            body: JSON.stringify(user)
         })
             .then(checkStatus)
             .then(convertResponseToJson)
@@ -53,7 +53,7 @@ class BackendService {
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify({ name: email, password: password })
+            body: JSON.stringify({ email, password })
         })
             .then(checkStatus)
             .then(convertResponseToJson)
@@ -66,7 +66,7 @@ class BackendService {
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify({ name: email, password: password })
+            body: JSON.stringify({ email, password })
         })
             .then(checkStatus)
             .then(convertResponseToJson)
