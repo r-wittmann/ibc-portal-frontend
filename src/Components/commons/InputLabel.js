@@ -5,10 +5,10 @@ class InputLabel extends Component {
     render() {
         return (
             <div className='form-group row'>
-                <label htmlFor={this.props.label} className='col-3 col-form-label'>
+                <label htmlFor={this.props.label} className='col-4 col-form-label'>
                     {this.props.label}
                 </label>
-                <div className='col-9'>
+                <div className='col-8'>
                     <input
                         id={this.props.label}
                         className={'form-control'}

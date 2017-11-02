@@ -19,11 +19,11 @@ class Login extends Component {
                         <a className={this.state.login ? 'nav-item nav-link active' : 'nav-item nav-link'}
                            onClick={() => this.setState({ login: true })}
                            href={'#'}
-                           style={{ borderTopLeftRadius: 16 }}>Login</a>
+                           style={{ borderTopLeftRadius: 8 }}>Login</a>
                         <a className={!this.state.login ? 'nav-item nav-link active' : 'nav-item nav-link'}
                            onClick={() => this.setState({ login: false })}
                            href={'#'}
-                           style={{ borderTopRightRadius: 16 }}>Registrieren</a>
+                           style={{ borderTopRightRadius: 8 }}>Registrieren</a>
                     </nav>
                     {this.state.login ? (
                         <LoginBody history={this.props.history}/>
