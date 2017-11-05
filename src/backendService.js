@@ -307,6 +307,35 @@ class BackendService {
             }
         })
     }
+
+    // =================
+    // Profile endpoints
+    // =================
+
+    static getProfile() {
+        return fetch(`${baseUrl}/api/profile`, {
+            method: 'GET',
+            headers: {
+                'x-access-token': localStorage.getItem('ibc-user-token')
+            },
+        })
+            .then(checkStatus)
+            .then(convertResponseToJson);
+    }
+
+    static updateProfile(profile) {
+        return fetch(`${baseUrl}/api/profile`, {
+            method: 'PUT',
+            headers: {
+                'x-access-token': localStorage.getItem('ibc-user-token'),
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(profile)
+        })
+            .then(checkStatus)
+            .then(convertResponseToJson);
+    }
+
 }
 
 export default BackendService

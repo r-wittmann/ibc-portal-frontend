@@ -30,6 +30,11 @@ class HomePage extends Component {
                     </Link>
                 </div>
                 <div>
+                    <Link to={'/profile'}>
+                        Link to Profile
+                    </Link>
+                </div>
+                <div>
                     <button onClick={this.handleLogout}>Logout</button>
                 </div>
             </div>

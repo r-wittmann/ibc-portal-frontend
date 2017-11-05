@@ -14,6 +14,8 @@ import Recruiter from "./company_account/recruiter/Recruiter";
 import Postings from "./company_account/postings/Postings";
 import Posting from "./company_account/postings/Posting";
 
+import Profile from "./company_account/profile/Profile";
+
 import Users from './admin_account/users/Users';
 import User from './admin_account/users/User';
 
@@ -40,6 +42,7 @@ class App extends Component {
                     <Route exact path={'/recruiters/:id'} component={Recruiter}/>
                     <Route exact path={'/postings'} component={Postings}/>
                     <Route exact path={'/postings/:id'} component={Posting}/>
+                    <Route exact path={'/profile/'} component={Profile}/>
                     <Route exact path={'/admin/users'} component={Users}/>
                     <Route exact path={'/admin/users/:id'} component={User}/>
                 </Switch>
