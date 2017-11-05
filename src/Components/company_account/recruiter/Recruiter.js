@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import backendService from '../../backendService';
-import InputLabel from "../commons/InputLabel";
-import defaultRecruiter from '../commons/defaultRecruiter';
+import backendService from '../../../backendService';
+import InputLabel from "../../commons/InputLabel";
+import defaultRecruiter from '../../commons/defaultRecruiter';
 
 class Recruiter extends Component {
     constructor(props) {

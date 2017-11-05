@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import backendService from '../../backendService';
+import backendService from '../../../backendService';
 
 class User extends Component {
     constructor(props) {

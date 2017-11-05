@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { convertFromRaw, convertToRaw, EditorState } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
-import '../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import '../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 class TextEditor extends Component {
     constructor(props) {

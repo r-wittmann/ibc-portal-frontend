@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import backendService from '../../backendService';
-import InputLabel from '../commons/InputLabel';
+import backendService from '../../../backendService';
+import InputLabel from '../../commons/InputLabel';
 
 class LoginBody extends Component {
     constructor(props) {

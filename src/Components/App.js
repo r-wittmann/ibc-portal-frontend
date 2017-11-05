@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import HomePage from './HomePage';
+import HomePage from './company_account/HomePage';
 
-import Login from './loginSignUp/Login';
-import AdminLogin from './loginSignUp/AdminLogin';
+import Login from './company_account/loginSignUp/Login';
+import AdminLogin from './company_account/loginSignUp/AdminLogin';
 
-import Companies from './company/Companies';
-import Company from './company/Company';
+import Companies from './company_account/company/Companies';
+import Company from './company_account/company/Company';
 
-import Recruiters from "./recruiter/Recruiters";
-import Recruiter from "./recruiter/Recruiter";
+import Recruiters from "./company_account/recruiter/Recruiters";
+import Recruiter from "./company_account/recruiter/Recruiter";
 
-import Postings from "./postings/Postings";
-import Posting from "./postings/Posting";
+import Postings from "./company_account/postings/Postings";
+import Posting from "./company_account/postings/Posting";
 
-import Users from './users/Users';
-import User from './users/User';
+import Users from './admin_account/users/Users';
+import User from './admin_account/users/User';
 
 import backendService from '../backendService';
 

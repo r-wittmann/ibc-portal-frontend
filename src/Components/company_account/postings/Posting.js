@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import backendService from '../../backendService';
-import InputLabel from "../commons/InputLabel";
-import TextEditor from "../TextEditor";
-import defaultPosting from '../commons/defaultPosting';
+import backendService from '../../../backendService';
+import InputLabel from "../../commons/InputLabel";
+import TextEditor from "../../commons/TextEditor";
+import defaultPosting from '../../commons/defaultPosting';
 
 class Posting extends Component {
     constructor(props) {

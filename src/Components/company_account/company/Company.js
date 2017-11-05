@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import backendService from '../../backendService';
-import InputLabel from "../commons/InputLabel";
-import TextEditor from "../TextEditor";
-import defaultCompany from '../commons/defaultCompany';
+import backendService from '../../../backendService';
+import InputLabel from "../../commons/InputLabel";
+import TextEditor from "../../commons/TextEditor";
+import defaultCompany from '../../commons/defaultCompany';
 
 class Company extends Component {
     constructor(props) {
