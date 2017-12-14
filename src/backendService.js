@@ -105,7 +105,7 @@ class BackendService {
 
     static declineAccount(id) {
         return fetch(`${baseUrl}/admin/accounts/${id}/decline`, {
-            method: 'DELETE',
+            method: 'PATCH',
             headers: {
                 'x-access-token': localStorage.getItem('ibc-user-token')
             },

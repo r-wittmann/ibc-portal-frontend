@@ -24,6 +24,22 @@ class Registrations extends Component {
         this.props.history.push('/admin/login');
     };
 
+    acceptRegistration = (id) => {
+        event.preventDefault();
+        backendService.acceptAccount(id)
+            .then(() => this.setState({
+                registeredAccounts: this.state.registeredAccounts.filter(account => account.id !== id)
+            }));
+    };
+
+    declineRegistration = (id) => {
+        event.preventDefault();
+        backendService.declineAccount(id)
+            .then(() => this.setState({
+                registeredAccounts: this.state.registeredAccounts.filter(account => account.id !== id)
+            }));
+    };
+
     render() {
         return (
             <div>
@@ -33,6 +49,8 @@ class Registrations extends Component {
                         {this.state.registeredAccounts.map((account) =>
                             <div key={account.id}>
                                 {account.id}, {account.company_name}, {account.name}, {account.email}, {account.website}, {account.company_type}, {account.status}
+                                <button onClick={() => this.acceptRegistration(account.id)}>Accept</button>
+                                <button onClick={() => this.declineRegistration(account.id)}>Decline</button>
                             </div>
                         )}
                     </div>
