@@ -47,13 +47,13 @@ class BackendService {
             .then(convertResponseToJson)
     }
 
-    static login(email, password) {
+    static login(name, password) {
         return fetch(`${baseUrl}/api/authenticate`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify({ email, password })
+            body: JSON.stringify({ name, password })
         })
             .then(checkStatus)
             .then(convertResponseToJson)
