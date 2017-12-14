@@ -60,17 +60,17 @@ class BackendService {
             .then((json) => localStorage.setItem('ibc-user-token', json.token));
     }
 
-    static adminLogin(email, password) {
+    static adminLogin(name, password) {
         return fetch(`${baseUrl}/admin/authenticate`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify({ email, password })
+            body: JSON.stringify({ name, password })
         })
             .then(checkStatus)
             .then(convertResponseToJson)
-            .then((json) => localStorage.setItem('ibc-user-token', json.token));
+            .then((token) => localStorage.setItem('ibc-user-token', token));
     }
 
     static logout() {
@@ -78,11 +78,11 @@ class BackendService {
     }
 
     // ====================
-    // admin user endpoints
+    // admin accounts endpoints
     // ====================
 
-    static getUsers() {
-        return fetch(`${baseUrl}/admin/users`, {
+    static getAccounts() {
+        return fetch(`${baseUrl}/admin/accounts`, {
             method: 'GET',
             headers: {
                 'x-access-token': localStorage.getItem('ibc-user-token')
@@ -92,19 +92,8 @@ class BackendService {
             .then(convertResponseToJson);
     }
 
-    static getUserById(id) {
-        return fetch(`${baseUrl}/admin/users/${id}`, {
-            method: 'GET',
-            headers: {
-                'x-access-token': localStorage.getItem('ibc-user-token')
-            },
-        })
-            .then(checkStatus)
-            .then(convertResponseToJson);
-    }
-
-    static acceptUser(id) {
-        return fetch(`${baseUrl}/admin/users/${id}/accept`, {
+    static acceptAccount(id) {
+        return fetch(`${baseUrl}/admin/accounts/${id}/accept`, {
             method: 'PATCH',
             headers: {
                 'x-access-token': localStorage.getItem('ibc-user-token')
@@ -114,8 +103,8 @@ class BackendService {
             .then(convertResponseToJson);
     }
 
-    static deleteUser(id) {
-        return fetch(`${baseUrl}/admin/users/${id}/decline`, {
+    static declineAccount(id) {
+        return fetch(`${baseUrl}/admin/accounts/${id}/decline`, {
             method: 'DELETE',
             headers: {
                 'x-access-token': localStorage.getItem('ibc-user-token')
