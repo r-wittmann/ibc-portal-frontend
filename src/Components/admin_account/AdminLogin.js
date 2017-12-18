@@ -19,11 +19,12 @@ class AdminLogin extends Component {
 
     render() {
         return (
-            <div>
-                <div>
-                    Login
-                </div>
-                <form onSubmit={this.handleSubmit}>
+            <div className={'ibc-background'}
+                 style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                 <h1 className='headline-login'>IBC Jobportal</h1>
+                <div className={'login-container'}>
+        
+                <form onSubmit={this.handleSubmit} style={{ margin: 20 }}>
                     <InputLabel
                         label={'Name'}
                         value={this.state.name}
@@ -33,10 +34,19 @@ class AdminLogin extends Component {
                         type={'password'}
                         value={this.state.password}
                         onChange={(password) => this.setState({ password })}/>
-                    <div>
-                        <input type={'submit'} value={'Login'}/>
+                    <div className={'float-right'}>
+                        <input className={'btn btn-primary'} type={'submit'} value={'Login'}/>
                     </div>
                 </form>
+                </div>
+
+            <div className={'admin-login-button'}>
+                <button className={'btn btn-link'} onClick={() => this.props.history.push('/login')} >
+                Firmen Login
+
+                </button>
+            </div>
+
             </div>
         );
     }

@@ -33,5 +33,15 @@ body {
 
 .headline-login{
     color: white; 
-    
+}
+
+.ibc-background {
+    background: url(../resources/ibc_background.jpg) no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100%;
+    width: 100%;
+    height: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
 }
