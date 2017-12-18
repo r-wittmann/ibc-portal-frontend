@@ -6,14 +6,15 @@ class SignUpBody extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            name: '',
             email: '',
-            password: '',
-            confirmPassword: '',
-            company: '',
-            street: '',
-            city: '',
-            payment: 'paypal',
-            vat: '',
+            company_type: 'ibc',
+            mother_company: '',
+            address: '',
+            contact_name: '',
+            contact_email: '',
+            contact_phone: '',
+            website: '',
             currentStep: 0
         };
     }
@@ -25,19 +26,10 @@ class SignUpBody extends Component {
                 this.setState({ currentStep: 1 });
                 break;
             case 1:
-                this.setState({ currentStep: 2 });
-                break;
-            case 2:
-                backendService.register({
-                    email: this.state.email,
-                    password: this.state.password,
-                    company: this.state.company,
-                    street: this.state.street,
-                    city: this.state.city,
-                    payment: this.state.payment,
-                    vat: this.state.vat
-                })
-                    .then(() => this.props.history.push('/'));
+                let reqBody = this.state;
+                delete reqBody.currentStep;
+                backendService.register(reqBody)
+                    .then(() => this.props.history.push('/home'));
                 break;
             default:
                 return false;
@@ -51,20 +43,55 @@ class SignUpBody extends Component {
                 {this.state.currentStep === 0 && (
                     <form onSubmit={(event) => this.handleSubmit(0, event)}>
                         <InputLabel
+                            label={'Benutzername'}
+                            type={'name'}
+                            value={this.state.name}
+                            onChange={(name) => this.setState({ name })}/>
+                        <InputLabel
                             label={'Email'}
                             type={'email'}
                             value={this.state.email}
                             onChange={(email) => this.setState({ email })}/>
-                        <InputLabel
-                            label={'Passwort'}
-                            type={'password'}
-                            value={this.state.password}
-                            onChange={(password) => this.setState({ password })}/>
-                        <InputLabel
-                            label={'Bestätigen'}
-                            type={'password'}
-                            value={this.state.confirmPassword}
-                            onChange={(confirmPassword) => this.setState({ confirmPassword })}/>
+                        <fieldset className="form-group">
+                            <div className="row">
+                                <legend className="col-form-legend col-4">Unternehmenstype</legend>
+                                <div className="col-8 col-form-label">
+                                    <div className="form-check">
+                                        <label className="form-check-label">
+                                            <input className="form-check-input"
+                                                   type="radio"
+                                                   name="gridRadios"
+                                                   value="ibc"
+                                                   checked={this.state.company_type === 'ibc'}
+                                                   onChange={() => this.setState({ company_type: 'ibc'})}/>
+                                            IBC
+                                        </label>
+                                    </div>
+                                    <div className="form-check">
+                                        <label className="form-check-label">
+                                            <input className="form-check-input"
+                                                   type="radio"
+                                                   name="gridRadios"
+                                                   value="startup"
+                                                   checked={this.state.company_type === 'startup'}
+                                                   onChange={() => this.setState({ company_type: 'startup'})}/>
+                                            Startup
+                                        </label>
+                                    </div>
+                                    <div className="form-check">
+                                        <label className="form-check-label">
+                                            <input className="form-check-input"
+                                                   type="radio"
+                                                   name="gridRadios"
+                                                   value="ngo"
+                                                   checked={this.state.company_type === 'ngo'}
+                                                   onChange={() => this.setState({ company_type: 'ngo'})}/>
+                                            Gemeinnütziger Verein
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
                         <div className={'float-right'}>
                             <input className={'btn btn-primary'} type={'submit'} value={'Nächster Schritt'}/>
                         </div>
@@ -73,43 +100,31 @@ class SignUpBody extends Component {
                 {this.state.currentStep === 1 && (
                     <form onSubmit={(event) => this.handleSubmit(1, event)}>
                         <InputLabel
-                            label={'Firma'}
-                            value={this.state.company}
-                            onChange={(company) => this.setState({ company })}/>
+                            label={'Unternehmen'}
+                            value={this.state.mother_company}
+                            onChange={(mother_company) => this.setState({ mother_company })}/>
                         <InputLabel
-                            label={'Straße'}
-                            value={this.state.street}
-                            onChange={(street) => this.setState({ street })}/>
+                            label={'Adresse'}
+                            value={this.state.address}
+                            onChange={(address) => this.setState({ address })}/>
                         <InputLabel
-                            label={'Ort'}
-                            value={this.state.city}
-                            onChange={(city) => this.setState({ city })}/>
+                            label={'Ansprechpartner'}
+                            value={this.state.contact_name}
+                            onChange={(contact_name) => this.setState({ contact_name })}/>
+                        <InputLabel
+                            label={'Email'}
+                            value={this.state.contact_email}
+                            onChange={(contact_email) => this.setState({ contact_email })}/>
+                        <InputLabel
+                            label={'Telefon'}
+                            value={this.state.contact_phone}
+                            onChange={(contact_phone) => this.setState({ contact_phone })}/>
+                        <InputLabel
+                            label={'Website'}
+                            value={this.state.website}
+                            onChange={(website) => this.setState({ website })}/>
                         <div className={'float-right'}>
-                            <input className={'btn btn-primary'} type={'submit'} value={'Nächster Schritt'}/>
-                        </div>
-                    </form>
-                )}
-                {this.state.currentStep === 2 && (
-                    <form onSubmit={(event) => this.handleSubmit(2, event)}>
-                        <div className={'form-row'}>
-                            <label htmlFor={'paymentDropdown'} className='col-form-label col-sm-4'>
-                                Bezahlmethode
-                            </label>
-                            <div className="form-group col-sm-8">
-                                <select id={'paymentDropdown'} value={this.state.payment} className="form-control"
-                                        onChange={(event) => this.setState({ payment: event.target.value })}>
-                                    <option value={'paypal'}>PayPal</option>
-                                    <option value={'transfer'}>Überweisung</option>
-                                    <option value={'credit'}>Kreditkarte</option>
-                                </select>
-                            </div>
-                        </div>
-                        <InputLabel
-                            label={'Steuernummer'}
-                            value={this.state.vat}
-                            onChange={(vat) => this.setState({ vat })}/>
-                        <div className={'float-right'}>
-                            <input className={'btn btn-primary'} type={'submit'} value={'Registrieren'}/>
+                            <input className={'btn btn-primary'} type={'submit'} value={'Registrierung abschließen'}/>
                         </div>
                     </form>
                 )}
