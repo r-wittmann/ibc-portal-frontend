@@ -21,7 +21,7 @@ class AdminLogin extends Component {
         return (
             <div className={'ibc-background'}
                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                 <h1 className='headline-login'>IBC Jobportal</h1>
+                 <div style={{textAlign: 'center'}}><h1 className='headline-login' >IBC Jobportal</h1>
                 <div className={'login-container'}>
         
                 <form onSubmit={this.handleSubmit} style={{ margin: 20 }}>
@@ -39,7 +39,7 @@ class AdminLogin extends Component {
                     </div>
                 </form>
                 </div>
-
+                </div>
             <div className={'admin-login-button'}>
                 <button className={'btn btn-link'} onClick={() => this.props.history.push('/login')} >
                 Firmen Login
