@@ -72,15 +72,23 @@ class Registrations extends Component {
                 </nav>
                 <h1>Anfragen</h1>
                 {this.state.registeredAccounts.length > 0 && (
-                    <div>
+                    <table className={"table"}>
+                        <th>ID</th>
+                        <th>Firmenname</th>
+                        <th>Benutzername</th>
+                        <th>E-Mail</th>
+                        <th>Webseite</th>
+                        <th>Firmentyp</th>
+                        <th>Status</th>
+                        <th>Aktionen</th>
+
                         {this.state.registeredAccounts.map((account) =>
-                            <div key={account.id}>
-                                {account.id}, {account.company_name}, {account.name}, {account.email}, {account.website}, {account.company_type}, {account.status}
-                                <button onClick={() => this.acceptRegistration(account.id)}>Accept</button>
-                                <button onClick={() => this.declineRegistration(account.id)}>Decline</button>
-                            </div>
+                            <tr key={account.id}>
+                                <td>{account.id}</td><td>{account.company_name}</td><td>{account.name}</td><td>{account.email}</td><td>{account.website}</td><td>{account.company_type}</td><td>{account.status}</td>
+                                <td><button onClick={() => this.acceptRegistration(account.id)}>Accept</button><button onClick={() => this.declineRegistration(account.id)}>Decline</button></td>
+                            </tr>
                         )}
-                    </div>
+                    </table>
                 )}
             </div>
         );
