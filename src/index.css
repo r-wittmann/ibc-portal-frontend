@@ -4,6 +4,10 @@ body {
     font-family: sans-serif;
 }
 
+a{
+     cursor:pointer;
+}
+
 .login-background {
     background: url(../resources/IBC_vision_img_students_small.png) no-repeat center center fixed;
     background-size: cover;
