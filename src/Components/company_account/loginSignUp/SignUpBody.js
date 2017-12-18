@@ -65,7 +65,7 @@ class SignUpBody extends Component {
                             type={'password'}
                             value={this.state.confirmPassword}
                             onChange={(confirmPassword) => this.setState({ confirmPassword })}/>
-                        <div className={''}>
+                        <div className={'float-right'}>
                             <input className={'btn btn-primary'} type={'submit'} value={'Nächster Schritt'}/>
                         </div>
                     </form>
