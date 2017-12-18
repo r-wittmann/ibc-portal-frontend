@@ -21,26 +21,28 @@ class AdminLogin extends Component {
         return (
             <div className={'ibc-background'}
                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                 <div style={{textAlign: 'center'}}><h1 className='headline-login' >IBC Jobportal</h1>
-                <div className={'login-container'}>
-        
-                <form onSubmit={this.handleSubmit} style={{ margin: 20 }}>
-                    <InputLabel
-                        label={'Name'}
-                        value={this.state.name}
-                        onChange={(email) => this.setState({ email })}/>
-                    <InputLabel
-                        label={'Password'}
-                        type={'password'}
-                        value={this.state.password}
-                        onChange={(password) => this.setState({ password })}/>
-                    <div className={'float-right'}>
-                        <input className={'btn btn-primary'} type={'submit'} value={'Login'}/>
-                    </div>
-                </form>
-                </div>
-                </div>
-            <div className={'admin-login-button'}>
+                 <div style={{textAlign: 'center'}}>
+                 	<h1 className={'headline-login'}>IBC Jobportal</h1>
+	                <div className={'login-container'}>
+	        
+		                <form onSubmit={this.handleSubmit} style={{ padding: 30 }}>
+		                    <InputLabel
+		                        label={'Name'}
+		                        value={this.state.name}
+		                        onChange={(email) => this.setState({ email })}/>
+		                    <InputLabel
+		                        label={'Password'}
+		                        type={'password'}
+		                        value={this.state.password}
+		                        onChange={(password) => this.setState({ password })}/>
+		                    <div className={'float-right'}>
+		                        <input className={'btn btn-primary'} type={'submit'} value={'Login'}/>
+		                    </div>
+		                </form>
+	                </div>
+	               </div>
+
+            <div className={'admin-login-button'} >
                 <button className={'btn btn-link'} onClick={() => this.props.history.push('/login')} >
                 Firmen Login
 

@@ -33,6 +33,14 @@ body {
 
 .headline-login{
     color: white; 
+
+}
+
+.headline-login-admin{
+    color: white; 
+    position:fixed;
+    top:32%;
+
 }
 
 .ibc-background {
