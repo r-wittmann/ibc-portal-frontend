@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import backendService from '../../../backendService';
 import InputLabel from "../../commons/InputLabel";
+import PasswordModal from "./PasswordModal";
 
-class Company extends Component {
+class Profile extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -27,6 +28,14 @@ class Company extends Component {
                 <div>Profile</div>
                 {this.state.profile && (
                     <form onSubmit={this.handleSubmit}>
+                        <div className='form-group row'>
+                            <label className='col-4 col-form-label'>
+                                Benutzername
+                            </label>
+                            <label className='col-8 col-form-label'>
+                                {this.state.profile.name}
+                            </label>
+                        </div>
                         <InputLabel
                             label={'Email'}
                             value={this.state.profile.email}
@@ -34,44 +43,27 @@ class Company extends Component {
                                 profile: Object.assign({}, this.state.profile, { email })
                             })}/>
                         <InputLabel
-                            label={'Firma'}
-                            value={this.state.profile.company}
+                            label={'Unternehmen'}
+                            value={this.state.profile.mother_company}
                             onChange={(company) => this.setState({
-                                profile: Object.assign({}, this.state.profile, { company })
+                                profile: Object.assign({}, this.state.profile, { mother_company: company })
                             })}/>
-                        <InputLabel
-                            label={'Straße'}
-                            value={this.state.profile.street}
-                            onChange={(street) => this.setState({
-                                profile: Object.assign({}, this.state.profile, { street })
-                            })}/>
-                        <InputLabel
-                            label={'Ort'}
-                            value={this.state.profile.city}
-                            onChange={(city) => this.setState({
-                                profile: Object.assign({}, this.state.profile, { city })
-                            })}/>
-                        <div className={'form-row'}>
-                            <label htmlFor={'paymentDropdown'} className='col-form-label col-sm-4'>
-                                Bezahlmethode
+                        <div className='form-group row'>
+                            <label className='col-4 col-form-label'>
+                                Unternehmenstyp
                             </label>
-                            <div className="form-group col-sm-8">
-                                <select id={'paymentDropdown'} value={this.state.profile.payment} className="form-control"
-                                        onChange={(event) => this.setState({
-                                                profile:Object.assign({}, this.state.profile, { payment: event.target.value })
-                                        })}>
-                                    <option value={'paypal'}>PayPal</option>
-                                    <option value={'transfer'}>Überweisung</option>
-                                    <option value={'credit'}>Kreditkarte</option>
-                                </select>
-                            </div>
+                            <label className='col-8 col-form-label'>
+                                {this.state.profile.company_type}
+                            </label>
                         </div>
-                        <InputLabel
-                            label={'Steuernummer'}
-                            value={this.state.profile.vat}
-                            onChange={(vat) => this.setState({
-                                profile: Object.assign({}, this.state.profile, { vat })
-                            })}/>
+                        <div className='col-8 offset-4'>
+                            <button type={'button'} className='btn btn-primary' data-toggle="modal"
+                                    data-target="#changePassword">
+                                Passwort ändern
+                            </button>
+                        </div>
+
+                        <PasswordModal/>
                         <div>
                             <input type={'submit'} value={'Update'}/>
                         </div>
@@ -85,4 +77,4 @@ class Company extends Component {
     }
 }
 
-export default Company;
+export default Profile;
