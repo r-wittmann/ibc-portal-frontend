@@ -30,7 +30,11 @@ class LoginBody extends Component {
                     value={this.state.password}
                     onChange={(password) => this.setState({ password })}/>
                 <div className={'float-right'}>
-                    <input className={'btn btn-primary'} type={'submit'} value={'Login'}/>
+
+                     <button className={'btn btn-link'} style={{ marginRight: 20, padding: 0 }} >Passwort vergessen?</button>
+                     
+                     <input className={'btn btn-primary'} type={'submit'} value={'Login'}/>
+
                 </div>
             </form>
         );

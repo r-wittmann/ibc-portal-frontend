@@ -34,7 +34,7 @@ class Login extends Component {
                     )}
 
                      <button className={'btn btn-link'} style={{ marginLeft: 20, padding: 0 }} >FAQ</button>
-                     <button className={'btn btn-link float-right'} style={{ marginRight: 20, padding: 0 }} >Passwort vergessen?</button>
+                     
                 </div></div>
             <div className={'admin-login-button'}>
             <button className={'btn btn-link'} onClick={() => this.props.history.push('/admin/login')} >IBC Login 

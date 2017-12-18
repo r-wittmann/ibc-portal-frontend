@@ -314,12 +314,25 @@ class BackendService {
 
     static updateProfile(profile) {
         return fetch(`${baseUrl}/api/account`, {
-            method: 'PUT',
+            method: 'PATCH',
             headers: {
                 'x-access-token': localStorage.getItem('ibc-user-token'),
                 'content-type': 'application/json'
             },
             body: JSON.stringify(profile)
+        })
+            .then(checkStatus)
+            .then(convertResponseToJson);
+    }
+
+    static updatePassword(oldPassword, newPassword) {
+        return fetch(`${baseUrl}/api/account/password`, {
+            method: 'PATCH',
+            headers: {
+                'x-access-token': localStorage.getItem('ibc-user-token'),
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({ oldPassword, newPassword })
         })
             .then(checkStatus)
             .then(convertResponseToJson);
