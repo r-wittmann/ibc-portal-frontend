@@ -314,7 +314,7 @@ class BackendService {
 
     static updateProfile(profile) {
         return fetch(`${baseUrl}/api/account`, {
-            method: 'PUT',
+            method: 'PATCH',
             headers: {
                 'x-access-token': localStorage.getItem('ibc-user-token'),
                 'content-type': 'application/json'
