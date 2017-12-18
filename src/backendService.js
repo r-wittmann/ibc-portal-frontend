@@ -57,7 +57,7 @@ class BackendService {
         })
             .then(checkStatus)
             .then(convertResponseToJson)
-            .then((json) => localStorage.setItem('ibc-user-token', json.token));
+            .then((token) => localStorage.setItem('ibc-user-token', token.toString()));
     }
 
     static adminLogin(name, password) {
@@ -70,7 +70,7 @@ class BackendService {
         })
             .then(checkStatus)
             .then(convertResponseToJson)
-            .then((token) => localStorage.setItem('ibc-user-token', token));
+            .then((token) => localStorage.setItem('ibc-user-token', token.toString()));
     }
 
     static logout() {
@@ -302,7 +302,7 @@ class BackendService {
     // =================
 
     static getProfile() {
-        return fetch(`${baseUrl}/api/profile`, {
+        return fetch(`${baseUrl}/api/account`, {
             method: 'GET',
             headers: {
                 'x-access-token': localStorage.getItem('ibc-user-token')
@@ -313,7 +313,7 @@ class BackendService {
     }
 
     static updateProfile(profile) {
-        return fetch(`${baseUrl}/api/profile`, {
+        return fetch(`${baseUrl}/api/account`, {
             method: 'PUT',
             headers: {
                 'x-access-token': localStorage.getItem('ibc-user-token'),
