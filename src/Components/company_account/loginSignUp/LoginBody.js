@@ -21,7 +21,7 @@ class LoginBody extends Component {
         return (
             <form onSubmit={this.handleSubmit} style={{ margin: 20 }}>
                 <InputLabel
-                    label={'Name'}
+                    label={'Benutzername'}
                     value={this.state.name}
                     onChange={(name) => this.setState({ name })}/>
                 <InputLabel
