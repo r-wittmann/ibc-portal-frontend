@@ -8,6 +8,11 @@ a{
      cursor:pointer;
 }
 
+h1{
+
+    text-align: center;
+}
+
 .login-background {
     background: url(../resources/IBC_vision_img_students_small.png) no-repeat center center fixed;
     background-size: cover;
@@ -61,4 +66,22 @@ a{
 .logo{
 
     height: 40px;
+}
+
+.headline{
+
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.done{
+    height:30px;
+    width: 30px;
+    margin-left: 5px;
+}
+
+.cancel{
+    height:30px;
+    width: 30px;
+    margin-left: 5px;
 }
