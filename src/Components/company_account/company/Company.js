@@ -26,19 +26,27 @@ class Company extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         if (!this.state.create) {
-            backendService.updateCompany(this.props.match.params.id, this.state.company)
-                .then(response => this.setState({ company: response.company }));
+            let updatedCompany = this.state.company;
+            delete(updatedCompany.created_at);
+            delete(updatedCompany.updated_at);
+            backendService.updateCompany(this.props.match.params.id, updatedCompany)
+                // call confirmation alert
+                // .then(() => confirmationAlert())
+                // .catch(() => failureAlert());
         } else {
             backendService.createCompany(this.state.company)
-                .then(response => this.props.history.push(`/companies/${response.id}`));
+                .then(() => this.props.history.push(`/companies`));
         }
 
     };
 
     handleDelete = (event) => {
         event.preventDefault();
-        backendService.deleteCompany(this.state.company._id);
-        this.props.history.push('/home');
+        backendService.deleteCompany(this.props.match.params.id)
+            // call confirmation alert
+            // .then(() => confirmationAlert())
+            .then(() => this.props.history.push('/companies'))
+            // .catch(() => failureAlert());
     };
 
     render() {
@@ -48,47 +56,103 @@ class Company extends Component {
                 {this.state.company && (
                     <form onSubmit={this.handleSubmit}>
                         <InputLabel
-                            label={'Name'}
-                            value={this.state.company.name}
-                            onChange={(name) => this.setState({
-                                company: Object.assign({}, this.state.company, { name })
+                            label={'Unternehmensname'}
+                            value={this.state.company.company_name}
+                            onChange={(company_name) => this.setState({
+                                company: Object.assign({}, this.state.company, { company_name })
                             })}/>
+                        <div className='form-group row'>
+                            <label htmlFor={'address'} className='col-4 col-form-label'>
+                                Adresse in München
+                            </label>
+                            <div className='col-8'>
+                                <textarea
+                                    id={'address'}
+                                    className={'form-control'}
+                                    rows='3'
+                                    value={this.state.company.munich_address}
+                                    onChange={(event) => this.setState({
+                                        company: Object.assign({}, this.state.company, { munich_address: event.target.value })
+                                    })}/>
+                            </div>
+                        </div>
                         <InputLabel
-                            label={'Locations'}
+                            label={'Weitere Standorte (Komma separiert)'}
                             value={this.state.company.locations}
                             onChange={(locations) => this.setState({
                                 company: Object.assign({}, this.state.company, { locations })
                             })}/>
+                        <div className='form-group row'>
+                            <label htmlFor={'employees'} className='col-4 col-form-label'>
+                                Mitarbeiter weltweit
+                            </label>
+                            <div className='col-8'>
+                                <select id={'employees'}
+                                        value={this.state.company.employees}
+                                        className="form-control"
+                                        onChange={(event) => this.setState({
+                                            company: Object.assign({}, this.state.company, { employees: event.target.value })
+                                        })}>
+                                    <option value={1}>Bis 10</option>
+                                    <option value={2}>11 - 50</option>
+                                    <option value={3}>51 - 100</option>
+                                    <option value={4}>101 - 500</option>
+                                    <option value={5}>501 - 1000</option>
+                                    <option value={5}>Über 1001</option>
+                                </select>
+                            </div>
+                        </div>
                         <InputLabel
-                            label={'Address'}
-                            value={this.state.company.address}
-                            onChange={(address) => this.setState({
-                                company: Object.assign({}, this.state.company, { address })
-                            })}/>
-                        <InputLabel
-                            label={'Main Point of Contact'}
-                            value={this.state.company.mainPointOfContact}
-                            onChange={(mainPointOfContact) => this.setState({
-                                company: Object.assign({}, this.state.company, { mainPointOfContact })
-                            })}/>
-                        <InputLabel
-                            label={'Number of Employees'}
-                            value={this.state.company.numberOfEmployees}
-                            onChange={(numberOfEmployees) => this.setState({
-                                company: Object.assign({}, this.state.company, { numberOfEmployees })
-                            })}/>
+                            label={'Website'}
+                            value={this.state.company.website}
+                            onChange={(website) => this.setState({
+                                company: Object.assign({}, this.state.company, {website})
+                            })}
+                        />
                         <InputLabel
                             label={'kununu Link'}
-                            value={this.state.company.kununuLink}
-                            onChange={(kununuLink) => this.setState({
-                                company: Object.assign({}, this.state.company, { kununuLink })
+                            value={this.state.company.kununu}
+                            onChange={(kununu) => this.setState({
+                                company: Object.assign({}, this.state.company, { kununu })
                             })}/>
-                        <div>
-                            Description:
+                        <InputLabel
+                            label={'Haupttätigkeitsbereich'}
+                            value={this.state.company.field_of_activity}
+                            onChange={(field_of_activity) => this.setState({
+                                company: Object.assign({}, this.state.company, { field_of_activity })
+                            })}/>
+                        <div className='form-group row'>
+                            <div className='col-4 col-form-label'>
+                                Kontakt bei {this.state.company.company_name}
+                            </div>
+                        </div>
+                        <InputLabel
+                            label={'Name'}
+                            value={this.state.company.contact_name}
+                            onChange={(contact_name) => this.setState({
+                                company: Object.assign({}, this.state.company, { contact_name })
+                            })}/>
+                        <InputLabel
+                            label={'Email'}
+                            value={this.state.company.contact_email}
+                            onChange={(contact_email) => this.setState({
+                                company: Object.assign({}, this.state.company, { contact_email })
+                            })}/>
+                        <InputLabel
+                            label={'Telefon'}
+                            value={this.state.company.contact_phone}
+                            onChange={(contact_phone) => this.setState({
+                                company: Object.assign({}, this.state.company, { contact_phone })
+                            })}/>
+                        <div className='form-group'>
+                            <label htmlFor={'description'} className='col-4 col-form-label'>
+                                Beschreibung
+                            </label>
                             <TextEditor
-                                value={this.state.company.description}
-                                onChange={(description) => this.setState({
-                                    company: Object.assign({}, this.state.company, { description })
+                                id={'description'}
+                                value={this.state.company.company_description}
+                                onChange={(company_description) => this.setState({
+                                    company: Object.assign({}, this.state.company, { company_description })
                                 })}/>
                         </div>
                         <div>

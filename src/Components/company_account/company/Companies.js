@@ -19,9 +19,9 @@ class Companies extends Component {
         return (
             <div>
                 <div>Companies</div>
-                {this.state.companies.map((company) =>
-                    <div key={company._id}>
-                        <Link to={`/companies/${company._id}`}>{company.name}</Link>
+                {this.state.companies && this.state.companies.map((company) =>
+                    <div key={company.id}>
+                        <Link to={`/companies/${company.id}`}>{company.company_name}</Link>
                     </div>
                 )}
                 <div>
