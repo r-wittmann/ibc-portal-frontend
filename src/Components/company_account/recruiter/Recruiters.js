@@ -19,9 +19,9 @@ class Recruiters extends Component {
         return (
             <div>
                 <div>Recruiters</div>
-                {this.state.recruiters.map((recruiter) =>
-                    <div key={recruiter._id}>
-                        <Link to={`/recruiters/${recruiter._id}`}>{recruiter.name}</Link>
+                {this.state.recruiters && this.state.recruiters.map((recruiter) =>
+                    <div key={recruiter.id}>
+                        <Link to={`/recruiters/${recruiter.id}`}>{recruiter.recruiter_name}</Link>
                     </div>
                 )}
                 <div>
