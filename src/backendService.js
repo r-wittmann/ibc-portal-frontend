@@ -57,7 +57,7 @@ class BackendService {
         })
             .then(checkStatus)
             .then(convertResponseToJson)
-            .then((token) => localStorage.setItem('ibc-user-token', token.toString()));
+            .then((json) => localStorage.setItem('ibc-user-token', json.token));
     }
 
     static adminLogin(name, password) {
@@ -70,7 +70,7 @@ class BackendService {
         })
             .then(checkStatus)
             .then(convertResponseToJson)
-            .then((token) => localStorage.setItem('ibc-user-token', token.toString()));
+            .then((json) => localStorage.setItem('ibc-user-token', json.token));
     }
 
     static logout() {

@@ -22,8 +22,11 @@ class PasswordModal extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
+        this.handleClose();
         backendService.updatePassword(this.state.old, this.state.new)
-            .then((res) => console.log(res));
+        // call confirmation alert
+        // .then(() => confirmationAlert())
+        // .catch(() => failureAlert());
     };
 
     render() {

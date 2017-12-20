@@ -19,7 +19,9 @@ class Profile extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         backendService.updateProfile(this.state.profile)
-            .then(response => this.setState({ profile: response.profile }));
+            // call confirmation alert
+            // .then(() => confirmationAlert())
+            // .catch(() => failureAlert());
     };
 
     render() {
