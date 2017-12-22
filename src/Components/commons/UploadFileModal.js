@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class UploadLogoModal extends Component {
+class UploadFileModal extends Component {
 
     handleFileChange = (event) => {
         let file = event.target.files[0];
@@ -18,11 +18,11 @@ class UploadLogoModal extends Component {
     render() {
         return (
             <div className="modal fade"
-                 id="uploadLogo">
+                 id="uploadFile">
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h5 className="modal-title">Logo ändern/hochladen</h5>
+                            <h5 className="modal-title">{this.props.title}</h5>
                         </div>
                         <div className="modal-body">
                             <input
@@ -44,4 +44,4 @@ class UploadLogoModal extends Component {
     }
 }
 
-export default UploadLogoModal;
+export default UploadFileModal;

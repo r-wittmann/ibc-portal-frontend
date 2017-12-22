@@ -3,7 +3,7 @@ import backendService from '../../../backendService';
 import InputLabel from "../../commons/InputLabel";
 import TextEditor from "../../commons/TextEditor";
 import defaultCompany from '../../commons/defaultCompany';
-import UploadLogoModal from "./UploadLogoModal";
+import UploadFileModal from "../../commons/UploadFileModal";
 
 class Company extends Component {
     constructor(props) {
@@ -36,7 +36,6 @@ class Company extends Component {
             backendService.updateCompany(this.props.match.params.id, updatedCompany)
             // call confirmation alert
             // .then(() => confirmationAlert())
-                .then(() => this.props.history.push(`/companies`));
             // .catch(() => failureAlert());
         } else {
             backendService.createCompany(this.state.company)
@@ -155,17 +154,19 @@ class Company extends Component {
                             </label>
                             <div className='col-8'>
                                 <button type={'button'} className='btn btn-primary' data-toggle="modal"
-                                        data-target="#uploadLogo">
+                                        data-target="#uploadFile">
                                     Logo ändern/hochladen
                                 </button>
                                 {this.state.company.logo &&
                                     <img src={this.state.company.logo} style={{ marginLeft: 12 }} height={38} alt={'logo'}/>
                                 }
                             </div>
-                            <UploadLogoModal returnFile={(logo) => this.setState({
-                                company: Object.assign({}, this.state.company, { logo }),
-                                logoChanged: true
-                            })}/>
+                            <UploadFileModal
+                                title={'Logo ändern/hochladen'}
+                                returnFile={(logo) => this.setState({
+                                    company: Object.assign({}, this.state.company, { logo }),
+                                    logoChanged: true
+                                })}/>
                         </div>
                         <div className='form-group'>
                             <label htmlFor={'description'} className='col-4 col-form-label'>

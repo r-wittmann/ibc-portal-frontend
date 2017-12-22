@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import backendService from '../../../backendService';
 import InputLabel from "../../commons/InputLabel";
 import defaultRecruiter from '../../commons/defaultRecruiter';
+import UploadFileModal from "../../commons/UploadFileModal";
 
 class Recruiter extends Component {
     constructor(props) {
         super(props);
         this.state = {
             recruiter: undefined,
+            photoChanged: false,
             create: this.props.match.params.id === 'create'
         };
     }
@@ -27,6 +29,9 @@ class Recruiter extends Component {
             let updatedRecruiter = this.state.recruiter;
             delete(updatedRecruiter.created_at);
             delete(updatedRecruiter.updated_at);
+            if (!this.state.photoChanged) {
+                delete(updatedRecruiter.photo);
+            }
             backendService.updateRecruiter(this.props.match.params.id, updatedRecruiter)
                 // call confirmation alert
                 // .then(() => confirmationAlert())
@@ -89,6 +94,26 @@ class Recruiter extends Component {
                             onChange={(location) => this.setState({
                                 recruiter: Object.assign({}, this.state.recruiter, { location })
                             })}/>
+                        <div className='form-group row'>
+                            <label htmlFor={'photo'} className='col-4 col-form-label'>
+                                Foto Upload
+                            </label>
+                            <div className='col-8'>
+                                <button type={'button'} className='btn btn-primary' data-toggle="modal"
+                                        data-target="#uploadFile">
+                                    Foto ändern/hochladen
+                                </button>
+                                {this.state.recruiter.photo &&
+                                <img src={this.state.recruiter.photo} style={{ marginLeft: 12 }} height={38} alt={'logo'}/>
+                                }
+                            </div>
+                            <UploadFileModal
+                                title={'Foto ändern/hochladen'}
+                                returnFile={(photo) => this.setState({
+                                    recruiter: Object.assign({}, this.state.recruiter, { photo }),
+                                    photoChanged: true
+                                })}/>
+                        </div>
                         <InputLabel
                             label={'XING-Profil'}
                             value={this.state.recruiter.xing}
