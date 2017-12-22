@@ -3,12 +3,14 @@ import backendService from '../../../backendService';
 import InputLabel from "../../commons/InputLabel";
 import TextEditor from "../../commons/TextEditor";
 import defaultCompany from '../../commons/defaultCompany';
+import UploadLogoModal from "./UploadLogoModal";
 
 class Company extends Component {
     constructor(props) {
         super(props);
         this.state = {
             company: undefined,
+            logoChanged: false,
             create: this.props.match.params.id === 'create'
         };
     }
@@ -20,7 +22,6 @@ class Company extends Component {
         } else {
             this.setState({ company: defaultCompany });
         }
-
     }
 
     handleSubmit = (event) => {
@@ -29,10 +30,14 @@ class Company extends Component {
             let updatedCompany = this.state.company;
             delete(updatedCompany.created_at);
             delete(updatedCompany.updated_at);
+            if (!this.state.logoChanged) {
+                delete(updatedCompany.logo);
+            }
             backendService.updateCompany(this.props.match.params.id, updatedCompany)
-                // call confirmation alert
-                // .then(() => confirmationAlert())
-                // .catch(() => failureAlert());
+            // call confirmation alert
+            // .then(() => confirmationAlert())
+                .then(() => this.props.history.push(`/companies`));
+            // .catch(() => failureAlert());
         } else {
             backendService.createCompany(this.state.company)
                 .then(() => this.props.history.push(`/companies`));
@@ -43,10 +48,10 @@ class Company extends Component {
     handleDelete = (event) => {
         event.preventDefault();
         backendService.deleteCompany(this.props.match.params.id)
-            // call confirmation alert
-            // .then(() => confirmationAlert())
+        // call confirmation alert
+        // .then(() => confirmationAlert())
             .then(() => this.props.history.push('/companies'))
-            // .catch(() => failureAlert());
+        // .catch(() => failureAlert());
     };
 
     render() {
@@ -106,7 +111,7 @@ class Company extends Component {
                             label={'Website'}
                             value={this.state.company.website}
                             onChange={(website) => this.setState({
-                                company: Object.assign({}, this.state.company, {website})
+                                company: Object.assign({}, this.state.company, { website })
                             })}
                         />
                         <InputLabel
@@ -144,6 +149,24 @@ class Company extends Component {
                             onChange={(contact_phone) => this.setState({
                                 company: Object.assign({}, this.state.company, { contact_phone })
                             })}/>
+                        <div className='form-group row'>
+                            <label htmlFor={'logo'} className='col-4 col-form-label'>
+                                Firmenlogo
+                            </label>
+                            <div className='col-8'>
+                                <button type={'button'} className='btn btn-primary' data-toggle="modal"
+                                        data-target="#uploadLogo">
+                                    Logo ändern/hochladen
+                                </button>
+                                {this.state.company.logo &&
+                                    <img src={this.state.company.logo} style={{ marginLeft: 12 }} height={38} alt={'logo'}/>
+                                }
+                            </div>
+                            <UploadLogoModal returnFile={(logo) => this.setState({
+                                company: Object.assign({}, this.state.company, { logo }),
+                                logoChanged: true
+                            })}/>
+                        </div>
                         <div className='form-group'>
                             <label htmlFor={'description'} className='col-4 col-form-label'>
                                 Beschreibung
