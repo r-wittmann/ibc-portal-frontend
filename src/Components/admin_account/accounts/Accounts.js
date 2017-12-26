@@ -51,12 +51,27 @@ class Accounts extends Component {
 
                   </div>
                 </nav>
-                <h1>Alle Accounts</h1>
+                <div className={'headline'}>
+                	<h1>Alle Accounts</h1>
+                </div>
+
+                <table className={"table table-striped"}>
+                            <th>ID</th>
+                            <th>Firmenname</th>
+                            <th>Benutzername</th>
+                            <th>E-Mail</th>
+                            <th>Webseite</th>
+                            <th>Firmentyp</th>
+                            <th>Status</th>
+
                 {this.state.accounts.map((account) =>
-                    <div key={account.id}>
-                        {account.id}, {account.company_name}, {account.name}, {account.email}, {account.website}, {account.company_type}, {account.status}
-                    </div>
+
+
+                    <tr key={account.id}>
+                        <td>{account.id}</td><td>{account.company_name}</td><td>{account.name}</td><td>{account.email}</td><td>{account.website}</td><td>{account.company_type}</td><td>{account.status}</td>
+                    </tr>
                 )}
+                </table>
             </div>
         );
     }
