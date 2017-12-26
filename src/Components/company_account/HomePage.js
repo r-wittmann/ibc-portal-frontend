@@ -1,59 +1,16 @@
 import React, { Component } from 'react';
-import backendService from '../../backendService';
-import image from '../../../resources/ibc_logo.png';
 import companies from '../../../resources/companies.jpeg';
 import recruiters from '../../../resources/recruiters.jpeg';
 import jobs from '../../../resources/jobs.jpeg'
+import Header from "./Header";
 
 class HomePage extends Component {
-
-    handleLogout = (event) => {
-        event.preventDefault();
-        backendService.logout();
-        this.props.history.push('/login');
-    };
-
 
     render() {
         return (
             <div>
-                <nav className={'navbar navbar-expand-lg navbar-light bg-light'}>
-                    <a className={'navbar-brand'} href="#"><img className={'logo'} src={image} alt={'blub'}/></a>
-                    <button className={'navbar-toggler'} type="button" data-toggle="collapse" data-target="#navbarNav"
-                            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span className={'navbar-toggler-icon'}/>
-                    </button>
-                    <div className={'collapse navbar-collapse'} id="navbarNav">
-                        <ul className={'navbar-nav mr-auto mt-2 mt-lg-0'}>
-                            <li className={'nav-item active'}>
-                                <a className={'nav-link'} onClick={() => this.props.history.push('/')}>Home</a>
-                            </li>
-                            <li className={'nav-item'}>
-                                <a className={'nav-link'} onClick={() => this.props.history.push('/companies')}>Ihr
-                                    Unternehmen</a>
-                            </li>
-                            <li className={'nav-item'}>
-                                <a className={'nav-link'} onClick={() => this.props.history.push('/recruiters')}>Ihre
-                                    Recruiter</a>
-                            </li>
-                            <li className={'nav-item'}>
-                                <a className={'nav-link'} onClick={() => this.props.history.push('/postings')}>Ihre
-                                    Stellenanzeigen</a>
-                            </li>
-                        </ul>
+                <Header history={this.props.history}/>
 
-                        <ul className={'navbar-nav my-2 my-lg-0'}>
-                            <li className={'nav-item'}>
-                                <a className={'nav-link'} onClick={() => this.props.history.push('/profile')}>Ihr
-                                    Profil</a>
-                            </li>
-                            <li className={'nav-item'}>
-                                <a className={'nav-link'} onClick={this.handleLogout}>Logout</a>
-                            </li>
-                        </ul>
-
-                    </div>
-                </nav>
                 <div className={'headline'}>
                     <h1>Dashboard</h1>
                 </div>
