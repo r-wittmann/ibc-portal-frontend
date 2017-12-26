@@ -3,6 +3,12 @@ import backendService from '../../../backendService';
 import InputLabel from '../../commons/InputLabel';
 
 class LoginBody extends Component {
+    handleSubmit = (event) => {
+        event.preventDefault();
+        backendService.login(this.state.name, this.state.password)
+            .then(() => this.props.history.push('/home'));
+    };
+
     constructor(props) {
         super(props);
         this.state = {
@@ -10,12 +16,6 @@ class LoginBody extends Component {
             password: '',
         };
     }
-
-    handleSubmit = (event) => {
-        event.preventDefault();
-        backendService.login(this.state.name, this.state.password)
-            .then(() => this.props.history.push('/home'));
-    };
 
     render() {
         return (
@@ -31,9 +31,10 @@ class LoginBody extends Component {
                     onChange={(password) => this.setState({ password })}/>
                 <div className={'float-right'}>
 
-                     <button className={'btn btn-link'} style={{ marginRight: 20, padding: 0 }} >Passwort vergessen?</button>
-                     
-                     <input className={'btn btn-primary'} type={'submit'} value={'Login'}/>
+                    <button className={'btn btn-link'} style={{ marginRight: 20, padding: 0 }}>Passwort vergessen?
+                    </button>
+
+                    <input className={'btn btn-primary'} type={'submit'} value={'Login'}/>
 
                 </div>
             </form>

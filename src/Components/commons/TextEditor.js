@@ -4,6 +4,13 @@ import { Editor } from 'react-draft-wysiwyg';
 import '../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 class TextEditor extends Component {
+    onEditorStateChange = (editorState) => {
+        this.props.onChange(JSON.stringify(convertToRaw(editorState.getCurrentContent())));
+        this.setState({
+            editorState,
+        });
+    };
+
     constructor(props) {
         super(props);
         const editorState = EditorState.createWithContent(convertFromRaw(JSON.parse(props.value)));
@@ -11,13 +18,6 @@ class TextEditor extends Component {
             editorState,
         }
     }
-
-    onEditorStateChange = (editorState) => {
-        this.props.onChange(JSON.stringify(convertToRaw(editorState.getCurrentContent())));
-        this.setState({
-            editorState,
-        });
-    };
 
     render() {
         return (

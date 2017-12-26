@@ -3,15 +3,6 @@ import backendService from '../../../backendService';
 import InputLabel from "../../commons/InputLabel";
 
 class PasswordModal extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            old: '',
-            new: '',
-            confirm: ''
-        };
-    }
-
     handleClose = () => {
         this.setState({
             old: '',
@@ -19,7 +10,6 @@ class PasswordModal extends Component {
             confirm: ''
         })
     };
-
     handleSubmit = (event) => {
         event.preventDefault();
         this.handleClose();
@@ -28,6 +18,15 @@ class PasswordModal extends Component {
         // .then(() => confirmationAlert())
         // .catch(() => failureAlert());
     };
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            old: '',
+            new: '',
+            confirm: ''
+        };
+    }
 
     render() {
         return (

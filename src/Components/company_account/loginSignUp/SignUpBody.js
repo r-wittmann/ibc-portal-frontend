@@ -3,22 +3,6 @@ import backendService from '../../../backendService';
 import InputLabel from '../../commons/InputLabel';
 
 class SignUpBody extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            name: '',
-            email: '',
-            company_type: 'ibc',
-            mother_company: '',
-            address: '',
-            contact_name: '',
-            contact_email: '',
-            contact_phone: '',
-            website: '',
-            currentStep: 0
-        };
-    }
-
     handleSubmit = (step, event) => {
         event.preventDefault();
         switch (step) {
@@ -36,6 +20,22 @@ class SignUpBody extends Component {
         }
 
     };
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            name: '',
+            email: '',
+            company_type: 'ibc',
+            mother_company: '',
+            address: '',
+            contact_name: '',
+            contact_email: '',
+            contact_phone: '',
+            website: '',
+            currentStep: 0
+        };
+    }
 
     render() {
         return (
@@ -63,7 +63,7 @@ class SignUpBody extends Component {
                                                    name="gridRadios"
                                                    value="ibc"
                                                    checked={this.state.company_type === 'ibc'}
-                                                   onChange={() => this.setState({ company_type: 'ibc'})}/>
+                                                   onChange={() => this.setState({ company_type: 'ibc' })}/>
                                             IBC
                                         </label>
                                     </div>
@@ -74,7 +74,7 @@ class SignUpBody extends Component {
                                                    name="gridRadios"
                                                    value="startup"
                                                    checked={this.state.company_type === 'startup'}
-                                                   onChange={() => this.setState({ company_type: 'startup'})}/>
+                                                   onChange={() => this.setState({ company_type: 'startup' })}/>
                                             Startup
                                         </label>
                                     </div>
@@ -85,7 +85,7 @@ class SignUpBody extends Component {
                                                    name="gridRadios"
                                                    value="ngo"
                                                    checked={this.state.company_type === 'ngo'}
-                                                   onChange={() => this.setState({ company_type: 'ngo'})}/>
+                                                   onChange={() => this.setState({ company_type: 'ngo' })}/>
                                             Gemeinnütziger Verein
                                         </label>
                                     </div>
