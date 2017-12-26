@@ -185,22 +185,21 @@ class Company extends Component {
                                         company: Object.assign({}, this.state.company, { company_description })
                                     })}/>
                             </div>
-                            <div>
-                                <input type={'submit'} className={'btn btn-primary float-right buttons-form'}
+                            <div className='float-right'>
+                                {!this.state.create && (
+                                    <button className={'btn btn-danger buttons-form'} onClick={this.handleDelete}>
+                                        Unternehmen löschen
+                                    </button>
+                                )}
+                                <button className={'btn btn-warning buttons-form'}
+                                        onClick={() => this.props.history.push('/companies')}>
+                                    {this.state.create ? 'Abbrechen' : 'Zurück'}
+                                </button>
+                                <input type={'submit'} className={'btn btn-success buttons-form'}
                                        value={this.state.create ? 'Speichern' : 'Update'}/>
                             </div>
                         </form>
                     )}
-                </div>
-                {!this.state.create && (
-                    <div>
-                        <button className={'btn btn-primary'} onClick={this.handleDelete}>delete this company</button>
-                    </div>
-                )}
-                <div className={'float-right'}>
-                    <button className={'btn btn-danger buttons-form'}
-                            onClick={() => this.props.history.push('/companies')}>Abbrechen
-                    </button>
                 </div>
             </div>
         );

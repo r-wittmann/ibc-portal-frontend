@@ -25,7 +25,6 @@ class TextEditor extends Component {
                 editorState={this.state.editorState}
                 wrapperClassName="demo-wrapper"
                 editorClassName="demo-editor"
-                wrapperStyle={{ margin: 10 }}
                 editorStyle={{ maxWidth: 1152, minHeight: 128, maxHeight: 512, padding: 5, border: 'solid black 1px' }}
                 toolbarStyle={{ maxWidth: 1152, border: 'solid black 1px', backgroundColor: '#dcdcdc' }}
                 onEditorStateChange={this.onEditorStateChange}
