@@ -85,3 +85,56 @@ h1{
     width: 30px;
     margin-left: 5px;
 }
+
+.create-button{
+    float: right;
+    margin-right: 20px;
+}
+
+.dashboard-picture{
+    max-width: 100%;
+    display:block;
+}
+
+.column-headline{
+    border-top: solid white;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    background-color: #000080;
+    text-align: center;
+    font-size: 20px;
+    padding-top:17px;
+    padding-bottom: 1px;
+
+}
+
+.column-headline p{
+    color:white;
+}
+
+.dashboard-hover{
+    display: none;
+    background-color: rgba(0,0,128,0.7);
+    position:absolute;
+    padding: 20px;
+    max-width: 100%;
+    bottom: 0;
+    height: 40%;
+    margin-right: 15px;
+}
+
+.dashboard-hover p{
+    color:white;
+}
+
+#picture-companies:hover #hover-companies{
+    display: block;
+}
+
+#picture-recruiters:hover #hover-recruiters{
+    display: block;
+}
+
+#picture-postings:hover #hover-postings{
+    display: block;
+}
