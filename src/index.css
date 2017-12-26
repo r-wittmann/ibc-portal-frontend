@@ -138,3 +138,7 @@ h1{
 #picture-postings:hover #hover-postings{
     display: block;
 }
+
+.buttons-form{
+    margin:10px;
+}

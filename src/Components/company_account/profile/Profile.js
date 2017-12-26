@@ -63,6 +63,7 @@ class Profile extends Component {
                 <div className={'headline'}>
                     <h1>Ihr Profil</h1>
                 </div>
+                <div className={'container'}>
                 {this.state.profile && (
                     <form onSubmit={this.handleSubmit}>
                         <div className='form-group row'>
@@ -102,12 +103,13 @@ class Profile extends Component {
 
                         <PasswordModal/>
                         <div>
-                            <input type={'submit'} value={'Update'}/>
+                            <input type={'submit'} className={'btn btn-primary float-right buttons-form'} value={'Speichern'}/>
                         </div>
                     </form>
                 )}
-                <div>
-                    <button onClick={() => this.props.history.push('/home')}>back</button>
+                <div className={'float-right'}>
+                    <button className={'btn btn-danger buttons-form'} onClick={() => this.props.history.push('/profile')}>Abbrechen</button>
+                </div>
                 </div>
             </div>
         );

@@ -3,6 +3,7 @@ import backendService from '../../../backendService';
 import InputLabel from "../../commons/InputLabel";
 import TextEditor from "../../commons/TextEditor";
 import defaultPosting from '../../commons/defaultPosting';
+import image from '../../../../resources/ibc_logo.png';
 
 class Posting extends Component {
     constructor(props) {
@@ -52,7 +53,42 @@ class Posting extends Component {
     render() {
         return (
             <div>
-                <div>Posting</div>
+            <nav className={'navbar navbar-expand-lg navbar-light bg-light'}>
+                      <a className={'navbar-brand'} href="#"><img className={'logo'} src={image} alt={'blub'}/></a>
+                      <button className={'navbar-toggler'} type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span className={'navbar-toggler-icon'}></span>
+                      </button>
+                      <div className={'collapse navbar-collapse'} id="navbarNav">
+                        <ul className={'navbar-nav mr-auto mt-2 mt-lg-0'}>
+                          <li className={'nav-item'}>
+                            <a className={'nav-link'} onClick={() => this.props.history.push('/')}>Home</a>
+                          </li>
+                          <li className={'nav-item'}>
+                            <a className={'nav-link'} onClick={() => this.props.history.push('/companies')}>Ihr Unternehmen</a>
+                          </li>
+                          <li className={'nav-item'}>
+                            <a className={'nav-link'} onClick={() => this.props.history.push('/recruiters')}>Ihre Recruiter</a>
+                          </li>
+                          <li className={'nav-item active'}>
+                            <a className={'nav-link'} onClick={() => this.props.history.push('/postings')}>Ihre Stellenanzeigen</a>
+                          </li>
+                        </ul>
+
+                        <ul className={'navbar-nav my-2 my-lg-0'}>
+                            <li className={'nav-item'}>
+                                <a className={'nav-link'} onClick={() => this.props.history.push('/profile')}>Ihr Profil</a>
+                            </li>
+                          <li className={'nav-item'}>
+                                <a className={'nav-link'} onClick={this.handleLogout}>Logout</a>
+                            </li>
+                        </ul>
+
+                      </div>
+                    </nav>
+                    <div className={'headline'}>
+                        <h1>Neue Stellenanzeige erstellen</h1>
+                    </div>
+                      <div className={'container'}>
                 {this.state.posting && (
                     <form onSubmit={this.handleSubmit}>
                         <InputLabel
@@ -63,51 +99,52 @@ class Posting extends Component {
                             })}
                         />
                         <InputLabel
-                            label={'Start of Employment'}
+                            label={'Startdatum'}
                             value={this.state.posting.startDate}
                             onChange={(startDate) => this.setState({
                                 posting: Object.assign({}, this.state.posting, { startDate })
                             })}
                         />
                         <InputLabel
-                            label={'Contract Type'}
+                            label={'Vertragstyp'}
                             value={this.state.posting.contractType}
                             onChange={(contractType) => this.setState({
                                 posting: Object.assign({}, this.state.posting, { contractType })
                             })}
                         />
                         <InputLabel
-                            label={'Contract Duration'}
+                            label={'Vertragsdauer'}
                             value={this.state.posting.contractDuration}
                             onChange={(contractDuration) => this.setState({
                                 posting: Object.assign({}, this.state.posting, { contractDuration })
                             })}
                         />
                         <InputLabel
-                            label={'Working Hours'}
+                            label={'Wochenstunden'}
                             value={this.state.posting.workingHours}
                             onChange={(workingHours) => this.setState({
                                 posting: Object.assign({}, this.state.posting, { workingHours })
                             })}
                         />
                         <InputLabel
-                            label={'Entry Level'}
+                            label={'Einstiegslevel'}
                             value={this.state.posting.entryLevel}
                             onChange={(entryLevel) => this.setState({
                                 posting: Object.assign({}, this.state.posting, { entryLevel })
                             })}
                         />
                         <InputLabel
-                            label={'Place of Employment'}
+                            label={'Standort'}
                             value={this.state.posting.placeOfEmployment}
                             onChange={(placeOfEmployment) => this.setState({
                                 posting: Object.assign({}, this.state.posting, { placeOfEmployment })
                             })}
                         />
-                        <div>
+                        <div className={"form-group"}>
                             <label>
-                                Company:
-                                <select
+                                Unternehmen:
+                            </label>
+                                <select className={"form-control"}
                                     value={this.state.selectedCompany}
                                     onChange={(event) => this.setState({
                                         posting: Object.assign({}, this.state.posting, { selectedCompany: event.target.value })
@@ -116,12 +153,12 @@ class Posting extends Component {
                                         <option key={company._id} value={company._id}>{company.name}</option>
                                     ))}
                                 </select>
-                            </label>
                         </div>
-                        <div>
+                        <div className={"form-group"}>
                             <label>
-                                Recruiter:
-                                <select
+                                Recruiter
+                            </label>
+                                <select className={"form-control"}
                                     value={this.state.selectedRecruiter}
                                     onChange={(event) => this.setState({
                                         posting: Object.assign({}, this.state.posting, { selectedRecruiter: event.target.value })
@@ -130,10 +167,9 @@ class Posting extends Component {
                                         <option key={recruiter._id} value={recruiter._id}>{recruiter.name}</option>
                                     ))}
                                 </select>
-                            </label>
                         </div>
                         <div>
-                            Content:
+                            Beschreibung
                             <TextEditor
                                 value={this.state.posting.content}
                                 onChange={(content) => this.setState({
@@ -141,17 +177,19 @@ class Posting extends Component {
                                 })}/>
                         </div>
                         <div>
-                            <input type={'submit'} value={this.state.create ? 'Save' : 'Update'}/>
+                            <input type={'submit'} className={'btn btn-primary float-right buttons-form'} value={this.state.create ? 'Speichern' : 'Update'}/>
                         </div>
                     </form>
                 )}
+
                 {!this.state.create && (
                     <div>
                         <button onClick={this.handleDelete}>delete this posting</button>
                     </div>
                 )}
-                <div>
-                    <button onClick={() => this.props.history.push('/postings')}>back</button>
+                <div className={'float-right'}>
+                    <button className={'btn btn-danger buttons-form'} onClick={() => this.props.history.push('/postings')}>Abbrechen</button>
+                </div>
                 </div>
             </div>
         );

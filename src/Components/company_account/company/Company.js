@@ -4,6 +4,7 @@ import InputLabel from "../../commons/InputLabel";
 import TextEditor from "../../commons/TextEditor";
 import defaultCompany from '../../commons/defaultCompany';
 import UploadFileModal from "../../commons/UploadFileModal";
+import image from '../../../../resources/ibc_logo.png';
 
 class Company extends Component {
     constructor(props) {
@@ -56,7 +57,42 @@ class Company extends Component {
     render() {
         return (
             <div>
-                <div>Company</div>
+                <nav className={'navbar navbar-expand-lg navbar-light bg-light'}>
+                      <a className={'navbar-brand'} href="#"><img className={'logo'} src={image} alt={'blub'}/></a>
+                      <button className={'navbar-toggler'} type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span className={'navbar-toggler-icon'}></span>
+                      </button>
+                      <div className={'collapse navbar-collapse'} id="navbarNav">
+                        <ul className={'navbar-nav mr-auto mt-2 mt-lg-0'}>
+                          <li className={'nav-item'}>
+                            <a className={'nav-link'} onClick={() => this.props.history.push('/')}>Home</a>
+                          </li>
+                          <li className={'nav-item active'}>
+                            <a className={'nav-link'} onClick={() => this.props.history.push('/companies')}>Ihr Unternehmen</a>
+                          </li>
+                          <li className={'nav-item'}>
+                            <a className={'nav-link'} onClick={() => this.props.history.push('/recruiters')}>Ihre Recruiter</a>
+                          </li>
+                          <li className={'nav-item'}>
+                            <a className={'nav-link'} onClick={() => this.props.history.push('/postings')}>Ihre Stellenanzeigen</a>
+                          </li>
+                        </ul>
+
+                        <ul className={'navbar-nav my-2 my-lg-0'}>
+                            <li className={'nav-item'}>
+                                <a className={'nav-link'} onClick={() => this.props.history.push('/profile')}>Ihr Profil</a>
+                            </li>
+                          <li className={'nav-item'}>
+                                <a className={'nav-link'} onClick={this.handleLogout}>Logout</a>
+                            </li>
+                        </ul>
+
+                      </div>
+                    </nav>
+                    <div className={'headline'}>
+                        <h1>Neues Unternehmen erstellen</h1>
+                    </div>
+                    <div className={'container'}>
                 {this.state.company && (
                     <form onSubmit={this.handleSubmit}>
                         <InputLabel
@@ -107,7 +143,7 @@ class Company extends Component {
                             </div>
                         </div>
                         <InputLabel
-                            label={'Website'}
+                            label={'Webseite'}
                             value={this.state.company.website}
                             onChange={(website) => this.setState({
                                 company: Object.assign({}, this.state.company, { website })
@@ -169,7 +205,7 @@ class Company extends Component {
                                 })}/>
                         </div>
                         <div className='form-group'>
-                            <label htmlFor={'description'} className='col-4 col-form-label'>
+                            <label htmlFor={'description'} >
                                 Beschreibung
                             </label>
                             <TextEditor
@@ -180,17 +216,18 @@ class Company extends Component {
                                 })}/>
                         </div>
                         <div>
-                            <input type={'submit'} value={this.state.create ? 'Save' : 'Update'}/>
+                            <input type={'submit'} className={'btn btn-primary float-right buttons-form'} value={this.state.create ? 'Speichern' : 'Update'}/>
                         </div>
                     </form>
                 )}
+                </div>
                 {!this.state.create && (
                     <div>
-                        <button onClick={this.handleDelete}>delete this company</button>
+                        <button className={'btn btn-primary'} onClick={this.handleDelete}>delete this company</button>
                     </div>
                 )}
-                <div>
-                    <button onClick={() => this.props.history.push('/companies')}>back</button>
+                <div className={'float-right'}>
+                    <button className={'btn btn-danger buttons-form'} onClick={() => this.props.history.push('/companies')}>Abbrechen</button>
                 </div>
             </div>
         );
