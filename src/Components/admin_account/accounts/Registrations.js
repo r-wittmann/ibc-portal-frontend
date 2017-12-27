@@ -6,11 +6,28 @@ import cancel from '../../../../resources/cancel.png'
 
 
 class Registrations extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            registeredAccounts: []
+        };
+    };
+
+    componentDidMount() {
+        backendService.getAccounts()
+            .then((accounts) => {
+                this.setState({
+                    registeredAccounts: accounts.filter(account => account.status === 'registered')
+                })
+            });
+    };
+
     handleLogout = (event) => {
         event.preventDefault();
         backendService.logout();
         this.props.history.push('/admin/login');
     };
+
     acceptRegistration = (id) => {
         event.preventDefault();
         backendService.acceptAccount(id)
@@ -23,9 +40,11 @@ class Registrations extends Component {
         done.removeAttribute('hidden');
 
     };
+
     declineRegistration = (id) => {
         event.preventDefault();
         backendService.declineAccount(id)
+            .then(() => this.sendEmail(this.state.registeredAccounts.filter(account => account.id === id)))
             .then(() => this.setState({
                 registeredAccounts: this.state.registeredAccounts.filter(account => account.id !== id)
             }));
@@ -35,32 +54,22 @@ class Registrations extends Component {
         cancel.removeAttribute('hidden');
     };
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            registeredAccounts: []
-        };
-    }
-
-    componentDidMount() {
-        backendService.getAccounts()
-            .then((accounts) => {
-                this.setState({
-                    registeredAccounts: accounts.filter(account => account.status === 'registered')
-                })
-            });
-    }
+    sendEmail = ([account]) => {
+        const subject = 'Default Subject';
+        const emailBody = 'Default Body';
+        document.location = "mailto:" + account.email + "?subject=" + subject + "&body=" + emailBody;
+    };
 
     render() {
         return (
             <div>
                 <nav className={'navbar navbar-expand-lg navbar-light bg-light'}>
                     <a className={'navbar-brand'} onClick={() => this.props.history.push('/admin/accounts')}>
-                        <img className={'logo'} src={image} alt={'blub'}></img>
+                        <img className={'logo'} src={image} alt={'blub'}/>
                     </a>
                     <button className={'navbar-toggler'} type="button" data-toggle="collapse" data-target="#navbarNav"
                             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span className={'navbar-toggler-icon'}></span>
+                        <span className={'navbar-toggler-icon'}/>
                     </button>
                     <div className={'collapse navbar-collapse'} id="navbarNav">
                         <ul className={'navbar-nav mr-auto mt-2 mt-lg-0'}>
@@ -126,12 +135,12 @@ class Registrations extends Component {
                                     <div className={'float-left'}>
                                         <div className={'done float-left'}>
                                             <a onClick={() => this.acceptRegistration(account.id)}>
-                                                <img className={'done'} src={done} alt={'blub'}></img>
+                                                <img className={'done'} src={done} alt={'blub'}/>
                                             </a>
                                         </div>
                                         <div className={'cancel float-left'}>
                                             <a onClick={() => this.declineRegistration(account.id)}>
-                                                <img className={'cancel'} src={cancel} alt={'blub'}></img>
+                                                <img className={'cancel'} src={cancel} alt={'blub'}/>
                                             </a>
                                         </div>
                                     </div>
