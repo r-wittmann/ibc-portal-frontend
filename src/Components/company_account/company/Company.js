@@ -5,36 +5,9 @@ import TextEditor from "../../commons/TextEditor";
 import defaultCompany from '../../commons/defaultCompany';
 import UploadFileModal from "../../commons/UploadFileModal";
 import Header from "../Header";
+import { toast } from 'react-toastify';
 
 class Company extends Component {
-    handleSubmit = (event) => {
-        event.preventDefault();
-        if (!this.state.create) {
-            let updatedCompany = this.state.company;
-            delete(updatedCompany.created_at);
-            delete(updatedCompany.updated_at);
-            if (!this.state.logoChanged) {
-                delete(updatedCompany.logo);
-            }
-            backendService.updateCompany(this.props.match.params.id, updatedCompany)
-            // call confirmation alert
-            // .then(() => confirmationAlert())
-            // .catch(() => failureAlert());
-        } else {
-            backendService.createCompany(this.state.company)
-                .then(() => this.props.history.push(`/companies`));
-        }
-
-    };
-    handleDelete = (event) => {
-        event.preventDefault();
-        backendService.deleteCompany(this.props.match.params.id)
-        // call confirmation alert
-        // .then(() => confirmationAlert())
-            .then(() => this.props.history.push('/companies'))
-        // .catch(() => failureAlert());
-    };
-
     constructor(props) {
         super(props);
         this.state = {
@@ -52,6 +25,35 @@ class Company extends Component {
             this.setState({ company: defaultCompany });
         }
     }
+
+    handleSubmit = (event) => {
+        event.preventDefault();
+        if (!this.state.create) {
+            let updatedCompany = this.state.company;
+            delete(updatedCompany.created_at);
+            delete(updatedCompany.updated_at);
+            if (!this.state.logoChanged) {
+                delete(updatedCompany.logo);
+            }
+            backendService.updateCompany(this.props.match.params.id, updatedCompany)
+                .then(() => toast('Unternehmen aktualisiert', { type: 'success' }))
+                .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
+        } else {
+            backendService.createCompany(this.state.company)
+                .then(() => this.props.history.push(`/companies`))
+                .then(() => toast('Unternehmen erstellt', { type: 'success' }))
+                .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
+        }
+
+    };
+
+    handleDelete = (event) => {
+        event.preventDefault();
+        backendService.deleteCompany(this.props.match.params.id)
+            .then(() => this.props.history.push('/companies'))
+            .then(() => toast('Unternehmen erfolgreich gelöscht', { type: 'success' }))
+            .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
+    };
 
     render() {
         return (
