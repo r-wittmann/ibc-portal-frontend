@@ -12,6 +12,7 @@
   "repository": "https://github.com/r-wittmann/ibc-portal-frontend.git",
   "dependencies": {
     "draft-js": "^0.10.4",
+    "draftjs-to-html": "^0.8.1",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-draft-wysiwyg": "^1.10.12",

@@ -42,6 +42,10 @@ class App extends Component {
                         <Route exact path={'/home'} component={HomePage}/>
                         <Route exact path={'/companies'} component={Companies}/>
                         <Route exact path={'/companies/:id'} component={Company}/>
+                        <Route exact path={'/companies/:id/preview'}
+                               render={(routeProps) => (
+                                   <Company {...routeProps} preview/>
+                               )}/>
                         <Route exact path={'/recruiters'} component={Recruiters}/>
                         <Route exact path={'/recruiters/:id'} component={Recruiter}/>
                         <Route exact path={'/postings'} component={Postings}/>
