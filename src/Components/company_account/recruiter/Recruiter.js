@@ -58,7 +58,7 @@ class Recruiter extends Component {
                 <Header history={this.props.history}/>
 
                 <div className={'headline'}>
-                    <h1>Neuen Recruiter erstellen</h1>
+                    <h1>{this.state.create ? 'Neuen Recruiter erstellen' : 'Recruiter bearbeiten'}</h1>
                 </div>
                 <div className={'container'}>
                     {this.state.recruiter && (

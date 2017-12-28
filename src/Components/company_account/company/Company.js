@@ -62,7 +62,7 @@ class Company extends Component {
                 <Header history={this.props.history}/>
 
                 <div className={'headline'}>
-                    <h1>Neues Unternehmen erstellen</h1>
+                    <h1>{this.state.create ? 'Neues Unternehmen erstellen' : 'Unternehmen bearbeiten'}</h1>
                 </div>
                 <div className={'container'}>
                     {this.state.company && (

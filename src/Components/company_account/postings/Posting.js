@@ -55,7 +55,7 @@ class Posting extends Component {
                 <Header history={this.props.history}/>
 
                 <div className={'headline'}>
-                    <h1>Neue Stellenanzeige erstellen</h1>
+                    <h1>{this.state.create ? 'Neue Stellenanzeige erstellen' : 'Stellenanzeige bearbeiten'}</h1>
                 </div>
                 <div className={'container'}>
                     {this.state.posting && (
