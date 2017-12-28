@@ -111,7 +111,7 @@ class Company extends Component {
                                             <option value={3}>51 - 100</option>
                                             <option value={4}>101 - 500</option>
                                             <option value={5}>501 - 1000</option>
-                                            <option value={5}>Über 1001</option>
+                                            <option value={6}>Über 1001</option>
                                         </select>
                                     </div>
                                 </div>
