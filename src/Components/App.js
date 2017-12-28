@@ -48,6 +48,10 @@ class App extends Component {
                                )}/>
                         <Route exact path={'/recruiters'} component={Recruiters}/>
                         <Route exact path={'/recruiters/:id'} component={Recruiter}/>
+                        <Route exact path={'/recruiters/:id/preview'}
+                               render={(routeProps) => (
+                                   <Recruiter {...routeProps} preview/>
+                               )}/>
                         <Route exact path={'/postings'} component={Postings}/>
                         <Route exact path={'/postings/:id'} component={Posting}/>
                         <Route exact path={'/profile/'} component={Profile}/>
