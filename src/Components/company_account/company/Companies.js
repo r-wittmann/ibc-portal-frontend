@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import backendService from '../../../backendService';
 import Header from "../Header";
+import CompanyListItem from "./CompanyListItem";
+import { toast } from "react-toastify";
 
 class Companies extends Component {
     constructor(props) {
@@ -16,6 +17,13 @@ class Companies extends Component {
             .then((companies) => this.setState({ companies }));
     }
 
+    handleDelete = (companyId) => {
+        backendService.deleteCompany(companyId)
+            .then(() => this.setState({ companies: this.state.companies.filter(company => company.id !== companyId) }))
+            .then(() => toast('Unternehmen erfolgreich gelöscht', { type: 'success' }))
+            .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
+    };
+
     render() {
         return (
             <div>
@@ -24,15 +32,30 @@ class Companies extends Component {
                 <div className={'headline'}>
                     <h1>Ihr Unternehmen</h1>
                 </div>
-                {this.state.companies && this.state.companies.map((company) =>
-                    <div key={company.id}>
-                        <Link to={`/companies/${company.id}`}>{company.company_name}</Link>
+                <div className={'container'}>
+                    <table className={'table table-hover'}>
+                        <thead>
+                        <tr>
+                            <th>Unternehmensname</th>
+                            <th/>
+                            <th>Aktive Stellenanzeigen</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {this.state.companies && this.state.companies.map((company) =>
+                            <CompanyListItem key={company.id}
+                                             company={company}
+                                             history={this.props.history}
+                                             delete={this.handleDelete}/>
+                        )}
+                        </tbody>
+                    </table>
+                    <div className={'create-button'}>
+                        <button className={'btn btn-primary'}
+                                onClick={() => this.props.history.push('/companies/create')}>
+                            Neues Unternehmen erstellen
+                        </button>
                     </div>
-                )}
-                <div className={'create-button'}>
-                    <button className={'btn btn-primary'} onClick={() => this.props.history.push('/companies/create')}>
-                        Neues Unternehmen erstellen
-                    </button>
                 </div>
             </div>
         );

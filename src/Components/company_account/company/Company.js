@@ -6,6 +6,7 @@ import defaultCompany from '../../commons/defaultCompany';
 import UploadFileModal from "../../commons/UploadFileModal";
 import Header from "../Header";
 import { toast } from 'react-toastify';
+import ConfirmModal from "../../commons/ConfirmModal";
 
 class Company extends Component {
     constructor(props) {
@@ -26,7 +27,7 @@ class Company extends Component {
         }
     }
 
-    handleSubmit = (event) => {
+    handleFormSubmit = (event) => {
         event.preventDefault();
         if (!this.state.create) {
             let updatedCompany = this.state.company;
@@ -65,142 +66,157 @@ class Company extends Component {
                 </div>
                 <div className={'container'}>
                     {this.state.company && (
-                        <form onSubmit={this.handleSubmit}>
-                            <InputLabel
-                                label={'Unternehmensname'}
-                                value={this.state.company.company_name}
-                                onChange={(company_name) => this.setState({
-                                    company: Object.assign({}, this.state.company, { company_name })
-                                })}/>
-                            <div className='form-group row'>
-                                <label htmlFor={'address'} className='col-4 col-form-label'>
-                                    Adresse in München
-                                </label>
-                                <div className='col-8'>
-                                <textarea
-                                    id={'address'}
-                                    className={'form-control'}
-                                    rows='3'
-                                    value={this.state.company.munich_address}
-                                    onChange={(event) => this.setState({
-                                        company: Object.assign({}, this.state.company, { munich_address: event.target.value })
+                        <div>
+                            <form onSubmit={this.handleSubmit}>
+                                <InputLabel
+                                    label={'Unternehmensname'}
+                                    value={this.state.company.company_name}
+                                    onChange={(company_name) => this.setState({
+                                        company: Object.assign({}, this.state.company, { company_name })
                                     })}/>
-                                </div>
-                            </div>
-                            <InputLabel
-                                label={'Weitere Standorte (Komma separiert)'}
-                                value={this.state.company.locations}
-                                onChange={(locations) => this.setState({
-                                    company: Object.assign({}, this.state.company, { locations })
-                                })}/>
-                            <div className='form-group row'>
-                                <label htmlFor={'employees'} className='col-4 col-form-label'>
-                                    Mitarbeiter weltweit
-                                </label>
-                                <div className='col-8'>
-                                    <select id={'employees'}
-                                            value={this.state.company.employees}
-                                            className="form-control"
+                                <div className='form-group row'>
+                                    <label htmlFor={'address'} className='col-4 col-form-label'>
+                                        Adresse in München
+                                    </label>
+                                    <div className='col-8'>
+                                        <textarea
+                                            id={'address'}
+                                            className={'form-control'}
+                                            rows='3'
+                                            value={this.state.company.munich_address}
                                             onChange={(event) => this.setState({
-                                                company: Object.assign({}, this.state.company, { employees: event.target.value })
-                                            })}>
-                                        <option value={1}>Bis 10</option>
-                                        <option value={2}>11 - 50</option>
-                                        <option value={3}>51 - 100</option>
-                                        <option value={4}>101 - 500</option>
-                                        <option value={5}>501 - 1000</option>
-                                        <option value={5}>Über 1001</option>
-                                    </select>
+                                                company: Object.assign({}, this.state.company, { munich_address: event.target.value })
+                                            })}/>
+                                    </div>
                                 </div>
-                            </div>
-                            <InputLabel
-                                label={'Webseite'}
-                                value={this.state.company.website}
-                                onChange={(website) => this.setState({
-                                    company: Object.assign({}, this.state.company, { website })
-                                })}
-                            />
-                            <InputLabel
-                                label={'kununu Link'}
-                                value={this.state.company.kununu}
-                                onChange={(kununu) => this.setState({
-                                    company: Object.assign({}, this.state.company, { kununu })
-                                })}/>
-                            <InputLabel
-                                label={'Haupttätigkeitsbereich'}
-                                value={this.state.company.field_of_activity}
-                                onChange={(field_of_activity) => this.setState({
-                                    company: Object.assign({}, this.state.company, { field_of_activity })
-                                })}/>
-                            <div className='form-group row'>
-                                <div className='col-4 col-form-label'>
-                                    Kontakt bei {this.state.company.company_name}
-                                </div>
-                            </div>
-                            <InputLabel
-                                label={'Name'}
-                                value={this.state.company.contact_name}
-                                onChange={(contact_name) => this.setState({
-                                    company: Object.assign({}, this.state.company, { contact_name })
-                                })}/>
-                            <InputLabel
-                                label={'Email'}
-                                value={this.state.company.contact_email}
-                                onChange={(contact_email) => this.setState({
-                                    company: Object.assign({}, this.state.company, { contact_email })
-                                })}/>
-                            <InputLabel
-                                label={'Telefon'}
-                                value={this.state.company.contact_phone}
-                                onChange={(contact_phone) => this.setState({
-                                    company: Object.assign({}, this.state.company, { contact_phone })
-                                })}/>
-                            <div className='form-group row'>
-                                <label htmlFor={'logo'} className='col-4 col-form-label'>
-                                    Firmenlogo
-                                </label>
-                                <div className='col-8'>
-                                    <button type={'button'} className='btn btn-primary' data-toggle="modal"
-                                            data-target="#uploadFile">
-                                        Logo ändern/hochladen
-                                    </button>
-                                    {this.state.company.logo &&
-                                    <img src={this.state.company.logo} style={{ marginLeft: 12 }} height={38}
-                                         alt={'logo'}/>
-                                    }
-                                </div>
-                                <UploadFileModal
-                                    title={'Logo ändern/hochladen'}
-                                    returnFile={(logo) => this.setState({
-                                        company: Object.assign({}, this.state.company, { logo }),
-                                        logoChanged: true
+                                <InputLabel
+                                    label={'Weitere Standorte (Komma separiert)'}
+                                    value={this.state.company.locations}
+                                    onChange={(locations) => this.setState({
+                                        company: Object.assign({}, this.state.company, { locations })
                                     })}/>
-                            </div>
-                            <div className='form-group'>
-                                <label htmlFor={'description'}>
-                                    Beschreibung
-                                </label>
-                                <TextEditor
-                                    id={'description'}
-                                    value={this.state.company.company_description}
-                                    onChange={(company_description) => this.setState({
-                                        company: Object.assign({}, this.state.company, { company_description })
+                                <div className='form-group row'>
+                                    <label htmlFor={'employees'} className='col-4 col-form-label'>
+                                        Mitarbeiter weltweit
+                                    </label>
+                                    <div className='col-8'>
+                                        <select id={'employees'}
+                                                value={this.state.company.employees}
+                                                className="form-control"
+                                                onChange={(event) => this.setState({
+                                                    company: Object.assign({}, this.state.company, { employees: event.target.value })
+                                                })}>
+                                            <option value={1}>Bis 10</option>
+                                            <option value={2}>11 - 50</option>
+                                            <option value={3}>51 - 100</option>
+                                            <option value={4}>101 - 500</option>
+                                            <option value={5}>501 - 1000</option>
+                                            <option value={5}>Über 1001</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <InputLabel
+                                    label={'Webseite'}
+                                    value={this.state.company.website}
+                                    onChange={(website) => this.setState({
+                                        company: Object.assign({}, this.state.company, { website })
+                                    })}
+                                />
+                                <InputLabel
+                                    label={'kununu Link'}
+                                    value={this.state.company.kununu}
+                                    onChange={(kununu) => this.setState({
+                                        company: Object.assign({}, this.state.company, { kununu })
                                     })}/>
-                            </div>
+                                <InputLabel
+                                    label={'Haupttätigkeitsbereich'}
+                                    value={this.state.company.field_of_activity}
+                                    onChange={(field_of_activity) => this.setState({
+                                        company: Object.assign({}, this.state.company, { field_of_activity })
+                                    })}/>
+                                <div className='form-group row'>
+                                    <div className='col-4 col-form-label'>
+                                        Kontakt bei {this.state.company.company_name}
+                                    </div>
+                                </div>
+                                <InputLabel
+                                    label={'Name'}
+                                    value={this.state.company.contact_name}
+                                    onChange={(contact_name) => this.setState({
+                                        company: Object.assign({}, this.state.company, { contact_name })
+                                    })}/>
+                                <InputLabel
+                                    label={'Email'}
+                                    value={this.state.company.contact_email}
+                                    onChange={(contact_email) => this.setState({
+                                        company: Object.assign({}, this.state.company, { contact_email })
+                                    })}/>
+                                <InputLabel
+                                    label={'Telefon'}
+                                    value={this.state.company.contact_phone}
+                                    onChange={(contact_phone) => this.setState({
+                                        company: Object.assign({}, this.state.company, { contact_phone })
+                                    })}/>
+                                <div className='form-group row'>
+                                    <label htmlFor={'logo'} className='col-4 col-form-label'>
+                                        Firmenlogo
+                                    </label>
+                                    <div className='col-8'>
+                                        <button type={'button'} className='btn btn-primary' data-toggle="modal"
+                                                data-target="#uploadFile">
+                                            Logo ändern/hochladen
+                                        </button>
+                                        {this.state.company.logo &&
+                                            <img src={this.state.company.logo} style={{ marginLeft: 12 }} height={38}
+                                                 alt={'logo'}/>
+                                        }
+                                    </div>
+                                    <UploadFileModal
+                                        title={'Logo ändern/hochladen'}
+                                        returnFile={(logo) => this.setState({
+                                            company: Object.assign({}, this.state.company, { logo }),
+                                            logoChanged: true
+                                        })}/>
+                                </div>
+                                <div className='form-group'>
+                                    <label htmlFor={'description'}>
+                                        Beschreibung
+                                    </label>
+                                    <TextEditor
+                                        id={'description'}
+                                        value={this.state.company.company_description}
+                                        onChange={(company_description) => this.setState({
+                                            company: Object.assign({}, this.state.company, { company_description })
+                                        })}/>
+                                </div>
+                            </form>
                             <div className='float-right'>
                                 {!this.state.create && (
-                                    <button className={'btn btn-danger buttons-form'} onClick={this.handleDelete}>
-                                        Unternehmen löschen
-                                    </button>
+                                    <span>
+                                        <button className={'btn btn-danger buttons-form'}
+                                                data-toggle={'modal'}
+                                                data-target={'#confirm-modal'}>
+                                            Unternehmen löschen
+                                        </button>
+                                        <ConfirmModal
+                                            id={'confirm-modal'}
+                                            message={`Wollen Sie das Unternehmen ${this.state.company.company_name} wirklich löschen?`}
+                                            positiveAction={this.handleDelete}
+                                            positiveText={'Löschen'}
+                                            negativeAction={() => {/*closes the modal*/}}
+                                            negativeText={'Abbrechen'}/>
+                                    </span>
                                 )}
                                 <button className={'btn btn-warning buttons-form'}
                                         onClick={() => this.props.history.push('/companies')}>
                                     {this.state.create ? 'Abbrechen' : 'Zurück'}
                                 </button>
-                                <input type={'submit'} className={'btn btn-success buttons-form'}
-                                       value={this.state.create ? 'Speichern' : 'Update'}/>
+                                <button className={'btn btn-success buttons-form'}
+                                        onClick={this.handleFormSubmit}>
+                                    {this.state.create ? 'Speichern' : 'Update'}
+                                </button>
                             </div>
-                        </form>
+                        </div>
                     )}
                 </div>
             </div>
