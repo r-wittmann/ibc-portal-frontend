@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import image from '../../../resources/ibc_logo.png';
+import image from '../../../resources/ibc_logo-long.png';
 import backendService from "../../backendService";
 
 class Header extends Component {
