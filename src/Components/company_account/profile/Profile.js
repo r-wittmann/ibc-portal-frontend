@@ -80,7 +80,7 @@ class Profile extends Component {
                     )}
                     <div className={'float-right'}>
                         <button className={'btn btn-danger buttons-form'}
-                                onClick={() => this.props.history.push('/profile')}>Abbrechen
+                                onClick={() => this.props.history.push('/home')}>Abbrechen
                         </button>
                     </div>
                 </div>
