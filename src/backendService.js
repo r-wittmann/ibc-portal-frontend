@@ -35,6 +35,18 @@ class BackendService {
         return localStorage.getItem('ibc-user-token');
     }
 
+    static checkUsername(name) {
+        return fetch(`${baseUrl}/api/register/check-username`, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({ name })
+        })
+            .then(checkStatus)
+            .then(convertResponseToJson)
+    }
+
     static register(user) {
         return fetch(`${baseUrl}/api/register`, {
             method: 'POST',

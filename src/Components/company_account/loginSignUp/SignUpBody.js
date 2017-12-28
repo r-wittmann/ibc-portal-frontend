@@ -46,7 +46,12 @@ class SignUpBody extends Component {
                             label={'Benutzername'}
                             type={'name'}
                             value={this.state.name}
-                            onChange={(name) => this.setState({ name })}/>
+                            onChange={(name) => {
+                                this.setState({ name });
+                                backendService.checkUsername(name)
+                                    .then(() => console.log('username ok'))
+                                    .catch(() => console.log('username taken'));
+                            }}/>
                         <InputLabel
                             label={'Email'}
                             type={'email'}
