@@ -24,15 +24,15 @@ class CompanyListItem extends Component {
                                 data-target={`#confirm-modal-${this.props.company.id}`}>
                             <span className={'fa fa-trash'}/>
                         </button>
-                        <ConfirmModal
-                            id={`confirm-modal-${this.props.company.id}`}
-                            message={`Wollen Sie das Unternehmen ${this.props.company.company_name} wirklich löschen?`}
-                            positiveAction={() => this.props.delete(this.props.company.id)}
-                            positiveText={'Löschen'}
-                            negativeAction={() => {/*closes the modal*/}}
-                            negativeText={'Abbrechen'}
-                        />
                     </div>
+                    <ConfirmModal
+                        id={`confirm-modal-${this.props.company.id}`}
+                        message={`Wollen Sie das Unternehmen ${this.props.company.company_name} wirklich löschen?`}
+                        positiveAction={() => this.props.delete(this.props.company.id)}
+                        positiveText={'Löschen'}
+                        negativeAction={() => {/*closes the modal*/}}
+                        negativeText={'Abbrechen'}
+                    />
                 </td>
                 <td>tbd</td>
 
