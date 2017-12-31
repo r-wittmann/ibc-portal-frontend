@@ -23,6 +23,10 @@ class RecruiterPreview extends Component {
                             onClick={this.props.endPreview}>
                         Zurück
                     </button>
+                    <button className={'btn btn-primary buttons-form'}
+                            onClick={this.props.primaryAction}>
+                        {this.props.primaryActionText}
+                    </button>
                 </div>
             </div>
         );

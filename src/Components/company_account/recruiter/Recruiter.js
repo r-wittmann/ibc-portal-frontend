@@ -66,13 +66,18 @@ class Recruiter extends Component {
                 {this.state.preview ? (
                     <RecruiterPreview
                         recruiter={this.state.recruiter}
-                        endPreview={() => {
-                            if (this.props.preview) {
-                                this.props.history.push('/recruiters');
-                            } else {
-                                this.setState({ preview: false });
+                        endPreview={this.props.preview
+                            ? () => this.props.history.push('/recruiters')
+                            : () => this.setState({ preview: false })
+                        }
+                        primaryAction={this.props.preview
+                            ? () => {
+                                this.props.history.push(`/recruiters/${this.state.recruiter.id}`);
+                                this.setState({ preview: false })
                             }
-                        }}
+                            : this.handleFormSubmit
+                        }
+                        primaryActionText={this.props.preview ? 'Editieren' : 'Speichern'}
                     />
                 ) : (
                     <div>

@@ -67,13 +67,18 @@ class Company extends Component {
                 {this.state.preview ? (
                     <CompanyPreview
                         company={this.state.company}
-                        endPreview={() => {
-                            if (this.props.preview) {
-                                this.props.history.push('/companies');
-                            } else {
-                                this.setState({ preview: false });
+                        endPreview={this.props.preview
+                            ? () => this.props.history.push('/companies')
+                            : () => this.setState({ preview: false })
+                        }
+                        primaryAction={this.props.preview
+                            ? () => {
+                                this.props.history.push(`/companies/${this.state.company.id}`);
+                                this.setState({ preview: false })
                             }
-                        }}
+                            : this.handleFormSubmit
+                        }
+                        primaryActionText={this.props.preview ? 'Editieren' : 'Speichern'}
                     />
                 ) : (
                     <div>
