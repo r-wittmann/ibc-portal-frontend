@@ -5,6 +5,13 @@ import RecruiterListItem from './RecruiterListItem';
 import { toast } from "react-toastify";
 
 class Recruiters extends Component {
+    handleDelete = (recruiterId) => {
+        backendService.deleteRecruiter(recruiterId)
+            .then(() => this.setState({ recruiters: this.state.recruiters.filter(recruiter => recruiter.id !== recruiterId) }))
+            .then(() => toast('Recruiter erfolgreich gelöscht', { type: 'success' }))
+            .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
+    };
+
     constructor(props) {
         super(props);
         this.state = {
@@ -16,13 +23,6 @@ class Recruiters extends Component {
         backendService.getRecruiters()
             .then((recruiters) => this.setState({ recruiters }));
     }
-
-    handleDelete = (recruiterId) => {
-        backendService.deleteRecruiter(recruiterId)
-            .then(() => this.setState({ recruiters: this.state.recruiters.filter(recruiter => recruiter.id !== recruiterId) }))
-            .then(() => toast('Recruiter erfolgreich gelöscht', { type: 'success' }))
-            .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
-    };
 
     render() {
         return (

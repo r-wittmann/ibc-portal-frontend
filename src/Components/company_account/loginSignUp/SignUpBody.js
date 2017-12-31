@@ -69,7 +69,7 @@ class SignUpBody extends Component {
                                                    value="ibc"
                                                    checked={this.state.company_type === 'ibc'}
 
-                                                   onChange={() => this.setState({ company_type: 'ibc'})}/>
+                                                   onChange={() => this.setState({ company_type: 'ibc' })}/>
                                             IBC-Unternehmen
                                         </label>
                                     </div>
@@ -98,22 +98,24 @@ class SignUpBody extends Component {
                                 </div>
                             </div>
                             {this.state.company_type === 'ibc' &&
-                         <p className= "text-primary">Wenn Sie sich als <b>IBC Unternehmen</b> registrieren wollen, müssen Sie bereits Mitglied des IBCs sein.</p>
-                        }
-                        {this.state.company_type === 'startup' &&
-                        <div><p className= "text-primary" style = {{marginBottom: '5px'}}>Wenn Sie sich als <b >Startup</b> registrieren wollen, müssen Sie folgende Kriterien erfüllen:</p>
-                        <li>Standort in München oder Umgebung</li>
-                        <li>Weniger als 20 Mitarbeiter</li>
-                        <li>Umsatz unter €10 Millionen im letzten Jahr </li>
-                        <li>Kein Gewinn im letzten Jahr</li>
-                        </div>
-                        }
-                        {this.state.company_type === 'ngo' &&
-                        <div className= "text-primary">Wenn Sie sich als Gemeinnütziger Verein registrieren wollen, müssen Sie folgende Kriterien erfüllen:</div>
-                        }
+                            <p className="text-primary">Wenn Sie sich als <b>IBC Unternehmen</b> registrieren wollen,
+                                müssen Sie bereits Mitglied des IBCs sein.</p>
+                            }
+                            {this.state.company_type === 'startup' &&
+                            <div><p className="text-primary" style={{ marginBottom: '5px' }}>Wenn Sie sich
+                                als <b>Startup</b> registrieren wollen, müssen Sie folgende Kriterien erfüllen:</p>
+                                <li>Standort in München oder Umgebung</li>
+                                <li>Weniger als 20 Mitarbeiter</li>
+                                <li>Umsatz unter €10 Millionen im letzten Jahr</li>
+                                <li>Kein Gewinn im letzten Jahr</li>
+                            </div>
+                            }
+                            {this.state.company_type === 'ngo' &&
+                            <div className="text-primary">Wenn Sie sich als Gemeinnütziger Verein registrieren wollen,
+                                müssen Sie folgende Kriterien erfüllen:</div>
+                            }
                         </fieldset>
-                        
-                                                
+
 
                         <div className={'float-right'}>
                             <input className={'btn btn-primary'} type={'submit'} value={'Nächster Schritt'}/>
@@ -126,7 +128,7 @@ class SignUpBody extends Component {
                             label={'Unternehmen'}
                             value={this.state.mother_company}
                             onChange={(mother_company) => this.setState({ mother_company })}/>
-                       <div className='form-group row'>
+                        <div className='form-group row'>
                             <label htmlFor={'address'} className='col-4 col-form-label'>
                                 Ihre Adresse in München und Umgebung
                             </label>
@@ -136,7 +138,7 @@ class SignUpBody extends Component {
                                     className={'form-control'}
                                     rows='3'
                                     value={this.props.value}
-                                    onChange={(event) => this.setState({address: event.target.value})}/>
+                                    onChange={(event) => this.setState({ address: event.target.value })}/>
                             </div>
                         </div>
 

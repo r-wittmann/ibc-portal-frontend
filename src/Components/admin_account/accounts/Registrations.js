@@ -6,6 +6,41 @@ import cancel from '../../../../resources/cancel.png'
 
 
 class Registrations extends Component {
+    handleLogout = (event) => {
+        event.preventDefault();
+        backendService.adminLogout();
+        this.props.history.push('/admin/login');
+    };
+    acceptRegistration = (id) => {
+        event.preventDefault();
+        backendService.acceptAccount(id)
+            .then(() => this.setState({
+                registeredAccounts: this.state.registeredAccounts.filter(account => account.id !== id)
+            }));
+
+        const done = document.getElementById("done");
+
+        done.removeAttribute('hidden');
+
+    };
+    declineRegistration = (id) => {
+        event.preventDefault();
+        backendService.declineAccount(id)
+            .then(() => this.sendEmail(this.state.registeredAccounts.filter(account => account.id === id)))
+            .then(() => this.setState({
+                registeredAccounts: this.state.registeredAccounts.filter(account => account.id !== id)
+            }));
+
+        const cancel = document.getElementById("cancel");
+
+        cancel.removeAttribute('hidden');
+    };
+    sendEmail = ([account]) => {
+        const subject = 'Default Subject';
+        const emailBody = 'Default Body';
+        document.location = "mailto:" + account.email + "?subject=" + subject + "&body=" + emailBody;
+    };
+
     constructor(props) {
         super(props);
         this.state = {
@@ -20,44 +55,6 @@ class Registrations extends Component {
                     registeredAccounts: accounts.filter(account => account.status === 'registered')
                 })
             });
-    };
-
-    handleLogout = (event) => {
-        event.preventDefault();
-        backendService.adminLogout();
-        this.props.history.push('/admin/login');
-    };
-
-    acceptRegistration = (id) => {
-        event.preventDefault();
-        backendService.acceptAccount(id)
-            .then(() => this.setState({
-                registeredAccounts: this.state.registeredAccounts.filter(account => account.id !== id)
-            }));
-
-        const done = document.getElementById("done");
-
-        done.removeAttribute('hidden');
-
-    };
-
-    declineRegistration = (id) => {
-        event.preventDefault();
-        backendService.declineAccount(id)
-            .then(() => this.sendEmail(this.state.registeredAccounts.filter(account => account.id === id)))
-            .then(() => this.setState({
-                registeredAccounts: this.state.registeredAccounts.filter(account => account.id !== id)
-            }));
-
-        const cancel = document.getElementById("cancel");
-
-        cancel.removeAttribute('hidden');
-    };
-
-    sendEmail = ([account]) => {
-        const subject = 'Default Subject';
-        const emailBody = 'Default Body';
-        document.location = "mailto:" + account.email + "?subject=" + subject + "&body=" + emailBody;
     };
 
     render() {

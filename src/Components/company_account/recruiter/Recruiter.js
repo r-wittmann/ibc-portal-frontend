@@ -9,6 +9,34 @@ import RecruiterPreview from "./RecruiterPreview";
 import ConfirmModal from "../../commons/ConfirmModal";
 
 class Recruiter extends Component {
+    handleFormSubmit = (event) => {
+        event.preventDefault();
+        if (!this.state.create) {
+            let updatedRecruiter = this.state.recruiter;
+            delete(updatedRecruiter.created_at);
+            delete(updatedRecruiter.updated_at);
+            if (!this.state.photoChanged) {
+                delete(updatedRecruiter.photo);
+            }
+            backendService.updateRecruiter(this.props.match.params.id, updatedRecruiter)
+                .then(() => toast('Recruiter aktualisiert', { type: 'success' }))
+                .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
+        } else {
+            backendService.createRecruiter(this.state.recruiter)
+                .then(() => this.props.history.push(`/recruiters`))
+                .then(() => toast('Recruiter erstellt', { type: 'success' }))
+                .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
+        }
+
+    };
+    handleDelete = (event) => {
+        event.preventDefault();
+        backendService.deleteRecruiter(this.props.match.params.id)
+            .then(() => this.props.history.push('/recruiters'))
+            .then(() => toast('Recruiter erfolgreich gelöscht', { type: 'success' }))
+            .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
+    };
+
     constructor(props) {
         super(props);
         this.state = {
@@ -30,35 +58,6 @@ class Recruiter extends Component {
             this.setState({ recruiter: defaultRecruiter });
         }
     }
-
-    handleFormSubmit = (event) => {
-        event.preventDefault();
-        if (!this.state.create) {
-            let updatedRecruiter = this.state.recruiter;
-            delete(updatedRecruiter.created_at);
-            delete(updatedRecruiter.updated_at);
-            if (!this.state.photoChanged) {
-                delete(updatedRecruiter.photo);
-            }
-            backendService.updateRecruiter(this.props.match.params.id, updatedRecruiter)
-                .then(() => toast('Recruiter aktualisiert', { type: 'success' }))
-                .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
-        } else {
-            backendService.createRecruiter(this.state.recruiter)
-                .then(() => this.props.history.push(`/recruiters`))
-                .then(() => toast('Recruiter erstellt', { type: 'success' }))
-                .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
-        }
-
-    };
-
-    handleDelete = (event) => {
-        event.preventDefault();
-        backendService.deleteRecruiter(this.props.match.params.id)
-            .then(() => this.props.history.push('/recruiters'))
-            .then(() => toast('Recruiter erfolgreich gelöscht', { type: 'success' }))
-            .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
-    };
 
     render() {
         return (

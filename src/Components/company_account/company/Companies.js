@@ -5,6 +5,13 @@ import CompanyListItem from "./CompanyListItem";
 import { toast } from "react-toastify";
 
 class Companies extends Component {
+    handleDelete = (companyId) => {
+        backendService.deleteCompany(companyId)
+            .then(() => this.setState({ companies: this.state.companies.filter(company => company.id !== companyId) }))
+            .then(() => toast('Unternehmen erfolgreich gelöscht', { type: 'success' }))
+            .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
+    };
+
     constructor(props) {
         super(props);
         this.state = {
@@ -16,13 +23,6 @@ class Companies extends Component {
         backendService.getCompanies()
             .then((companies) => this.setState({ companies }));
     }
-
-    handleDelete = (companyId) => {
-        backendService.deleteCompany(companyId)
-            .then(() => this.setState({ companies: this.state.companies.filter(company => company.id !== companyId) }))
-            .then(() => toast('Unternehmen erfolgreich gelöscht', { type: 'success' }))
-            .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
-    };
 
     render() {
         return (

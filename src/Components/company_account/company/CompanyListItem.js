@@ -13,7 +13,7 @@ class CompanyListItem extends Component {
                 <td>
                     <div className={'btn-group'}>
                         <button className={'btn btn-outline-dark'}
-                        onClick={() => this.props.history.push(`/companies/${this.props.company.id}/preview`)}>
+                                onClick={() => this.props.history.push(`/companies/${this.props.company.id}/preview`)}>
                             <span className={'fa fa-eye'}/>
                         </button>
                         <button className={'btn btn-outline-dark'}
