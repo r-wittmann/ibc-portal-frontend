@@ -59,17 +59,19 @@ class Accounts extends Component {
                 </div>
 
                 <table className={"table table-striped"}>
-                    <th>ID</th>
-                    <th>Firmenname</th>
-                    <th>Benutzername</th>
-                    <th>E-Mail</th>
-                    <th>Webseite</th>
-                    <th>Firmentyp</th>
-                    <th>Status</th>
-
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Firmenname</th>
+                        <th>Benutzername</th>
+                        <th>E-Mail</th>
+                        <th>Webseite</th>
+                        <th>Firmentyp</th>
+                        <th>Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
                     {this.state.accounts.map((account) =>
-
-
                         <tr key={account.id}>
                             <td>{account.id}</td>
                             <td>{account.company_name}</td>
@@ -80,6 +82,7 @@ class Accounts extends Component {
                             <td>{account.status}</td>
                         </tr>
                     )}
+                    </tbody>
                 </table>
             </div>
         );

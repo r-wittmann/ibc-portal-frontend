@@ -110,15 +110,19 @@ class Registrations extends Component {
 
                 {this.state.registeredAccounts.length > 0 && (
                     <table className={"table table-striped"}>
-                        <th>ID</th>
-                        <th>Firmenname</th>
-                        <th>Benutzername</th>
-                        <th>E-Mail</th>
-                        <th>Webseite</th>
-                        <th>Firmentyp</th>
-                        <th>Status</th>
-                        <th>Aktionen</th>
-
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Firmenname</th>
+                            <th>Benutzername</th>
+                            <th>E-Mail</th>
+                            <th>Webseite</th>
+                            <th>Firmentyp</th>
+                            <th>Status</th>
+                            <th>Aktionen</th>
+                        </tr>
+                        </thead>
+                        <tbody>
                         {this.state.registeredAccounts.map((account) =>
                             <tr key={account.id}>
                                 <td>{account.id}</td>
@@ -144,6 +148,7 @@ class Registrations extends Component {
                                 </td>
                             </tr>
                         )}
+                        </tbody>
                     </table>
                 )}
             </div>
