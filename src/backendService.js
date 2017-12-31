@@ -9,6 +9,8 @@ const checkStatus = (response) => {
     }
     if (response.status === 403) {
         localStorage.removeItem('ibc-user-token');
+        localStorage.removeItem('ibc-admin-token');
+        window.location.reload();
     }
     const error = new Error(response.statusText);
     error.response = response;
@@ -32,7 +34,8 @@ class BackendService {
     //
 
     static isAuthenticated() {
-        return localStorage.getItem('ibc-user-token');
+        let logedIn = localStorage.getItem('ibc-user-token') || localStorage.getItem('ibc-admin-token');
+        return logedIn;
     }
 
     static checkUsername(name) {
@@ -82,11 +85,15 @@ class BackendService {
         })
             .then(checkStatus)
             .then(convertResponseToJson)
-            .then((json) => localStorage.setItem('ibc-user-token', json.token));
+            .then((json) => localStorage.setItem('ibc-admin-token', json.token));
     }
 
     static logout() {
         localStorage.removeItem('ibc-user-token');
+    }
+
+    static adminLogout() {
+        localStorage.removeItem('ibc-admin-token');
     }
 
     // ====================
@@ -97,7 +104,7 @@ class BackendService {
         return fetch(`${baseUrl}/admin/accounts`, {
             method: 'GET',
             headers: {
-                'x-access-token': localStorage.getItem('ibc-user-token')
+                'x-access-token': localStorage.getItem('ibc-admin-token')
             },
         })
             .then(checkStatus)
@@ -108,7 +115,7 @@ class BackendService {
         return fetch(`${baseUrl}/admin/accounts/${id}/accept`, {
             method: 'PATCH',
             headers: {
-                'x-access-token': localStorage.getItem('ibc-user-token')
+                'x-access-token': localStorage.getItem('ibc-admin-token')
             },
         })
             .then(checkStatus)
@@ -119,7 +126,7 @@ class BackendService {
         return fetch(`${baseUrl}/admin/accounts/${id}/decline`, {
             method: 'PATCH',
             headers: {
-                'x-access-token': localStorage.getItem('ibc-user-token')
+                'x-access-token': localStorage.getItem('ibc-admin-token')
             },
         })
             .then(checkStatus)

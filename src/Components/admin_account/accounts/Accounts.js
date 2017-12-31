@@ -5,7 +5,7 @@ import image from '../../../../resources/ibc_logo.png'
 class Accounts extends Component {
     handleLogout = (event) => {
         event.preventDefault();
-        backendService.logout();
+        backendService.adminLogout();
         this.props.history.push('/admin/login');
     };
 

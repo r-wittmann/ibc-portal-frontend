@@ -33,6 +33,7 @@ class App extends Component {
                     <Switch>
                         <Route exact path={'/login'} component={Login}/>
                         <Route exact path={'/admin/login'} component={AdminLogin}/>
+                        <Redirect from={'/admin'} to={'/admin/login'}/>
                         <Redirect to={'/login'}/>
                     </Switch>
                     :
@@ -57,6 +58,8 @@ class App extends Component {
                         <Route exact path={'/profile/'} component={Profile}/>
                         <Route exact path={'/admin/registrations'} component={Registrations}/>
                         <Route exact path={'/admin/accounts'} component={Accounts}/>
+                        <Redirect from={'/admin'} to={'/admin/accounts'}/>
+                        <Redirect to={'/home'}/>
                     </Switch>
                 }
             </div>

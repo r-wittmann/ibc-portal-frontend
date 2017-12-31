@@ -24,7 +24,7 @@ class Registrations extends Component {
 
     handleLogout = (event) => {
         event.preventDefault();
-        backendService.logout();
+        backendService.adminLogout();
         this.props.history.push('/admin/login');
     };
 
