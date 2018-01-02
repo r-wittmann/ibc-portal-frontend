@@ -32,12 +32,18 @@ class Companies extends Component {
                 <div className={'headline'}>
                     <h1>Ihr Unternehmen</h1>
                 </div>
+                <div className={'create-button'}>
+                        <button className={'btn btn-primary'}
+                                onClick={() => this.props.history.push('/companies/create')}>
+                            Neues Unternehmen erstellen
+                        </button>
+                    </div>
                 <div className={'container'}>
                     <table className={'table table-hover'}>
                         <thead>
                         <tr>
                             <th>Unternehmensname</th>
-                            <th/>
+                            <th>Aktionen</th>
                             <th>Aktive Stellenanzeigen</th>
                         </tr>
                         </thead>
@@ -50,12 +56,7 @@ class Companies extends Component {
                         )}
                         </tbody>
                     </table>
-                    <div className={'create-button'}>
-                        <button className={'btn btn-primary'}
-                                onClick={() => this.props.history.push('/companies/create')}>
-                            Neues Unternehmen erstellen
-                        </button>
-                    </div>
+                    
                 </div>
             </div>
         );

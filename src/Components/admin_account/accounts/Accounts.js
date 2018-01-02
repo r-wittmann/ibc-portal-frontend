@@ -58,7 +58,8 @@ class Accounts extends Component {
                     <h1>Alle Accounts</h1>
                 </div>
 
-                <table className={"table table-striped"}>
+                <div className={'container'}>
+                    <table className={'table table-hover'}>
                     <thead>
                     <tr>
                         <th>ID</th>
@@ -84,6 +85,7 @@ class Accounts extends Component {
                     )}
                     </tbody>
                 </table>
+                </div>
             </div>
         );
     }

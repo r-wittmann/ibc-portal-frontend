@@ -108,8 +108,9 @@ class Registrations extends Component {
                     <h1>Anfragen</h1>
                 </div>
 
+                <div className={'container'}>
                 {this.state.registeredAccounts.length > 0 && (
-                    <table className={"table table-striped"}>
+                    <table className={"table table-hover"}>
                         <thead>
                         <tr>
                             <th>ID</th>
@@ -133,24 +134,24 @@ class Registrations extends Component {
                                 <td>{account.company_type}</td>
                                 <td>{account.status}</td>
                                 <td>
-                                    <div className={'float-left'}>
-                                        <div className={'done float-left'}>
-                                            <a onClick={() => this.acceptRegistration(account.id)}>
-                                                <img className={'done'} src={done} alt={'blub'}/>
-                                            </a>
-                                        </div>
-                                        <div className={'cancel float-left'}>
-                                            <a onClick={() => this.declineRegistration(account.id)}>
-                                                <img className={'cancel'} src={cancel} alt={'blub'}/>
-                                            </a>
-                                        </div>
-                                    </div>
+                                <div className={'btn-group'}>
+                                    <button className={'btn btn-outline-dark'}
+                                            onClick={() => this.acceptRegistration(account.id)}>
+                                        <span className={'fa fa-check'}/>
+                                    </button>
+                                    <button className={'btn btn-outline-dark'}
+                                            onClick={() => this.declineRegistration(account.id)}>
+                                        <span className={'fa fa-times'}/>
+                                    </button>
+                                </div>
                                 </td>
                             </tr>
                         )}
                         </tbody>
                     </table>
                 )}
+
+                    </div>
             </div>
         );
     }

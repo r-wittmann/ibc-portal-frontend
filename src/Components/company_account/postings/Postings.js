@@ -32,6 +32,12 @@ class Postings extends Component {
                 <div className={'headline'}>
                     <h1>Ihre Stellenanzeigen</h1>
                 </div>
+                <div className={'create-button'}>
+                        <button className={'btn btn-primary'}
+                                onClick={() => this.props.history.push('/postings/create')}>
+                            Neues Posting erstellen
+                        </button>
+                    </div>
                 <div className={'container'}>
                     <table className={'table table-hover'}>
                         <thead>
@@ -53,12 +59,7 @@ class Postings extends Component {
                         )}
                         </tbody>
                     </table>
-                    <div className={'create-button'}>
-                        <button className={'btn btn-primary'}
-                                onClick={() => this.props.history.push('/postings/create')}>
-                            Neues Posting erstellen
-                        </button>
-                    </div>
+                    
                 </div>
             </div>
         );

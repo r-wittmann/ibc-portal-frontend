@@ -32,12 +32,18 @@ class Recruiters extends Component {
                 <div className={'headline'}>
                     <h1>Ihre Recruiter</h1>
                 </div>
+                 <div className={'create-button'}>
+                        <button className={'btn btn-primary'}
+                                onClick={() => this.props.history.push('/recruiters/create')}>
+                            Neuen Recruiter erstellen
+                        </button>
+                    </div>
                 <div className={'container'}>
                     <table className={'table table-hover'}>
                         <thead>
                         <tr>
                             <th>Recruitername</th>
-                            <th/>
+                            <th>Aktionen</th>
                             <th>Aktive Stellenanzeigen</th>
                         </tr>
                         </thead>
@@ -50,12 +56,7 @@ class Recruiters extends Component {
                         )}
                         </tbody>
                     </table>
-                    <div className={'create-button'}>
-                        <button className={'btn btn-primary'}
-                                onClick={() => this.props.history.push('/recruiters/create')}>
-                            Neuen Recruiter erstellen
-                        </button>
-                    </div>
+                   
                 </div>
             </div>
         );

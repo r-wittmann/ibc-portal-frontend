@@ -73,13 +73,13 @@ class Profile extends Component {
 
                             <PasswordModal/>
                             <div>
-                                <input type={'submit'} className={'btn btn-primary float-right buttons-form'}
+                                <input type={'submit'} className={'btn btn-success float-right buttons-form'}
                                        value={'Speichern'}/>
                             </div>
                         </form>
                     )}
                     <div className={'float-right'}>
-                        <button className={'btn btn-danger buttons-form'}
+                        <button className={'btn btn-warning buttons-form'}
                                 onClick={() => this.props.history.push('/home')}>Abbrechen
                         </button>
                     </div>

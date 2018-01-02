@@ -89,6 +89,7 @@ h1 {
 .create-button {
     float: right;
     margin-right: 20px;
+    margin-bottom: 20px;
 }
 
 .dashboard-picture {
