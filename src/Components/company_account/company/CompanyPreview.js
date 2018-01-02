@@ -6,31 +6,40 @@ class CompanyPreview extends Component {
     render() {
         return (
             <div className={'container'}>
+                <div className={'headline'}>
+                    <h1>Vorschau</h1>
+                </div>
                 {this.props.company && (
                     <div>
-                        <p>Company Name: {this.props.company.company_name}</p>
-                        <p>Contact Name: {this.props.company.contact_name}</p>
-                        <p>Contact Email: {this.props.company.contact_email}</p>
-                        <p>Contact Phone: {this.props.company.contact_phone}</p>
-                        <p>Munich Address:
-                            <span
-                                dangerouslySetInnerHTML={{ __html: this.props.company.munich_address.replace('\n', '<br>') }}/>
-                        </p>
-                        <p>Locations: {this.props.company.locations}</p>
-                        <p>Employees: {this.props.company.employees}</p>
-                        <p>Website: {this.props.company.website}</p>
-                        <p>kununu: {this.props.company.kununu}</p>
-                        <p>Field of Activity: {this.props.company.field_of_activity}</p>
+                        <h2>{this.props.company.company_name.toUpperCase()}</h2>
+                        <div className={'attributes'}>
+                            <table className={'table table-bordered'}>
+                                <tr>
+                                    <td><span className={'fa fa-info-circle'}/> <a href="{this.props.company.website}"> {this.props.company.website}</a></td>
+                                    <td><span className={'fa fa-users'}/> {this.props.company.employees} Mitarbeiter</td>
+                                    <td><span className={'fa fa-map-marker'}/> <span dangerouslySetInnerHTML={{ __html: this.props.company.munich_address.replace('\n', '<br>') }}/></td>
+                                    <td><span className={'fa fa-search'}/>  {this.props.company.field_of_activity}</td>
+                                </tr>
+                                <tr>
+                                    <td><span className={'fa fa-star'}/> <a href="{this.props.company.kununu}"> Bewertungen auf kununu</a></td>
+                                    <td><span className={'fa fa-globe'}/> {this.props.company.locations}</td>
+                                    <td><p><span className={'fa fa-user'}/> {this.props.company.contact_name}</p></td>
+                                    <td><p><span className={'fa fa-envelope'}/> {this.props.company.contact_email}</p>
+                                        <p><span className={'fa fa-phone'}/> {this.props.company.contact_phone}</p></td>
+                                </tr>
+                            </table>
+                        </div>
+                        
                         {this.props.company.logo && <p><img src={this.props.company.logo} alt={'logo'}/></p>}
                         <p dangerouslySetInnerHTML={{ __html: draftToHtml(JSON.parse(this.props.company.company_description)) }}/>
                     </div>
                 )}
                 <div className='float-right'>
-                    <button className={'btn btn-danger buttons-form'}
+                    <button className={'btn btn-warning buttons-form'}
                             onClick={this.props.endPreview}>
                         Zurück
                     </button>
-                    <button className={'btn btn-primary buttons-form'}
+                    <button className={'btn btn-success buttons-form'}
                             onClick={this.props.primaryAction}>
                         {this.props.primaryActionText}
                     </button>
