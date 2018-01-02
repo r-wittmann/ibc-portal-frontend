@@ -4,31 +4,44 @@ import InputLabel from "../../commons/InputLabel";
 import TextEditor from "../../commons/TextEditor";
 import defaultPosting from '../../commons/defaultPosting';
 import Header from "../Header";
+import { toast } from "react-toastify";
+import ConfirmModal from "../../commons/ConfirmModal";
+import PostingPreview from "./PostingPreview";
 
 class Posting extends Component {
-    handleSubmit = (event) => {
-        event.preventDefault();
+    handleFormSubmit = (status) => {
         if (!this.state.create) {
-            backendService.updatePosting(this.props.match.params.id, this.state.posting)
-                .then(response => this.setState({ posting: response.posting }))
+            let updatedPosting = this.state.posting;
+            delete(updatedPosting.created_at);
+            delete(updatedPosting.updated_at);
+            updatedPosting.status = status;
+            backendService.updatePosting(this.props.match.params.id, updatedPosting)
+                .then(() => toast('Anzeige aktualisiert', { type: 'success' }))
+                .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
         } else {
             let posting = this.state.posting;
-            if (!posting.company) posting.company = this.state.companies[0]._id;
-            if (!posting.recruiter) posting.recruiter = this.state.recruiters[0]._id;
+            if (posting.company_id === '') posting.company_id = this.state.companies[0].id;
+            if (posting.recruiter_id === '') posting.recruiter_id = this.state.recruiters[0].id;
+            if (posting.contract_type === '') posting.contract_type = 'Direkteinstieg';
+            posting.status = status;
             backendService.createPosting(this.state.posting)
-                .then((response) => {
-                    this.props.history.push(`/postings/${response.id}`)
-                });
+                .then(() => this.props.history.push(`/postings`))
+                .then(() => toast('Anzeige erstellt', { type: 'success' }))
+                .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
         }
     };
-    handleDelete = () => {
-        backendService.deletePosting(this.state.posting._id);
-        this.props.history.push('/home');
+    handleDelete = (event) => {
+        event.preventDefault();
+        backendService.deletePosting(this.state.posting.id)
+            .then(() => this.props.history.push('/postings'))
+            .then(() => toast('Anzeige erfolgreich gelöscht', { type: 'success' }))
+            .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
     };
 
     constructor(props) {
         super(props);
         this.state = {
+            preview: false,
             posting: undefined,
             create: this.props.match.params.id === 'create',
             companies: [],
@@ -37,13 +50,14 @@ class Posting extends Component {
     }
 
     componentDidMount() {
+        if (this.props.preview) {
+            this.setState({ preview: true })
+        }
         if (!this.state.create) {
             backendService.getPostingById(this.props.match.params.id)
                 .then(posting => this.setState({ posting }))
         } else {
-            this.setState({
-                posting: defaultPosting
-            });
+            this.setState({ posting: defaultPosting });
         }
         backendService.getCompanies().then(companies => this.setState({ companies }));
         backendService.getRecruiters().then(recruiters => this.setState({ recruiters }));
@@ -53,116 +67,212 @@ class Posting extends Component {
         return (
             <div>
                 <Header history={this.props.history}/>
-
-                <div className={'headline'}>
-                    <h1>{this.state.create ? 'Neue Stellenanzeige erstellen' : 'Stellenanzeige bearbeiten'}</h1>
-                </div>
-                <div className={'container'}>
-                    {this.state.posting && (
-                        <form onSubmit={this.handleSubmit}>
-                            <InputLabel
-                                label={'Title'}
-                                value={this.state.posting.title}
-                                onChange={(title) => this.setState({
-                                    posting: Object.assign({}, this.state.posting, { title })
-                                })}
-                            />
-                            <InputLabel
-                                label={'Startdatum'}
-                                value={this.state.posting.startDate}
-                                onChange={(startDate) => this.setState({
-                                    posting: Object.assign({}, this.state.posting, { startDate })
-                                })}
-                            />
-                            <InputLabel
-                                label={'Vertragstyp'}
-                                value={this.state.posting.contractType}
-                                onChange={(contractType) => this.setState({
-                                    posting: Object.assign({}, this.state.posting, { contractType })
-                                })}
-                            />
-                            <InputLabel
-                                label={'Vertragsdauer'}
-                                value={this.state.posting.contractDuration}
-                                onChange={(contractDuration) => this.setState({
-                                    posting: Object.assign({}, this.state.posting, { contractDuration })
-                                })}
-                            />
-                            <InputLabel
-                                label={'Wochenstunden'}
-                                value={this.state.posting.workingHours}
-                                onChange={(workingHours) => this.setState({
-                                    posting: Object.assign({}, this.state.posting, { workingHours })
-                                })}
-                            />
-                            <InputLabel
-                                label={'Einstiegslevel'}
-                                value={this.state.posting.entryLevel}
-                                onChange={(entryLevel) => this.setState({
-                                    posting: Object.assign({}, this.state.posting, { entryLevel })
-                                })}
-                            />
-                            <InputLabel
-                                label={'Standort'}
-                                value={this.state.posting.placeOfEmployment}
-                                onChange={(placeOfEmployment) => this.setState({
-                                    posting: Object.assign({}, this.state.posting, { placeOfEmployment })
-                                })}
-                            />
-                            <div className={"form-group"}>
-                                <label>
-                                    Unternehmen:
-                                </label>
-                                <select className={"form-control"}
-                                        value={this.state.selectedCompany}
-                                        onChange={(event) => this.setState({
-                                            posting: Object.assign({}, this.state.posting, { selectedCompany: event.target.value })
-                                        })}>
-                                    {this.state.companies.map(company => (
-                                        <option key={company._id} value={company._id}>{company.name}</option>
-                                    ))}
-                                </select>
-                            </div>
-                            <div className={"form-group"}>
-                                <label>
-                                    Recruiter
-                                </label>
-                                <select className={"form-control"}
-                                        value={this.state.selectedRecruiter}
-                                        onChange={(event) => this.setState({
-                                            posting: Object.assign({}, this.state.posting, { selectedRecruiter: event.target.value })
-                                        })}>
-                                    {this.state.recruiters.map(recruiter => (
-                                        <option key={recruiter._id} value={recruiter._id}>{recruiter.name}</option>
-                                    ))}
-                                </select>
-                            </div>
-                            <div>
-                                Beschreibung
-                                <TextEditor
-                                    value={this.state.posting.content}
-                                    onChange={(content) => this.setState({
-                                        posting: Object.assign({}, this.state.posting, { content })
-                                    })}/>
-                            </div>
-                            <div>
-                                <input type={'submit'} className={'btn btn-primary float-right buttons-form'}
-                                       value={this.state.create ? 'Speichern' : 'Update'}/>
-                            </div>
-                        </form>
-                    )}
-
-                    {!this.state.create && (
-                        <div>
-                            <button onClick={this.handleDelete}>delete this posting</button>
+                {this.state.preview ? (
+                    <PostingPreview
+                        posting={this.state.posting}
+                        endPreview={this.props.preview
+                            ? () => this.props.history.push('/postings')
+                            : () => this.setState({ preview: false })
+                        }
+                        primaryAction={this.props.preview
+                            ? () => {
+                                this.props.history.push(`/postings/${this.state.posting.id}`);
+                                this.setState({ preview: false })
+                            }
+                            : this.handleFormSubmit
+                        }
+                        primaryActionText={this.props.preview ? 'Editieren' : 'Speichern'}
+                    />
+                ) : (
+                    <div>
+                        <div className={'headline'}>
+                            <h1>{this.state.create ? 'Neue Stellenanzeige erstellen' : 'Stellenanzeige bearbeiten'}</h1>
                         </div>
-                    )}
-                    <div className={'float-right'}>
-                        <button className={'btn btn-danger buttons-form'}
-                                onClick={() => this.props.history.push('/postings')}>Abbrechen
-                        </button>
+                        <div className={'container'}>
+                            {this.state.posting && (
+                                <div>
+                                    <form onSubmit={this.handleFormSubmit}>
+                                        <InputLabel
+                                            label={'Title'}
+                                            value={this.state.posting.title}
+                                            onChange={(title) => this.setState({
+                                                posting: Object.assign({}, this.state.posting, { title })
+                                            })}
+                                        />
+                                        <div className={"form-group row"}>
+                                            <label className={'col-4 col-form-label'}>
+                                                Unternehmen:
+                                            </label>
+                                            <div className={'col-8'}>
+                                                <select className={'form-control'}
+                                                        value={this.state.posting.company_id}
+                                                        onChange={(event) => this.setState({
+                                                            posting: Object.assign({}, this.state.posting, { company_id: event.target.value })
+                                                        })}>
+                                                    {this.state.companies.map(company => (
+                                                        <option key={company.id}
+                                                                value={company.id}>{company.company_name}</option>
+                                                    ))}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <InputLabel
+                                            label={'Standort'}
+                                            value={this.state.posting.place_of_employment}
+                                            onChange={(place_of_employment) => this.setState({
+                                                posting: Object.assign({}, this.state.posting, { place_of_employment })
+                                            })}
+                                        />
+                                        <InputLabel
+                                            label={'Startdatum'}
+                                            value={this.state.posting.start_of_employment}
+                                            onChange={(start_of_employment) => this.setState({
+                                                posting: Object.assign({}, this.state.posting, { start_of_employment })
+                                            })}
+                                        />
+                                        <div className={"form-group row"}>
+                                            <label className={'col-4 col-form-label'}>
+                                                Vertragslaufzeit
+                                            </label>
+                                            <div className={'col-8'}>
+                                                <select className={'form-control'}
+                                                        value={this.state.posting.contract_duration}
+                                                        onChange={(event) => this.setState({
+                                                            posting: Object.assign({}, this.state.posting, { contract_duration: event.target.value })
+                                                        })}>
+                                                    <option value={'to3'}>befristet, bis zu 3 Monate</option>
+                                                    <option value={'3to6'}>befristet, 3 bis 6 Monate</option>
+                                                    <option value={'6'}>befristet, 6 Monate</option>
+                                                    <option value={'12'}>befristet, 12 Monate</option>
+                                                    <option value={'indefinite'}>unbefristet</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <InputLabel
+                                            label={'Wochenstunden'}
+                                            value={this.state.posting.working_hours}
+                                            onChange={(working_hours) => this.setState({
+                                                posting: Object.assign({}, this.state.posting, { working_hours })
+                                            })}
+                                        />
+                                        <div className={"form-group row"}>
+                                            <label className={'col-4 col-form-label'}>
+                                                Vertragstyp
+                                            </label>
+                                            <div className={'col-8'}>
+                                                <select className={'form-control'}
+                                                        value={this.state.posting.contract_type}
+                                                        onChange={(event) => this.setState({
+                                                            posting: Object.assign({}, this.state.posting, { contract_type: event.target.value })
+                                                        })}>
+                                                    <option value={'Direkteinstieg'}>Direkteinstieg</option>
+                                                    <option value={'Werkstudent'}>Werkstudent</option>
+                                                    <option value={'Praktikant'}>Praktikant</option>
+                                                    <option value={'Trainee'}>Trainee</option>
+                                                    <option value={'Volontariat'}>Volontariat</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div className={"form-group row"}>
+                                            <label className={'col-4 col-form-label'}>
+                                                Zielgruppe
+                                            </label>
+                                            <div className={'col-8'}>
+                                                <select className={'form-control'}
+                                                        value={this.state.posting.entry_level}
+                                                        onChange={(event) => this.setState({
+                                                            posting: Object.assign({}, this.state.posting, { entry_level: event.target.value })
+                                                        })}>
+                                                    <option value={'Studenten'}>Studenten</option>
+                                                    <option value={'Masteranden'}>Masteranden</option>
+                                                    <option value={'Absolventen'}>Absolventen</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <InputLabel
+                                            label={'Bewerbungslink'}
+                                            value={this.state.posting.application_link}
+                                            onChange={(application_link) => this.setState({
+                                                posting: Object.assign({}, this.state.posting, { application_link })
+                                            })}
+                                        />
+                                        <div className={"form-group row"}>
+                                            <label className={'col-4 col-form-label'}>
+                                                Recruiter
+                                            </label>
+                                            <div className={'col-8'}>
+                                                <select className={"form-control"}
+                                                        value={this.state.posting.recruiter_id}
+                                                        onChange={(event) => this.setState({
+                                                            posting: Object.assign({}, this.state.posting, { recruiter_id: event.target.value })
+                                                        })}>
+                                                    {this.state.recruiters.map(recruiter => (
+                                                        <option key={recruiter.id}
+                                                                value={recruiter.id}>{recruiter.recruiter_name}</option>
+                                                    ))}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <InputLabel
+                                            label={'Tätigkeitsbereich'}
+                                            value={this.state.posting.field_of_employment}
+                                            onChange={(field_of_employment) => this.setState({
+                                                posting: Object.assign({}, this.state.posting, { field_of_employment })
+                                            })}
+                                        />
+                                        <div>
+                                            Beschreibung
+                                            <TextEditor
+                                                value={this.state.posting.description}
+                                                onChange={(description) => this.setState({
+                                                    posting: Object.assign({}, this.state.posting, { description })
+                                                })}/>
+                                        </div>
+                                    </form>
+                                    <div className='float-right'>
+                                        {!this.state.create && (
+                                            <span>
+                                        <button className={'btn btn-danger buttons-form'}
+                                                data-toggle={'modal'}
+                                                data-target={'#confirm-modal'}>
+                                            Anzeige löschen
+                                        </button>
+                                        <ConfirmModal
+                                            id={'confirm-modal'}
+                                            message={`Wollen Sie die Anzeige mit dem Titel ${this.state.posting.title} wirklich löschen?`}
+                                            positiveAction={this.handleDelete}
+                                            positiveText={'Löschen'}
+                                            negativeAction={() => {/*closes the modal*/
+                                            }}
+                                            negativeText={'Abbrechen'}/>
+                                    </span>
+                                        )}
+                                        <button className={'btn btn-warning buttons-form'}
+                                                onClick={() => this.props.history.push('/postings')}>
+                                            {this.state.create ? 'Abbrechen' : 'Zurück'}
+                                        </button>
+                                        <button className={'btn btn-primary button-form'}
+                                                onClick={() => this.setState({ preview: true })}>
+                                            Vorschau
+                                        </button>
+                                        <button className={'btn btn-success buttons-form'}
+                                                data-toggle={'modal'}
+                                                data-target={'#save-with-status'}>
+                                            {this.state.create ? 'Speichern' : 'Update'}
+                                        </button>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
                     </div>
-                </div>
+                )}
+                <ConfirmModal
+                    id={'save-with-status'}
+                    message={'Soll diese Anzeige sofort veröffentlicht werden?'}
+                    positiveAction={() => this.handleFormSubmit('active')}
+                    positiveText={'Veröffentlichen'}
+                    negativeAction={() => this.handleFormSubmit('deactivated')}
+                    negativeText={'Nicht veröffentlichen'} />
             </div>
         );
     }

@@ -55,6 +55,10 @@ class App extends Component {
                                )}/>
                         <Route exact path={'/postings'} component={Postings}/>
                         <Route exact path={'/postings/:id'} component={Posting}/>
+                        <Route exact path={'/postings/:id/preview'}
+                               render={(routeProps) => (
+                                   <Posting {...routeProps} preview/>
+                               )}/>
                         <Route exact path={'/profile/'} component={Profile}/>
                         <Route exact path={'/admin/registrations'} component={Registrations}/>
                         <Route exact path={'/admin/accounts'} component={Accounts}/>
