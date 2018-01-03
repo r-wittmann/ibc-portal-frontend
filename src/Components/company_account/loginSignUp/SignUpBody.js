@@ -98,23 +98,33 @@ class SignUpBody extends Component {
                                 </div>
                             </div>
                             {this.state.company_type === 'ibc' &&
-                            <p className="text-primary">Wenn Sie sich als <b>IBC Unternehmen</b> registrieren wollen,
+                            <p className="text-info">Wenn Sie sich als <b>IBC Unternehmen</b> registrieren wollen,
                                 müssen Sie bereits Mitglied des IBCs sein.</p>
                             }
                             {this.state.company_type === 'startup' &&
-                            <div><p className="text-primary" style={{ marginBottom: '5px' }}>Wenn Sie sich
+                            <div style={{marginBottom: "16px"}}><p className="text-info" style={{ marginBottom: '5px' }}>Wenn Sie sich
                                 als <b>Startup</b> registrieren wollen, müssen Sie folgende Kriterien erfüllen:</p>
-                                <li>Standort in München oder Umgebung</li>
-                                <li>Weniger als 20 Mitarbeiter</li>
-                                <li>Umsatz unter €10 Millionen im letzten Jahr</li>
-                                <li>Kein Gewinn im letzten Jahr</li>
+                                <li className="registrierungskriterien">Standort in München oder Umgebung</li>
+                                <li className="registrierungskriterien">Weniger als 20 Mitarbeiter</li>
+                                <li className="registrierungskriterien">Umsatz unter €10 Millionen im letzten Jahr</li>
+                                <li className="registrierungskriterien">Kein Gewinn im letzten Jahr</li>
+                                <li className="registrierungskriterien">Vorzugsweise digitales Hauptgeschäftsfeld (siehe <a href="">FAQs</a>)</li>
                             </div>
                             }
                             {this.state.company_type === 'ngo' &&
-                            <div className="text-primary">Wenn Sie sich als Gemeinnütziger Verein registrieren wollen,
-                                müssen Sie folgende Kriterien erfüllen:</div>
+                           <div style={{marginBottom: "16px"}}> <p className="text-info" style={{ marginBottom: '5px' }}>Wenn Sie sich als <b>Gemeinnütziger Verein</b> registrieren wollen,
+                                müssen Sie folgende Kriterien erfüllen:</p>
+                                <li className="registrierungskriterien">Standort in München oder Umgebung</li>
+                                <li className="registrierungskriterien">Sie sind ein gemeinnütziger Verein</li>
+                                <li className="registrierungskriterien">Sie erzielen keine Gewinne</li>
+                                <li className="registrierungskriterien">Vorzugsweise digitales Hauptgeschäftsfeld (siehe <a href="">FAQs</a>)</li></div>
                             }
+
+                            <div className="checkbox" style={{marginTop:"10px"}}>
+                                <label style={{fontSize:"9px"}}><input type="checkbox" value=""/> Hiermit versichere ich die oben genannten Voraussetzungen zu erfüllen. Ich verpflichte mich auf Nachfrage des IBCs Beweise für die Richtigkeit der Angaben vorzulegen. Ich verpflichte mich, etwaige Änderungen, die den Status des Unternehmens verändern, dem IBC sofort schriftlich mitzuteilen.</label>
+                            </div>
                         </fieldset>
+
 
 
                         <div className={'float-right'}>
