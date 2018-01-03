@@ -1,15 +1,59 @@
 import React, { Component } from 'react';
 import draftToHtml from 'draftjs-to-html';
+import backendService from "../../../backendService";
 
 class PostingPreview extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            company: undefined,
+            recruiter: undefined
+        };
+    }
+
+    componentWillReceiveProps(nextProps) {
+        backendService.getCompanyById(nextProps.posting.company_id).then(company => this.setState({ company }));
+        backendService.getRecruiterById(nextProps.posting.recruiter_id).then(recruiter => this.setState({ recruiter }));
+    }
 
     render() {
         return (
             <div className={'container'}>
                 {this.props.posting && (
                     <div>
-                        <p>company_id: {this.props.posting.company_id}</p>
-                        <p>recruiter_id: {this.props.posting.recruiter_id}</p>
+                        <p>Company:</p>
+                        {this.state.company &&
+                        <div>
+                            <p>Company Name: {this.state.company.company_name}</p>
+                            <p>Contact Name: {this.state.company.contact_name}</p>
+                            <p>Contact Email: {this.state.company.contact_email}</p>
+                            <p>Contact Phone: {this.state.company.contact_phone}</p>
+                            <p>Munich Address:
+                                <span
+                                    dangerouslySetInnerHTML={{ __html: this.state.company.munich_address.replace('\n', '<br>') }}/>
+                            </p>
+                            <p>Locations: {this.state.company.locations}</p>
+                            <p>Employees: {this.state.company.employees}</p>
+                            <p>Website: {this.state.company.website}</p>
+                            <p>kununu: {this.state.company.kununu}</p>
+                            <p>Field of Activity: {this.state.company.field_of_activity}</p>
+
+                        </div>
+                        }
+                        <p>Recruiter:</p>
+                        {this.state.recruiter &&
+                        <div>
+                            <p>Recruiter Name: {this.state.recruiter.recruiter_name}</p>
+                            <p>Recruiter Email: {this.state.recruiter.recruiter_email}</p>
+                            <p>Recruiter Phone: {this.state.recruiter.phone}</p>
+                            <p>Recruiter Mobile: {this.state.recruiter.mobile}</p>
+                            <p>Recruiter Position: {this.state.recruiter.position}</p>
+                            <p>Recruiter Location: {this.state.recruiter.location}</p>
+                            <p>Recruiter Xing: {this.state.recruiter.xing}</p>
+                            <p>Recruiter LinkedIn: {this.state.recruiter.linked_in}</p>
+                            {this.state.recruiter.photo && <p><img src={this.state.recruiter.photo} alt={'recruiter'}/></p>}
+                        </div>
+                        }
                         <p>title: {this.props.posting.title}</p>
                         <p>start_of_employment: {this.props.posting.start_of_employment}</p>
                         <p>contract_type: {this.props.posting.contract_type}</p>
