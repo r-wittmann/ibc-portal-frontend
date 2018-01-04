@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import backendService from '../../../backendService';
 import image from '../../../../resources/ibc_logo.png';
-import done from '../../../../resources/done.png';
-import cancel from '../../../../resources/cancel.png'
 
 
 class Registrations extends Component {
