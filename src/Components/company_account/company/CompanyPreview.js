@@ -14,6 +14,7 @@ class CompanyPreview extends Component {
                         <h2>{this.props.company.company_name.toUpperCase()}</h2>
                         <div className={'attributes'}>
                             <table className={'table table-bordered'}>
+                                <tbody>
                                 <tr>
                                     <td><span className={'fa fa-info-circle'}/> <a href={this.props.company.website}> {this.props.company.website}</a></td>
                                     <td><span className={'fa fa-users'}/> {this.props.company.employees} Mitarbeiter</td>
@@ -27,6 +28,7 @@ class CompanyPreview extends Component {
                                     <td><p><span className={'fa fa-envelope'}/> {this.props.company.contact_email}</p>
                                         <p><span className={'fa fa-phone'}/> {this.props.company.contact_phone}</p></td>
                                 </tr>
+                                </tbody>
                             </table>
                         </div>
                         
