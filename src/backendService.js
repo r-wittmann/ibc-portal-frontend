@@ -259,9 +259,9 @@ class BackendService {
     // Posting endpoints
     // =================
 
-    static getPostings(filters) {
-        let url = filters ? `${baseUrl}/api/postings?${filters}` : `${baseUrl}/api/postings`;
-        return fetch(url, {
+    static getPostings(searchParams) {
+        // let url = filters ? `${baseUrl}/api/postings?${filters}` : `${baseUrl}/api/postings`;
+        return fetch(`${baseUrl}/api/postings${searchParams}`, {
             method: 'GET',
             headers: {
                 'x-access-token': localStorage.getItem('ibc-user-token')
