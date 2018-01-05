@@ -35,7 +35,9 @@ class RecruiterListItem extends Component {
                         negativeText={'Abbrechen'}
                     />
                 </td>
-                <td>{this.props.recruiter.count}</td>
+                <td>
+                    <Link to={'/postings?recruiter_id=' + this.props.recruiter.id}>{this.props.recruiter.count}</Link>
+                </td>
 
             </tr>
         );

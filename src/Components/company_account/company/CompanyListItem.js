@@ -35,7 +35,9 @@ class CompanyListItem extends Component {
                         negativeText={'Abbrechen'}
                     />
                 </td>
-                <td>{this.props.company.count}</td>
+                <td>
+                    <Link to={'/postings?company_id=' + this.props.company.id}>{this.props.company.count}</Link>
+                </td>
 
             </tr>
         );
