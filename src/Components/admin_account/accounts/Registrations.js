@@ -9,6 +9,7 @@ class Registrations extends Component {
         backendService.adminLogout();
         this.props.history.push('/admin/login');
     };
+
     acceptRegistration = (id) => {
         event.preventDefault();
         backendService.acceptAccount(id)
@@ -21,10 +22,11 @@ class Registrations extends Component {
         done.removeAttribute('hidden');
 
     };
+
     declineRegistration = (id) => {
         event.preventDefault();
         backendService.declineAccount(id)
-            .then(() => this.sendEmail(this.state.registeredAccounts.filter(account => account.id === id)))
+            .then(() => this.sendEmail(this.state.registeredAccounts.find(account => account.id === id)))
             .then(() => this.setState({
                 registeredAccounts: this.state.registeredAccounts.filter(account => account.id !== id)
             }));
@@ -33,7 +35,8 @@ class Registrations extends Component {
 
         cancel.removeAttribute('hidden');
     };
-    sendEmail = ([account]) => {
+
+    sendEmail = (account) => {
         const subject = 'Default Subject';
         const emailBody = 'Default Body';
         document.location = "mailto:" + account.email + "?subject=" + subject + "&body=" + emailBody;
