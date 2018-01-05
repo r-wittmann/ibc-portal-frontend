@@ -10,9 +10,20 @@ class Registrations extends Component {
         this.props.history.push('/admin/login');
     };
 
-    acceptRegistration = (id) => {
+    handleChangeType = (event, accountId) => {
+        this.setState({
+            registeredAccounts: this.state.registeredAccounts.map(account => {
+                if (account.id === accountId) {
+                    account.company_type = event.target.value
+                }
+                return account
+            })
+        });
+    };
+
+    acceptRegistration = (id, companyType) => {
         event.preventDefault();
-        backendService.acceptAccount(id)
+        backendService.acceptAccount(id, companyType)
             .then(() => this.setState({
                 registeredAccounts: this.state.registeredAccounts.filter(account => account.id !== id)
             }));
@@ -137,7 +148,8 @@ class Registrations extends Component {
                                 <td>
                                 <div className={'btn-group'}>
                                     <button className={'btn btn-outline-dark'}
-                                            onClick={() => this.acceptRegistration(account.id)}>
+                                            data-toggle='modal'
+                                            data-target={'#'+account.id}>
                                         <span className={'fa fa-check'}/>
                                     </button>
                                     <button className={'btn btn-outline-dark'}
@@ -145,6 +157,64 @@ class Registrations extends Component {
                                         <span className={'fa fa-times'}/>
                                     </button>
                                 </div>
+                                    <div className="modal fade"
+                                         id={account.id}>
+                                        <div className="modal-dialog">
+                                            <div className="modal-content">
+                                                <div className="modal-body">
+                                                    Stimmt die Unternehmensart?
+                                                    <div className="form-check">
+                                                        <label className="form-check-label">
+                                                            <input className="form-check-input"
+                                                                   type="radio"
+                                                                   name="gridRadios"
+                                                                   value="ibc"
+                                                                   checked={account.company_type === 'ibc'}
+                                                                   onChange={(event) => this.handleChangeType(event, account.id)}/>
+                                                            IBC-Unternehmen
+                                                        </label>
+                                                    </div>
+                                                    <div className="form-check">
+                                                        <label className="form-check-label">
+                                                            <input className="form-check-input"
+                                                                   type="radio"
+                                                                   name="gridRadios"
+                                                                   value="startup"
+                                                                   checked={account.company_type === 'startup'}
+                                                                   onChange={(event) => this.handleChangeType(event, account.id)}/>
+                                                            Startup
+                                                        </label>
+                                                    </div>
+                                                    <div className="form-check">
+                                                        <label className="form-check-label">
+                                                            <input className="form-check-input"
+                                                                   type="radio"
+                                                                   name="gridRadios"
+                                                                   value="ngo"
+                                                                   checked={account.company_type === 'ngo'}
+                                                                   onChange={(event) => this.handleChangeType(event, account.id)}/>
+                                                            Gemeinnütziger Verein
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div className="modal-footer">
+                                                    <button type="button"
+                                                            onClick={() => {}}
+                                                            className="btn btn-secondary"
+                                                            data-dismiss="modal">Abbrechen
+                                                    </button>
+                                                    <button type="button"
+                                                            onClick={() => {
+                                                                this.acceptRegistration(account.id,
+                                                                    this.state.registeredAccounts.find(acc => acc.id === account.id).company_type);
+                                                            }}
+                                                            className="btn btn-primary"
+                                                            data-dismiss="modal">Speichern
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                         )}
