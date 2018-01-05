@@ -67,7 +67,7 @@ class Recruiter extends Component {
                     <RecruiterPreview
                         recruiter={this.state.recruiter}
                         endPreview={this.props.preview
-                            ? () => this.props.history.push('/recruiters')
+                            ? () => this.props.history.goBack()
                             : () => this.setState({ preview: false })
                         }
                         primaryAction={this.props.preview
@@ -177,7 +177,7 @@ class Recruiter extends Component {
                                             </span>
                                         )}
                                         <button className={'btn btn-warning buttons-form'}
-                                                onClick={() => this.props.history.push('/recruiters')}>
+                                                onClick={() => this.props.history.goBack()}>
                                             {this.state.create ? 'Abbrechen' : 'Zurück'}
                                         </button>
                                         <button className={'btn btn-primary button-form'}
