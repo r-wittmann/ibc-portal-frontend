@@ -71,7 +71,7 @@ class Posting extends Component {
                     <PostingPreview
                         posting={this.state.posting}
                         endPreview={this.props.preview
-                            ? () => this.props.history.push('/postings')
+                            ? () => this.props.history.goBack()
                             : () => this.setState({ preview: false })
                         }
                         primaryAction={this.props.preview
@@ -248,7 +248,7 @@ class Posting extends Component {
                                     </span>
                                         )}
                                         <button className={'btn btn-warning buttons-form'}
-                                                onClick={() => this.props.history.push('/postings')}>
+                                                onClick={() => this.props.history.goBack()}>
                                             {this.state.create ? 'Abbrechen' : 'Zurück'}
                                         </button>
                                         <button className={'btn btn-primary button-form'}
