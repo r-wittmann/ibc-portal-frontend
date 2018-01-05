@@ -7,8 +7,9 @@ class Notification extends Component {
     render() {
         return (
             <ToastContainer
-                position={'bottom-left'}
+                position={'top-left'}
                 hideProgressBar={true}
+                style={{ marginTop: 60 }}
             />
         );
     }
