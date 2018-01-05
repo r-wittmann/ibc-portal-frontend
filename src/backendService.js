@@ -111,6 +111,19 @@ class BackendService {
             .then(convertResponseToJson);
     }
 
+    static updateAccount(id, account) {
+        return fetch(`${baseUrl}/admin/accounts/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'x-access-token': localStorage.getItem('ibc-admin-token'),
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(account)
+        })
+            .then(checkStatus)
+            .then(convertResponseToJson);
+    }
+
     static acceptAccount(id) {
         return fetch(`${baseUrl}/admin/accounts/${id}/accept`, {
             method: 'PATCH',
@@ -131,6 +144,15 @@ class BackendService {
         })
             .then(checkStatus)
             .then(convertResponseToJson);
+    }
+
+    static deleteAccount(id) {
+        return fetch(`${baseUrl}/admin/accounts/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'x-access-token': localStorage.getItem('ibc-admin-token')
+            }
+        })
     }
 
     // =================
