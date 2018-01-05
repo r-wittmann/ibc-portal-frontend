@@ -13,12 +13,22 @@ class Postings extends Component {
             .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
     };
 
-    handleChange = (key, value) => {
+    handleChange = (event, key, value) => {
+        event.stopPropagation();
+        let filters = this.state.filters;
 
-        let search = queryString.parse(this.props.location.search);
-        search[key] = value;
+        if (!filters[key].includes(value)) {
+            filters[key].push(value);
+        } else {
+            filters[key] = filters[key].filter(e => e !== value);
+        }
 
-        location.search = queryString.stringify(search);
+        this.setState({ filters })
+    };
+
+    useFilters = (event) => {
+        event.preventDefault();
+        location.search = queryString.stringify(this.state.filters);
     };
 
     constructor(props) {
@@ -27,11 +37,25 @@ class Postings extends Component {
             postings: [],
             companies: [],
             recruiters: [],
+            filters: {
+                status: [],
+                contract_type: [],
+                company_id: [],
+            }
         };
     };
 
     componentDidMount() {
-        backendService.getPostings(this.props.location.search)
+        if (this.props.location.search) {
+            let filters = Object.assign({}, this.state.filters, queryString.parse(this.props.location.search));
+            for (let key in filters) {
+                if (filters.hasOwnProperty(key) && !(filters[key] instanceof Array)) {
+                    filters[key] = [filters[key]];
+                }
+            }
+            this.setState({ filters })
+        }
+        backendService.getPostings(location.search)
             .then((postings) => this.setState({ postings }));
         backendService.getCompanies()
             .then((companies) => this.setState({ companies }));
@@ -40,6 +64,8 @@ class Postings extends Component {
     };
 
     render() {
+        let availableContractTypes = ['Direkteinstieg', 'Werkstudent', 'Praktikant', 'Trainee', 'Volontariat'];
+        let availableStatus = [{ key: 'active', value: 'Aktiv' }, { key: 'deactivated', value: 'Deaktiviert' }];
         return (
             <div>
                 <Header history={this.props.history}/>
@@ -54,36 +80,81 @@ class Postings extends Component {
                     </button>
                 </div>
                 <div className={'container'}>
-                    <div className={'row'}>
-                        <div>
-                            Status:
-                            <div className={'from-check'}>
-                                <input className={'form-radio-input'} type={'radio'} value={''} id={'active'}
-                                       checked={queryString.parse(this.props.location.search).status === 'active'}
-                                       onChange={() => this.handleChange('status', 'active')}/>
-                                <label className={'form-check-label'} htmlFor={'active'}>
-                                    Aktive
-                                </label>
-                            </div>
-                            <div className={'from-check'}>
-                                <input className={'form-radio-input'} type={'radio'} value={''} id={'deactivated'}
-                                       checked={queryString.parse(this.props.location.search).status === 'deactivated'}
-                                       onChange={() => this.handleChange('status', 'deactivated')}/>
-                                <label className={'form-check-label'} htmlFor={'deactivated'}>
-                                    Deaktiviert
-                                </label>
-                            </div>
-                        </div>
-                    </div>
                     <table className={'table table-hover'}>
                         <thead>
                         <tr>
                             <th>Titel</th>
                             {/* no expiry date yet */}
                             {/*<th>Ablaufdatum</th>*/}
-                            <th>Unternehmen</th>
-                            <th>Status</th>
-                            <th>Aktionen</th>
+                            <td className={'dropdown'} style={{ borderBottom: '2px solid #e9ecef' }}>
+                                <form>
+                                    <button className={'btn btn-small btn-outline-dark dropdown-toggle'}
+                                            data-toggle={'dropdown'}>
+                                        <b>Vertragsart</b>
+                                    </button>
+                                    <div className={'dropdown-menu p-0 pl-4 pt-2'}>
+                                        {availableContractTypes.map(type => (
+                                            <div className={'form-check'} key={type}>
+                                                <input className={'form-check-input'} type={'checkbox'} id={type}
+                                                       checked={this.state.filters.contract_type.includes(type)}
+                                                       onChange={(event) => this.handleChange(event, 'contract_type', type)}/>
+                                                <label className={'form-check-label'} htmlFor={type}>
+                                                    {type}
+                                                </label>
+                                            </div>
+                                        ))}
+
+                                    </div>
+                                </form>
+                            </td>
+                            <td className={'dropdown'} style={{ borderBottom: '2px solid #e9ecef' }}>
+                                <form>
+                                    <button className={'btn btn-small btn-outline-dark dropdown-toggle'}
+                                            data-toggle={'dropdown'}>
+                                        <b>Unternehmen</b>
+                                    </button>
+                                    <div className={'dropdown-menu p-0 pl-4 pt-2'}>
+                                        {this.state.companies.map(company => (
+                                            <div className={'form-check'} key={company.id}>
+                                                <input className={'form-check-input'} type={'checkbox'} id={company.id}
+                                                       checked={this.state.filters.company_id.includes(company.id.toString())}
+                                                       onChange={(event) => this.handleChange(event, 'company_id', company.id.toString())}/>
+                                                <label className={'form-check-label'} htmlFor={company.id}>
+                                                    {company.company_name}
+                                                </label>
+                                            </div>
+                                        ))}
+
+                                    </div>
+                                </form>
+                            </td>
+                            <td className={'dropdown'} style={{ borderBottom: '2px solid #e9ecef' }}>
+                                <form>
+                                    <button className={'btn btn-small btn-outline-dark dropdown-toggle'}
+                                            data-toggle={'dropdown'}>
+                                        <b>Status</b>
+                                    </button>
+                                    <div className={'dropdown-menu p-0 pl-4 pt-2'}>
+                                        {availableStatus.map((status) => (
+                                            <div className={'form-check'} key={status.key}>
+                                                <input className={'form-check-input'} type={'checkbox'} id={status.key}
+                                                       checked={this.state.filters.status.includes(status.key)}
+                                                       onChange={(event) => this.handleChange(event, 'status', status.key)}/>
+                                                <label className={'form-check-label'} htmlFor={status.key}>
+                                                    {status.value}
+                                                </label>
+                                            </div>
+                                        ))}
+
+                                    </div>
+                                </form>
+                            </td>
+                            <th>
+                                <button className={'btn btn-outline-dark'}
+                                        onClick={this.useFilters}>
+                                    <b>Filter anwenden</b>
+                                </button>
+                            </th>
                         </tr>
                         </thead>
                         <tbody>
