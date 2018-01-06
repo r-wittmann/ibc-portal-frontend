@@ -42,8 +42,9 @@ class SignUpBody extends Component {
             <div style={{ margin: 20 }}>
                 {this.state.currentStep === 0 && (
                     <form onSubmit={(event) => this.handleSubmit(0, event)}>
-                        <InputLabel
+                        <InputLabel className="form-control"
                             label={'Benutzername'}
+                            required
                             type={'name'}
                             value={this.state.name}
                             onChange={(name) => {
@@ -51,9 +52,13 @@ class SignUpBody extends Component {
                                 backendService.checkUsername(name)
                                     .then(() => console.log('username ok'))
                                     .catch(() => console.log('username taken'));
-                            }}/>
+                            }}
+                            require={true}
+                            />
                         <InputLabel
                             label={'Email'}
+                            required
+                            className="form-control"
                             type={'email'}
                             value={this.state.email}
                             onChange={(email) => this.setState({ email })}/>
@@ -121,7 +126,7 @@ class SignUpBody extends Component {
                             }
 
                             <div className="checkbox" style={{marginTop:"10px"}}>
-                                <label style={{fontSize:"9px"}}><input type="checkbox" value=""/> Hiermit versichere ich die oben genannten Voraussetzungen zu erfüllen. Ich verpflichte mich auf Nachfrage des IBCs Beweise für die Richtigkeit der Angaben vorzulegen. Ich verpflichte mich, etwaige Änderungen, die den Status des Unternehmens verändern, dem IBC sofort schriftlich mitzuteilen.</label>
+                                <label style={{fontSize:"9px"}}><input required type="checkbox" value=""/> Hiermit versichere ich die oben genannten Voraussetzungen zu erfüllen. Ich verpflichte mich auf Nachfrage des IBCs Beweise für die Richtigkeit der Angaben vorzulegen. Ich verpflichte mich, etwaige Änderungen, die den Status des Unternehmens verändern, dem IBC sofort schriftlich mitzuteilen.</label>
                             </div>
                         </fieldset>
 
@@ -135,9 +140,21 @@ class SignUpBody extends Component {
                 {this.state.currentStep === 1 && (
                     <form onSubmit={(event) => this.handleSubmit(1, event)}>
                         <InputLabel
+                            className="form-control"
                             label={'Unternehmen'}
+                            required
                             value={this.state.mother_company}
                             onChange={(mother_company) => this.setState({ mother_company })}/>
+                        
+
+                        <InputLabel
+                            label={'Website'}
+                            required
+                           // type="url"
+                            className="form-control"
+                            value={this.state.website}
+                            onChange={(website) => this.setState({ website })}/>
+
                         <div className='form-group row'>
                             <label htmlFor={'address'} className='col-4 col-form-label'>
                                 Ihre Adresse in München und Umgebung
@@ -145,30 +162,70 @@ class SignUpBody extends Component {
                             <div className='col-8'>
                                 <textarea
                                     id={'address'}
+                                    placeholder={'Musterstraße 15a \n12345 München'}
+                                    required
                                     className={'form-control'}
                                     rows='3'
                                     value={this.props.value}
                                     onChange={(event) => this.setState({ address: event.target.value })}/>
                             </div>
                         </div>
+                            
+                        <b><p>Account Ansprechpartner:</p></b>
 
 
                         <InputLabel
+                            label={'Name'}
+                            className="form-control"
+                            required
+                            value={this.state.contact_name}
+                            onChange={(contact_name) => this.setState({ contact_name })}/>
+
+                        <InputLabel
+                            label={'Telefon'}
+                            className="form-control"
+                            //type="tel"
+                            required
+                            value={this.state.contact_phone}
+                            onChange={(contact_phone) => this.setState({ contact_phone })}/>
+
+
+                      {/*  <InputLabel
+                            label={'Straße, Hausnr.'}
+                            placeholder="Beispielstraße 16a"
+                            className="form-control"
+                            required
+                            value={this.state.contact_name}
+                            //onChange={(contact_name) => this.setState({ contact_name })}/>
+                        <InputLabel
+                            label={'PLZ'}
+                            className="form-control"
+                            placeholder="12345"
+                            type="number"
+                            required
+                            value={this.state.contact_name}
+                            //onChange={(contact_name) => this.setState({ contact_name })}/>
+                        <InputLabel
+                            label={'Stadt'}
+                            className="form-control"
+                            placeholder="München"
+                            required
+                            value={this.state.contact_name}
+                           //onChange={(contact_name) => this.setState({ contact_name })}/>*/}
+
+                        {/*<InputLabel
                             label={'Ansprechpartner'}
+                            className="form-control"
+                            required
                             value={this.state.contact_name}
                             onChange={(contact_name) => this.setState({ contact_name })}/>
                         <InputLabel
                             label={'Email'}
+                            className="form-control"
+                            required
                             value={this.state.contact_email}
-                            onChange={(contact_email) => this.setState({ contact_email })}/>
-                        <InputLabel
-                            label={'Telefon'}
-                            value={this.state.contact_phone}
-                            onChange={(contact_phone) => this.setState({ contact_phone })}/>
-                        <InputLabel
-                            label={'Website'}
-                            value={this.state.website}
-                            onChange={(website) => this.setState({ website })}/>
+                            onChange={(contact_email) => this.setState({ contact_email })}/>*/}
+                       
                         <div className={'float-right'}>
                             <input className={'btn btn-primary'} type={'submit'} value={'Registrierung abschließen'}/>
                         </div>
