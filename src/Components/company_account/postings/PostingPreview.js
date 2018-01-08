@@ -11,6 +11,31 @@ class PostingPreview extends Component {
         };
     }
 
+    getDurationString(key) {
+        let value = '';
+        switch (key) {
+            case 'to3':
+                value = 'Befristet, bis zu 3 Monate';
+                break;
+            case '3to6':
+                value = 'Befristet, 3 bis 6 Monate';
+                break;
+            case '6':
+                value = 'Befristet, 6 Monate';
+                break;
+            case '12':
+                value = 'Befristet, 12 Monate';
+                break;
+            case 'indefinite':
+                value = 'Unbefristet';
+                break;
+            default:
+                value = 'Ohne Vertragslaufzeit';
+                break;
+        }
+        return value;
+    }
+
     componentDidMount() {
         if (this.props.posting) {
             backendService.getCompanyById(this.props.posting.company_id).then(company => this.setState({ company }));
@@ -77,7 +102,7 @@ class PostingPreview extends Component {
                             <table className={'table table-borderless preview-table-posting'}>
                                 <tbody>
                                 <tr>
-                                    <td><span className={'fa fa-arrow-right'}/> {this.props.posting.contract_duration}
+                                    <td><span className={'fa fa-arrow-right'}/> {this.getDurationString(this.props.posting.contract_duration)}
                                     </td>
                                     <td><span className={'fa fa-clock'}/> {this.props.posting.working_hours}</td>
                                     <td><span className={'fa fa-edit'}/> {this.props.posting.contract_type}</td>
