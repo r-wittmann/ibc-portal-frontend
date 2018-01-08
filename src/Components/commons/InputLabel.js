@@ -13,6 +13,7 @@ class InputLabel extends Component {
                         id={this.props.label}
                         className={'form-control'}
                         type={this.props.type ? this.props.type : 'text'}
+                        required={this.props.required}
                         value={this.props.value}
                         onChange={(event) => this.props.onChange(event.target.value)}/>
                 </div>

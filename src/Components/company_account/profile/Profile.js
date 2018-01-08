@@ -3,14 +3,14 @@ import backendService from '../../../backendService';
 import InputLabel from "../../commons/InputLabel";
 import PasswordModal from "./PasswordModal";
 import Header from "../Header";
+import { toast } from "react-toastify";
 
 class Profile extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         backendService.updateProfile(this.state.profile)
-        // call confirmation alert
-        // .then(() => confirmationAlert())
-        // .catch(() => failureAlert());
+            .then(() => toast('Profil aktualisiert', { type: 'success' }))
+            .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
     };
 
     constructor(props) {

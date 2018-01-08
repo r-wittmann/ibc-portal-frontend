@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import backendService from '../../../backendService';
 import InputLabel from "../../commons/InputLabel";
+import { toast } from "react-toastify";
 
 class PasswordModal extends Component {
     handleClose = () => {
@@ -14,9 +15,8 @@ class PasswordModal extends Component {
         event.preventDefault();
         this.handleClose();
         backendService.updatePassword(this.state.old, this.state.new)
-        // call confirmation alert
-        // .then(() => confirmationAlert())
-        // .catch(() => failureAlert());
+            .then(() => toast('Passwort aktualisiert', { type: 'success' }))
+            .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
     };
 
     constructor(props) {
