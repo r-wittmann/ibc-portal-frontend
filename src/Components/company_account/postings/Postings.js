@@ -41,6 +41,7 @@ class Postings extends Component {
                 status: [],
                 contract_type: [],
                 company_id: [],
+                recruiter_id: []
             }
         };
     };
@@ -103,7 +104,6 @@ class Postings extends Component {
                                                 </label>
                                             </div>
                                         ))}
-
                                     </div>
                                 </form>
                             </td>
@@ -124,7 +124,26 @@ class Postings extends Component {
                                                 </label>
                                             </div>
                                         ))}
-
+                                    </div>
+                                </form>
+                            </td>
+                            <td className={'dropdown'} style={{ borderBottom: '2px solid #e9ecef' }}>
+                                <form>
+                                    <button className={'btn btn-small btn-outline-dark dropdown-toggle'}
+                                            data-toggle={'dropdown'}>
+                                        <b>Recruiter</b>
+                                    </button>
+                                    <div className={'dropdown-menu p-0 pl-4 pt-2'}>
+                                        {this.state.recruiters.map(recruiter => (
+                                            <div className={'form-check'} key={recruiter.id}>
+                                                <input className={'form-check-input'} type={'checkbox'} id={recruiter.id}
+                                                       checked={this.state.filters.recruiter_id.includes(recruiter.id.toString())}
+                                                       onChange={(event) => this.handleChange(event, 'recruiter_id', recruiter.id.toString())}/>
+                                                <label className={'form-check-label'} htmlFor={recruiter.id}>
+                                                    {recruiter.recruiter_name}
+                                                </label>
+                                            </div>
+                                        ))}
                                     </div>
                                 </form>
                             </td>
@@ -145,7 +164,6 @@ class Postings extends Component {
                                                 </label>
                                             </div>
                                         ))}
-
                                     </div>
                                 </form>
                             </td>

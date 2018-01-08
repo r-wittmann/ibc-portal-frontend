@@ -14,6 +14,7 @@ class PostingListItem extends Component {
                 {/*<td>{this.props.posting.expiry_date}</td>*/}
                 <td>{this.props.posting.contract_type}</td>
                 <td>{this.props.posting.company_name}</td>
+                <td>{this.props.posting.recruiter_name}</td>
                 <td>{this.props.posting.status}</td>
                 <td>
                     <div className={'btn-group'}>
