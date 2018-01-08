@@ -11,7 +11,6 @@ class RegistrationListItem extends Component {
                 <td>{this.props.account.email}</td>
                 <td>{this.props.account.website}</td>
                 <td>{this.props.account.company_type}</td>
-                <td>{this.props.account.status}</td>
                 <td>
                     <div className={'btn-group'}>
                         <button className={'btn btn-outline-dark'}

@@ -111,7 +111,6 @@ class Registrations extends Component {
                                 <th>E-Mail</th>
                                 <th>Webseite</th>
                                 <th>Firmentyp</th>
-                                <th>Status</th>
                                 <th>Aktionen</th>
                             </tr>
                             </thead>
