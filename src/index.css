@@ -147,3 +147,49 @@ h1 {
 .registrierungskriterien{
     font-size: 14px;
 }
+
+
+.preview-logo img{
+
+    height: 100px;
+
+
+}
+
+.preview-logo{
+    float:right;
+    margin-bottom: 10px;
+    margin-top: -50px;
+}
+
+
+.preview-headline{
+
+    margin-bottom: -75px;
+    margin-top: 50px;
+
+
+}
+
+.preview-table{
+    border-top: 1px solid grey;
+    border-bottom: 1px solid grey;
+}
+
+.table-borderless td{
+
+    border:none;
+
+}
+
+.recruiter-logo img{
+    height:200px;
+}
+
+.logo-table{
+    width:250px;
+}
+
+.preview-table-posting{
+    border-bottom: 1px solid grey;
+}

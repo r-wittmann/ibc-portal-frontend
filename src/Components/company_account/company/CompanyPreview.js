@@ -11,9 +11,10 @@ class CompanyPreview extends Component {
                 </div>
                 {this.props.company && (
                     <div>
-                        <h2>{this.props.company.company_name.toUpperCase()}</h2>
+                        <div className={'preview-headline'}><h2>{this.props.company.company_name.toUpperCase()}</h2></div>
+                        <div className={'preview-logo'}>{this.props.company.logo && <img src={this.props.company.logo} alt={'logo'}/>}</div>
                         <div className={'attributes'}>
-                            <table className={'table table-bordered'}>
+                            <table className={'table table-borderless preview-table'}>
                                 <tbody>
                                 <tr>
                                     <td><span className={'fa fa-info-circle'}/> <a href={this.props.company.website}> {this.props.company.website}</a></td>
@@ -32,7 +33,6 @@ class CompanyPreview extends Component {
                             </table>
                         </div>
                         
-                        {this.props.company.logo && <p><img src={this.props.company.logo} alt={'logo'}/></p>}
                         <p dangerouslySetInnerHTML={{ __html: draftToHtml(JSON.parse(this.props.company.company_description)) }}/>
                     </div>
                 )}

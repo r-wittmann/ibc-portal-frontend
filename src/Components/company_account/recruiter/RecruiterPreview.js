@@ -5,25 +5,37 @@ class RecruiterPreview extends Component {
     render() {
         return (
             <div className={'container'}>
+                <div className={'headline'}>
+                        <h1>Vorschau</h1>
+                    </div>
                 {this.props.recruiter && (
                     <div>
-                        <p>Recruiter Name: {this.props.recruiter.recruiter_name}</p>
-                        <p>Recruiter Email: {this.props.recruiter.recruiter_email}</p>
-                        <p>Recruiter Phone: {this.props.recruiter.phone}</p>
-                        <p>Recruiter Mobile: {this.props.recruiter.mobile}</p>
-                        <p>Recruiter Position: {this.props.recruiter.position}</p>
-                        <p>Recruiter Location: {this.props.recruiter.location}</p>
-                        <p>Recruiter Xing: {this.props.recruiter.xing}</p>
-                        <p>Recruiter LinkedIn: {this.props.recruiter.linked_in}</p>
-                        {this.props.recruiter.photo && <p><img src={this.props.recruiter.photo} alt={'recruiter'}/></p>}
+                        <div className={'attributes'}>
+                                <table className={'table table-borderless preview-table'}>
+                                    <tbody>
+                                    <tr>
+                                        <td className={'logo-table'}><div className={'recruiter-logo'}>{this.props.recruiter.photo &&<img src={this.props.recruiter.photo} alt={'recruiter'}/>}</div></td>
+                                        <td>
+                                            <p><b>{this.props.recruiter.recruiter_name}</b></p>
+                                            <p>{this.props.recruiter.position}, {this.props.recruiter.location}</p>
+                                            <p>Festnetz: {this.props.recruiter.phone}</p>
+                                            <p>Mobil: {this.props.recruiter.mobile}</p>
+                                            <p>Xing: {this.props.recruiter.xing}</p>
+                                            <p>LinkedIn: {this.props.recruiter.linked_in}</p>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                        </div>
+                                       
                     </div>
                 )}
                 <div className='float-right'>
-                    <button className={'btn btn-danger buttons-form'}
+                    <button className={'btn btn-warning buttons-form'}
                             onClick={this.props.endPreview}>
                         Zurück
                     </button>
-                    <button className={'btn btn-primary buttons-form'}
+                    <button className={'btn btn-success buttons-form'}
                             onClick={this.props.primaryAction}>
                         {this.props.primaryActionText}
                     </button>

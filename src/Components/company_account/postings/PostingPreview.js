@@ -19,59 +19,73 @@ class PostingPreview extends Component {
     render() {
         return (
             <div className={'container'}>
+            <div className={'headline'}>
+                        <h1>Vorschau</h1>
+                    </div>
                 {this.props.posting && (
-                    <div>
-                        <p>Company:</p>
-                        {this.state.company &&
-                        <div>
-                            <p>Company Name: {this.state.company.company_name}</p>
-                            <p>Contact Name: {this.state.company.contact_name}</p>
-                            <p>Contact Email: {this.state.company.contact_email}</p>
-                            <p>Contact Phone: {this.state.company.contact_phone}</p>
-                            <p>Munich Address:
-                                <span
-                                    dangerouslySetInnerHTML={{ __html: this.state.company.munich_address.replace('\n', '<br>') }}/>
-                            </p>
-                            <p>Locations: {this.state.company.locations}</p>
-                            <p>Employees: {this.state.company.employees}</p>
-                            <p>Website: {this.state.company.website}</p>
-                            <p>kununu: {this.state.company.kununu}</p>
-                            <p>Field of Activity: {this.state.company.field_of_activity}</p>
 
+                    <div>
+                        <div className={'preview-headline'}><h2>{this.props.posting.title.toUpperCase()}</h2></div>
+                        <div className={'preview-logo'}>{this.state.company.logo && <img src={this.state.company.logo} alt={'logo'}/>}</div>
+                        <div className={'attributes'}>
+                            <table className={'table table-borderless preview-table'}>
+                                <tbody>
+                                <tr>
+                                    <td><span className={'fa fa-home'}/> {this.state.company.company_name}</td>
+                                    <td><span className={'fa fa-map-marker'}/> <span dangerouslySetInnerHTML={{ __html: this.state.company.munich_address.replace('\n', '<br>') }}/></td>
+                                    <td><span className={'fa fa-calendar'}/>  {this.props.posting.start_of_employment}</td>
+                                    <td><span className={'fa fa-desktop'}/>  {this.state.company.field_of_activity}</td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
-                        }
-                        <p>Recruiter:</p>
-                        {this.state.recruiter &&
-                        <div>
-                            <p>Recruiter Name: {this.state.recruiter.recruiter_name}</p>
-                            <p>Recruiter Email: {this.state.recruiter.recruiter_email}</p>
-                            <p>Recruiter Phone: {this.state.recruiter.phone}</p>
-                            <p>Recruiter Mobile: {this.state.recruiter.mobile}</p>
-                            <p>Recruiter Position: {this.state.recruiter.position}</p>
-                            <p>Recruiter Location: {this.state.recruiter.location}</p>
-                            <p>Recruiter Xing: {this.state.recruiter.xing}</p>
-                            <p>Recruiter LinkedIn: {this.state.recruiter.linked_in}</p>
-                            {this.state.recruiter.photo && <p><img src={this.state.recruiter.photo} alt={'recruiter'}/></p>}
-                        </div>
-                        }
-                        <p>title: {this.props.posting.title}</p>
-                        <p>start_of_employment: {this.props.posting.start_of_employment}</p>
-                        <p>contract_type: {this.props.posting.contract_type}</p>
-                        <p>contract_duration: {this.props.posting.contract_duration}</p>
-                        <p>working_hours: {this.props.posting.working_hours}</p>
-                        <p>entry_level: {this.props.posting.entry_level}</p>
-                        <p>place_of_employment: {this.props.posting.place_of_employment}</p>
-                        <p>application_link: {this.props.posting.application_link}</p>
-                        <p>field_of_employment: {this.props.posting.field_of_employment}</p>
-                        <p>pdf: {this.props.posting.pdf}</p>
-                        <p>status: {this.props.posting.status}</p>
-                        <p>description: <span
+
+                        <p><span
                             dangerouslySetInnerHTML={{ __html: draftToHtml(JSON.parse(this.props.posting.description)) }}/>
                         </p>
+
+                        {this.state.recruiter &&
+                       
+
+                            <div className={'attributes'}>
+                                    <table className={'table table-borderless preview-table'}>
+                                        <tbody>
+                                        <tr>
+                                            <td className={'logo-table'}><div className={'recruiter-logo'}>{this.state.recruiter.photo &&<img src={this.state.recruiter.photo} alt={'recruiter'}/>}</div></td>
+                                            <td>
+                                                <p><b>{this.state.recruiter.recruiter_name}</b></p>
+                                                <p>{this.state.recruiter.position}, {this.state.recruiter.location}</p>
+                                                <p>Festnetz: {this.state.recruiter.phone}</p>
+                                                <p>Mobil: {this.state.recruiter.mobile}</p>
+                                                <p>Xing: {this.state.recruiter.xing}</p>
+                                                <p>LinkedIn: {this.state.recruiter.linked_in}</p>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                            </div>  
+
+
+                        }
+
+
+                        <div className={'attributes'}>
+                            <table className={'table table-borderless preview-table-posting'}>
+                                <tbody>
+                                <tr>
+                                    <td><span className={'fa fa-arrow-right'}/> {this.props.posting.contract_duration}</td>
+                                    <td><span className={'fa fa-clock'}/> {this.props.posting.working_hours}</td>
+                                    <td><span className={'fa fa-edit'}/>  {this.props.posting.contract_type}</td>
+                                    <td><span className={'fa fa-info-circle'}/>  {this.props.posting.entry_level}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    
                     </div>
                 )}
                 <div className='float-right'>
-                    <button className={'btn btn-danger buttons-form'}
+                    <button className={'btn btn-warning buttons-form'}
                             onClick={this.props.endPreview}>
                         Zurück
                     </button>
@@ -82,7 +96,7 @@ class PostingPreview extends Component {
                             Speichern
                         </button>
                     ) : (
-                        <button className={'btn btn-primary buttons-form'}
+                        <button className={'btn btn-success buttons-form'}
                                 onClick={this.props.primaryAction}>
                             {this.props.primaryActionText}
                         </button>
