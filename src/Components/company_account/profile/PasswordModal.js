@@ -4,7 +4,7 @@ import InputLabel from "../../commons/InputLabel";
 import { toast } from "react-toastify";
 
 class PasswordModal extends Component {
-    handleClose = () => {
+    resetState = () => {
         this.setState({
             old: '',
             new: '',
@@ -13,10 +13,24 @@ class PasswordModal extends Component {
     };
     handleSubmit = (event) => {
         event.preventDefault();
-        this.handleClose();
-        backendService.updatePassword(this.state.old, this.state.new)
-            .then(() => toast('Passwort aktualisiert', { type: 'success' }))
-            .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
+        this.resetState();
+        if (this.state.old === this.state.new) {
+            toast('Altes und neues Passwort dürfen nicht übereinstimmen', { type: 'error' })
+        } else if (this.state.new === this.state.confirm) {
+            backendService.updatePassword(this.state.old, this.state.new)
+                .then(() => toast('Passwort aktualisiert', { type: 'success' }))
+                .then(() => {
+                    let modal = document.getElementById('changePassword');
+                    modal.classList.remove('show');
+                    modal.style.display = 'none';
+                    document.body.classList.remove('modal-open');
+                    let backdrop = document.getElementsByClassName('modal-backdrop')[0];
+                    backdrop.parentNode.removeChild(backdrop);
+                })
+            .catch(() => toast('Das alte Passwort stimmt nicht mit dem von uns gespeicherten Passwort überein', { type: 'error' }));
+        } else {
+            toast('Neues Password und Bestätigung stimmen nicht überein', { type: 'error' })
+        }
     };
 
     constructor(props) {
@@ -30,8 +44,7 @@ class PasswordModal extends Component {
 
     render() {
         return (
-            <div className="modal fade"
-                 id="changePassword">
+            <div className="modal fade" id="changePassword">
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header">
@@ -56,14 +69,15 @@ class PasswordModal extends Component {
                         </div>
                         <div className="modal-footer">
                             <button type="button"
-                                    onClick={this.handleClose}
+                                    onClick={this.resetState}
                                     className="btn btn-secondary"
-                                    data-dismiss="modal">Abbrechen
+                                    data-dismiss="modal">
+                                Abbrechen
                             </button>
                             <button type="button"
                                     onClick={this.handleSubmit}
-                                    className="btn btn-primary"
-                                    data-dismiss="modal">Speichern
+                                    className="btn btn-primary">
+                                Speichern
                             </button>
                         </div>
                     </div>
