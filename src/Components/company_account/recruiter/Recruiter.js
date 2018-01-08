@@ -63,7 +63,7 @@ class Recruiter extends Component {
         return (
             <div>
                 <Header history={this.props.history}/>
-                {this.state.preview ? (
+                {this.state.preview && this.state.recruiter ? (
                     <RecruiterPreview
                         recruiter={this.state.recruiter}
                         endPreview={this.props.preview

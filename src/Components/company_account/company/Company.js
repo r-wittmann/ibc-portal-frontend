@@ -64,7 +64,7 @@ class Company extends Component {
         return (
             <div>
                 <Header history={this.props.history}/>
-                {this.state.preview ? (
+                {this.state.preview && this.state.company ? (
                     <CompanyPreview
                         company={this.state.company}
                         endPreview={this.props.preview
