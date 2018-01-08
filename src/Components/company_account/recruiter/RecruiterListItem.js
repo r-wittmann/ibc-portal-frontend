@@ -36,7 +36,7 @@ class RecruiterListItem extends Component {
                     />
                 </td>
                 <td>
-                    <Link to={'/postings?recruiter_id=' + this.props.recruiter.id}>{this.props.recruiter.count}</Link>
+                    <Link to={'/postings#recruiter_id=' + this.props.recruiter.id}>{this.props.recruiter.count}</Link>
                 </td>
 
             </tr>

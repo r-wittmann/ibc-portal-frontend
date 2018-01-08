@@ -284,6 +284,10 @@ class BackendService {
     // =================
 
     static getPostings(searchParams) {
+        if (searchParams) {
+            searchParams = searchParams.replace('#', '?');
+        }
+
         // let url = filters ? `${baseUrl}/api/postings?${filters}` : `${baseUrl}/api/postings`;
         return fetch(`${baseUrl}/api/postings${searchParams}`, {
             method: 'GET',

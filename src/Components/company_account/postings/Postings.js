@@ -6,6 +6,15 @@ import PostingListItem from "./PostingListItem";
 import queryString from 'query-string';
 
 class Postings extends Component {
+    defaultFilters = () => {
+        return {
+            status: [],
+            contract_type: [],
+            company_id: [],
+            recruiter_id: []
+        }
+    };
+
     handleDelete = (postingId) => {
         backendService.deletePosting(postingId)
             .then(() => this.setState({ postings: this.state.postings.filter(posting => posting.id !== postingId) }))
@@ -15,7 +24,7 @@ class Postings extends Component {
 
     handleChange = (event, key, value) => {
         event.stopPropagation();
-        let filters = this.state.filters;
+        let filters = Object.assign({}, this.state.filters);
 
         if (!filters[key].includes(value)) {
             filters[key].push(value);
@@ -23,12 +32,24 @@ class Postings extends Component {
             filters[key] = filters[key].filter(e => e !== value);
         }
 
-        this.setState({ filters })
+        this.setState({ filters });
+
+        location.hash = queryString.stringify(filters);
     };
 
-    useFilters = (event) => {
-        event.preventDefault();
-        location.search = queryString.stringify(this.state.filters);
+    getPostings() {
+        backendService.getPostings(location.hash)
+            .then((postings) => this.setState({ postings }));
+    };
+
+    deleteFilters = (event) => {
+        event && event.preventDefault();
+
+        this.setState({
+            filters: Object.assign({}, this.defaultFilters)
+        });
+
+        location.hash = ''
     };
 
     constructor(props) {
@@ -37,18 +58,13 @@ class Postings extends Component {
             postings: [],
             companies: [],
             recruiters: [],
-            filters: {
-                status: [],
-                contract_type: [],
-                company_id: [],
-                recruiter_id: []
-            }
+            filters: this.defaultFilters()
         };
     };
 
     componentDidMount() {
-        if (this.props.location.search) {
-            let filters = Object.assign({}, this.state.filters, queryString.parse(this.props.location.search));
+        if (location.hash) {
+            let filters = Object.assign({}, this.state.filters, queryString.parse(location.hash));
             for (let key in filters) {
                 if (filters.hasOwnProperty(key) && !(filters[key] instanceof Array)) {
                     filters[key] = [filters[key]];
@@ -56,12 +72,26 @@ class Postings extends Component {
             }
             this.setState({ filters })
         }
-        backendService.getPostings(location.search)
-            .then((postings) => this.setState({ postings }));
+
+        this.getPostings(location.hash);
         backendService.getCompanies()
             .then((companies) => this.setState({ companies }));
         backendService.getRecruiters()
             .then((recruiters) => this.setState({ recruiters }));
+    };
+
+    componentWillUpdate(nextProps) {
+        if (nextProps.location.hash !== this.props.location.hash) {
+            let filters = Object.assign({}, this.defaultFilters(), queryString.parse(nextProps.location.hash));
+            for (let key in filters) {
+                if (filters.hasOwnProperty(key) && !(filters[key] instanceof Array)) {
+                    filters[key] = [filters[key]];
+                }
+            }
+            this.setState({ filters });
+
+            this.getPostings(location.hash);
+        }
     };
 
     render() {
@@ -136,7 +166,8 @@ class Postings extends Component {
                                     <div className={'dropdown-menu p-0 pl-4 pt-2'}>
                                         {this.state.recruiters.map(recruiter => (
                                             <div className={'form-check'} key={recruiter.id}>
-                                                <input className={'form-check-input'} type={'checkbox'} id={recruiter.id}
+                                                <input className={'form-check-input'} type={'checkbox'}
+                                                       id={recruiter.id}
                                                        checked={this.state.filters.recruiter_id.includes(recruiter.id.toString())}
                                                        onChange={(event) => this.handleChange(event, 'recruiter_id', recruiter.id.toString())}/>
                                                 <label className={'form-check-label'} htmlFor={recruiter.id}>
@@ -169,8 +200,8 @@ class Postings extends Component {
                             </td>
                             <th>
                                 <button className={'btn btn-outline-dark'}
-                                        onClick={this.useFilters}>
-                                    <b>Filter anwenden</b>
+                                        onClick={this.deleteFilters}>
+                                    <b>Filter entfernen</b>
                                 </button>
                             </th>
                         </tr>
@@ -184,7 +215,7 @@ class Postings extends Component {
                         )}
                         </tbody>
                     </table>
-                    
+
                 </div>
             </div>
         );
