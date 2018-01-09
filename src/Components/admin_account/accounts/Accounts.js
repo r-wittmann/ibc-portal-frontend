@@ -125,7 +125,7 @@ class Accounts extends Component {
             }
             this.setState({ filters });
 
-            this.getAccounts(location.hash);
+            this.getAccounts();
         }
     };
 

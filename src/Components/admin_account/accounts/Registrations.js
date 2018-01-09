@@ -3,12 +3,54 @@ import backendService from '../../../backendService';
 import image from '../../../../resources/ibc_logo.png';
 import RegistrationListItem from './RegistrationListItem';
 import { toast } from "react-toastify";
+import queryString from "query-string";
 
 class Registrations extends Component {
+    defaultFilters = () => {
+        return {
+            company_type: []
+        }
+    };
+
     handleLogout = (event) => {
         event.preventDefault();
         backendService.adminLogout();
         this.props.history.push('/admin/login');
+    };
+
+    handleFilterChange = (event, value) => {
+        event.stopPropagation();
+        let filters = Object.assign({}, this.state.filters);
+        let key = 'company_type';
+
+        if (!filters[key].includes(value)) {
+            filters[key].push(value);
+        } else {
+            filters[key] = filters[key].filter(e => e !== value);
+        }
+
+        this.setState({ filters });
+
+        location.hash = queryString.stringify(filters);
+    };
+
+    getAccounts() {
+        backendService.getAccounts(location.hash)
+            .then((accounts) => {
+                this.setState({
+                    registeredAccounts: accounts.filter(account => account.status === 'registered'),
+                })
+            });
+    };
+
+    deleteFilters = (event) => {
+        event && event.preventDefault();
+
+        this.setState({
+            filters: Object.assign({}, this.defaultFilters())
+        });
+
+        location.hash = ''
     };
 
     handleChangeType = (event, accountId) => {
@@ -52,20 +94,43 @@ class Registrations extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            registeredAccounts: []
+            registeredAccounts: [],
+            filters: this.defaultFilters()
         };
     };
 
     componentDidMount() {
-        backendService.getAccounts()
-            .then((accounts) => {
-                this.setState({
-                    registeredAccounts: accounts.filter(account => account.status === 'registered')
-                })
-            });
+        if (location.hash) {
+            let filters = Object.assign({}, this.state.filters, queryString.parse(location.hash));
+            for (let key in filters) {
+                if (filters.hasOwnProperty(key) && !(filters[key] instanceof Array)) {
+                    filters[key] = [filters[key]];
+                }
+            }
+            this.setState({ filters });
+        }
+        this.getAccounts();
+    };
+
+    componentWillUpdate(nextProps) {
+        if (nextProps.location.hash !== this.props.location.hash) {
+            let filters = Object.assign({}, this.defaultFilters(), queryString.parse(nextProps.location.hash));
+            for (let key in filters) {
+                if (filters.hasOwnProperty(key) && !(filters[key] instanceof Array)) {
+                    filters[key] = [filters[key]];
+                }
+            }
+            this.setState({ filters });
+
+            this.getAccounts();
+        }
     };
 
     render() {
+        let availableTypes = [{ key: 'ibc', value: 'IBC Unternehmen' },
+            { key: 'startup', value: 'Startup' },
+            { key: 'ngo', value: 'Verein' }];
+
         return (
             <div>
                 <nav className={'navbar navbar-expand-lg navbar-light bg-light'}>
@@ -101,33 +166,55 @@ class Registrations extends Component {
                 </div>
 
                 <div className={'container'}>
-                    {this.state.registeredAccounts.length > 0 && (
-                        <table className={"table table-hover"}>
-                            <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Firmenname</th>
-                                <th>Benutzername</th>
-                                <th>E-Mail</th>
-                                <th>Webseite</th>
-                                <th>Firmentyp</th>
-                                <th>Aktionen</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {this.state.registeredAccounts.map((account) =>
-                                <RegistrationListItem
-                                    key={account.id}
-                                    account={account}
-                                    handleChangeType={this.handleChangeType}
-                                    handleAccept={this.acceptRegistration}
-                                    handleDecline={this.declineRegistration}
-                                    history={this.props.history}
-                                />
-                            )}
-                            </tbody>
-                        </table>
-                    )}
+                    <table className={"table table-hover"}>
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Firmenname</th>
+                            <th>Benutzername</th>
+                            <th>E-Mail</th>
+                            <th>Webseite</th>
+                            <td className={'dropdown'} style={{ borderBottom: '2px solid #e9ecef' }}>
+                                <form>
+                                    <button className={'btn btn-small btn-outline-dark dropdown-toggle'}
+                                            data-toggle={'dropdown'}>
+                                        <b>Firmentype</b>
+                                    </button>
+                                    <div className={'dropdown-menu p-0 pl-4 pt-2'}>
+                                        {availableTypes.map((type) => (
+                                            <div className={'form-check'} key={type.key}>
+                                                <input className={'form-check-input'} type={'checkbox'} id={type.key}
+                                                       checked={this.state.filters.company_type.includes(type.key)}
+                                                       onChange={(event) => this.handleFilterChange(event, type.key)}/>
+                                                <label className={'form-check-label'} htmlFor={type.key}>
+                                                    {type.value}
+                                                </label>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </form>
+                            </td>
+                            <th>
+                                <button className={'btn btn-outline-dark'}
+                                        onClick={this.deleteFilters}>
+                                    <b>Filter entfernen</b>
+                                </button>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {this.state.registeredAccounts.length > 0 && this.state.registeredAccounts.map((account) =>
+                            <RegistrationListItem
+                                key={account.id}
+                                account={account}
+                                handleChangeType={this.handleChangeType}
+                                handleAccept={this.acceptRegistration}
+                                handleDecline={this.declineRegistration}
+                                history={this.props.history}
+                            />
+                        )}
+                        </tbody>
+                    </table>
                 </div>
             </div>
         );
