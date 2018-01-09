@@ -29,9 +29,9 @@ const baseUrl = 'http://localhost:9090';
 // BackendService
 //
 class BackendService {
-    //
-    // DATABASE ENDPOINTS
-    //
+    // ============================ //
+    // ====== auth endpoints ====== //
+    // ============================ //
 
     static isAuthenticated() {
         let logedIn = localStorage.getItem('ibc-user-token') || localStorage.getItem('ibc-admin-token');
@@ -96,9 +96,9 @@ class BackendService {
         localStorage.removeItem('ibc-admin-token');
     }
 
-    // ====================
-    // admin accounts endpoints
-    // ====================
+    // ============================ //
+    // = admin accounts endpoints = //
+    // ============================ //
 
     static getAccounts(searchParams) {
         if (searchParams) {
@@ -161,9 +161,9 @@ class BackendService {
         })
     }
 
-    // =================
-    // Company endpoints
-    // =================
+    // ============================ //
+    // ==== Company endpoints ===== //
+    // ============================ //
 
     static getCompanies() {
         return fetch(`${baseUrl}/api/companies`, {
@@ -222,9 +222,9 @@ class BackendService {
         })
     }
 
-    // ===================
-    // Recruiter endpoints
-    // ===================
+    // ============================ //
+    // === Recruiter endpoints ==== //
+    // ============================ //
 
     static getRecruiters() {
         return fetch(`${baseUrl}/api/recruiters`, {
@@ -283,9 +283,9 @@ class BackendService {
         })
     }
 
-    // =================
-    // Posting endpoints
-    // =================
+    // ============================ //
+    // ==== Posting endpoints ===== //
+    // ============================ //
 
     static getPostings(searchParams) {
         if (searchParams) {
@@ -349,9 +349,9 @@ class BackendService {
         })
     }
 
-    // =================
-    // Profile endpoints
-    // =================
+    // ============================ //
+    // ==== Profile endpoints ===== //
+    // ============================ //
 
     static getProfile() {
         return fetch(`${baseUrl}/api/account`, {
@@ -390,6 +390,44 @@ class BackendService {
             .then(convertResponseToJson);
     }
 
+    // ============================ //
+    // ===== Public endpoints ===== //
+    // ============================ //
+
+    static getPublicCompanies() {
+        return fetch(`${baseUrl}/public/companies`, {
+            method: 'GET',
+        })
+            .then(checkStatus)
+            .then(convertResponseToJson);
+    }
+
+    static getPublicCompanyById(id) {
+        return fetch(`${baseUrl}/public/companies/${id}`, {
+            method: 'GET',
+        })
+            .then(checkStatus)
+            .then(convertResponseToJson);
+    }
+
+    static getPublicPostings(searchParams) {
+        if (searchParams) {
+            searchParams = searchParams.replace('#', '?');
+        }
+        return fetch(`${baseUrl}/public/postings${searchParams}`, {
+            method: 'GET',
+        })
+            .then(checkStatus)
+            .then(convertResponseToJson);
+    }
+
+    static getPublicPostingById(id) {
+        return fetch(`${baseUrl}/public/postings/${id}`, {
+            method: 'GET',
+        })
+            .then(checkStatus)
+            .then(convertResponseToJson);
+    }
 }
 
 export default BackendService

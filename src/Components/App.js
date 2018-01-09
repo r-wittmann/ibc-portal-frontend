@@ -21,6 +21,11 @@ import Profile from "./company_account/profile/Profile";
 import Accounts from './admin_account/accounts/Accounts';
 import Registrations from './admin_account/accounts/Registrations';
 
+import PublicPostings from './student_account/postings/PublicPostings'
+import PublicPosting from './student_account/postings/PublicPosting'
+
+import PublicCompany from './student_account/company/PublicCompany'
+
 import backendService from '../backendService';
 
 class App extends Component {
@@ -31,6 +36,9 @@ class App extends Component {
                 <Notification/>
                 {!backendService.isAuthenticated() ?
                     <Switch>
+                        <Route exact path={'/public/postings'} component={PublicPostings}/>
+                        <Route exact path={'/public/postings/:id'} component={PublicPosting}/>
+                        <Route exact path={'/public/companies/:id'} component={PublicCompany}/>
                         <Route exact path={'/login'} component={Login}/>
                         <Route exact path={'/admin/login'} component={AdminLogin}/>
                         <Redirect from={'/admin'} to={'/admin/login'}/>
@@ -38,6 +46,9 @@ class App extends Component {
                     </Switch>
                     :
                     <Switch>
+                        <Route exact path={'/public/postings'} component={PublicPostings}/>
+                        <Route exact path={'/public/postings/:id'} component={PublicPosting}/>
+                        <Route exact path={'/public/companies/:id'} component={PublicCompany}/>
                         <Redirect exact from={'/'} to="/home"/>
                         <Redirect exact from={'/login'} to="/home"/>
                         <Route exact path={'/home'} component={HomePage}/>
