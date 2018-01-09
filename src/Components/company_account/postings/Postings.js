@@ -46,7 +46,7 @@ class Postings extends Component {
         event && event.preventDefault();
 
         this.setState({
-            filters: Object.assign({}, this.defaultFilters)
+            filters: Object.assign({}, this.defaultFilters())
         });
 
         location.hash = ''
@@ -73,7 +73,7 @@ class Postings extends Component {
             this.setState({ filters })
         }
 
-        this.getPostings(location.hash);
+        this.getPostings();
         backendService.getCompanies()
             .then((companies) => this.setState({ companies }));
         backendService.getRecruiters()
@@ -90,7 +90,7 @@ class Postings extends Component {
             }
             this.setState({ filters });
 
-            this.getPostings(location.hash);
+            this.getPostings();
         }
     };
 

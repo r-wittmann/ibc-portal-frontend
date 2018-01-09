@@ -100,8 +100,12 @@ class BackendService {
     // admin accounts endpoints
     // ====================
 
-    static getAccounts() {
-        return fetch(`${baseUrl}/admin/accounts`, {
+    static getAccounts(searchParams) {
+        if (searchParams) {
+            searchParams = searchParams.replace('#', '?');
+        }
+
+        return fetch(`${baseUrl}/admin/accounts${searchParams}`, {
             method: 'GET',
             headers: {
                 'x-access-token': localStorage.getItem('ibc-admin-token')
