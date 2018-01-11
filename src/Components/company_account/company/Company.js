@@ -91,6 +91,7 @@ class Company extends Component {
                                     <form onSubmit={this.handleSubmit}>
                                         <InputLabel
                                             label={'Unternehmensname'}
+                                            required
                                             value={this.state.company.company_name}
                                             onChange={(company_name) => this.setState({
                                                 company: Object.assign({}, this.state.company, { company_name })
@@ -102,6 +103,7 @@ class Company extends Component {
                                             <div className='col-8'>
                                                 <textarea
                                                     id={'address'}
+                                                    required
                                                     className={'form-control'}
                                                     rows='3'
                                                     value={this.state.company.munich_address}
@@ -138,6 +140,7 @@ class Company extends Component {
                                         </div>
                                         <InputLabel
                                             label={'Webseite'}
+                                            required
                                             value={this.state.company.website}
                                             onChange={(website) => this.setState({
                                                 company: Object.assign({}, this.state.company, { website })
@@ -151,6 +154,7 @@ class Company extends Component {
                                             })}/>
                                         <InputLabel
                                             label={'Haupttätigkeitsbereich'}
+                                            required
                                             value={this.state.company.field_of_activity}
                                             onChange={(field_of_activity) => this.setState({
                                                 company: Object.assign({}, this.state.company, { field_of_activity })

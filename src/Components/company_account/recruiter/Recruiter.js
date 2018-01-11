@@ -90,12 +90,14 @@ class Recruiter extends Component {
                                     <form onSubmit={this.handleSubmit}>
                                         <InputLabel
                                             label={'Name'}
+                                            required
                                             value={this.state.recruiter.recruiter_name}
                                             onChange={(recruiter_name) => this.setState({
                                                 recruiter: Object.assign({}, this.state.recruiter, { recruiter_name })
                                             })}/>
                                         <InputLabel
                                             label={'Email'}
+                                            required
                                             value={this.state.recruiter.recruiter_email}
                                             onChange={(recruiter_email) => this.setState({
                                                 recruiter: Object.assign({}, this.state.recruiter, { recruiter_email })
@@ -114,6 +116,7 @@ class Recruiter extends Component {
                                             })}/>
                                         <InputLabel
                                             label={'Position'}
+                                            required
                                             value={this.state.recruiter.position}
                                             onChange={(position) => this.setState({
                                                 recruiter: Object.assign({}, this.state.recruiter, { position })

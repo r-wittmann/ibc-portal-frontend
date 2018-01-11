@@ -46,12 +46,15 @@ class Profile extends Component {
                             </div>
                             <InputLabel
                                 label={'Email'}
+                                type={'email'}
+                                required
                                 value={this.state.profile.email}
                                 onChange={(email) => this.setState({
                                     profile: Object.assign({}, this.state.profile, { email })
                                 })}/>
                             <InputLabel
                                 label={'Unternehmen'}
+                                required
                                 value={this.state.profile.mother_company}
                                 onChange={(company) => this.setState({
                                     profile: Object.assign({}, this.state.profile, { mother_company: company })
