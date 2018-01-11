@@ -88,7 +88,7 @@ class Company extends Component {
                         <div className={'container'}>
                             {this.state.company && (
                                 <div>
-                                    <form onSubmit={this.handleSubmit}>
+                                    <form onSubmit={this.handleFormSubmit}>
                                         <InputLabel
                                             label={'Unternehmensname'}
                                             required
@@ -215,6 +215,19 @@ class Company extends Component {
                                                     company: Object.assign({}, this.state.company, { company_description })
                                                 })}/>
                                         </div>
+                                        <div className='float-right'>
+                                            
+                                               <button className={'btn btn-warning buttons-form'}
+                                                    onClick={() => this.props.history.goBack()}>
+                                                    {this.state.create ? 'Abbrechen' : 'Zurück'}
+                                                </button>
+                                                <button className={'btn btn-primary button-form'}
+                                                    onClick={() => this.setState({ preview: true })}>
+                                                    Vorschau
+                                                </button>
+                                                <input type={"submit"} className={'btn btn-success buttons-form'}
+                                                    value={this.state.create ? 'Speichern' : 'Update'} />
+                                        </div>
                                     </form>
                                     <div className='float-right'>
                                         {!this.state.create && (
@@ -234,18 +247,9 @@ class Company extends Component {
                                                     negativeText={'Abbrechen'}/>
                                             </span>
                                         )}
-                                        <button className={'btn btn-warning buttons-form'}
-                                                onClick={() => this.props.history.goBack()}>
-                                            {this.state.create ? 'Abbrechen' : 'Zurück'}
-                                        </button>
-                                        <button className={'btn btn-primary button-form'}
-                                                onClick={() => this.setState({ preview: true })}>
-                                            Vorschau
-                                        </button>
-                                        <button className={'btn btn-success buttons-form'}
-                                                onClick={this.handleFormSubmit}>
-                                            {this.state.create ? 'Speichern' : 'Update'}
-                                        </button>
+                                    
+                                        
+                                     
                                     </div>
                                 </div>
                             )}

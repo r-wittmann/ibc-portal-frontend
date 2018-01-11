@@ -87,7 +87,7 @@ class Recruiter extends Component {
                         <div className={'container'}>
                             {this.state.recruiter && (
                                 <div>
-                                    <form onSubmit={this.handleSubmit}>
+                                    <form onSubmit={this.handleFormSubmit}>
                                         <InputLabel
                                             label={'Name'}
                                             required
@@ -98,6 +98,7 @@ class Recruiter extends Component {
                                         <InputLabel
                                             label={'Email'}
                                             required
+                                            type="Email"
                                             value={this.state.recruiter.recruiter_email}
                                             onChange={(recruiter_email) => this.setState({
                                                 recruiter: Object.assign({}, this.state.recruiter, { recruiter_email })
@@ -161,8 +162,7 @@ class Recruiter extends Component {
                                             onChange={(linked_in) => this.setState({
                                                 recruiter: Object.assign({}, this.state.recruiter, { linked_in })
                                             })}/>
-                                    </form>
-                                    <div className='float-right'>
+                                            <div className='float-right'>
                                         {!this.state.create && (
                                             <span>
                                                 <button className={'btn btn-danger buttons-form'}
@@ -187,11 +187,10 @@ class Recruiter extends Component {
                                                 onClick={() => this.setState({ preview: true })}>
                                             Vorschau
                                         </button>
-                                        <button className={'btn btn-success buttons-form'}
-                                                onClick={this.handleFormSubmit}>
-                                            {this.state.create ? 'Speichern' : 'Update'}
-                                        </button>
+                                        <input type="submit" className={'btn btn-success buttons-form'} value={this.state.create ? 'Speichern' : 'Update'}/>
                                     </div>
+                                    </form>
+                                    
                                 </div>
                             )}
                         </div>
