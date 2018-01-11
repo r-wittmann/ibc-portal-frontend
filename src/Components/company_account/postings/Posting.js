@@ -94,6 +94,7 @@ class Posting extends Component {
                                     <form onSubmit={this.handleFormSubmit}>
                                         <InputLabel
                                             label={'Title'}
+                                            required
                                             value={this.state.posting.title}
                                             onChange={(title) => this.setState({
                                                 posting: Object.assign({}, this.state.posting, { title })
@@ -118,6 +119,7 @@ class Posting extends Component {
                                         </div>
                                         <InputLabel
                                             label={'Standort'}
+                                            required
                                             value={this.state.posting.place_of_employment}
                                             onChange={(place_of_employment) => this.setState({
                                                 posting: Object.assign({}, this.state.posting, { place_of_employment })
@@ -125,6 +127,7 @@ class Posting extends Component {
                                         />
                                         <InputLabel
                                             label={'Startdatum'}
+                                            required
                                             value={this.state.posting.start_of_employment}
                                             onChange={(start_of_employment) => this.setState({
                                                 posting: Object.assign({}, this.state.posting, { start_of_employment })
@@ -150,6 +153,7 @@ class Posting extends Component {
                                         </div>
                                         <InputLabel
                                             label={'Wochenstunden'}
+                                            required
                                             value={this.state.posting.working_hours}
                                             onChange={(working_hours) => this.setState({
                                                 posting: Object.assign({}, this.state.posting, { working_hours })
@@ -191,6 +195,8 @@ class Posting extends Component {
                                         </div>
                                         <InputLabel
                                             label={'Bewerbungslink'}
+                                            type={"text"}
+                                            required={true}
                                             value={this.state.posting.application_link}
                                             onChange={(application_link) => this.setState({
                                                 posting: Object.assign({}, this.state.posting, { application_link })
@@ -215,6 +221,7 @@ class Posting extends Component {
                                         </div>
                                         <InputLabel
                                             label={'Tätigkeitsbereich'}
+                                            required
                                             value={this.state.posting.field_of_employment}
                                             onChange={(field_of_employment) => this.setState({
                                                 posting: Object.assign({}, this.state.posting, { field_of_employment })
