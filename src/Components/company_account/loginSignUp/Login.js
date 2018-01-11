@@ -37,11 +37,6 @@ class Login extends Component {
 
                     </div>
                 </div>
-                <div className={'admin-login-button'}>
-                    <button className={'btn btn-link'} onClick={() => this.props.history.push('/admin/login')}>IBC Login
-
-                    </button>
-                </div>
             </div>
         );
     }

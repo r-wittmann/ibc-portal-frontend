@@ -40,10 +40,13 @@ class LoginBody extends Component {
                 <div className={'float-right'}>
                     <button className={'btn btn-link'}
                             style={{ marginRight: 20, padding: 0 }}
+                            type={'button'}
                             onClick={this.handleForgotPassword}>
                         Passwort vergessen?
                     </button>
-                    <input className={'btn btn-primary'} type={'submit'} value={'Login'}/>
+                    <button className={'btn btn-primary'}>
+                        Login
+                    </button>
 
                 </div>
             </form>

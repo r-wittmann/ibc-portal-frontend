@@ -41,14 +41,6 @@ class AdminLogin extends Component {
                         </form>
                     </div>
                 </div>
-
-                <div className={'admin-login-button'}>
-                    <button className={'btn btn-link'} onClick={() => this.props.history.push('/login')}>
-                        Firmen Login
-
-                    </button>
-                </div>
-
             </div>
         );
     }
