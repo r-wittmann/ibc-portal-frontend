@@ -75,6 +75,18 @@ class BackendService {
             .then((json) => localStorage.setItem('ibc-user-token', json.token));
     }
 
+    static forgotPassword(name) {
+        return fetch(`${baseUrl}/api/register/forgot`, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({ name })
+        })
+            .then(checkStatus)
+            .then(convertResponseToJson)
+    }
+
     static adminLogin(name, password) {
         return fetch(`${baseUrl}/admin/authenticate`, {
             method: 'POST',
