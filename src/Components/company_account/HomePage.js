@@ -32,7 +32,7 @@ class HomePage extends Component {
                     <div className={"container"}>
                         <div className={"row"} style={{ cursor: 'pointer' }}>
                             <div className={"col-lg"} id={'picture-companies'}
-                                 onClick={() => this.props.history.push('/companies')}>
+                                 onClick={() => this.props.history.push('/company/companies')}>
                                 <div className={"column-headline"}>
                                     <p>Unternehmen managen</p>
                                 </div>
@@ -43,7 +43,7 @@ class HomePage extends Component {
                                 </div>
                             </div>
                             <div className={"col-lg"} id={'picture-recruiters'}
-                                 onClick={() => this.props.history.push('/recruiters')}>
+                                 onClick={() => this.props.history.push('/company/recruiters')}>
                                 <div className={"column-headline"}>
                                     <p>Recruiter managen</p>
                                 </div>
@@ -54,7 +54,7 @@ class HomePage extends Component {
                                 </div>
                             </div>
                             <div className={"col-lg"} id={'picture-postings'}
-                                 onClick={() => this.props.history.push('/postings')}>
+                                 onClick={() => this.props.history.push('/company/postings')}>
                                 <div className={"column-headline"}>
                                     <p>Stellenanzeigen managen</p>
                                 </div>

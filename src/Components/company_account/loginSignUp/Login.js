@@ -6,7 +6,7 @@ class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            login: props.match.path === '/login'
+            login: props.match.path === '/company/login'
         };
     }
 

@@ -7,7 +7,7 @@ class LoginBody extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         backendService.login(this.state.name, this.state.password)
-            .then(() => this.props.history.push('/home'));
+            .then(() => this.props.history.push('/company/home'));
     };
 
     handleForgotPassword = (event) => {

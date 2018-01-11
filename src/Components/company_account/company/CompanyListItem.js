@@ -8,16 +8,16 @@ class CompanyListItem extends Component {
         return (
             <tr>
                 <td>
-                    <Link to={`/companies/${this.props.company.id}`}>{this.props.company.company_name}</Link>
+                    <Link to={`/company/companies/${this.props.company.id}`}>{this.props.company.company_name}</Link>
                 </td>
                 <td>
                     <div className={'btn-group'}>
                         <button className={'btn btn-outline-dark'}
-                                onClick={() => this.props.history.push(`/companies/${this.props.company.id}/preview`)}>
+                                onClick={() => this.props.history.push(`/company/companies/${this.props.company.id}/preview`)}>
                             <span className={'fa fa-eye'}/>
                         </button>
                         <button className={'btn btn-outline-dark'}
-                                onClick={() => this.props.history.push(`/companies/${this.props.company.id}`)}>
+                                onClick={() => this.props.history.push(`/company/companies/${this.props.company.id}`)}>
                             <span className={'fa fa-pencil-alt'}/>
                         </button>
                         <button className={'btn btn-outline-dark'}
@@ -36,7 +36,7 @@ class CompanyListItem extends Component {
                     />
                 </td>
                 <td>
-                    <Link to={'/postings#company_id=' + this.props.company.id}>{this.props.company.count}</Link>
+                    <Link to={'/company/postings#company_id=' + this.props.company.id}>{this.props.company.count}</Link>
                 </td>
 
             </tr>

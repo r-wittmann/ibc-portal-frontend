@@ -25,7 +25,7 @@ class Posting extends Component {
             if (posting.contract_type === '') posting.contract_type = 'Direkteinstieg';
             posting.status = status;
             backendService.createPosting(this.state.posting)
-                .then(() => this.props.history.push(`/postings`))
+                .then(() => this.props.history.push(`/company/postings`))
                 .then(() => toast('Anzeige erstellt', { type: 'success' }))
                 .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
         }
@@ -33,7 +33,7 @@ class Posting extends Component {
     handleDelete = (event) => {
         event.preventDefault();
         backendService.deletePosting(this.state.posting.id)
-            .then(() => this.props.history.push('/postings'))
+            .then(() => this.props.history.push('/company/postings'))
             .then(() => toast('Anzeige erfolgreich gelöscht', { type: 'success' }))
             .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
     };
@@ -76,7 +76,7 @@ class Posting extends Component {
                         }
                         primaryAction={this.props.preview
                             ? () => {
-                                this.props.history.push(`/postings/${this.state.posting.id}`);
+                                this.props.history.push(`/company/postings/${this.state.posting.id}`);
                                 this.setState({ preview: false })
                             }
                             : this.handleFormSubmit

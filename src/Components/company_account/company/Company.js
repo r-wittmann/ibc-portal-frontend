@@ -24,7 +24,7 @@ class Company extends Component {
                 .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
         } else {
             backendService.createCompany(this.state.company)
-                .then(() => this.props.history.push(`/companies`))
+                .then(() => this.props.history.push(`/company/companies`))
                 .then(() => toast('Unternehmen erstellt', { type: 'success' }))
                 .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
         }
@@ -33,7 +33,7 @@ class Company extends Component {
     handleDelete = (event) => {
         event.preventDefault();
         backendService.deleteCompany(this.props.match.params.id)
-            .then(() => this.props.history.push('/companies'))
+            .then(() => this.props.history.push('/company/companies'))
             .then(() => toast('Unternehmen erfolgreich gelöscht', { type: 'success' }))
             .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
     };
@@ -73,7 +73,7 @@ class Company extends Component {
                         }
                         primaryAction={this.props.preview
                             ? () => {
-                                this.props.history.push(`/companies/${this.state.company.id}`);
+                                this.props.history.push(`/company/companies/${this.state.company.id}`);
                                 this.setState({ preview: false })
                             }
                             : this.handleFormSubmit

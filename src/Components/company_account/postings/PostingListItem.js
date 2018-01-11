@@ -19,11 +19,11 @@ class PostingListItem extends Component {
                 <td>
                     <div className={'btn-group'}>
                         <button className={'btn btn-outline-dark'}
-                                onClick={() => this.props.history.push(`/postings/${this.props.posting.id}/preview`)}>
+                                onClick={() => this.props.history.push(`/company/postings/${this.props.posting.id}/preview`)}>
                             <span className={'fa fa-eye'}/>
                         </button>
                         <button className={'btn btn-outline-dark'}
-                                onClick={() => this.props.history.push(`/postings/${this.props.posting.id}`)}>
+                                onClick={() => this.props.history.push(`/company/postings/${this.props.posting.id}`)}>
                             <span className={'fa fa-pencil-alt'}/>
                         </button>
                         <button className={'btn btn-outline-dark'}

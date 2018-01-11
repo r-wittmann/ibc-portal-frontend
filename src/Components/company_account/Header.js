@@ -7,7 +7,7 @@ class Header extends Component {
     handleLogout = (event) => {
         event.preventDefault();
         backendService.logout();
-        this.props.history.push('/login');
+        this.props.history.push('/company/login');
     };
 
     getActiveLinkClassNames = (path) => {
@@ -21,7 +21,7 @@ class Header extends Component {
         return (
 
             <nav className={'navbar navbar-expand-lg navbar-light bg-light'}>
-                <a className={'navbar-brand'} onClick={() => this.props.history.push('/')}>
+                <a className={'navbar-brand'} onClick={() => this.props.history.push('/company/home')}>
                     <img className={'logo'} src={image} alt={'blub'}/>
                 </a>
                 <button className={'navbar-toggler'} type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -30,26 +30,26 @@ class Header extends Component {
                 </button>
                 <div className={'collapse navbar-collapse'} id="navbarNav">
                     <ul className={'navbar-nav mr-auto mt-2 mt-lg-0'}>
-                        <li className={this.getActiveLinkClassNames('/home')}>
-                            <a className={'nav-link'} onClick={() => this.props.history.push('/')}>Home</a>
+                        <li className={this.getActiveLinkClassNames('/company/home')}>
+                            <a className={'nav-link'} onClick={() => this.props.history.push('/company/home')}>Home</a>
                         </li>
-                        <li className={this.getActiveLinkClassNames('/companies')}>
-                            <a className={'nav-link'} onClick={() => this.props.history.push('/companies')}>
+                        <li className={this.getActiveLinkClassNames('/company/companies')}>
+                            <a className={'nav-link'} onClick={() => this.props.history.push('/company/companies')}>
                                 Ihr Unternehmen</a>
                         </li>
-                        <li className={this.getActiveLinkClassNames('/recruiters')}>
-                            <a className={'nav-link'} onClick={() => this.props.history.push('/recruiters')}>
+                        <li className={this.getActiveLinkClassNames('/company/recruiters')}>
+                            <a className={'nav-link'} onClick={() => this.props.history.push('/company/recruiters')}>
                                 Ihre Recruiter</a>
                         </li>
-                        <li className={this.getActiveLinkClassNames('/postings')}>
-                            <a className={'nav-link'} onClick={() => this.props.history.push('/postings')}>
+                        <li className={this.getActiveLinkClassNames('/company/postings')}>
+                            <a className={'nav-link'} onClick={() => this.props.history.push('/company/postings')}>
                                 Ihre Stellenanzeigen</a>
                         </li>
                     </ul>
 
                     <ul className={'navbar-nav my-2 my-lg-0'}>
-                        <li className={this.getActiveLinkClassNames('/profile')}>
-                            <a className={'nav-link'} onClick={() => this.props.history.push('/profile')}>
+                        <li className={this.getActiveLinkClassNames('/company/profile')}>
+                            <a className={'nav-link'} onClick={() => this.props.history.push('/company/profile')}>
                                 Ihr Profil</a>
                         </li>
                         <li className={'nav-item'}>

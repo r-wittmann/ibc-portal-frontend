@@ -34,7 +34,7 @@ class Recruiters extends Component {
                 </div>
                  <div className={'create-button'}>
                         <button className={'btn btn-primary'}
-                                onClick={() => this.props.history.push('/recruiters/create')}>
+                                onClick={() => this.props.history.push('/company/recruiters/create')}>
                             Neuen Recruiter erstellen
                         </button>
                     </div>

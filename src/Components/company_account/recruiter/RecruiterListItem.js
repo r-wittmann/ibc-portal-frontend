@@ -13,11 +13,11 @@ class RecruiterListItem extends Component {
                 <td>
                     <div className={'btn-group'}>
                         <button className={'btn btn-outline-dark'}
-                                onClick={() => this.props.history.push(`/recruiters/${this.props.recruiter.id}/preview`)}>
+                                onClick={() => this.props.history.push(`/company/recruiters/${this.props.recruiter.id}/preview`)}>
                             <span className={'fa fa-eye'}/>
                         </button>
                         <button className={'btn btn-outline-dark'}
-                                onClick={() => this.props.history.push(`/recruiters/${this.props.recruiter.id}`)}>
+                                onClick={() => this.props.history.push(`/company/recruiters/${this.props.recruiter.id}`)}>
                             <span className={'fa fa-pencil-alt'}/>
                         </button>
                         <button className={'btn btn-outline-dark'}
@@ -36,7 +36,7 @@ class RecruiterListItem extends Component {
                     />
                 </td>
                 <td>
-                    <Link to={'/postings#recruiter_id=' + this.props.recruiter.id}>{this.props.recruiter.count}</Link>
+                    <Link to={'/company/postings#recruiter_id=' + this.props.recruiter.id}>{this.props.recruiter.count}</Link>
                 </td>
 
             </tr>

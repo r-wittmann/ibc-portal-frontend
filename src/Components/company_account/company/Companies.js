@@ -34,7 +34,7 @@ class Companies extends Component {
                 </div>
                 <div className={'create-button'}>
                         <button className={'btn btn-primary'}
-                                onClick={() => this.props.history.push('/companies/create')}>
+                                onClick={() => this.props.history.push('/company/companies/create')}>
                             Neues Unternehmen erstellen
                         </button>
                     </div>

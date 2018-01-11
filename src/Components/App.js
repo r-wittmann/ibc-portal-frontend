@@ -36,45 +36,46 @@ class App extends Component {
                 <Notification/>
                 {!backendService.isAuthenticated() ?
                     <Switch>
-                        <Route exact path={'/public/postings'} component={PublicPostings}/>
-                        <Route exact path={'/public/postings/:id'} component={PublicPosting}/>
-                        <Route exact path={'/public/companies/:id'} component={PublicCompany}/>
-                        <Route exact path={'/login'} component={Login}/>
+                        <Route exact path={'/postings'} component={PublicPostings}/>
+                        <Route exact path={'/postings/:id'} component={PublicPosting}/>
+                        <Route exact path={'/companies/:id'} component={PublicCompany}/>
+                        <Route exact path={'/company/login'} component={Login}/>
                         <Route exact path={'/admin/login'} component={AdminLogin}/>
                         <Redirect from={'/admin'} to={'/admin/login'}/>
-                        <Redirect to={'/login'}/>
+                        <Redirect from={'/company'} to={'/company/login'}/>
+                        <Redirect to={'/postings'} />
                     </Switch>
                     :
                     <Switch>
-                        <Route exact path={'/public/postings'} component={PublicPostings}/>
-                        <Route exact path={'/public/postings/:id'} component={PublicPosting}/>
-                        <Route exact path={'/public/companies/:id'} component={PublicCompany}/>
-                        <Redirect exact from={'/'} to="/home"/>
-                        <Redirect exact from={'/login'} to="/home"/>
-                        <Route exact path={'/home'} component={HomePage}/>
-                        <Route exact path={'/companies'} component={Companies}/>
-                        <Route exact path={'/companies/:id'} component={Company}/>
-                        <Route exact path={'/companies/:id/preview'}
+                        <Route exact path={'/postings'} component={PublicPostings}/>
+                        <Route exact path={'/postings/:id'} component={PublicPosting}/>
+                        <Route exact path={'/companies/:id'} component={PublicCompany}/>
+                        <Redirect exact from={'/'} to="/postings"/>
+                        <Redirect exact from={'/company/login'} to="/company/home"/>
+                        <Route exact path={'/company/home'} component={HomePage}/>
+                        <Route exact path={'/company/companies'} component={Companies}/>
+                        <Route exact path={'/company/companies/:id'} component={Company}/>
+                        <Route exact path={'/company/companies/:id/preview'}
                                render={(routeProps) => (
                                    <Company {...routeProps} preview/>
                                )}/>
-                        <Route exact path={'/recruiters'} component={Recruiters}/>
-                        <Route exact path={'/recruiters/:id'} component={Recruiter}/>
-                        <Route exact path={'/recruiters/:id/preview'}
+                        <Route exact path={'/company/recruiters'} component={Recruiters}/>
+                        <Route exact path={'/company/recruiters/:id'} component={Recruiter}/>
+                        <Route exact path={'/company/recruiters/:id/preview'}
                                render={(routeProps) => (
                                    <Recruiter {...routeProps} preview/>
                                )}/>
-                        <Route exact path={'/postings'} component={Postings}/>
-                        <Route exact path={'/postings/:id'} component={Posting}/>
-                        <Route exact path={'/postings/:id/preview'}
+                        <Route exact path={'/company/postings'} component={Postings}/>
+                        <Route exact path={'/company/postings/:id'} component={Posting}/>
+                        <Route exact path={'/company/postings/:id/preview'}
                                render={(routeProps) => (
                                    <Posting {...routeProps} preview/>
                                )}/>
-                        <Route exact path={'/profile/'} component={Profile}/>
+                        <Route exact path={'/company/profile/'} component={Profile}/>
                         <Route exact path={'/admin/registrations'} component={Registrations}/>
                         <Route exact path={'/admin/accounts'} component={Accounts}/>
                         <Redirect from={'/admin'} to={'/admin/accounts'}/>
-                        <Redirect to={'/home'}/>
+                        <Redirect to={'/postings'}/>
                     </Switch>
                 }
             </div>

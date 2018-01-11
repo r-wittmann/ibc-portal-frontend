@@ -14,7 +14,7 @@ class SignUpBody extends Component {
                 let reqBody = this.state;
                 delete reqBody.currentStep;
                 backendService.register(reqBody)
-                    .then(() => this.props.history.push('/home'))
+                    .then(() => this.props.history.push('company/home'))
                     .then(() => toast('Registrierung abgeschlossen. Sie erhalten eine Email mit einem generierten Passwort, ' +
                         'nachdem ihre Registrigung von uns überprüft wurde. Dies kann bis zu drei Werktage dauern.'
                         , { type: 'success', autoClose: false }))

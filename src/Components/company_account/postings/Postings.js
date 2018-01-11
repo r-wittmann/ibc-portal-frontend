@@ -106,7 +106,7 @@ class Postings extends Component {
                 </div>
                 <div className={'create-button'}>
                     <button className={'btn btn-primary'}
-                            onClick={() => this.props.history.push('/postings/create')}>
+                            onClick={() => this.props.history.push('/company/postings/create')}>
                         Neues Posting erstellen
                     </button>
                 </div>

@@ -23,7 +23,7 @@ class Recruiter extends Component {
                 .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
         } else {
             backendService.createRecruiter(this.state.recruiter)
-                .then(() => this.props.history.push(`/recruiters`))
+                .then(() => this.props.history.push(`/company/recruiters`))
                 .then(() => toast('Recruiter erstellt', { type: 'success' }))
                 .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
         }
@@ -32,7 +32,7 @@ class Recruiter extends Component {
     handleDelete = (event) => {
         event.preventDefault();
         backendService.deleteRecruiter(this.props.match.params.id)
-            .then(() => this.props.history.push('/recruiters'))
+            .then(() => this.props.history.push('/company/recruiters'))
             .then(() => toast('Recruiter erfolgreich gelöscht', { type: 'success' }))
             .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
     };
@@ -72,7 +72,7 @@ class Recruiter extends Component {
                         }
                         primaryAction={this.props.preview
                             ? () => {
-                                this.props.history.push(`/recruiters/${this.state.recruiter.id}`);
+                                this.props.history.push(`/company/recruiters/${this.state.recruiter.id}`);
                                 this.setState({ preview: false })
                             }
                             : this.handleFormSubmit
