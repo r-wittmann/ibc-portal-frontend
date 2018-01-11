@@ -19,11 +19,9 @@ const checkStatus = (response) => {
 
 const convertResponseToJson = (response) => response.json();
 
-// const baseUrl = process.env.NODE_ENV === 'development'
-//   ? 'http://localhost:9090/api/'
-//   : 'https://indoornav.cfapps.io/api/'
-
-const baseUrl = 'http://localhost:9090';
+const baseUrl = process.env.NODE_ENV === 'development'
+  ? 'http://localhost:9090'
+  : 'https://ibc-backend.cfapps.io';
 
 //
 // BackendService

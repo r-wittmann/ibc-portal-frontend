@@ -48,6 +48,7 @@ class App extends Component {
                     :
                     <Switch>
                         <Route exact path={'/postings'} component={PublicPostings}/>
+                        {console.log(process.env.NODE_ENV)}
                         <Route exact path={'/postings/:id'} component={PublicPosting}/>
                         <Route exact path={'/companies/:id'} component={PublicCompany}/>
                         <Redirect exact from={'/'} to="/postings"/>

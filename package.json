@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "react-scripts start",
-    "build": "react-scripts build"
+    "build": "react-scripts build",
+    "deploy": "react-scripts build && cd build && touch Staticfile && cf login -a https://api.run.pivotal.io -s development -u r-wittmann@outlook.de -p IBC-portal1 && cf push ibc-job-portal -m 64M -b https://github.com/cloudfoundry/staticfile-buildpack.git"
   },
   "author": "Rainer Wittmann <r-wittmann@gmx.net>",
   "license": "MIT",
