@@ -36,22 +36,20 @@ class App extends Component {
                 <Notification/>
                 {!backendService.isAuthenticated() ?
                     <Switch>
-                        <Route exact path={'/postings'} component={PublicPostings}/>
+                        <Route exact path={'/'} component={PublicPostings}/>
                         <Route exact path={'/postings/:id'} component={PublicPosting}/>
                         <Route exact path={'/companies/:id'} component={PublicCompany}/>
                         <Route exact path={'/company/login'} component={Login}/>
                         <Route exact path={'/admin/login'} component={AdminLogin}/>
                         <Redirect from={'/admin'} to={'/admin/login'}/>
                         <Redirect from={'/company'} to={'/company/login'}/>
-                        <Redirect to={'/postings'} />
+                        <Redirect to={'/'} />
                     </Switch>
                     :
                     <Switch>
-                        <Route exact path={'/postings'} component={PublicPostings}/>
-                        {console.log(process.env.NODE_ENV)}
+                        <Route exact path={'/'} component={PublicPostings}/>
                         <Route exact path={'/postings/:id'} component={PublicPosting}/>
                         <Route exact path={'/companies/:id'} component={PublicCompany}/>
-                        <Redirect exact from={'/'} to="/postings"/>
                         <Redirect exact from={'/company/login'} to="/company/home"/>
                         <Route exact path={'/company/home'} component={HomePage}/>
                         <Route exact path={'/company/companies'} component={Companies}/>
@@ -76,7 +74,7 @@ class App extends Component {
                         <Route exact path={'/admin/registrations'} component={Registrations}/>
                         <Route exact path={'/admin/accounts'} component={Accounts}/>
                         <Redirect from={'/admin'} to={'/admin/accounts'}/>
-                        <Redirect to={'/postings'}/>
+                        <Redirect to={'/'}/>
                     </Switch>
                 }
             </div>

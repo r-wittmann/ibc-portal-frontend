@@ -16,8 +16,8 @@ class SignUpBody extends Component {
                 backendService.register(reqBody)
                     .then(() => this.props.history.push('company/home'))
                     .then(() => toast('Registrierung abgeschlossen. Sie erhalten eine Email mit einem generierten Passwort, ' +
-                        'nachdem ihre Registrigung von uns überprüft wurde. Dies kann bis zu drei Werktage dauern.'
-                        , { type: 'success', autoClose: false }))
+                        'nachdem ihre Registrirung von uns überprüft wurde. Dies kann bis zu drei Werktage dauern.',
+                        { type: 'success', autoClose: false }))
                     .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
                 break;
             default:

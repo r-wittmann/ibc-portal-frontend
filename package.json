@@ -6,14 +6,16 @@
   "scripts": {
     "dev": "react-scripts start",
     "build": "react-scripts build",
-    "deploy": "react-scripts build && cd build && touch Staticfile && cf login -a https://api.run.pivotal.io -s development -u r-wittmann@outlook.de -p IBC-portal1 && cf push ibc-job-portal -m 64M -b https://github.com/cloudfoundry/staticfile-buildpack.git"
+    "deploy": "npm run build && gh-pages -d build --repo https://github.com/r-wittmann/ibc-portal-frontend.git"
   },
   "author": "Rainer Wittmann <r-wittmann@gmx.net>",
   "license": "MIT",
   "repository": "https://github.com/r-wittmann/ibc-portal-frontend.git",
+  "homepage": "http://r-wittmann.github.io/ibc-portal-frontend",
   "dependencies": {
     "draft-js": "^0.10.4",
     "draftjs-to-html": "^0.8.1",
+    "gh-pages": "^1.1.0",
     "query-string": "^5.0.1",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
