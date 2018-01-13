@@ -12,8 +12,8 @@ class AdminLogin extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: 'admin',
-            password: '1'
+            name: '',
+            password: ''
         };
     }
 
@@ -29,7 +29,7 @@ class AdminLogin extends Component {
                             <InputLabel
                                 label={'Name'}
                                 value={this.state.name}
-                                onChange={(email) => this.setState({ email })}/>
+                                onChange={(name) => this.setState({ name })}/>
                             <InputLabel
                                 label={'Password'}
                                 type={'password'}
