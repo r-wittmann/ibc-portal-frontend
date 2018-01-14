@@ -44,7 +44,8 @@ class Recruiters extends Component {
                         <tr>
                             <th>Recruitername</th>
                             <th>Aktionen</th>
-                            <th>Aktive Stellenanzeigen</th>
+                            <th>Stellenanzeigen aktiv</th>
+                            <th>gesamt</th>
                         </tr>
                         </thead>
                         <tbody>

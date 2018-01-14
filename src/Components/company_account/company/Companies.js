@@ -44,7 +44,8 @@ class Companies extends Component {
                         <tr>
                             <th>Unternehmensname</th>
                             <th>Aktionen</th>
-                            <th>Aktive Stellenanzeigen</th>
+                            <th>Stellenanzeigen aktiv</th>
+                            <th>gesamt</th>
                         </tr>
                         </thead>
                         <tbody>
