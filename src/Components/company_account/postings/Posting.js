@@ -9,25 +9,40 @@ import ConfirmModal from "../../commons/ConfirmModal";
 import PostingPreview from "./PostingPreview";
 
 class Posting extends Component {
-    handleFormSubmit = (status) => {
-        if (!this.state.create) {
-            let updatedPosting = this.state.posting;
-            delete(updatedPosting.created_at);
-            delete(updatedPosting.updated_at);
-            updatedPosting.status = status;
-            backendService.updatePosting(this.props.match.params.id, updatedPosting)
-                .then(() => toast('Anzeige aktualisiert', { type: 'success' }))
-                .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
+    handleSubmit = (event) => {
+        console.log(event.target);
+        if (event.target.getAttribute('id') === 'preview') {
+            console.log('blub');
+            this.setState({
+                posting: Object.assign({}, this.state.posting,
+                    {
+                        company_id: this.state.posting.company_id === ''
+                            ? this.state.companies[0].id
+                            : this.state.posting.company_id,
+                        recruiter_id: this.state.posting.recruiter_id === ''
+                            ? this.state.recruiters[0].id
+                            : this.state.posting.recruiter_id
+                    })
+            });
+            this.setState({ preview: true });
         } else {
-            let posting = this.state.posting;
-            if (posting.company_id === '') posting.company_id = this.state.companies[0].id;
-            if (posting.recruiter_id === '') posting.recruiter_id = this.state.recruiters[0].id;
-            if (posting.contract_type === '') posting.contract_type = 'Direkteinstieg';
-            posting.status = status;
-            backendService.createPosting(this.state.posting)
-                .then(() => this.props.history.push(`/company/postings`))
-                .then(() => toast('Anzeige erstellt', { type: 'success' }))
-                .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
+            if (!this.state.create) {
+                let updatedPosting = this.state.posting;
+                delete(updatedPosting.created_at);
+                delete(updatedPosting.updated_at);
+                backendService.updatePosting(this.props.match.params.id, updatedPosting)
+                    .then(() => this.props.history.push(`/company/postings`))
+                    .then(() => toast('Anzeige aktualisiert', { type: 'success' }))
+                    .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
+            } else {
+                let posting = this.state.posting;
+                if (posting.company_id === '') posting.company_id = this.state.companies[0].id;
+                if (posting.recruiter_id === '') posting.recruiter_id = this.state.recruiters[0].id;
+                backendService.createPosting(posting)
+                    .then(() => this.props.history.push(`/company/postings`))
+                    .then(() => toast('Anzeige erstellt', { type: 'success' }))
+                    .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
+            }
         }
     };
     handleDelete = (event) => {
@@ -65,33 +80,34 @@ class Posting extends Component {
 
     render() {
         return (
-            <div>
+            <form onSubmit={this.handleSubmit}>
                 <Header history={this.props.history}/>
-                {this.state.preview ? (
-                    <PostingPreview
-                        posting={this.state.posting}
-                        endPreview={this.props.preview
-                            ? () => this.props.history.goBack()
-                            : () => this.setState({ preview: false })
-                        }
-                        primaryAction={this.props.preview
-                            ? () => {
-                                this.props.history.push(`/company/postings/${this.state.posting.id}`);
-                                this.setState({ preview: false })
+                {this.state.posting &&
+                <div className={'container'}>
+                    {this.state.preview ? (
+                        <PostingPreview
+                            posting={this.state.posting}
+                            endPreview={this.props.preview
+                                ? () => this.props.history.goBack()
+                                : () => this.setState({ preview: false })
                             }
-                            : this.handleFormSubmit
-                        }
-                        primaryActionText={this.props.preview ? 'Editieren' : 'Speichern'}
-                    />
-                ) : (
-                    <div>
-                        <div className={'headline'}>
-                            <h1>{this.state.create ? 'Neue Stellenanzeige erstellen' : 'Stellenanzeige bearbeiten'}</h1>
-                        </div>
-                        <div className={'container'}>
+                            primaryAction={this.props.preview
+                                ? () => {
+                                    this.props.history.push(`/company/postings/${this.state.posting.id}`);
+                                    this.setState({ preview: false })
+                                }
+                                : this.handleSubmit
+                            }
+                            primaryActionText={this.props.preview ? 'Editieren' : 'Speichern'}
+                        />
+                    ) : (
+                        <div>
+                            <div className={'headline'}>
+                                <h1>{this.state.create ? 'Neue Stellenanzeige erstellen' : 'Stellenanzeige bearbeiten'}</h1>
+                            </div>
                             {this.state.posting && (
                                 <div>
-                                    <form onSubmit={this.handleFormSubmit}>
+                                    <div>
                                         <InputLabel
                                             label={'Title'}
                                             required
@@ -100,23 +116,29 @@ class Posting extends Component {
                                                 posting: Object.assign({}, this.state.posting, { title })
                                             })}
                                         />
+                                        {this.state.companies.length > 0 &&
                                         <div className={"form-group row"}>
                                             <label className={'col-4 col-form-label'}>
                                                 Unternehmen:
                                             </label>
                                             <div className={'col-8'}>
                                                 <select className={'form-control'}
-                                                        value={this.state.posting.company_id}
+                                                        value={this.state.posting.company_id !== ''
+                                                            ? this.state.posting.company_id
+                                                            : this.state.companies[0].id}
                                                         onChange={(event) => this.setState({
                                                             posting: Object.assign({}, this.state.posting, { company_id: event.target.value })
                                                         })}>
                                                     {this.state.companies.map(company => (
                                                         <option key={company.id}
-                                                                value={company.id}>{company.company_name}</option>
+                                                                value={company.id}>
+                                                            {company.company_name}
+                                                        </option>
                                                     ))}
                                                 </select>
                                             </div>
                                         </div>
+                                        }
                                         <InputLabel
                                             label={'Standort'}
                                             required
@@ -235,52 +257,77 @@ class Posting extends Component {
                                                     posting: Object.assign({}, this.state.posting, { description })
                                                 })}/>
                                         </div>
-                                    </form>
+                                        <div className={"form-group row"}>
+                                            <label className={'col-4 col-form-label'}>
+                                                Erstellen im Status
+                                            </label>
+                                            <div className={'col-8'}>
+                                                <select className={'form-control'}
+                                                        value={this.state.posting.status}
+                                                        onChange={(event) => this.setState({
+                                                            posting: Object.assign({}, this.state.posting, { status: event.target.value })
+                                                        })}>
+                                                    <option value={'active'}>Aktiv</option>
+                                                    <option value={'deactivated'}>Deaktiviert</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div className='float-right'>
                                         {!this.state.create && (
                                             <span>
-                                        <button className={'btn btn-danger buttons-form'}
-                                                data-toggle={'modal'}
-                                                data-target={'#confirm-modal'}>
-                                            Anzeige löschen
-                                        </button>
-                                        <ConfirmModal
-                                            id={'confirm-modal'}
-                                            message={`Wollen Sie die Anzeige mit dem Titel ${this.state.posting.title} wirklich löschen?`}
-                                            positiveAction={this.handleDelete}
-                                            positiveText={'Löschen'}
-                                            negativeAction={() => {/*closes the modal*/
-                                            }}
-                                            negativeText={'Abbrechen'}/>
-                                    </span>
+                                                <button className={'btn btn-danger buttons-form'}
+                                                        type={'button'}
+                                                        data-toggle={'modal'}
+                                                        data-target={'#confirm-modal'}>
+                                                    Anzeige löschen
+                                                </button>
+                                                <ConfirmModal
+                                                    id={'confirm-modal'}
+                                                    message={`Wollen Sie die Anzeige mit dem Titel ${this.state.posting.title} wirklich löschen?`}
+                                                    positiveAction={this.handleDelete}
+                                                    positiveText={'Löschen'}
+                                                    negativeAction={() => {/*closes the modal*/
+                                                    }}
+                                                    negativeText={'Abbrechen'}/>
+                                            </span>
                                         )}
-                                        <button className={'btn btn-warning buttons-form'}
+                                        <button type={'button'}
+                                                className={'btn btn-warning buttons-form'}
                                                 onClick={() => this.props.history.goBack()}>
                                             {this.state.create ? 'Abbrechen' : 'Zurück'}
                                         </button>
-                                        <button className={'btn btn-primary button-form'}
-                                                onClick={() => this.setState({ preview: true })}>
+                                        <button id={'preview'}
+                                                type={'button'}
+                                                className={'btn btn-primary button-form'}
+                                                onClick={this.handleSubmit}>
+                                            {/*// onClick={() => {*/}
+                                            {/*//     this.setState({ posting: Object.assign({}, this.state.posting,*/}
+                                            {/*//             { company_id: this.state.posting.company_id === ''*/}
+                                            {/*//                     ? this.state.companies[0].id*/}
+                                            {/*//                     : this.state.posting.company_id,*/}
+                                            {/*//                 recruiter_id: this.state.posting.recruiter_id === ''*/}
+                                            {/*//                     ? this.state.recruiters[0].id*/}
+                                            {/*//                     : this.state.posting.recruiter_id*/}
+                                            {/*//             })*/}
+                                            {/*//     });*/}
+                                            {/*//     this.setState({ preview: true });*/}
+                                            {/*// }}>*/}
                                             Vorschau
                                         </button>
-                                        <button className={'btn btn-success buttons-form'}
-                                                data-toggle={'modal'}
-                                                data-target={'#save-with-status'}>
+                                        <button type={'button'} className={'btn btn-success buttons-form'}
+                                        onClick={this.handleSubmit}>
                                             {this.state.create ? 'Speichern' : 'Update'}
                                         </button>
                                     </div>
                                 </div>
                             )}
                         </div>
-                    </div>
-                )}
-                <ConfirmModal
-                    id={'save-with-status'}
-                    message={'Soll diese Anzeige sofort veröffentlicht werden?'}
-                    positiveAction={() => this.handleFormSubmit('active')}
-                    positiveText={'Veröffentlichen'}
-                    negativeAction={() => this.handleFormSubmit('deactivated')}
-                    negativeText={'Nicht veröffentlichen'} />
-            </div>
+                    )}
+                </div>
+                }
+
+            </form>
         );
     }
 }

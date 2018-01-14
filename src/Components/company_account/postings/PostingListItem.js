@@ -8,7 +8,7 @@ class PostingListItem extends Component {
         return (
             <tr>
                 <td>
-                    <Link to={`/postings/${this.props.posting.id}`}>{this.props.posting.title}</Link>
+                    <Link to={`/company/postings/${this.props.posting.id}`}>{this.props.posting.title}</Link>
                 </td>
                 {/* no expiry date yet */}
                 {/*<td>{this.props.posting.expiry_date}</td>*/}

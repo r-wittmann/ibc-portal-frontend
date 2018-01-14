@@ -37,10 +37,8 @@ class PostingPreview extends Component {
     }
 
     componentDidMount() {
-        if (this.props.posting) {
-            backendService.getCompanyById(this.props.posting.company_id).then(company => this.setState({ company }));
-            backendService.getRecruiterById(this.props.posting.recruiter_id).then(recruiter => this.setState({ recruiter }));
-        }
+        backendService.getCompanyById(this.props.posting.company_id).then(company => this.setState({ company }));
+        backendService.getRecruiterById(this.props.posting.recruiter_id).then(recruiter => this.setState({ recruiter }));
     }
 
     componentWillReceiveProps(nextProps) {
@@ -50,7 +48,7 @@ class PostingPreview extends Component {
 
     render() {
         return (
-            <div className={'container'}>
+            <div>
                 <div className={'headline'}>
                     <h1>Vorschau</h1>
                 </div>
@@ -102,7 +100,8 @@ class PostingPreview extends Component {
                             <table className={'table table-borderless preview-table-posting'}>
                                 <tbody>
                                 <tr>
-                                    <td><span className={'fa fa-arrow-right'}/> {this.getDurationString(this.props.posting.contract_duration)}
+                                    <td><span
+                                        className={'fa fa-arrow-right'}/> {this.getDurationString(this.props.posting.contract_duration)}
                                     </td>
                                     <td><span className={'fa fa-clock'}/> {this.props.posting.working_hours}</td>
                                     <td><span className={'fa fa-edit'}/> {this.props.posting.contract_type}</td>
@@ -114,22 +113,15 @@ class PostingPreview extends Component {
                     </div>
                 )}
                 <div className='float-right'>
-                    <button className={'btn btn-warning buttons-form'}
+                    <button type={'button'} className={'btn btn-warning buttons-form'}
                             onClick={this.props.endPreview}>
                         Zurück
                     </button>
-                    {this.props.primaryActionText === 'Speichern' ? (
-                        <button className={'btn btn-success buttons-form'}
-                                data-toggle={'modal'}
-                                data-target={'#save-with-status'}>
-                            Speichern
-                        </button>
-                    ) : (
-                        <button className={'btn btn-success buttons-form'}
-                                onClick={this.props.primaryAction}>
-                            {this.props.primaryActionText}
-                        </button>
-                    )}
+
+                    <button type={'button'} className={'btn btn-success buttons-form'}
+                            onClick={this.props.primaryAction}>
+                        {this.props.primaryActionText}
+                    </button>
                 </div>
             </div>
         );
