@@ -65,6 +65,7 @@ class SignUpBody extends Component {
                             type={'email'}
                             value={this.state.email}
                             onChange={(email) => this.setState({ email })}/>
+                        <label style={{ fontSize: 14 }}>Sowohl Unternehmensname und E-Mail-Adresse können zum Login benutzt werden</label>
                         <fieldset className="form-group">
                             <div className="row">
                                 <legend className="col-form-legend col-4">Unternehmenstype</legend>
