@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import backendService from '../../../backendService';
 import InputLabel from '../../commons/InputLabel';
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 class SignUpBody extends Component {
     handleSubmit = (step, event) => {
@@ -47,17 +48,17 @@ class SignUpBody extends Component {
                 {this.state.currentStep === 0 && (
                     <form onSubmit={(event) => this.handleSubmit(0, event)}>
                         <InputLabel className="form-control"
-                            label={'Unternehmen'}
-                            required
-                            value={this.state.name}
-                            onChange={(name) => {
-                                this.setState({ name });
-                                backendService.checkUsername(name)
-                                    .then(() => console.log('username ok'))
-                                    .catch(() => console.log('username taken'));
-                            }}
-                            require={true}
-                            />
+                                    label={'Unternehmen'}
+                                    required
+                                    value={this.state.name}
+                                    onChange={(name) => {
+                                        this.setState({ name });
+                                        backendService.checkUsername(name)
+                                            .then(() => console.log('username ok'))
+                                            .catch(() => console.log('username taken'));
+                                    }}
+                                    require={true}
+                        />
                         <InputLabel
                             label={'Email'}
                             required
@@ -65,7 +66,8 @@ class SignUpBody extends Component {
                             type={'email'}
                             value={this.state.email}
                             onChange={(email) => this.setState({ email })}/>
-                        <label style={{ fontSize: 14 }}>Sowohl Unternehmensname und E-Mail-Adresse können zum Login benutzt werden</label>
+                        <label style={{ fontSize: 14 }}>Sowohl Unternehmensname und E-Mail-Adresse können zum Login
+                            benutzt werden</label>
                         <fieldset className="form-group">
                             <div className="row">
                                 <legend className="col-form-legend col-4">Unternehmenstype</legend>
@@ -111,29 +113,40 @@ class SignUpBody extends Component {
                                 müssen Sie bereits Mitglied des IBCs sein.</p>
                             }
                             {this.state.company_type === 'startup' &&
-                            <div style={{marginBottom: "16px"}}><p className="text-info" style={{ marginBottom: '5px' }}>Wenn Sie sich
-                                als <b>Startup</b> registrieren wollen, müssen Sie folgende Kriterien erfüllen:</p>
+                            <div style={{ marginBottom: "16px" }}><p className="text-info"
+                                                                     style={{ marginBottom: '5px' }}>
+                                Wenn Sie sich als <b>Startup</b> registrieren wollen, müssen Sie folgende Kriterien
+                                erfüllen:</p>
                                 <li className="registrierungskriterien">Standort in München oder Umgebung</li>
                                 <li className="registrierungskriterien">Weniger als 20 Mitarbeiter</li>
                                 <li className="registrierungskriterien">Umsatz unter €10 Millionen im letzten Jahr</li>
                                 <li className="registrierungskriterien">Kein Gewinn im letzten Jahr</li>
-                                <li className="registrierungskriterien">Vorzugsweise digitales Hauptgeschäftsfeld (siehe <a href="">FAQs</a>)</li>
+                                <li className="registrierungskriterien">Vorzugsweise digitales Hauptgeschäftsfeld
+                                    (siehe <Link to={'/faq'} target={'_blank'}>FAQs</Link>)
+                                </li>
                             </div>
                             }
                             {this.state.company_type === 'ngo' &&
-                           <div style={{marginBottom: "16px"}}> <p className="text-info" style={{ marginBottom: '5px' }}>Wenn Sie sich als <b>Gemeinnütziger Verein</b> registrieren wollen,
-                                müssen Sie folgende Kriterien erfüllen:</p>
+                            <div style={{ marginBottom: "16px" }}><p className="text-info"
+                                                                     style={{ marginBottom: '5px' }}>
+                                Wenn Sie sich als <b>Gemeinnütziger Verein</b> registrieren wollen, müssen Sie folgende
+                                Kriterien erfüllen:</p>
                                 <li className="registrierungskriterien">Standort in München oder Umgebung</li>
                                 <li className="registrierungskriterien">Sie sind ein gemeinnütziger Verein</li>
-                                <li className="registrierungskriterien">Sie erzielen keine Gewinne</li>
-                                <li className="registrierungskriterien">Vorzugsweise digitales Hauptgeschäftsfeld (siehe <a href="">FAQs</a>)</li></div>
+                                <li className="registrierungskriterien">Sie verfolgen keine wirtschaftlichen
+                                    Tätigkeiten
+                                </li>
+                                <li className="registrierungskriterien">Vorzugsweise digitales Hauptgeschäftsfeld
+                                    (siehe <Link to={'/faq'} target={'_blank'}>FAQs</Link>)
+                                </li>
+                            </div>
                             }
 
-                            <div className="checkbox" style={{marginTop:"10px"}}>
-                                <label style={{fontSize:"9px"}}><input required type="checkbox" value=""/> Hiermit versichere ich die oben genannten Voraussetzungen zu erfüllen.</label>
+                            <div className="checkbox" style={{ marginTop: "10px" }}>
+                                <label style={{ fontSize: "9px" }}><input required type="checkbox" value=""/> Hiermit
+                                    versichere ich die oben genannten Voraussetzungen zu erfüllen.</label>
                             </div>
                         </fieldset>
-
 
 
                         <div className={'float-right'}>
@@ -165,7 +178,7 @@ class SignUpBody extends Component {
                                     onChange={(event) => this.setState({ address: event.target.value })}/>
                             </div>
                         </div>
-                            
+
                         <b><p>Account Ansprechpartner:</p></b>
 
                         <InputLabel
