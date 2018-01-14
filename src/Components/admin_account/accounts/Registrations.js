@@ -169,8 +169,6 @@ class Registrations extends Component {
                     <table className={"table table-hover"}>
                         <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Firmenname</th>
                             <th>Benutzername</th>
                             <th>E-Mail</th>
                             <th>Webseite</th>

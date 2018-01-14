@@ -13,8 +13,6 @@ class AccountListItem extends Component {
     render() {
         return (
             <tr key={this.props.account.id}>
-                <td>{this.props.account.id}</td>
-                <td>{this.props.account.company_name}</td>
                 <td>{this.props.account.name}</td>
                 <td>
                     {this.state.editMode

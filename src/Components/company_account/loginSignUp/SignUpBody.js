@@ -31,8 +31,7 @@ class SignUpBody extends Component {
         this.state = {
             name: '',
             email: '',
-            company_type: 'ibc',
-            mother_company: '',
+            company_type: '',
             address: '',
             contact_name: '',
             contact_email: '',
@@ -48,9 +47,8 @@ class SignUpBody extends Component {
                 {this.state.currentStep === 0 && (
                     <form onSubmit={(event) => this.handleSubmit(0, event)}>
                         <InputLabel className="form-control"
-                            label={'Benutzername'}
+                            label={'Unternehmen'}
                             required
-                            type={'name'}
                             value={this.state.name}
                             onChange={(name) => {
                                 this.setState({ name });
@@ -131,7 +129,7 @@ class SignUpBody extends Component {
                             }
 
                             <div className="checkbox" style={{marginTop:"10px"}}>
-                                <label style={{fontSize:"9px"}}><input required type="checkbox" value=""/> Hiermit versichere ich die oben genannten Voraussetzungen zu erfüllen. Ich verpflichte mich auf Nachfrage des IBCs Beweise für die Richtigkeit der Angaben vorzulegen. Ich verpflichte mich, etwaige Änderungen, die den Status des Unternehmens verändern, dem IBC sofort schriftlich mitzuteilen.</label>
+                                <label style={{fontSize:"9px"}}><input required type="checkbox" value=""/> Hiermit versichere ich die oben genannten Voraussetzungen zu erfüllen.</label>
                             </div>
                         </fieldset>
 
@@ -145,17 +143,8 @@ class SignUpBody extends Component {
                 {this.state.currentStep === 1 && (
                     <form onSubmit={(event) => this.handleSubmit(1, event)}>
                         <InputLabel
-                            className="form-control"
-                            label={'Unternehmen'}
-                            required
-                            value={this.state.mother_company}
-                            onChange={(mother_company) => this.setState({ mother_company })}/>
-                        
-
-                        <InputLabel
                             label={'Website'}
                             required
-                           // type="url"
                             className="form-control"
                             value={this.state.website}
                             onChange={(website) => this.setState({ website })}/>
@@ -178,7 +167,6 @@ class SignUpBody extends Component {
                             
                         <b><p>Account Ansprechpartner:</p></b>
 
-
                         <InputLabel
                             label={'Name'}
                             className="form-control"
@@ -189,48 +177,9 @@ class SignUpBody extends Component {
                         <InputLabel
                             label={'Telefon'}
                             className="form-control"
-                            //type="tel"
                             required
                             value={this.state.contact_phone}
                             onChange={(contact_phone) => this.setState({ contact_phone })}/>
-
-
-                      {/*  <InputLabel
-                            label={'Straße, Hausnr.'}
-                            placeholder="Beispielstraße 16a"
-                            className="form-control"
-                            required
-                            value={this.state.contact_name}
-                            //onChange={(contact_name) => this.setState({ contact_name })}/>
-                        <InputLabel
-                            label={'PLZ'}
-                            className="form-control"
-                            placeholder="12345"
-                            type="number"
-                            required
-                            value={this.state.contact_name}
-                            //onChange={(contact_name) => this.setState({ contact_name })}/>
-                        <InputLabel
-                            label={'Stadt'}
-                            className="form-control"
-                            placeholder="München"
-                            required
-                            value={this.state.contact_name}
-                           //onChange={(contact_name) => this.setState({ contact_name })}/>*/}
-
-                        {/*<InputLabel
-                            label={'Ansprechpartner'}
-                            className="form-control"
-                            required
-                            value={this.state.contact_name}
-                            onChange={(contact_name) => this.setState({ contact_name })}/>
-                        <InputLabel
-                            label={'Email'}
-                            className="form-control"
-                            required
-                            value={this.state.contact_email}
-                            onChange={(contact_email) => this.setState({ contact_email })}/>*/}
-                       
                         <div className={'float-right'}>
                             <input className={'btn btn-primary'} type={'submit'} value={'Registrierung abschließen'}/>
                         </div>
