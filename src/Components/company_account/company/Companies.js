@@ -30,7 +30,7 @@ class Companies extends Component {
                 <Header history={this.props.history}/>
 
                 <div className={'headline'}>
-                    <h1>Ihr Unternehmen</h1>
+                    <h1>Ihre Unternehmen</h1>
                 </div>
                 <div className={'create-button'}>
                         <button className={'btn btn-primary'}

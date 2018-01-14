@@ -35,7 +35,7 @@ class Header extends Component {
                         </li>
                         <li className={this.getActiveLinkClassNames('/company/companies')}>
                             <a className={'nav-link'} onClick={() => this.props.history.push('/company/companies')}>
-                                Ihr Unternehmen</a>
+                                Ihre Unternehmen</a>
                         </li>
                         <li className={this.getActiveLinkClassNames('/company/recruiters')}>
                             <a className={'nav-link'} onClick={() => this.props.history.push('/company/recruiters')}>
