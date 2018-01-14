@@ -31,6 +31,10 @@ class PostingListItem extends Component {
                                 data-target={`#confirm-modal-${this.props.posting.id}`}>
                             <span className={'fa fa-trash'}/>
                         </button>
+                        <button className={'btn btn-outline-dark'}
+                                onClick={() => this.props.save(this.props.posting.id,this.props.posting.status === 'active' ? 'deactivated' : 'active')}>
+                            <span className={this.props.posting.status === 'active' ? 'fa fa-pause' : 'fa fa-play'}/>
+                        </button>
                     </div>
                     <ConfirmModal
                         id={`confirm-modal-${this.props.posting.id}`}

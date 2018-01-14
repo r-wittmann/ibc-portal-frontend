@@ -22,6 +22,26 @@ class Postings extends Component {
             .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
     };
 
+    handleStatusChange = (id, status) => {
+        backendService.updatePosting(id, { status })
+            .then(() => this.setState({
+                    posting: this.state.postings.map(posting => {
+                        if (id === posting.id) {
+                            posting.status = status;
+                        }
+                        return posting;
+                    })
+                }
+            ))
+            .then(() => {
+                let hash = location.hash;
+                location.hash = '';
+                location.hash = hash;
+            })
+            .then(() => toast('Anzeige aktualisiert', { type: 'success' }))
+            .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
+    };
+
     handleChange = (event, key, value) => {
         event.stopPropagation();
         let filters = Object.assign({}, this.state.filters);
@@ -123,7 +143,7 @@ class Postings extends Component {
                                             data-toggle={'dropdown'}>
                                         <b>Vertragsart </b>
                                         <span className={'fa fa-filter'}
-                                            style={this.state.filters.contract_type.length ? {} : { color: 'lightgrey' }}/>
+                                              style={this.state.filters.contract_type.length ? {} : { color: 'lightgrey' }}/>
                                     </button>
                                     <div className={'dropdown-menu p-2 pl-4'}>
                                         {availableContractTypes.map(type => (
@@ -219,7 +239,8 @@ class Postings extends Component {
                             <PostingListItem key={posting.id}
                                              posting={posting}
                                              history={this.props.history}
-                                             delete={this.handleDelete}/>
+                                             delete={this.handleDelete}
+                                             save={this.handleStatusChange}/>
                         )}
                         </tbody>
                     </table>
