@@ -13,8 +13,12 @@ class PostingListItem extends Component {
                 {/* no expiry date yet */}
                 {/*<td>{this.props.posting.expiry_date}</td>*/}
                 <td>{this.props.posting.contract_type}</td>
-                <td>{this.props.posting.company_name}</td>
-                <td>{this.props.posting.recruiter_name}</td>
+                <td>
+                    <Link to={'/company/companies/' + this.props.posting.company_id + '/preview'}>{this.props.posting.company_name}</Link>
+                </td>
+                <td>
+                    <Link to={'/company/recruiters/' + this.props.posting.recruiter_id + '/preview'}>{this.props.posting.recruiter_name}</Link>
+                </td>
                 <td>{this.props.posting.status}</td>
                 <td>
                     <div className={'btn-group'}>
