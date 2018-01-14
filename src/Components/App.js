@@ -27,6 +27,10 @@ import PublicPosting from './student_account/postings/PublicPosting'
 import PublicCompany from './student_account/company/PublicCompany'
 
 import backendService from '../backendService';
+import Footer from "./company_account/Footer";
+import FAQ from "./commons/FAQ";
+import Impressum from "./commons/Impressum";
+import Privacy from "./commons/Privacy";
 
 class App extends Component {
 
@@ -39,6 +43,9 @@ class App extends Component {
                         <Route exact path={'/'} component={PublicPostings}/>
                         <Route exact path={'/postings/:id'} component={PublicPosting}/>
                         <Route exact path={'/companies/:id'} component={PublicCompany}/>
+                        <Route exact path={'/faq'} component={FAQ}/>
+                        <Route exact path={'/impressum'} component={Impressum}/>
+                        <Route exact path={'/privacy'} component={Privacy}/>
                         <Route exact path={'/company/login'} component={Login}/>
                         <Route exact path={'/admin/login'} component={AdminLogin}/>
                         <Redirect from={'/admin'} to={'/admin/login'}/>
@@ -50,6 +57,9 @@ class App extends Component {
                         <Route exact path={'/'} component={PublicPostings}/>
                         <Route exact path={'/postings/:id'} component={PublicPosting}/>
                         <Route exact path={'/companies/:id'} component={PublicCompany}/>
+                        <Route exact path={'/faq'} component={FAQ}/>
+                        <Route exact path={'/impressum'} component={Impressum}/>
+                        <Route exact path={'/privacy'} component={Privacy}/>
                         <Redirect exact from={'/company/login'} to="/company/home"/>
                         <Route exact path={'/company/home'} component={HomePage}/>
                         <Route exact path={'/company/companies'} component={Companies}/>
@@ -77,6 +87,7 @@ class App extends Component {
                         <Redirect to={'/'}/>
                     </Switch>
                 }
+                <Footer/>
             </div>
         )
     }
