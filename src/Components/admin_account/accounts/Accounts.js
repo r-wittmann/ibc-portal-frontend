@@ -174,9 +174,11 @@ class Accounts extends Component {
                             <th>Webseite</th>
                             <td className={'dropdown'} style={{ borderBottom: '2px solid #e9ecef' }}>
                                 <form>
-                                    <button className={'btn btn-small btn-outline-dark dropdown-toggle'}
+                                    <button className={'btn btn-small btn-outline-dark'}
                                             data-toggle={'dropdown'}>
-                                        <b>Firmentype</b>
+                                        <b>Firmentyp </b>
+                                        <span className={'fa fa-filter'}
+                                              style={this.state.filters.company_type.length ? {} : { color: 'lightgrey' }}/>
                                     </button>
                                     <div className={'dropdown-menu p-0 pl-4 pt-2'}>
                                         {availableTypes.map((type) => (
@@ -194,9 +196,11 @@ class Accounts extends Component {
                             </td>
                             <td className={'dropdown'} style={{ borderBottom: '2px solid #e9ecef' }}>
                                 <form>
-                                    <button className={'btn btn-small btn-outline-dark dropdown-toggle'}
+                                    <button className={'btn btn-small btn-outline-dark'}
                                             data-toggle={'dropdown'}>
-                                        <b>Status</b>
+                                        <b>Status </b>
+                                        <span className={'fa fa-filter'}
+                                              style={this.state.filters.status.length ? {} : { color: 'lightgrey' }}/>
                                     </button>
                                     <div className={'dropdown-menu p-0 pl-4 pt-2'}>
                                         {availableStatus.map((status) => (

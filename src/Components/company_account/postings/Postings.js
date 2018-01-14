@@ -119,11 +119,13 @@ class Postings extends Component {
                             {/*<th>Ablaufdatum</th>*/}
                             <td className={'dropdown'} style={{ borderBottom: '2px solid #e9ecef' }}>
                                 <form>
-                                    <button className={'btn btn-small btn-outline-dark dropdown-toggle'}
+                                    <button className={'btn btn-small btn-outline-dark'}
                                             data-toggle={'dropdown'}>
-                                        <b>Vertragsart</b>
+                                        <b>Vertragsart </b>
+                                        <span className={'fa fa-filter'}
+                                            style={this.state.filters.contract_type.length ? {} : { color: 'lightgrey' }}/>
                                     </button>
-                                    <div className={'dropdown-menu p-0 pl-4 pt-2'}>
+                                    <div className={'dropdown-menu p-2 pl-4'}>
                                         {availableContractTypes.map(type => (
                                             <div className={'form-check'} key={type}>
                                                 <input className={'form-check-input'} type={'checkbox'} id={type}
@@ -139,9 +141,11 @@ class Postings extends Component {
                             </td>
                             <td className={'dropdown'} style={{ borderBottom: '2px solid #e9ecef' }}>
                                 <form>
-                                    <button className={'btn btn-small btn-outline-dark dropdown-toggle'}
+                                    <button className={'btn btn-small btn-outline-dark'}
                                             data-toggle={'dropdown'}>
-                                        <b>Unternehmen</b>
+                                        <b>Unternehmen </b>
+                                        <span className={'fa fa-filter'}
+                                              style={this.state.filters.company_id.length ? {} : { color: 'lightgrey' }}/>
                                     </button>
                                     <div className={'dropdown-menu p-0 pl-4 pt-2'}>
                                         {this.state.companies.map(company => (
@@ -159,9 +163,11 @@ class Postings extends Component {
                             </td>
                             <td className={'dropdown'} style={{ borderBottom: '2px solid #e9ecef' }}>
                                 <form>
-                                    <button className={'btn btn-small btn-outline-dark dropdown-toggle'}
+                                    <button className={'btn btn-small btn-outline-dark'}
                                             data-toggle={'dropdown'}>
-                                        <b>Recruiter</b>
+                                        <b>Recruiter </b>
+                                        <span className={'fa fa-filter'}
+                                              style={this.state.filters.recruiter_id.length ? {} : { color: 'lightgrey' }}/>
                                     </button>
                                     <div className={'dropdown-menu p-0 pl-4 pt-2'}>
                                         {this.state.recruiters.map(recruiter => (
@@ -180,9 +186,11 @@ class Postings extends Component {
                             </td>
                             <td className={'dropdown'} style={{ borderBottom: '2px solid #e9ecef' }}>
                                 <form>
-                                    <button className={'btn btn-small btn-outline-dark dropdown-toggle'}
+                                    <button className={'btn btn-small btn-outline-dark'}
                                             data-toggle={'dropdown'}>
-                                        <b>Status</b>
+                                        <b>Status </b>
+                                        <span className={'fa fa-filter'}
+                                              style={this.state.filters.status.length ? {} : { color: 'lightgrey' }}/>
                                     </button>
                                     <div className={'dropdown-menu p-0 pl-4 pt-2'}>
                                         {availableStatus.map((status) => (
