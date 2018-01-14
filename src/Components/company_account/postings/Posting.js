@@ -10,22 +10,25 @@ import PostingPreview from "./PostingPreview";
 
 class Posting extends Component {
     handleSubmit = (event) => {
-        console.log(event.target);
         if (event.target.getAttribute('id') === 'preview') {
-            console.log('blub');
-            this.setState({
-                posting: Object.assign({}, this.state.posting,
-                    {
-                        company_id: this.state.posting.company_id === ''
-                            ? this.state.companies[0].id
-                            : this.state.posting.company_id,
-                        recruiter_id: this.state.posting.recruiter_id === ''
-                            ? this.state.recruiters[0].id
-                            : this.state.posting.recruiter_id
-                    })
-            });
-            this.setState({ preview: true });
+            if (this.inputForm.checkValidity()) {
+                this.setState({
+                    posting: Object.assign({}, this.state.posting,
+                        {
+                            company_id: this.state.posting.company_id === ''
+                                ? this.state.companies[0].id
+                                : this.state.posting.company_id,
+                            recruiter_id: this.state.posting.recruiter_id === ''
+                                ? this.state.recruiters[0].id
+                                : this.state.posting.recruiter_id
+                        })
+                });
+                this.setState({ preview: true });
+            } else {
+                return false;
+            }
         } else {
+            event.preventDefault();
             if (!this.state.create) {
                 let updatedPosting = this.state.posting;
                 delete(updatedPosting.created_at);
@@ -80,7 +83,8 @@ class Posting extends Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={this.handleSubmit}
+                  ref={(form) => { this.inputForm = form; }}>
                 <Header history={this.props.history}/>
                 {this.state.posting &&
                 <div className={'container'}>
@@ -292,31 +296,15 @@ class Posting extends Component {
                                                     negativeText={'Abbrechen'}/>
                                             </span>
                                         )}
-                                        <button type={'button'}
-                                                className={'btn btn-warning buttons-form'}
+                                        <button type={'button'} className={'btn btn-warning buttons-form'}
                                                 onClick={() => this.props.history.goBack()}>
                                             {this.state.create ? 'Abbrechen' : 'Zurück'}
                                         </button>
-                                        <button id={'preview'}
-                                                type={'button'}
-                                                className={'btn btn-primary button-form'}
+                                        <button id={'preview'} className={'btn btn-primary button-form'}
                                                 onClick={this.handleSubmit}>
-                                            {/*// onClick={() => {*/}
-                                            {/*//     this.setState({ posting: Object.assign({}, this.state.posting,*/}
-                                            {/*//             { company_id: this.state.posting.company_id === ''*/}
-                                            {/*//                     ? this.state.companies[0].id*/}
-                                            {/*//                     : this.state.posting.company_id,*/}
-                                            {/*//                 recruiter_id: this.state.posting.recruiter_id === ''*/}
-                                            {/*//                     ? this.state.recruiters[0].id*/}
-                                            {/*//                     : this.state.posting.recruiter_id*/}
-                                            {/*//             })*/}
-                                            {/*//     });*/}
-                                            {/*//     this.setState({ preview: true });*/}
-                                            {/*// }}>*/}
                                             Vorschau
                                         </button>
-                                        <button type={'button'} className={'btn btn-success buttons-form'}
-                                        onClick={this.handleSubmit}>
+                                        <button className={'btn btn-success buttons-form'}>
                                             {this.state.create ? 'Speichern' : 'Update'}
                                         </button>
                                     </div>
@@ -326,7 +314,6 @@ class Posting extends Component {
                     )}
                 </div>
                 }
-
             </form>
         );
     }

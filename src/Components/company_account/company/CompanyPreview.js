@@ -5,7 +5,7 @@ class CompanyPreview extends Component {
 
     render() {
         return (
-            <div className={'container'}>
+            <div>
                 <div className={'headline'}>
                     <h1>Vorschau</h1>
                 </div>
@@ -37,7 +37,7 @@ class CompanyPreview extends Component {
                     </div>
                 )}
                 <div className='float-right'>
-                    <button className={'btn btn-warning buttons-form'}
+                    <button type={'button'} className={'btn btn-warning buttons-form'}
                             onClick={this.props.endPreview}>
                         Zurück
                     </button>

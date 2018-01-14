@@ -8,7 +8,7 @@ class RecruiterListItem extends Component {
         return (
             <tr>
                 <td>
-                    <Link to={`/recruiters/${this.props.recruiter.id}`}>{this.props.recruiter.recruiter_name}</Link>
+                    <Link to={`/company/recruiters/${this.props.recruiter.id}`}>{this.props.recruiter.recruiter_name}</Link>
                 </td>
                 <td>
                     <div className={'btn-group'}>

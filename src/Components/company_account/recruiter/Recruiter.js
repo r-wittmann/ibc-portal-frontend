@@ -9,25 +9,33 @@ import RecruiterPreview from "./RecruiterPreview";
 import ConfirmModal from "../../commons/ConfirmModal";
 
 class Recruiter extends Component {
-    handleFormSubmit = (event) => {
-        event.preventDefault();
-        if (!this.state.create) {
-            let updatedRecruiter = this.state.recruiter;
-            delete(updatedRecruiter.created_at);
-            delete(updatedRecruiter.updated_at);
-            if (!this.state.photoChanged) {
-                delete(updatedRecruiter.photo);
+    handleSubmit = (event) => {
+        if (event.target.getAttribute('id') === 'preview') {
+            if (this.inputForm.checkValidity()) {
+                this.setState({ preview: true });
+            } else {
+                return false;
             }
-            backendService.updateRecruiter(this.props.match.params.id, updatedRecruiter)
-                .then(() => toast('Recruiter aktualisiert', { type: 'success' }))
-                .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
         } else {
-            backendService.createRecruiter(this.state.recruiter)
-                .then(() => this.props.history.push(`/company/recruiters`))
-                .then(() => toast('Recruiter erstellt', { type: 'success' }))
-                .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
+            event.preventDefault();
+            if (!this.state.create) {
+                let updatedRecruiter = this.state.recruiter;
+                delete(updatedRecruiter.created_at);
+                delete(updatedRecruiter.updated_at);
+                if (!this.state.photoChanged) {
+                    delete(updatedRecruiter.photo);
+                }
+                backendService.updateRecruiter(this.props.match.params.id, updatedRecruiter)
+                    .then(() => this.props.history.push(`/company/recruiters`))
+                    .then(() => toast('Recruiter aktualisiert', { type: 'success' }))
+                    .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
+            } else {
+                backendService.createRecruiter(this.state.recruiter)
+                    .then(() => this.props.history.push(`/company/recruiters`))
+                    .then(() => toast('Recruiter erstellt', { type: 'success' }))
+                    .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
+            }
         }
-
     };
     handleDelete = (event) => {
         event.preventDefault();
@@ -61,142 +69,146 @@ class Recruiter extends Component {
 
     render() {
         return (
-            <div>
+            <form onSubmit={this.handleSubmit}
+                  ref={(form) => { this.inputForm = form; }}>
                 <Header history={this.props.history}/>
-                {this.state.preview && this.state.recruiter ? (
-                    <RecruiterPreview
-                        recruiter={this.state.recruiter}
-                        endPreview={this.props.preview
-                            ? () => this.props.history.goBack()
-                            : () => this.setState({ preview: false })
-                        }
-                        primaryAction={this.props.preview
-                            ? () => {
-                                this.props.history.push(`/company/recruiters/${this.state.recruiter.id}`);
-                                this.setState({ preview: false })
+                {this.state.recruiter &&
+                <div className={'container'}>
+                    {this.state.preview ? (
+                        <RecruiterPreview
+                            recruiter={this.state.recruiter}
+                            endPreview={this.props.preview
+                                ? () => this.props.history.goBack()
+                                : () => this.setState({ preview: false })
                             }
-                            : this.handleFormSubmit
-                        }
-                        primaryActionText={this.props.preview ? 'Editieren' : 'Speichern'}
-                    />
-                ) : (
-                    <div>
-                        <div className={'headline'}>
-                            <h1>{this.state.create ? 'Neuen Recruiter erstellen' : 'Recruiter bearbeiten'}</h1>
-                        </div>
-                        <div className={'container'}>
+                            primaryAction={this.props.preview
+                                ? () => {
+                                    this.props.history.push(`/company/recruiters/${this.state.recruiter.id}`);
+                                    this.setState({ preview: false })
+                                }
+                                : this.handleSubmit
+                            }
+                            primaryActionText={this.props.preview ? 'Editieren' : 'Speichern'}
+                        />
+                    ) : (
+                        <div>
+                            <div className={'headline'}>
+                                <h1>{this.state.create ? 'Neuen Recruiter erstellen' : 'Recruiter bearbeiten'}</h1>
+                            </div>
                             {this.state.recruiter && (
                                 <div>
-                                    <form onSubmit={this.handleFormSubmit}>
-                                        <InputLabel
-                                            label={'Name'}
-                                            required
-                                            value={this.state.recruiter.recruiter_name}
-                                            onChange={(recruiter_name) => this.setState({
-                                                recruiter: Object.assign({}, this.state.recruiter, { recruiter_name })
-                                            })}/>
-                                        <InputLabel
-                                            label={'Email'}
-                                            required
-                                            type="Email"
-                                            value={this.state.recruiter.recruiter_email}
-                                            onChange={(recruiter_email) => this.setState({
-                                                recruiter: Object.assign({}, this.state.recruiter, { recruiter_email })
-                                            })}/>
-                                        <InputLabel
-                                            label={'Telefon Mobile'}
-                                            value={this.state.recruiter.mobile}
-                                            onChange={(mobile) => this.setState({
-                                                recruiter: Object.assign({}, this.state.recruiter, { mobile })
-                                            })}/>
-                                        <InputLabel
-                                            label={'Telefon Festnetz'}
-                                            value={this.state.recruiter.phone}
-                                            onChange={(phone) => this.setState({
-                                                recruiter: Object.assign({}, this.state.recruiter, { phone })
-                                            })}/>
-                                        <InputLabel
-                                            label={'Position'}
-                                            required
-                                            value={this.state.recruiter.position}
-                                            onChange={(position) => this.setState({
-                                                recruiter: Object.assign({}, this.state.recruiter, { position })
-                                            })}/>
-                                        <InputLabel
-                                            label={'Standort'}
-                                            value={this.state.recruiter.location}
-                                            onChange={(location) => this.setState({
-                                                recruiter: Object.assign({}, this.state.recruiter, { location })
-                                            })}/>
-                                        <div className='form-group row'>
-                                            <label htmlFor={'photo'} className='col-4 col-form-label'>
-                                                Foto Upload
-                                            </label>
-                                            <div className='col-8'>
-                                                <button type={'button'} className='btn btn-primary' data-toggle="modal"
-                                                        data-target="#uploadFile">
-                                                    Foto ändern/hochladen
-                                                </button>
-                                                {this.state.recruiter.photo &&
-                                                <img src={this.state.recruiter.photo} style={{ marginLeft: 12 }}
-                                                     height={38}
-                                                     alt={'logo'}/>
-                                                }
-                                            </div>
-                                            <UploadFileModal
-                                                title={'Foto ändern/hochladen'}
-                                                returnFile={(photo) => this.setState({
-                                                    recruiter: Object.assign({}, this.state.recruiter, { photo }),
-                                                    photoChanged: true
-                                                })}/>
+                                    <InputLabel
+                                        label={'Name'}
+                                        required
+                                        value={this.state.recruiter.recruiter_name}
+                                        onChange={(recruiter_name) => this.setState({
+                                            recruiter: Object.assign({}, this.state.recruiter, { recruiter_name })
+                                        })}/>
+                                    <InputLabel
+                                        label={'Email'}
+                                        required
+                                        type="Email"
+                                        value={this.state.recruiter.recruiter_email}
+                                        onChange={(recruiter_email) => this.setState({
+                                            recruiter: Object.assign({}, this.state.recruiter, { recruiter_email })
+                                        })}/>
+                                    <InputLabel
+                                        label={'Telefon Mobile'}
+                                        value={this.state.recruiter.mobile}
+                                        onChange={(mobile) => this.setState({
+                                            recruiter: Object.assign({}, this.state.recruiter, { mobile })
+                                        })}/>
+                                    <InputLabel
+                                        label={'Telefon Festnetz'}
+                                        value={this.state.recruiter.phone}
+                                        onChange={(phone) => this.setState({
+                                            recruiter: Object.assign({}, this.state.recruiter, { phone })
+                                        })}/>
+                                    <InputLabel
+                                        label={'Position'}
+                                        required
+                                        value={this.state.recruiter.position}
+                                        onChange={(position) => this.setState({
+                                            recruiter: Object.assign({}, this.state.recruiter, { position })
+                                        })}/>
+                                    <InputLabel
+                                        label={'Standort'}
+                                        value={this.state.recruiter.location}
+                                        onChange={(location) => this.setState({
+                                            recruiter: Object.assign({}, this.state.recruiter, { location })
+                                        })}/>
+                                    <div className='form-group row'>
+                                        <label htmlFor={'photo'} className='col-4 col-form-label'>
+                                            Foto Upload
+                                        </label>
+                                        <div className='col-8'>
+                                            <button type={'button'} className='btn btn-primary' data-toggle="modal"
+                                                    data-target="#uploadFile">
+                                                Foto ändern/hochladen
+                                            </button>
+                                            {this.state.recruiter.photo &&
+                                            <img src={this.state.recruiter.photo} style={{ marginLeft: 12 }}
+                                                 height={38}
+                                                 alt={'logo'}/>
+                                            }
                                         </div>
-                                        <InputLabel
-                                            label={'XING-Profil'}
-                                            value={this.state.recruiter.xing}
-                                            onChange={(xing) => this.setState({
-                                                recruiter: Object.assign({}, this.state.recruiter, { xing })
+                                        <UploadFileModal
+                                            title={'Foto ändern/hochladen'}
+                                            returnFile={(photo) => this.setState({
+                                                recruiter: Object.assign({}, this.state.recruiter, { photo }),
+                                                photoChanged: true
                                             })}/>
-                                        <InputLabel
-                                            label={'LinkedIn-Profil'}
-                                            value={this.state.recruiter.linked_in}
-                                            onChange={(linked_in) => this.setState({
-                                                recruiter: Object.assign({}, this.state.recruiter, { linked_in })
-                                            })}/>
-                                            <div className='float-right'>
-                                        {!this.state.create && (
+                                    </div>
+                                    <InputLabel
+                                        label={'XING-Profil'}
+                                        value={this.state.recruiter.xing}
+                                        onChange={(xing) => this.setState({
+                                            recruiter: Object.assign({}, this.state.recruiter, { xing })
+                                        })}/>
+                                    <InputLabel
+                                        label={'LinkedIn-Profil'}
+                                        value={this.state.recruiter.linked_in}
+                                        onChange={(linked_in) => this.setState({
+                                            recruiter: Object.assign({}, this.state.recruiter, { linked_in })
+                                        })}/>
+                                    <div className='float-right'>
+                                        {!this.state.create &&
                                             <span>
                                                 <button className={'btn btn-danger buttons-form'}
+                                                        type={'button'}
                                                         data-toggle={'modal'}
                                                         data-target={'#confirm-modal'}>
-                                                Recruiter löschen
+                                                    Recruiter löschen
                                                 </button>
                                                 <ConfirmModal
                                                     id={'confirm-modal'}
                                                     message={`Wollen Sie den Recruiter ${this.state.recruiter.recruiter_name} wirklich löschen?`}
                                                     positiveAction={this.handleDelete}
                                                     positiveText={'Löschen'}
-                                                    negativeAction={() => {/*closes the modal*/}}
+                                                    negativeAction={() => {/*closes the modal*/
+                                                    }}
                                                     negativeText={'Abbrechen'}/>
                                             </span>
-                                        )}
-                                        <button className={'btn btn-warning buttons-form'}
+                                        }
+                                        <button type={'button'} className={'btn btn-warning buttons-form'}
                                                 onClick={() => this.props.history.goBack()}>
                                             {this.state.create ? 'Abbrechen' : 'Zurück'}
                                         </button>
-                                        <button className={'btn btn-primary button-form'}
-                                                onClick={() => this.setState({ preview: true })}>
+                                        <button id={'preview'} className={'btn btn-primary button-form'}
+                                                onClick={this.handleSubmit}>
                                             Vorschau
                                         </button>
-                                        <input type="submit" className={'btn btn-success buttons-form'} value={this.state.create ? 'Speichern' : 'Update'}/>
+                                        <button className={'btn btn-success buttons-form'}>
+                                            {this.state.create ? 'Speichern' : 'Update'}
+                                        </button>
                                     </div>
-                                    </form>
-                                    
                                 </div>
                             )}
                         </div>
-                    </div>
-                )}
-            </div>
+                    )}
+                </div>
+                }
+            </form>
         );
     }
 }
