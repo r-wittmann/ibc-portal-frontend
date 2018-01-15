@@ -38,12 +38,19 @@ class Profile extends Component {
                         <form onSubmit={this.handleSubmit}>
                             <div className='form-group row'>
                                 <label className='col-4 col-form-label'>
-                                    Benutzername
+                                    Unternehmen
                                 </label>
                                 <label className='col-8 col-form-label'>
                                     {this.state.profile.name}
                                 </label>
                             </div>
+                            <InputLabel
+                                label={'Kontakt'}
+                                required
+                                value={this.state.profile.contact_name}
+                                onChange={(contact_name) => this.setState({
+                                    profile: Object.assign({}, this.state.profile, { contact_name })
+                                })}/>
                             <InputLabel
                                 label={'Email'}
                                 type={'email'}
@@ -53,11 +60,11 @@ class Profile extends Component {
                                     profile: Object.assign({}, this.state.profile, { email })
                                 })}/>
                             <InputLabel
-                                label={'Unternehmen'}
+                                label={'Telefon'}
                                 required
-                                value={this.state.profile.mother_company}
-                                onChange={(company) => this.setState({
-                                    profile: Object.assign({}, this.state.profile, { mother_company: company })
+                                value={this.state.profile.contact_phone}
+                                onChange={(contact_phone) => this.setState({
+                                    profile: Object.assign({}, this.state.profile, { contact_phone })
                                 })}/>
                             <div className='form-group row'>
                                 <label className='col-4 col-form-label'>
