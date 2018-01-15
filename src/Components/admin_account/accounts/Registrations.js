@@ -169,8 +169,10 @@ class Registrations extends Component {
                     <table className={"table table-hover"}>
                         <thead>
                         <tr>
-                            <th>Benutzername</th>
+                            <th>Firmenname</th>
+                            <th>Kontakt</th>
                             <th>E-Mail</th>
+                            <th>Telefon</th>
                             <th>Webseite</th>
                             <td className={'dropdown'} style={{ borderBottom: '2px solid #e9ecef' }}>
                                 <form>

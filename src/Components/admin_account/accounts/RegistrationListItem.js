@@ -6,7 +6,9 @@ class RegistrationListItem extends Component {
         return (
             <tr key={this.props.account.id}>
                 <td>{this.props.account.name}</td>
+                <td>{this.props.account.contact_name}</td>
                 <td>{this.props.account.email}</td>
+                <td>{this.props.account.contact_phone}</td>
                 <td>{this.props.account.website}</td>
                 <td>{this.props.account.company_type}</td>
                 <td>
