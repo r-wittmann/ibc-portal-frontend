@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 
 class PublicPostingListItem extends Component {
 
+    
+
     render() {
         return (
             <tr>

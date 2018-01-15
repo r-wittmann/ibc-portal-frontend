@@ -37,6 +37,7 @@ class App extends Component {
     render() {
         return (
             <div>
+            <div className={'cont'}>
                 <Notification/>
                 {!backendService.isAuthenticated() ?
                     <Switch>
@@ -87,7 +88,9 @@ class App extends Component {
                         <Redirect to={'/'}/>
                     </Switch>
                 }
-                <Footer/>
+                
+            </div>
+            <Footer/>
             </div>
         )
     }
