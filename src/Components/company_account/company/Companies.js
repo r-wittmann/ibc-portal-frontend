@@ -32,6 +32,8 @@ class Companies extends Component {
                 <div className={'headline'}>
                     <h1>Ihre Unternehmen</h1>
                 </div>
+                <p className={'description'}>Legen Sie Ihre Tochterunternehmen an und erstellen Sie Stellenanzeigen für Ihre
+                                        Tochterunternehmen.</p>
                 <div className={'create-button'}>
                         <button className={'btn btn-primary'}
                                 onClick={() => this.props.history.push('/company/companies/create')}>

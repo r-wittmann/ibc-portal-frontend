@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 class RecruiterPreview extends Component {
 
     render() {
+
+        console.log(this.props.recruiter);
         return (
             <div>
                 <div className={'headline'}>
@@ -21,6 +23,7 @@ class RecruiterPreview extends Component {
                                     <td>
                                         <p><b>{this.props.recruiter.recruiter_name}</b></p>
                                         <p>{this.props.recruiter.position}, {this.props.recruiter.location}</p>
+                                        <p>E-Mail: {this.props.recruiter.recruiter_email}</p>
                                         <p>Festnetz: {this.props.recruiter.phone}</p>
                                         <p>Mobil: {this.props.recruiter.mobile}</p>
                                         <p>Xing: {this.props.recruiter.xing}</p>

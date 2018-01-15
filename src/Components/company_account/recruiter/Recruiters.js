@@ -32,6 +32,8 @@ class Recruiters extends Component {
                 <div className={'headline'}>
                     <h1>Ihre Recruiter</h1>
                 </div>
+                <p className={'description'}>Legen Sie Recruiter-Profile an, fügen Sie diese Ihren Stellenanzeigen hinzu und
+                                        verwalten Sie diese. </p>
                  <div className={'create-button'}>
                         <button className={'btn btn-primary'}
                                 onClick={() => this.props.history.push('/company/recruiters/create')}>
