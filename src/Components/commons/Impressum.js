@@ -10,12 +10,16 @@ class Impressum extends Component {
 		            <div className={'headline'}>
 	                    <h1>Impressum</h1>
                         <  br />
-                            <h2>ANSCHRIFT:</h2>
+                            <h2>KONTAKT:</h2>
 
                             <p>Internet Business Cluster e.V.<br />
                             c/o Ludwig-Maximilians-Universität München<br />
                             Institut für Wirtschaftsinformatik und Neue Medien<br />
-                            Ludwigstraße 28 D-80539 München</p>
+                            Ludwigstraße 28 D-80539 München<br />
+                            Tel.: +49 (0)89 2180-6390<br />
+                            Email: info@ibc-muenchen.com</p>
+
+
                             <br />
 
                             <h2>HAFTUNG FÜR INHALTE</h2>
