@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import backendService from '../../../backendService';
 import PostingListItem from "./PublicPostingListItem";
 import queryString from 'query-string';
+import Header from "../Header";
 
 class PublicPostings extends Component {
     defaultFilters = () => {
@@ -86,6 +87,10 @@ class PublicPostings extends Component {
         let availableEntryLevels = ['Studenten', 'Maseranden', 'Absolventen'];
         return (
             <div>
+                <Header history={this.props.history}/>
+                <div className={'headline'}>
+                    <h1>Digitale Jobs in und um München</h1>
+                </div>
                 <div className={'container'}>
                     <table className={'table table-hover'}>
                         <thead>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import backendService from '../../../backendService';
 import draftToHtml from "draftjs-to-html";
 import { Link } from "react-router-dom";
+import Header from "../Header";
 
 class PublicPosting extends Component {
     getDurationString(key) {
@@ -43,6 +44,8 @@ class PublicPosting extends Component {
 
     render() {
         return (
+            <div>
+            <Header history={this.props.history}/>
             <div className={'container'}>
                 {this.state.posting &&
                 <div>
@@ -113,6 +116,7 @@ class PublicPosting extends Component {
                         Zurück
                     </button>
                 </div>
+            </div>
             </div>
         );
     }

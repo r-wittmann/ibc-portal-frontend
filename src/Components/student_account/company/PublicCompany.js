@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import backendService from '../../../backendService';
 import draftToHtml from "draftjs-to-html";
+import Header from "../Header";
 
 class PublicCompany extends Component {
 
@@ -18,6 +19,8 @@ class PublicCompany extends Component {
 
     render() {
         return (
+            <div>
+            <Header history={this.props.history}/>
             <div className={'container'}>
                 {this.state.company && (
                     <div>
@@ -61,6 +64,7 @@ class PublicCompany extends Component {
                         Zurück
                     </button>
                 </div>
+            </div>
             </div>
         );
     }
