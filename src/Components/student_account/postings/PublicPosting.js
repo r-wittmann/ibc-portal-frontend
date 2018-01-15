@@ -57,7 +57,7 @@ class PublicPosting extends Component {
                             <tbody>
                             <tr>
                                 <td><span className={'fa fa-home'}/>
-                                    <Link to={'/public/companies/' + this.state.posting.company_id}>
+                                    <Link to={'/companies/' + this.state.posting.company_id}>
                                         &nbsp;{this.state.posting.company_name}
                                     </Link>
                                 </td>
