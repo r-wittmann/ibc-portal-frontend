@@ -151,6 +151,9 @@ class Registrations extends Component {
                                 <a className={'nav-link'} onClick={() => this.props.history.push('/admin/accounts')}>Alle
                                     Accounts</a>
                             </li>
+                            <li className={'nav-item'}>
+                                <a className={'nav-link'} href={'https://analytics.google.com/analytics/web/#embed/report-home/a71308674w167653651p167860407/'} target={'_blank'}>Analytics</a>
+                            </li>
                         </ul>
 
                         <ul className={'navbar-nav my-2 my-lg-0'}>
@@ -169,8 +172,10 @@ class Registrations extends Component {
                     <table className={"table table-hover"}>
                         <thead>
                         <tr>
-                            <th>Benutzername</th>
+                            <th>Firmenname</th>
+                            <th>Kontakt</th>
                             <th>E-Mail</th>
+                            <th>Telefon</th>
                             <th>Webseite</th>
                             <td className={'dropdown'} style={{ borderBottom: '2px solid #e9ecef' }}>
                                 <form>

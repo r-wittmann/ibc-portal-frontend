@@ -35,7 +35,6 @@ class SignUpBody extends Component {
             company_type: '',
             address: '',
             contact_name: '',
-            contact_email: '',
             contact_phone: '',
             website: '',
             currentStep: 0
@@ -157,6 +156,20 @@ class SignUpBody extends Component {
                 {this.state.currentStep === 1 && (
                     <form onSubmit={(event) => this.handleSubmit(1, event)}>
                         <InputLabel
+                            label={'Kontakt'}
+                            className="form-control"
+                            required
+                            value={this.state.contact_name}
+                            onChange={(contact_name) => this.setState({ contact_name })}/>
+
+                        <InputLabel
+                            label={'Telefon'}
+                            className="form-control"
+                            required
+                            value={this.state.contact_phone}
+                            onChange={(contact_phone) => this.setState({ contact_phone })}/>
+
+                        <InputLabel
                             label={'Website'}
                             required
                             className="form-control"
@@ -179,21 +192,6 @@ class SignUpBody extends Component {
                             </div>
                         </div>
 
-                        <b><p>Account Ansprechpartner:</p></b>
-
-                        <InputLabel
-                            label={'Name'}
-                            className="form-control"
-                            required
-                            value={this.state.contact_name}
-                            onChange={(contact_name) => this.setState({ contact_name })}/>
-
-                        <InputLabel
-                            label={'Telefon'}
-                            className="form-control"
-                            required
-                            value={this.state.contact_phone}
-                            onChange={(contact_phone) => this.setState({ contact_phone })}/>
                         <div className={'float-right'}>
                             <input className={'btn btn-primary'} type={'submit'} value={'Registrierung abschließen'}/>
                         </div>

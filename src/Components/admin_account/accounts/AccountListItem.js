@@ -14,6 +14,7 @@ class AccountListItem extends Component {
         return (
             <tr key={this.props.account.id}>
                 <td>{this.props.account.name}</td>
+                <td>{this.props.account.contact_name}</td>
                 <td>
                     {this.state.editMode
                         ? <input type={'email'}
@@ -22,6 +23,7 @@ class AccountListItem extends Component {
                         : this.props.account.email
                     }
                 </td>
+                <td>{this.props.account.contact_phone}</td>
                 <td>{this.props.account.website}</td>
                 <td>
                     {this.state.editMode

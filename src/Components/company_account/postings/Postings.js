@@ -124,6 +124,9 @@ class Postings extends Component {
                 <div className={'headline'}>
                     <h1>Ihre Stellenanzeigen</h1>
                 </div>
+                <p className={'description'}>Legen Sie neue Stellenanzeigen an, fügen Sie diesen einem Unternehmen bzw.
+                                        Recruiter
+                                        hinzu und verwalten Sie diese.</p>
                 <div className={'create-button'}>
                     <button className={'btn btn-primary'}
                             onClick={() => this.props.history.push('/company/postings/create')}>
