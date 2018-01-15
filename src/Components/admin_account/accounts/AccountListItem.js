@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ConfirmModal from "../../commons/ConfirmModal";
+import translationService from "../../../translationService";
 
 class AccountListItem extends Component {
 
@@ -35,10 +36,10 @@ class AccountListItem extends Component {
                             <option value={'startup'}>Startup</option>
                             <option value={'ngo'}>Verein</option>
                         </select>
-                        : this.props.account.company_type
+                        : translationService.translateCompanyType(this.props.account.company_type)
                     }
                 </td>
-                <td>{this.props.account.status}</td>
+                <td>{translationService.translateRegistrationStatus(this.props.account.status)}</td>
                 <td>
                     {!this.state.editMode ?
                         <div className={'btn-group'}>

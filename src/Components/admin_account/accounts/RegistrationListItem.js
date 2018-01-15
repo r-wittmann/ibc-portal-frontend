@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import translationService from "../../../translationService";
 
 class RegistrationListItem extends Component {
 
@@ -10,7 +11,7 @@ class RegistrationListItem extends Component {
                 <td>{this.props.account.email}</td>
                 <td>{this.props.account.contact_phone}</td>
                 <td>{this.props.account.website}</td>
-                <td>{this.props.account.company_type}</td>
+                <td>{translationService.translateCompanyType(this.props.account.company_type)}</td>
                 <td>
                     <div className={'btn-group'}>
                         <button className={'btn btn-outline-dark'}
