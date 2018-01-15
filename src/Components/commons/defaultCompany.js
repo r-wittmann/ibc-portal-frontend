@@ -2,9 +2,6 @@ const defaultCompany = {
     // id
     // account_id
     company_name: '',
-    contact_name: '',
-    contact_email: '',
-    contact_phone: '',
     munich_address: '',
     locations: '',
     employees: 1,
