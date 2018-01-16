@@ -33,7 +33,7 @@ class SignUpBody extends Component {
         this.state = {
             name: '',
             email: '',
-            company_type: '',
+            company_type: 'ibc',
             address: '',
             contact_name: '',
             contact_phone: '',
