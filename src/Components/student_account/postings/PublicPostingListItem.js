@@ -15,6 +15,7 @@ class PublicPostingListItem extends Component {
                 {/* no expiry date yet */}
                 {/*<td>{this.props.posting.expiry_date}</td>*/}
                 <td>{translate.contractType(this.props.posting.contract_type)}</td>
+                <td>{translate.fieldOfEmployment(this.props.posting.field_of_employment)}</td>
                 <td>{translate.entryLevel(this.props.posting.entry_level)}</td>
                 <td><Link to={'/companies/' + this.props.posting.company_id}>{this.props.posting.company_name}</Link></td>
                 <td> </td>

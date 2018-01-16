@@ -80,6 +80,7 @@ class PublicPosting extends Component {
                                 <td><span className={'fa fa-clock'}/> {this.state.posting.working_hours}</td>
                                 <td><span className={'fa fa-edit'}/> {translate.contractType(this.state.posting.contract_type)}</td>
                                 <td><span className={'fa fa-info-circle'}/> {translate.entryLevel(this.state.posting.entry_level)}</td>
+                                <td><span className={'fa fa-info-circle'}/> {translate.fieldOfEmployment(this.state.posting.field_of_employment)}</td>
                             </tr>
                             </tbody>
                         </table>

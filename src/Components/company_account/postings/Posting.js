@@ -242,14 +242,22 @@ class Posting extends Component {
                                                 </select>
                                             </div>
                                         </div>
-                                        <InputLabel
-                                            label={'Tätigkeitsbereich'}
-                                            required
-                                            value={this.state.posting.field_of_employment}
-                                            onChange={(field_of_employment) => this.setState({
-                                                posting: Object.assign({}, this.state.posting, { field_of_employment })
-                                            })}
-                                        />
+                                        <div className={"form-group row"}>
+                                            <label className={'col-4 col-form-label'}>
+                                                Tätigkeitsbereich
+                                            </label>
+                                            <div className={'col-8'}>
+                                                <select className={'form-control'}
+                                                        value={this.state.posting.field_of_employment}
+                                                        onChange={(event) => this.setState({
+                                                            posting: Object.assign({}, this.state.posting, { field_of_employment: event.target.value })
+                                                        })}>
+                                                    {Object.keys(translate.fieldOfEmployment()).map(key =>
+                                                        <option key={key} value={key}>{translate.fieldOfEmployment(key)}</option>
+                                                    )}
+                                                </select>
+                                            </div>
+                                        </div>
                                         <div>
                                             Beschreibung
                                             <TextEditor

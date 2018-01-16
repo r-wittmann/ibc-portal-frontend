@@ -9,6 +9,7 @@ class PublicPostings extends Component {
     defaultFilters = () => {
         return {
             contract_type: [],
+            field_of_employment: [],
             company_id: [],
             entry_level: []
         }
@@ -113,6 +114,28 @@ class PublicPostings extends Component {
                                                        onChange={(event) => this.handleChange(event, 'contract_type', key)}/>
                                                 <label className={'form-check-label'} htmlFor={key}>
                                                     {translate.contractType(key)}
+                                                </label>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </form>
+                            </td>
+                            <td className={'dropdown'} style={{ borderBottom: '2px solid #e9ecef' }}>
+                                <form>
+                                    <button className={'btn btn-small btn-outline-dark'}
+                                            data-toggle={'dropdown'}>
+                                        <b>Tätigkeit </b>
+                                        <span className={'fa fa-filter'}
+                                              style={this.state.filters.field_of_employment.length ? {} : { color: 'lightgrey' }}/>
+                                    </button>
+                                    <div className={'dropdown-menu p-0 pl-4 pt-2'}>
+                                        {Object.keys(translate.fieldOfEmployment()).map(key => (
+                                            <div className={'form-check'} key={key}>
+                                                <input className={'form-check-input'} type={'checkbox'} id={key}
+                                                       checked={this.state.filters.field_of_employment.includes(key)}
+                                                       onChange={(event) => this.handleChange(event, 'field_of_employment', key)}/>
+                                                <label className={'form-check-label'} htmlFor={key}>
+                                                    {translate.fieldOfEmployment(key)}
                                                 </label>
                                             </div>
                                         ))}

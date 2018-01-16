@@ -82,6 +82,7 @@ class PostingPreview extends Component {
                                     <td><span className={'fa fa-clock'}/> {this.props.posting.working_hours}</td>
                                     <td><span className={'fa fa-edit'}/> {translate.contractType(this.props.posting.contract_type)}</td>
                                     <td><span className={'fa fa-info-circle'}/> {translate.entryLevel(this.props.posting.entry_level)}</td>
+                                    <td><span className={'fa fa-info-circle'}/> {translate.fieldOfEmployment(this.props.posting.field_of_employment)}</td>
                                 </tr>
                                 </tbody>
                             </table>

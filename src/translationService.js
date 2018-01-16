@@ -91,6 +91,25 @@ class TranslationService {
         }
         return dictionary;
     }
+
+    static fieldOfEmployment(key) {
+        let dictionary = {
+            design: 'Grafik & Design',
+            video: 'Video & Audio',
+            itDev: 'IT & Softwareentwicklung',
+            itMan: 'IT (Projekt) Management',
+            prodDev: 'Digitale Produktentwicklung & Produktmanagement',
+            marketing: 'Digitales Marketing',
+            innovation: 'Digitale Innovation & Neue Medien',
+            transformation: 'Transformation & Digitalisierung',
+            sales: 'Digital Sales',
+            else: 'Sonstiges'
+        };
+        if (key) {
+            return dictionary[key];
+        }
+        return dictionary;
+    }
 }
 
 export default TranslationService;
