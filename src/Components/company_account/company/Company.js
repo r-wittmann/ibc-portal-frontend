@@ -8,6 +8,7 @@ import Header from "../Header";
 import { toast } from 'react-toastify';
 import ConfirmModal from "../../commons/ConfirmModal";
 import CompanyPreview from "./CompanyPreview";
+import translate from "../../../translationService";
 
 class Company extends Component {
     handleSubmit = (event) => {
@@ -141,12 +142,9 @@ class Company extends Component {
                                                     onChange={(event) => this.setState({
                                                         company: Object.assign({}, this.state.company, { employees: event.target.value })
                                                     })}>
-                                                <option value={1}>Bis 10</option>
-                                                <option value={2}>11 - 50</option>
-                                                <option value={3}>51 - 100</option>
-                                                <option value={4}>101 - 500</option>
-                                                <option value={5}>501 - 1000</option>
-                                                <option value={6}>Über 1001</option>
+                                                {Object.keys(translate.numberOfEmployees()).map(key =>
+                                                    <option key={key} value={key}>{translate.numberOfEmployees(key)}</option>
+                                                )}
                                             </select>
                                         </div>
                                     </div>
@@ -170,29 +168,6 @@ class Company extends Component {
                                         value={this.state.company.field_of_activity}
                                         onChange={(field_of_activity) => this.setState({
                                             company: Object.assign({}, this.state.company, { field_of_activity })
-                                        })}/>
-                                    <div className='form-group row'>
-                                        <div className='col-4 col-form-label'>
-                                            Kontakt bei {this.state.company.company_name}
-                                        </div>
-                                    </div>
-                                    <InputLabel
-                                        label={'Name'}
-                                        value={this.state.company.contact_name}
-                                        onChange={(contact_name) => this.setState({
-                                            company: Object.assign({}, this.state.company, { contact_name })
-                                        })}/>
-                                    <InputLabel
-                                        label={'Email'}
-                                        value={this.state.company.contact_email}
-                                        onChange={(contact_email) => this.setState({
-                                            company: Object.assign({}, this.state.company, { contact_email })
-                                        })}/>
-                                    <InputLabel
-                                        label={'Telefon'}
-                                        value={this.state.company.contact_phone}
-                                        onChange={(contact_phone) => this.setState({
-                                            company: Object.assign({}, this.state.company, { contact_phone })
                                         })}/>
                                     <div className='form-group row'>
                                         <label htmlFor={'logo'} className='col-4 col-form-label'>

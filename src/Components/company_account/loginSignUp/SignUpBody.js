@@ -3,6 +3,7 @@ import backendService from '../../../backendService';
 import InputLabel from '../../commons/InputLabel';
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import translate from "../../../translationService";
 
 class SignUpBody extends Component {
     handleSubmit = (step, event) => {
@@ -71,40 +72,19 @@ class SignUpBody extends Component {
                             <div className="row">
                                 <legend className="col-form-legend col-4">Unternehmenstype</legend>
                                 <div className="col-8 col-form-label">
-                                    <div className="form-check">
-                                        <label className="form-check-label">
-                                            <input className="form-check-input"
-                                                   type="radio"
-                                                   name="gridRadios"
-                                                   value="ibc"
-                                                   checked={this.state.company_type === 'ibc'}
-
-                                                   onChange={() => this.setState({ company_type: 'ibc' })}/>
-                                            IBC-Unternehmen
-                                        </label>
-                                    </div>
-                                    <div className="form-check">
-                                        <label className="form-check-label">
-                                            <input className="form-check-input"
-                                                   type="radio"
-                                                   name="gridRadios"
-                                                   value="startup"
-                                                   checked={this.state.company_type === 'startup'}
-                                                   onChange={() => this.setState({ company_type: 'startup' })}/>
-                                            Startup
-                                        </label>
-                                    </div>
-                                    <div className="form-check">
-                                        <label className="form-check-label">
-                                            <input className="form-check-input"
-                                                   type="radio"
-                                                   name="gridRadios"
-                                                   value="ngo"
-                                                   checked={this.state.company_type === 'ngo'}
-                                                   onChange={() => this.setState({ company_type: 'ngo' })}/>
-                                            Gemeinnütziger Verein
-                                        </label>
-                                    </div>
+                                    {Object.keys(translate.companyType()).map(key =>
+                                        <div className="form-check" key={key}>
+                                            <label className="form-check-label">
+                                                <input className="form-check-input"
+                                                       type="radio"
+                                                       name="gridRadios"
+                                                       value={key}
+                                                       checked={this.state.company_type === key}
+                                                       onChange={() => this.setState({ company_type: key })}/>
+                                                {translate.companyType(key)}
+                                            </label>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                             {this.state.company_type === 'ibc' &&

@@ -4,6 +4,7 @@ import image from '../../../../resources/ibc_logo.png'
 import AccountListItem from "./AccountListItem";
 import { toast } from "react-toastify";
 import queryString from "query-string";
+import translate from "../../../translationService";
 
 class Accounts extends Component {
     defaultFilters = () => {
@@ -130,9 +131,6 @@ class Accounts extends Component {
     };
 
     render() {
-        let availableStatus = [{ key: 'accepted', value: 'Angenommen' }, { key: 'declined', value: 'Abgelehnt' }];
-        let availableTypes = [{ key: 'ibc', value: 'IBC Unternehmen' }, { key: 'startup', value: 'Startup' }, { key: 'ngo', value: 'Verein' }];
-
         return (
             <div>
                 <nav className={'navbar navbar-expand-lg navbar-light bg-light'}>
@@ -186,13 +184,13 @@ class Accounts extends Component {
                                               style={this.state.filters.company_type.length ? {} : { color: 'lightgrey' }}/>
                                     </button>
                                     <div className={'dropdown-menu p-0 pl-4 pt-2'}>
-                                        {availableTypes.map((type) => (
-                                            <div className={'form-check'} key={type.key}>
-                                                <input className={'form-check-input'} type={'checkbox'} id={type.key}
-                                                       checked={this.state.filters.company_type.includes(type.key)}
-                                                       onChange={(event) => this.handleFilterChange(event, 'company_type', type.key)}/>
-                                                <label className={'form-check-label'} htmlFor={type.key}>
-                                                    {type.value}
+                                        {Object.keys(translate.companyType()).map((key) => (
+                                            <div className={'form-check'} key={key}>
+                                                <input className={'form-check-input'} type={'checkbox'} id={key}
+                                                       checked={this.state.filters.company_type.includes(key)}
+                                                       onChange={(event) => this.handleFilterChange(event, 'company_type', key)}/>
+                                                <label className={'form-check-label'} htmlFor={key}>
+                                                    {translate.companyType(key)}
                                                 </label>
                                             </div>
                                         ))}
@@ -208,16 +206,18 @@ class Accounts extends Component {
                                               style={this.state.filters.status.length ? {} : { color: 'lightgrey' }}/>
                                     </button>
                                     <div className={'dropdown-menu p-0 pl-4 pt-2'}>
-                                        {availableStatus.map((status) => (
-                                            <div className={'form-check'} key={status.key}>
-                                                <input className={'form-check-input'} type={'checkbox'} id={status.key}
-                                                       checked={this.state.filters.status.includes(status.key)}
-                                                       onChange={(event) => this.handleFilterChange(event, 'status', status.key)}/>
-                                                <label className={'form-check-label'} htmlFor={status.key}>
-                                                    {status.value}
+                                        {Object.keys(translate.registrationStatus()).map((key) =>
+                                            key !== 'registered' ? (
+                                            <div className={'form-check'} key={key}>
+                                                <input className={'form-check-input'} type={'checkbox'} id={key}
+                                                       checked={this.state.filters.status.includes(key)}
+                                                       onChange={(event) => this.handleFilterChange(event, 'status', key)}/>
+                                                <label className={'form-check-label'} htmlFor={key}>
+                                                    {translate.registrationStatus(key)}
                                                 </label>
                                             </div>
-                                        ))}
+                                            ) : null
+                                        )}
                                     </div>
                                 </form>
                             </td>

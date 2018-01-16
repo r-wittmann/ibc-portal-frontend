@@ -3,33 +3,9 @@ import backendService from '../../../backendService';
 import draftToHtml from "draftjs-to-html";
 import { Link } from "react-router-dom";
 import Header from "../Header";
+import translate from "../../../translationService";
 
 class PublicPosting extends Component {
-    getDurationString(key) {
-        let value = '';
-        switch (key) {
-            case 'to3':
-                value = 'Befristet, bis zu 3 Monate';
-                break;
-            case '3to6':
-                value = 'Befristet, 3 bis 6 Monate';
-                break;
-            case '6':
-                value = 'Befristet, 6 Monate';
-                break;
-            case '12':
-                value = 'Befristet, 12 Monate';
-                break;
-            case 'indefinite':
-                value = 'Unbefristet';
-                break;
-            default:
-                value = 'Ohne Vertragslaufzeit';
-                break;
-        }
-        return value;
-    }
-
     constructor(props) {
         super(props);
         this.state = {
@@ -99,11 +75,11 @@ class PublicPosting extends Component {
                             <tbody>
                             <tr>
                                 <td><span
-                                    className={'fa fa-arrow-right'}/> {this.getDurationString(this.state.posting.contract_duration)}
+                                    className={'fa fa-arrow-right'}/> {translate.contractDuration(this.state.posting.contract_duration)}
                                 </td>
                                 <td><span className={'fa fa-clock'}/> {this.state.posting.working_hours}</td>
-                                <td><span className={'fa fa-edit'}/> {this.state.posting.contract_type}</td>
-                                <td><span className={'fa fa-info-circle'}/> {this.state.posting.entry_level}</td>
+                                <td><span className={'fa fa-edit'}/> {translate.contractType(this.state.posting.contract_type)}</td>
+                                <td><span className={'fa fa-info-circle'}/> {translate.entryLevel(this.state.posting.entry_level)}</td>
                             </tr>
                             </tbody>
                         </table>

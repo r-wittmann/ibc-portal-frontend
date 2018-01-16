@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ConfirmModal from "../../commons/ConfirmModal";
-import translationService from "../../../translationService";
+import translate from "../../../translationService";
 
 class AccountListItem extends Component {
 
@@ -32,14 +32,14 @@ class AccountListItem extends Component {
                                   value={this.props.account.company_type}
                                   className="form-control"
                                   onChange={(event) => this.props.updateType(event, this.props.account.id)}>
-                            <option value={'ibc'}>IBC Unternehmen</option>
-                            <option value={'startup'}>Startup</option>
-                            <option value={'ngo'}>Verein</option>
+                            {Object.keys(translate.companyType()).map(key =>
+                                <option key={key} value={key}>{translate.companyType(key)}</option>
+                            )}
                         </select>
-                        : translationService.translateCompanyType(this.props.account.company_type)
+                        : translate.companyType(this.props.account.company_type)
                     }
                 </td>
-                <td>{translationService.translateRegistrationStatus(this.props.account.status)}</td>
+                <td>{translate.registrationStatus(this.props.account.status)}</td>
                 <td>
                     {!this.state.editMode ?
                         <div className={'btn-group'}>

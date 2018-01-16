@@ -4,6 +4,7 @@ import InputLabel from "../../commons/InputLabel";
 import PasswordModal from "./PasswordModal";
 import Header from "../Header";
 import { toast } from "react-toastify";
+import translate from "../../../translationService";
 
 class Profile extends Component {
     handleSubmit = (event) => {
@@ -71,7 +72,7 @@ class Profile extends Component {
                                     Unternehmenstyp
                                 </label>
                                 <label className='col-8 col-form-label'>
-                                    {this.state.profile.company_type}
+                                    {translate.companyType(this.state.profile.company_type)}
                                 </label>
                             </div>
                             <div className='col-8 offset-4'>

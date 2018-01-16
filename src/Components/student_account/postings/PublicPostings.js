@@ -3,6 +3,7 @@ import backendService from '../../../backendService';
 import PostingListItem from "./PublicPostingListItem";
 import queryString from 'query-string';
 import Header from "../Header";
+import translate from "../../../translationService";
 
 class PublicPostings extends Component {
     defaultFilters = () => {
@@ -83,8 +84,6 @@ class PublicPostings extends Component {
     };
 
     render() {
-        let availableContractTypes = ['Direkteinstieg', 'Werkstudent', 'Praktikant', 'Trainee', 'Volontariat'];
-        let availableEntryLevels = ['Studenten', 'Maseranden', 'Absolventen'];
         return (
             <div>
                 <Header history={this.props.history}/>
@@ -107,13 +106,13 @@ class PublicPostings extends Component {
                                               style={this.state.filters.contract_type.length ? {} : { color: 'lightgrey' }}/>
                                     </button>
                                     <div className={'dropdown-menu p-0 pl-4 pt-2'}>
-                                        {availableContractTypes.map(type => (
-                                            <div className={'form-check'} key={type}>
-                                                <input className={'form-check-input'} type={'checkbox'} id={type}
-                                                       checked={this.state.filters.contract_type.includes(type)}
-                                                       onChange={(event) => this.handleChange(event, 'contract_type', type)}/>
-                                                <label className={'form-check-label'} htmlFor={type}>
-                                                    {type}
+                                        {Object.keys(translate.contractType()).map(key => (
+                                            <div className={'form-check'} key={key}>
+                                                <input className={'form-check-input'} type={'checkbox'} id={key}
+                                                       checked={this.state.filters.contract_type.includes(key)}
+                                                       onChange={(event) => this.handleChange(event, 'contract_type', key)}/>
+                                                <label className={'form-check-label'} htmlFor={key}>
+                                                    {translate.contractType(key)}
                                                 </label>
                                             </div>
                                         ))}
@@ -129,13 +128,13 @@ class PublicPostings extends Component {
                                               style={this.state.filters.entry_level.length ? {} : { color: 'lightgrey' }}/>
                                     </button>
                                     <div className={'dropdown-menu p-0 pl-4 pt-2'}>
-                                        {availableEntryLevels.map(level => (
-                                            <div className={'form-check'} key={level}>
-                                                <input className={'form-check-input'} type={'checkbox'} id={level}
-                                                       checked={this.state.filters.entry_level.includes(level)}
-                                                       onChange={(event) => this.handleChange(event, 'entry_level', level)}/>
-                                                <label className={'form-check-label'} htmlFor={level}>
-                                                    {level}
+                                        {Object.keys(translate.entryLevel()).map(key => (
+                                            <div className={'form-check'} key={key}>
+                                                <input className={'form-check-input'} type={'checkbox'} id={key}
+                                                       checked={this.state.filters.entry_level.includes(key)}
+                                                       onChange={(event) => this.handleChange(event, 'entry_level', key)}/>
+                                                <label className={'form-check-label'} htmlFor={key}>
+                                                    {translate.entryLevel(key)}
                                                 </label>
                                             </div>
                                         ))}

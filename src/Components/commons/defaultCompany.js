@@ -4,7 +4,7 @@ const defaultCompany = {
     company_name: '',
     munich_address: '',
     locations: '',
-    employees: 1,
+    employees: 0,
     website: '',
     kununu: '',
     field_of_activity: '',

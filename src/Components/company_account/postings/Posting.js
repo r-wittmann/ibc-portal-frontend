@@ -7,6 +7,7 @@ import Header from "../Header";
 import { toast } from "react-toastify";
 import ConfirmModal from "../../commons/ConfirmModal";
 import PostingPreview from "./PostingPreview";
+import translate from "../../../translationService";
 
 class Posting extends Component {
     handleSubmit = (event) => {
@@ -169,11 +170,9 @@ class Posting extends Component {
                                                         onChange={(event) => this.setState({
                                                             posting: Object.assign({}, this.state.posting, { contract_duration: event.target.value })
                                                         })}>
-                                                    <option value={'to3'}>befristet, bis zu 3 Monate</option>
-                                                    <option value={'3to6'}>befristet, 3 bis 6 Monate</option>
-                                                    <option value={'6'}>befristet, 6 Monate</option>
-                                                    <option value={'12'}>befristet, 12 Monate</option>
-                                                    <option value={'indefinite'}>unbefristet</option>
+                                                    {Object.keys(translate.contractDuration()).map(key =>
+                                                        <option key={key} value={key}>{translate.contractDuration(key)}</option>
+                                                    )}
                                                 </select>
                                             </div>
                                         </div>
@@ -195,11 +194,9 @@ class Posting extends Component {
                                                         onChange={(event) => this.setState({
                                                             posting: Object.assign({}, this.state.posting, { contract_type: event.target.value })
                                                         })}>
-                                                    <option value={'Direkteinstieg'}>Direkteinstieg</option>
-                                                    <option value={'Werkstudent'}>Werkstudent</option>
-                                                    <option value={'Praktikant'}>Praktikant</option>
-                                                    <option value={'Trainee'}>Trainee</option>
-                                                    <option value={'Volontariat'}>Volontariat</option>
+                                                    {Object.keys(translate.contractType()).map(key =>
+                                                        <option key={key} value={key}>{translate.contractType(key)}</option>
+                                                    )}
                                                 </select>
                                             </div>
                                         </div>
@@ -213,9 +210,9 @@ class Posting extends Component {
                                                         onChange={(event) => this.setState({
                                                             posting: Object.assign({}, this.state.posting, { entry_level: event.target.value })
                                                         })}>
-                                                    <option value={'Studenten'}>Studenten</option>
-                                                    <option value={'Masteranden'}>Masteranden</option>
-                                                    <option value={'Absolventen'}>Absolventen</option>
+                                                    {Object.keys(translate.entryLevel()).map(key =>
+                                                        <option key={key} value={key}>{translate.entryLevel(key)}</option>
+                                                    )}
                                                 </select>
                                             </div>
                                         </div>
@@ -271,8 +268,9 @@ class Posting extends Component {
                                                         onChange={(event) => this.setState({
                                                             posting: Object.assign({}, this.state.posting, { status: event.target.value })
                                                         })}>
-                                                    <option value={'active'}>Aktiv</option>
-                                                    <option value={'deactivated'}>Deaktiviert</option>
+                                                    {Object.keys(translate.postingStatus()).map(key =>
+                                                        <option key={key} value={key}>{translate.postingStatus(key)}</option>
+                                                    )}
                                                 </select>
                                             </div>
                                         </div>

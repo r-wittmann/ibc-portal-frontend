@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import ConfirmModal from "../../commons/ConfirmModal";
+import translate from "../../../translationService";
 
 class PostingListItem extends Component {
 
@@ -19,7 +20,7 @@ class PostingListItem extends Component {
                 <td>
                     <Link to={'/company/recruiters/' + this.props.posting.recruiter_id + '/preview'}>{this.props.posting.recruiter_name}</Link>
                 </td>
-                <td>{this.props.posting.status}</td>
+                <td>{translate.postingStatus(this.props.posting.status)}</td>
                 <td>
                     <div className={'btn-group'}>
                         <button className={'btn btn-outline-dark'}

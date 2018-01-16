@@ -4,6 +4,7 @@ import Header from "../Header";
 import { toast } from "react-toastify";
 import PostingListItem from "./PostingListItem";
 import queryString from 'query-string';
+import translate from "../../../translationService";
 
 class Postings extends Component {
     defaultFilters = () => {
@@ -115,8 +116,6 @@ class Postings extends Component {
     };
 
     render() {
-        let availableContractTypes = ['Direkteinstieg', 'Werkstudent', 'Praktikant', 'Trainee', 'Volontariat'];
-        let availableStatus = [{ key: 'active', value: 'Aktiv' }, { key: 'deactivated', value: 'Deaktiviert' }];
         return (
             <div>
                 <Header history={this.props.history}/>
@@ -149,13 +148,13 @@ class Postings extends Component {
                                               style={this.state.filters.contract_type.length ? {} : { color: 'lightgrey' }}/>
                                     </button>
                                     <div className={'dropdown-menu p-2 pl-4'}>
-                                        {availableContractTypes.map(type => (
-                                            <div className={'form-check'} key={type}>
-                                                <input className={'form-check-input'} type={'checkbox'} id={type}
-                                                       checked={this.state.filters.contract_type.includes(type)}
-                                                       onChange={(event) => this.handleChange(event, 'contract_type', type)}/>
-                                                <label className={'form-check-label'} htmlFor={type}>
-                                                    {type}
+                                        {Object.keys(translate.contractType()).map(key => (
+                                            <div className={'form-check'} key={key}>
+                                                <input className={'form-check-input'} type={'checkbox'} id={key}
+                                                       checked={this.state.filters.contract_type.includes(key)}
+                                                       onChange={(event) => this.handleChange(event, 'contract_type', key)}/>
+                                                <label className={'form-check-label'} htmlFor={key}>
+                                                    {translate.contractType(key)}
                                                 </label>
                                             </div>
                                         ))}
@@ -216,13 +215,13 @@ class Postings extends Component {
                                               style={this.state.filters.status.length ? {} : { color: 'lightgrey' }}/>
                                     </button>
                                     <div className={'dropdown-menu p-0 pl-4 pt-2'}>
-                                        {availableStatus.map((status) => (
-                                            <div className={'form-check'} key={status.key}>
-                                                <input className={'form-check-input'} type={'checkbox'} id={status.key}
-                                                       checked={this.state.filters.status.includes(status.key)}
-                                                       onChange={(event) => this.handleChange(event, 'status', status.key)}/>
-                                                <label className={'form-check-label'} htmlFor={status.key}>
-                                                    {status.value}
+                                        {Object.keys(translate.postingStatus()).map(key => (
+                                            <div className={'form-check'} key={key}>
+                                                <input className={'form-check-input'} type={'checkbox'} id={key}
+                                                       checked={this.state.filters.status.includes(key)}
+                                                       onChange={(event) => this.handleChange(event, 'status', key)}/>
+                                                <label className={'form-check-label'} htmlFor={key}>
+                                                    {translate.postingStatus(key)}
                                                 </label>
                                             </div>
                                         ))}

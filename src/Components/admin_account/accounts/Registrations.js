@@ -4,6 +4,7 @@ import image from '../../../../resources/ibc_logo.png';
 import RegistrationListItem from './RegistrationListItem';
 import { toast } from "react-toastify";
 import queryString from "query-string";
+import translate from "../../../translationService";
 
 class Registrations extends Component {
     defaultFilters = () => {
@@ -70,7 +71,7 @@ class Registrations extends Component {
             .then(() => this.setState({
                 registeredAccounts: this.state.registeredAccounts.filter(account => account.id !== id)
             }))
-            .then(() => toast('Rigistrierung akzeptiert', { type: 'success' }))
+            .then(() => toast('Registrierung akzeptiert', { type: 'success' }))
             .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
     };
 
@@ -127,10 +128,6 @@ class Registrations extends Component {
     };
 
     render() {
-        let availableTypes = [{ key: 'ibc', value: 'IBC Unternehmen' },
-            { key: 'startup', value: 'Startup' },
-            { key: 'ngo', value: 'Verein' }];
-
         return (
             <div>
                 <nav className={'navbar navbar-expand-lg navbar-light bg-light'}>
@@ -186,13 +183,13 @@ class Registrations extends Component {
                                               style={this.state.filters.company_type.length ? {} : { color: 'lightgrey' }}/>
                                     </button>
                                     <div className={'dropdown-menu p-0 pl-4 pt-2'}>
-                                        {availableTypes.map((type) => (
-                                            <div className={'form-check'} key={type.key}>
-                                                <input className={'form-check-input'} type={'checkbox'} id={type.key}
-                                                       checked={this.state.filters.company_type.includes(type.key)}
-                                                       onChange={(event) => this.handleFilterChange(event, type.key)}/>
-                                                <label className={'form-check-label'} htmlFor={type.key}>
-                                                    {type.value}
+                                        {Object.keys(translate.companyType()).map((key) => (
+                                            <div className={'form-check'} key={key}>
+                                                <input className={'form-check-input'} type={'checkbox'} id={key}
+                                                       checked={this.state.filters.company_type.includes(key)}
+                                                       onChange={(event) => this.handleFilterChange(event, key)}/>
+                                                <label className={'form-check-label'} htmlFor={key}>
+                                                    {translate.companyType(key)}
                                                 </label>
                                             </div>
                                         ))}

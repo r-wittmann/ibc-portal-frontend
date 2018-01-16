@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import backendService from '../../../backendService';
 import draftToHtml from "draftjs-to-html";
 import Header from "../Header";
+import translate from "../../../translationService";
 
 class PublicCompany extends Component {
 
@@ -37,7 +38,7 @@ class PublicCompany extends Component {
                                 <tr>
                                     <td><span className={'fa fa-info-circle'}/> <a
                                         href={this.state.company.website}> {this.state.company.website}</a></td>
-                                    <td><span className={'fa fa-users'}/> {this.state.company.employees} Mitarbeiter
+                                    <td><span className={'fa fa-users'}/> {translate.numberOfEmployees(this.state.company.employees)} Mitarbeiter
                                     </td>
                                     <td><span className={'fa fa-map-marker'}/> <span
                                         dangerouslySetInnerHTML={{ __html: this.state.company.munich_address.replace('\n', '<br>') }}/>
@@ -48,9 +49,6 @@ class PublicCompany extends Component {
                                     <td><span className={'fa fa-star'}/> <a
                                         href={this.state.company.kununu}> Bewertungen auf kununu</a></td>
                                     <td><span className={'fa fa-globe'}/> {this.state.company.locations}</td>
-                                    <td><p><span className={'fa fa-user'}/> {this.state.company.contact_name}</p></td>
-                                    <td><p><span className={'fa fa-envelope'}/> {this.state.company.contact_email}</p>
-                                        <p><span className={'fa fa-phone'}/> {this.state.company.contact_phone}</p></td>
                                 </tr>
                                 </tbody>
                             </table>
