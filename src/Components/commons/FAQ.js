@@ -37,12 +37,20 @@ class FAQ extends Component {
 					    </div>
 					    <div id="collapseTwo" className="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
 					      <div className="card-body">
-					        <h5>Frage 1</h5>
-					        <p>Antwort 1</p>
-					        <h5>Frage 2</h5>
-					        <p>Antwort 2</p>
-					        <h5>Frage 3</h5>
-					        <p>Antwort 3</p>
+					        <h5>Was für Jobs finde ich auf dem IBC Job Portal?</h5>
+					        <p>Auf dem IBC Job Portal können Studenten und Absolventen digitaler Studiengänge Jobs mit digitalem Fokus finden. Dazu gehören z.B. Jobs in der Softwareentwickung, in der digitalen Produktentwicklung, im IT-Mamagement oder im digitalen Marketing.</p>
+					        <br />
+					        <h5>Filtermöglichkeiten: Tätigkeitsbereich, Vertragsart, Zielgruppe & Unternehmen</h5>
+					        <p>Damit Studenten und Absolventen schnell und einfach den passenden Job finden können, stehen diverse Filtermöglichkeiten zur Verfügung. Unter Zielgruppe kann angegeben werden, ob es sich bei dem Jobsuchenden um einen Studenten, Masteranden oder Absolventen handelt. Bei der Vertragsart kann ausgewählt werden, nach was für einer Art von Beschäftigungsverhältnis gefiltert werden soll. Hier gibt es unteranderem die Auswahlmöglichkeiten Praktikum, Werkstudentenstelle, Traineeship und Direkteinstieg. Ein weiterer wichtiger Filter ist der Tätigkeitsbereich. Hier können Studenten und Absolventen genauer spezifizieren, nach welchem Job (Branche, Abteilung, Tätigkeitsfokus,...) sie suchen. Sollen nur Jobs bestimmter Unternehmen angezeigt werden, so kann dies mit dem Unternehmensfilter erreicht werden.</p>
+					        <br />
+					        <h5>Ich möchte mehr Informationen zu einem Unternehmen. Wo finde ich diese?</h5>
+					        <p>In der Liste an potentiellen Jobs ist immer das dazugehörige Unternehmen angezeigt. Mit Klick auf dieses Unternehmen werden Sie auf eine Unternehmensseite weitergeleitet, der Sie mehr Informationen entnehmen können. Auch von der Job-Detailseite ist die Unternehmensseite verlinkt. Außerdem finden Sie auf der Unternehmensseite einen Link zur Homepage des Unternehmens, auf der Sie mehr über das Unternehmen erfahren können.  </p>
+					        <br />
+					        <h5>Ich möchte mich für einen Job bewerben? Wie mache ich das?</h5>
+					        <p>Auf der Job-Detailseite finden Sie einen "Jetzt bewerben" Link. Hier werden Sie auf das unternehmensinterne Bewerbungs-Portal des Unternehmens weitergeleitet. Verfügt das Unternehmen über kein solches Portal werden Sie hier auf eine Seite mit weiteren Instruktionen weitergeleitet. Häufig finden Sie auch Recruiter Informationen auf einer Job-Detailseite und können sich bei Fragen direkt an den Recruiter wenden.</p>
+					        <br />
+					        <h5>Kann ich mich als Student anmelden und ein Profil anlegen?</h5>
+					        <p>Momentan ist es nicht möglich sich als Student anzumelden und ein Profil anzulegen.</p>
 					      </div>
 					    </div>
 					  </div>
@@ -92,7 +100,7 @@ class FAQ extends Component {
 					    </div>
 					    <div id="collapseFour" className="collapse" role="tabpanel" aria-labelledby="headingFour" data-parent="#accordion">
 					      <div className="card-body">
-					      	Schreiben Sie uns eine E-Mail and info@ibc-muenchen.com. Wir helfen Ihnen gerne weiter!
+					      	Haben Sie noch mehr Fragen oder Anregungen? Schreiben Sie uns eine E-Mail and info@ibc-muenchen.com. Wir helfen Ihnen gerne weiter!
 					      </div>
 					    </div>
 					  </div>
