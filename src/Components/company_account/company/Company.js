@@ -75,7 +75,8 @@ class Company extends Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={this.handleSubmit}
+                  ref={(form) => this.inputForm = form}>
                 <Header history={this.props.history}/>
                 {this.state.company &&
                 <div className={'container'}>
