@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import backendService from '../../../backendService';
-import image from '../../../../resources/ibc_logo.png'
 import AccountListItem from "./AccountListItem";
 import { toast } from "react-toastify";
 import queryString from "query-string";
 import translate from "../../../translationService";
+import Header from "../Header";
 
 class Accounts extends Component {
     defaultFilters = () => {
@@ -133,35 +133,7 @@ class Accounts extends Component {
     render() {
         return (
             <div>
-                <nav className={'navbar navbar-expand-lg navbar-light bg-light'}>
-                    <a className={'navbar-brand'} href="#"><img className={'logo'} src={image} alt={'blub'}/></a>
-                    <button className={'navbar-toggler'} type="button" data-toggle="collapse" data-target="#navbarNav"
-                            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span className={'navbar-toggler-icon'}/>
-                    </button>
-                    <div className={'collapse navbar-collapse'} id="navbarNav">
-                        <ul className={'navbar-nav mr-auto mt-2 mt-lg-0'}>
-                            <li className={'nav-item'}>
-                                <a className={'nav-link'}
-                                   onClick={() => this.props.history.push('/admin/registrations')}>Anfragen</a>
-                            </li>
-                            <li className={'nav-item active'}>
-                                <a className={'nav-link'} onClick={() => this.props.history.push('/admin/accounts')}>Alle
-                                    Accounts</a>
-                            </li>
-                            <li className={'nav-item'}>
-                                <a className={'nav-link'} href={'https://analytics.google.com/analytics/web/#embed/report-home/a71308674w167653651p167860407/'} target={'_blank'}>Analytics</a>
-                            </li>
-                        </ul>
-
-                        <ul className={'navbar-nav my-2 my-lg-0'}>
-                            <li className={'nav-item'}>
-                                <a className={'nav-link'} onClick={this.handleLogout}>Logout</a>
-                            </li>
-                        </ul>
-
-                    </div>
-                </nav>
+                <Header history={this.props.history}/>
                 <div className={'headline'}>
                     <h1>Alle Accounts</h1>
                 </div>
@@ -208,14 +180,14 @@ class Accounts extends Component {
                                     <div className={'dropdown-menu p-0 pl-4 pt-2'}>
                                         {Object.keys(translate.registrationStatus()).map((key) =>
                                             key !== 'registered' ? (
-                                            <div className={'form-check'} key={key}>
-                                                <input className={'form-check-input'} type={'checkbox'} id={key}
-                                                       checked={this.state.filters.status.includes(key)}
-                                                       onChange={(event) => this.handleFilterChange(event, 'status', key)}/>
-                                                <label className={'form-check-label'} htmlFor={key}>
-                                                    {translate.registrationStatus(key)}
-                                                </label>
-                                            </div>
+                                                <div className={'form-check'} key={key}>
+                                                    <input className={'form-check-input'} type={'checkbox'} id={key}
+                                                           checked={this.state.filters.status.includes(key)}
+                                                           onChange={(event) => this.handleFilterChange(event, 'status', key)}/>
+                                                    <label className={'form-check-label'} htmlFor={key}>
+                                                        {translate.registrationStatus(key)}
+                                                    </label>
+                                                </div>
                                             ) : null
                                         )}
                                     </div>

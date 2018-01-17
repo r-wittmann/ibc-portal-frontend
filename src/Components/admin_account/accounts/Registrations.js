@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import backendService from '../../../backendService';
-import image from '../../../../resources/ibc_logo.png';
 import RegistrationListItem from './RegistrationListItem';
 import { toast } from "react-toastify";
 import queryString from "query-string";
 import translate from "../../../translationService";
+import Header from "../Header";
 
 class Registrations extends Component {
     defaultFilters = () => {
@@ -130,37 +130,7 @@ class Registrations extends Component {
     render() {
         return (
             <div>
-                <nav className={'navbar navbar-expand-lg navbar-light bg-light'}>
-                    <a className={'navbar-brand'} onClick={() => this.props.history.push('/admin/accounts')}>
-                        <img className={'logo'} src={image} alt={'blub'}/>
-                    </a>
-                    <button className={'navbar-toggler'} type="button" data-toggle="collapse" data-target="#navbarNav"
-                            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span className={'navbar-toggler-icon'}/>
-                    </button>
-                    <div className={'collapse navbar-collapse'} id="navbarNav">
-                        <ul className={'navbar-nav mr-auto mt-2 mt-lg-0'}>
-                            <li className={'nav-item active'}>
-                                <a className={'nav-link'}
-                                   onClick={() => this.props.history.push('/admin/registrations')}>Anfragen</a>
-                            </li>
-                            <li className={'nav-item'}>
-                                <a className={'nav-link'} onClick={() => this.props.history.push('/admin/accounts')}>Alle
-                                    Accounts</a>
-                            </li>
-                            <li className={'nav-item'}>
-                                <a className={'nav-link'} href={'https://analytics.google.com/analytics/web/#embed/report-home/a71308674w167653651p167860407/'} target={'_blank'}>Analytics</a>
-                            </li>
-                        </ul>
-
-                        <ul className={'navbar-nav my-2 my-lg-0'}>
-                            <li className={'nav-item'}>
-                                <a className={'nav-link'} onClick={this.handleLogout}>Logout</a>
-                            </li>
-                        </ul>
-
-                    </div>
-                </nav>
+                <Header history={this.props.history}/>
                 <div className={'headline'}>
                     <h1>Anfragen</h1>
                 </div>

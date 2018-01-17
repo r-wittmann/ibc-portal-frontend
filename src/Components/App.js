@@ -31,6 +31,7 @@ import Footer from "./company_account/Footer";
 import FAQ from "./commons/FAQ";
 import Impressum from "./commons/Impressum";
 import Privacy from "./commons/Privacy";
+import Analytics from "./admin_account/accounts/Analytics";
 
 class App extends Component {
 
@@ -84,6 +85,7 @@ class App extends Component {
                         <Route exact path={'/company/profile/'} component={Profile}/>
                         <Route exact path={'/admin/registrations'} component={Registrations}/>
                         <Route exact path={'/admin/accounts'} component={Accounts}/>
+                        <Route exact path={'/admin/analytics'} component={Analytics}/>
                         <Redirect from={'/admin'} to={'/admin/accounts'}/>
                         <Redirect to={'/'}/>
                     </Switch>

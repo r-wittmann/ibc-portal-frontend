@@ -125,6 +125,17 @@ class BackendService {
             .then(convertResponseToJson);
     }
 
+    static getAnalytics() {
+        return fetch(`${baseUrl}/admin/accounts/analytics`, {
+            method: 'GET',
+            headers: {
+                'x-access-token': localStorage.getItem('ibc-admin-token')
+            },
+        })
+            .then(checkStatus)
+            .then(convertResponseToJson);
+    }
+
     static updateAccount(id, account) {
         return fetch(`${baseUrl}/admin/accounts/${id}`, {
             method: 'PATCH',
