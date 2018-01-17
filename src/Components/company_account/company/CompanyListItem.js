@@ -36,10 +36,16 @@ class CompanyListItem extends Component {
                     />
                 </td>
                 <td>
-                    <Link to={'/company/postings#status=active&company_id=' + this.props.company.id}>{this.props.company.activeCount}</Link>
+                    {this.props.company.activeCount
+                        ? <Link to={'/company/postings#status=active&company_id=' + this.props.company.id}>{this.props.company.activeCount}</Link>
+                        : 0
+                    }
                 </td>
                 <td>
-                    <Link to={'/company/postings#company_id=' + this.props.company.id}> {this.props.company.totalCount}</Link>
+                    {this.props.company.totalCount !== 0
+                        ? <Link to={'/company/postings#company_id=' + this.props.company.id}>{this.props.company.totalCount}</Link>
+                        : 0
+                    }
                 </td>
 
             </tr>

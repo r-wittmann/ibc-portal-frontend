@@ -36,10 +36,16 @@ class RecruiterListItem extends Component {
                     />
                 </td>
                 <td>
-                    <Link to={'/company/postings#status=active&recruiter_id=' + this.props.recruiter.id}>{this.props.recruiter.activeCount}</Link>
+                    {this.props.recruiter.activeCount
+                        ? <Link to={'/company/postings#status=active&recruiter_id=' + this.props.recruiter.id}>{this.props.recruiter.activeCount}</Link>
+                        : 0
+                    }
                 </td>
                 <td>
-                    <Link to={'/company/postings#recruiter_id=' + this.props.recruiter.id}>{this.props.recruiter.totalCount}</Link>
+                    {this.props.recruiter.totalCount !== 0
+                        ? <Link to={'/company/postings#recruiter_id=' + this.props.recruiter.id}>{this.props.recruiter.totalCount}</Link>
+                        : 0
+                    }
                 </td>
 
             </tr>
