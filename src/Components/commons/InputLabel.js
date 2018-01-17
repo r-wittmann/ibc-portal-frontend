@@ -15,7 +15,9 @@ class InputLabel extends Component {
                         type={this.props.type ? this.props.type : 'text'}
                         required={this.props.required}
                         value={this.props.value}
-                        onChange={(event) => this.props.onChange(event.target.value)}/>
+                        onChange={(event) => this.props.onChange(event.target.value)}
+                        onBlur={this.props.onBlur ? (event) => this.props.onBlur(event.target.value) : null}
+                    />
                 </div>
 
             </div>

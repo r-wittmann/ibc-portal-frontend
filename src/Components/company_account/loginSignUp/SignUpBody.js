@@ -15,6 +15,7 @@ class SignUpBody extends Component {
             case 1:
                 let reqBody = this.state;
                 delete reqBody.currentStep;
+                delete reqBody.usernameOk;
                 backendService.register(reqBody)
                     .then(() => this.props.history.push('company/home'))
                     .then(() => toast('Registrierung abgeschlossen. Sie erhalten eine Email mit einem generierten Passwort, ' +
@@ -28,6 +29,16 @@ class SignUpBody extends Component {
 
     };
 
+    checkUsername = (name) => {
+        this.setState({ name });
+        backendService.checkUsername(name)
+            .then(() => this.setState({ usernameOk: true }))
+            .catch(() => {
+                this.setState({ usernameOk: false })
+                toast('Unternehmensname existiert bereits', { type: 'error' })
+            });
+    };
+
     constructor(props) {
         super(props);
         this.state = {
@@ -38,7 +49,8 @@ class SignUpBody extends Component {
             contact_name: '',
             contact_phone: '',
             website: '',
-            currentStep: 0
+            currentStep: 0,
+            usernameOk: false
         };
     }
 
@@ -51,12 +63,8 @@ class SignUpBody extends Component {
                                     label={'Unternehmen'}
                                     required
                                     value={this.state.name}
-                                    onChange={(name) => {
-                                        this.setState({ name });
-                                        backendService.checkUsername(name)
-                                            .then(() => console.log('username ok'))
-                                            .catch(() => console.log('username taken'));
-                                    }}
+                                    onChange={(name) => this.setState({ name })}
+                                    onBlur={this.checkUsername}
                                     require={true}
                         />
                         <InputLabel
@@ -129,7 +137,10 @@ class SignUpBody extends Component {
 
 
                         <div className={'float-right'}>
-                            <input className={'btn btn-primary'} type={'submit'} value={'Nächster Schritt'}/>
+                            <button className={'btn btn-primary'}
+                                    disabled={!this.state.usernameOk}>
+                                Nächster Schritt
+                            </button>
                         </div>
                     </form>
                 )}
