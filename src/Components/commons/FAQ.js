@@ -65,27 +65,31 @@ class FAQ extends Component {
 					    <div id="collapseThree" className="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
 					      <div className="card-body">
 					       <h5>Wer darf sich als Unternehmen registrieren?</h5>
-					        <p>Antwort 1</p>
+					        <p>Das IBC Job Portal ist momentan Mitgliedunternehmen des IBCs, sowie Startups und gemeinnützigen Vereinen vorbehalten. Unser Ziel ist es, Unternehmen, die über geringe finanzielle Mittel verfügen, bei der Suche nach passenden Nachwuchsarbeitskräften zu unterstützen. Dabei bevorzugen wir Unternehmen mit einem <b>digitalen Hauptgeschäftsfeld</b>. Doch auch andere Unternehmen, die eine Vielzahl an digitalen Job zu besetzen haben, sind Willkommen auf unserer Platform zu inserieren.</p>
+					        <p> Startups müssen dabei einen Standort in München und Umgebung und weniger als 20 Mitarbeiter haben. Ihr Umsatz im letzten Jahr muss unter €10 Millionen betragen. Sie dürfen im letzten Jahr keinen Gewinn erzielt haben.</p>
+							<p> Auch Vereine müssen einen Standort in München und Umgebung vorweisen können. Sie müssen weiterhin als ein gemeinnütziger Verein eingetragen sein und dürfen keine wirtschaftliche Tätigkeit verfolgen.</p>
+							<br />
 					        <h5>Was ist wenn ich ein Konzern mit mehreren Marken und Unternehmen bin?</h5>
-					        <p>Antwort 2</p>
+					        <p>Melden Sie sich mit dem Namen Ihres Mutterunternehmens an. Dieses Unternehmen wird automatisch für Sie erstellt. Danach haben Sie die Möglichkeit in Ihrem Dashboard weitere Unternehmen anzulegen. Diese Funktion können Sie auch gerne für Ihre verschiedenen Marken verwenden.</p>
+					        <br />
 					        <h5>Welche Daten muss ich bei der Registrierung angeben?</h5>
-					        <p>Antwort 3</p>
+					        <p>Leider sind alle abgefragte Daten im Registrieungsprozess verpflichtend. Anhand dieser Daten wird der IBC entscheiden, ob Ihr Unternehmen eine geeignete Ergänzung für das IBC Job Portal ist.</p>
+					        <br />
 					        <h5>Was passiert nachdem ich die Registrieung abgeschlossen habe?</h5>
-					        <p>Antwort 4</p>
-					        <h5>Ich habe mein Passwort vergessen - was muss ich tun?</h5>
-					        <p>Antwort 5</p>
-					        <h5>Was bedeutet die Dreiteilung zwischen Unternehmen, Recruiter & Stellenanzeigen?</h5>
-					        <p>Antwort 6</p>
-					        <h5>Wie erstelle ich ein neues Unternehmen?</h5>
-					        <p>Antwort 7</p>
-					        <h5>Wie erstelle ich einen neuen Recruiter?</h5>
-					        <p>Antwort 8</p>
-					        <h5>Wie erstelle ich eine neue Stellenanzeige?</h5>
-					        <p>Antwort 9</p>
-					        <h5>Ich möchte den Status meines Unternehmens ändern - was muss ich tun?</h5>
-					        <p>Antwort 10</p>
-					        <h5>Wie ändere ich mein Passwort, meine Email Adresse oder meinen Account Ansprechpartner?</h5>
-					        <p>Antwort 11</p>
+					        <p>Nachdem Sie den Registrieungsprozess durchlaufen haben, wird Ihre Anfrage von einem IBC Mitarbeiter bearbeitet. Sie werden per E-Mail darüber informiert, ob Ihre Registrierung erfolgreich war. Wird Ihr Unternehmen akzeptiert, schicken wir Ihnen per Email ein Passwort zu, mit dem Sie sich auf dem Portal anmelden können. Ändern Sie dieses bitte sofort bei Ihrer ersten Anmeldung!</p>
+					        <br />
+					        <h5>Ich wurde abgelehnt? Was nun?</h5>	
+							<p> Wenn Sie nicht zum IBC Portal zugelassen wurden erfüllen Sie nicht die Anforderungen die oben beschrieben wurden. Sind Sie der Meinung, Sie erfüllen die Kriterien und wurden trotzdem abgelehnt, schreiben Sie uns eine Email an nfo@ibc-muenchen.com.</p>
+					        <br /><h5>Ich habe mein Passwort vergessen - was muss ich tun?</h5>
+					        <p>Auf der Login Seite finden Sie einen "Passwort vergessen" Link über den Sie ein neues Passwort anfordern können.</p>
+					        <br /><h5>Was bedeutet die Dreiteilung zwischen Unternehmen, Recruiter & Stellenanzeigen?</h5>
+					        <p>Unter dem Reiter "Unternehmen" können Sie Ihre verschiedenen Tochterunternehmen und Marken managen. Diese können Sie später einer Stellenanzeige zuweisen. Besitzen Sie ein einzelnes Unternehmen ohne weitere Tochterunternehmen oder Marken, so können Sie mit dem automatisch für Sie erstellten Unternehmen arbeiten. Fügen Sie fehlende Informationen zu Ihrem/n Unternehmen hinzu, damit Studenten sich ein genaues Bild über das Unternehmen machen können.  </p>
+					        <p>Unter dem Reiter "Recruiter" können Sie einen oder mehrere Recruiter anlegen und managen, die Sie anschließend Ihren Stellenanzeigen hinzufügen können. Studenten und Absolventen können Recruiter direkt kontaktieren und Fragen zu bestimmten Stellenanzeigen stellen. Wir erstellen für Sie automatische Ihren ersten Recruiter, der dem Ansprechpartner des Unternehmens entspricht. Sie können diese Informationen jedezeit bearbeiten.</p>
+					        <p>Unter dem Reiter "Stellenanzeigen" können Sie Ihre Stellenanzeigen anlegen und managen. Sie können einer Stellenanzeige ein Unternehmen und einen Recruiter hinzufügen um Interessenten wichtige Infos zu geben. Sie müssen bestimmte Felder ausfüllen um das Filtern Ihrer Stellenbeschreibungen zu ermöglichen. Anschließend können Sie entweder ein Textfeld für die Erstellung Ihrer Stellenanzeige nutzen, oder ein pdf hochladen. </p>
+					        <br /><h5>Ich möchte den Status meines Unternehmens ändern - was muss ich tun?</h5>
+					        <p>Den Status eines Unternehmens können Sie momentan nicht selbst ändern. Wünschen Sie eine Änderung Ihres Status, schicken Sie uns eine Email an info@ibc-muenchen.com. </p>
+					        <br /><h5>Wie ändere ich mein Passwort, meine Email Adresse oder meinen Account Ansprechpartner?</h5>
+					        <p>Im Hauptmenü in Ihrem Dashboard können Sie auf "Ihr Profil" klicken um Ihre Profildaten einzusehen. Hier finden Sie auch die Funktion "Passwort ändern".</p>
 					      </div>
 					    </div>
 					  </div>

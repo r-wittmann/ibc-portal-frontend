@@ -13,6 +13,10 @@ h1 {
     text-align: center;
 }
 
+h5{
+    font-weight: bold;
+}
+
 .login-background {
     background: url(../resources/IBC_vision_img_students_small.png) no-repeat center center fixed;
     background-size: cover;
