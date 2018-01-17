@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import backendService from '../../backendService';
 import InputLabel from "../commons/InputLabel";
+import { toast } from "react-toastify";
 
 class AdminLogin extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         backendService.adminLogin(this.state.name, this.state.password)
-            .then(() => this.props.history.push('/admin/registrations'));
+            .then(() => this.props.history.push('/admin/registrations'))
+            .catch(() => toast('Login nicht möglich. Username oder Passwort sind falsch', { type: 'error' }));
+
     };
 
     constructor(props) {

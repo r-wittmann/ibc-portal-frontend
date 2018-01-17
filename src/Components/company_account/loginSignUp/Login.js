@@ -33,7 +33,7 @@ class Login extends Component {
                             <SignUpBody history={this.props.history}/>
                         )}
 
-                        <button className={'btn btn-link'} style={{ marginLeft: 20, padding: 0 }}></button>
+                        <button className={'btn btn-link'} style={{ marginLeft: 20, padding: 0 }}/>
 
                     </div>
                 </div>

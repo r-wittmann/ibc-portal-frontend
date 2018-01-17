@@ -7,7 +7,8 @@ class LoginBody extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         backendService.login(this.state.name, this.state.password)
-            .then(() => this.props.history.push('/company/home'));
+            .then(() => this.props.history.push('/company/home'))
+            .catch(() => toast('Login nicht möglich. Username oder Passwort sind falsch', { type: 'error' }));
     };
 
     handleForgotPassword = (event) => {

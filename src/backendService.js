@@ -10,7 +10,9 @@ const checkStatus = (response) => {
     if (response.status === 403) {
         localStorage.removeItem('ibc-user-token');
         localStorage.removeItem('ibc-admin-token');
-        window.location.reload();
+        if (location.pathname !== '/admin/login' && location.pathname !== '/company/login') {
+            window.location.reload();
+        }
     }
     const error = new Error(response.statusText);
     error.response = response;
