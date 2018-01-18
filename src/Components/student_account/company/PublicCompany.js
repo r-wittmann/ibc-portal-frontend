@@ -25,13 +25,23 @@ class PublicCompany extends Component {
             <div className={'container'}>
                 {this.state.company && (
                     <div>
-                        <div className={'preview-headline'}><h2>{this.state.company.company_name.toUpperCase()}</h2>
-                        </div>
-                        <div className={'preview-logo'}>
-                            {this.state.company.logo &&
-                            <img src={this.state.company.logo} alt={'logo'}/>
-                            }
-                        </div>
+                    <table className={'table table-borderless'}>
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <div className={'preview-headline'}><h2>{this.state.company.company_name.toUpperCase()}</h2>
+                                        </div>
+                                    </td>
+                                    <td>
+                                      <div className={'preview-logo'}>
+                                        {this.state.company.logo &&
+                                        <img src={this.state.company.logo} alt={'logo'}/>
+                                        }</div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                    </table>
+                      
                         <div className={'attributes'}>
                             <table className={'table table-borderless preview-table'}>
                                 <tbody>
@@ -43,12 +53,16 @@ class PublicCompany extends Component {
                                     <td><span className={'fa fa-map-marker'}/> <span
                                         dangerouslySetInnerHTML={{ __html: this.state.company.munich_address.replace('\n', '<br>') }}/>
                                     </td>
-                                    <td><span className={'fa fa-search'}/> {this.state.company.field_of_activity}</td>
                                 </tr>
                                 <tr>
-                                    <td><span className={'fa fa-star'}/> <a
-                                        href={this.state.company.kununu}> Bewertungen auf kununu</a></td>
-                                    <td><span className={'fa fa-globe'}/> {this.state.company.locations}</td>
+                                    <td><span className={'fa fa-search'}/> {this.state.company.field_of_activity}</td>
+                                    { this.state.company.kununu ?
+                                        <td><span className={'fa fa-star'}/> <a
+                                        href={this.state.company.kununu}> Bewertungen auf kununu</a></td> : <td></td>
+                                    }
+                                    { this.state.company.locations ?
+                                        <td><span className={'fa fa-globe'}/> {this.state.company.locations}</td> : <td></td>
+                                    }
                                 </tr>
                                 </tbody>
                             </table>

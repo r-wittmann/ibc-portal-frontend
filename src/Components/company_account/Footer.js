@@ -13,11 +13,11 @@ class Footer extends Component {
     render() {
         return (
              <nav className={'navbar footer fixed-bottom navbar-expand-lg navbar-light bg-light'}>
-                <button className={'navbar-toggler'} type="button" data-toggle="collapse" data-target="#navbarNav"
-                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <button className={'navbar-toggler'} type="button" data-toggle="collapse" data-target="#footer"
+                        aria-controls="footer" aria-expanded="false" aria-label="Toggle navigation">
                     <span className={'navbar-toggler-icon'}/>
                 </button>
-                <div className={'collapse navbar-collapse'} id="navbarNav">
+                <div className={'collapse navbar-collapse'} id="footer">
                     <ul className={'navbar-nav mr-auto mt-2 mt-lg-0 ml-auto'}>
                         <li className={this.getActiveLinkClassNames('/faq')}>
                         	<Link className={'nav-link'} to={'/faq'} target={'_blank'}>FAQ</Link>

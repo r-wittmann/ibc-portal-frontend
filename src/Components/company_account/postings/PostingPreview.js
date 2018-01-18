@@ -31,10 +31,22 @@ class PostingPreview extends Component {
                 {this.props.posting && this.state.company && this.state.recruiter && (
 
                     <div>
-                        <div className={'preview-headline'}><h2>{this.props.posting.title.toUpperCase()}</h2></div>
-                        <div className={'preview-logo'}>{this.state.company.logo &&
-                        <img src={this.state.company.logo} alt={'logo'}/>}</div>
-                        <div className={'attributes'}>
+                        <div className={'table-responsive'}>
+                        <table className={'table table-borderless'}>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                            <div className={'preview-headline'}><h2>{this.props.posting.title.toUpperCase()}</h2></div>
+                                            </td>
+                                            <td>
+                                            <div className={'preview-logo'}>{this.state.company.logo &&
+                                            <img src={this.state.company.logo} alt={'logo'}/>}</div>
+                                            </td>
+                                     </tr>
+                                    </tbody>
+                        </table>
+                        </div>
+                        <div className={'table-responsive'}>
                             <table className={'table table-borderless preview-table'}>
                                 <tbody>
                                 <tr>
@@ -52,7 +64,7 @@ class PostingPreview extends Component {
                         <p><span
                             dangerouslySetInnerHTML={{ __html: draftToHtml(JSON.parse(this.props.posting.description)) }}/>
                         </p>
-                        <div className={'attributes'}>
+                        <div className={'table-responsive'}>
                             <table className={'table table-borderless preview-table'}>
                                 <tbody>
                                 <tr>
@@ -62,17 +74,30 @@ class PostingPreview extends Component {
                                     </td>
                                     <td>
                                         <p><b>{this.state.recruiter.recruiter_name}</b></p>
-                                        <p>{this.state.recruiter.position}, {this.state.recruiter.location}</p>
-                                        <p>Festnetz: {this.state.recruiter.phone}</p>
-                                        <p>Mobil: {this.state.recruiter.mobile}</p>
-                                        <p>Xing: {this.state.recruiter.xing}</p>
-                                        <p>LinkedIn: {this.state.recruiter.linked_in}</p>
+                                        { this.state.recruiter.location ?
+                                            <p>{this.state.recruiter.position}, {this.state.recruiter.location}</p> : <p>{this.state.recruiter.position}</p>
+                                        }
+                                        { this.state.recruiter.recruiter_email ?
+                                            <p>E-Mail: {this.state.recruiter.recruiter_email}</p> : <p></p>
+                                        }
+                                        { this.state.recruiter.phone ?
+                                            <p>Festnetz: {this.state.recruiter.phone}</p> : <p></p>
+                                        }
+                                        { this.state.recruiter.mobile ?
+                                            <p>Mobil: {this.state.recruiter.mobile}</p> : <p></p>
+                                        }
+                                        { this.state.recruiter.xing ? 
+                                            <p>Xing: {this.state.recruiter.xing}</p> : <p></p>
+                                        }
+                                        { this.state.recruiter.linked_in ? 
+                                            <p>LinkedIn: {this.state.recruiter.linked_in}</p> : <p></p>
+                                        }
                                     </td>
                                 </tr>
                                 </tbody>
                             </table>
                         </div>
-                        <div className={'attributes'}>
+                        <div className={'table-responsive'}>
                             <table className={'table table-borderless preview-table-posting'}>
                                 <tbody>
                                 <tr>
@@ -81,9 +106,8 @@ class PostingPreview extends Component {
                                     </td>
                                     <td><span className={'fa fa-clock'}/> {this.props.posting.working_hours}</td>
                                     <td><span className={'fa fa-edit'}/> {translate.contractType(this.props.posting.contract_type)}</td>
-                                    <td><span className={'fa fa-info-circle'}/> {translate.entryLevel(this.props.posting.entry_level)}</td>
-                                    <td><span className={'fa fa-info-circle'}/> {translate.fieldOfEmployment(this.props.posting.field_of_employment)}</td>
-                                </tr>
+                                    <td><span className={'fa fa-user'}/> {translate.entryLevel(this.props.posting.entry_level)}</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

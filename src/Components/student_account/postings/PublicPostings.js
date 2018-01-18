@@ -92,12 +92,15 @@ class PublicPostings extends Component {
                     <h1>Digitale Jobs in und um München</h1>
                 </div>
                 <div className={'container'}>
+                    <div className={'table-responsive'}>
                     <table className={'table table-hover'}>
                         <thead>
                         <tr>
+                            <th></th>
+                            <th></th>
                             <th>Titel</th>
-                            {/* no expiry date yet */}
-                            {/*<th>Ablaufdatum</th>*/}
+                            <th>Standort</th>
+                            <th>Startdatum</th>
                             <td className={'dropdown'} style={{ borderBottom: '2px solid #e9ecef' }}>
                                 <form>
                                     <button className={'btn btn-small btn-outline-dark'}
@@ -201,7 +204,7 @@ class PublicPostings extends Component {
                         )}
                         </tbody>
                     </table>
-
+                    </div>
                 </div>
             </div>
         );

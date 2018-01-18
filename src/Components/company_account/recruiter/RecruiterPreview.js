@@ -13,6 +13,7 @@ class RecruiterPreview extends Component {
                 {this.props.recruiter && (
                     <div>
                         <div className={'attributes'}>
+                        <div className={'table-responsive'}>
                             <table className={'table table-borderless preview-table'}>
                                 <tbody>
                                 <tr>
@@ -22,16 +23,29 @@ class RecruiterPreview extends Component {
                                     </td>
                                     <td>
                                         <p><b>{this.props.recruiter.recruiter_name}</b></p>
-                                        <p>{this.props.recruiter.position}, {this.props.recruiter.location}</p>
-                                        <p>E-Mail: {this.props.recruiter.recruiter_email}</p>
-                                        <p>Festnetz: {this.props.recruiter.phone}</p>
-                                        <p>Mobil: {this.props.recruiter.mobile}</p>
-                                        <p>Xing: {this.props.recruiter.xing}</p>
-                                        <p>LinkedIn: {this.props.recruiter.linked_in}</p>
+                                        { this.props.recruiter.location ?
+                                            <p>{this.props.recruiter.position}, {this.props.recruiter.location}</p> : <p>{this.props.recruiter.position}</p>
+                                        }
+                                        { this.props.recruiter.recruiter_email ?
+                                            <p>E-Mail: {this.props.recruiter.recruiter_email}</p> : <p></p>
+                                        }
+                                        { this.props.recruiter.phone ?
+                                            <p>Festnetz: {this.props.recruiter.phone}</p> : <p></p>
+                                        }
+                                        { this.props.recruiter.mobile ?
+                                            <p>Mobil: {this.props.recruiter.mobile}</p> : <p></p>
+                                        }
+                                        { this.props.recruiter.xing ? 
+                                            <p>Xing: {this.props.recruiter.xing}</p> : <p></p>
+                                        }
+                                        { this.props.recruiter.linked_in ? 
+                                            <p>LinkedIn: {this.props.recruiter.linked_in}</p> : <p></p>
+                                        }
                                     </td>
                                 </tr>
                                 </tbody>
                             </table>
+                        </div>
                         </div>
 
                     </div>

@@ -12,8 +12,20 @@ class CompanyPreview extends Component {
                 </div>
                 {this.props.company && (
                     <div>
+                    <table className={'table table-borderless'}>
+                                <tbody>
+                                <tr>
+                                    <td>
                         <div className={'preview-headline'}><h2>{this.props.company.company_name.toUpperCase()}</h2></div>
+                        </td>
+                        <td>
                         <div className={'preview-logo'}>{this.props.company.logo && <img src={this.props.company.logo} alt={'logo'}/>}</div>
+                        </td>
+                        </tr>
+                                </tbody>
+                    </table>
+
+
                         <div className={'attributes'}>
                             <table className={'table table-borderless preview-table'}>
                                 <tbody>
@@ -21,11 +33,15 @@ class CompanyPreview extends Component {
                                     <td><span className={'fa fa-info-circle'}/> <a href={this.props.company.website}> {this.props.company.website}</a></td>
                                     <td><span className={'fa fa-users'}/> {translate.numberOfEmployees(this.props.company.employees)} Mitarbeiter</td>
                                     <td><span className={'fa fa-map-marker'}/> <span dangerouslySetInnerHTML={{ __html: this.props.company.munich_address.replace('\n', '<br>') }}/></td>
-                                    <td><span className={'fa fa-search'}/>  {this.props.company.field_of_activity}</td>
                                 </tr>
                                 <tr>
-                                    <td><span className={'fa fa-star'}/> <a href={this.props.company.kununu}> Bewertungen auf kununu</a></td>
-                                    <td><span className={'fa fa-globe'}/> {this.props.company.locations}</td>
+                                    <td><span className={'fa fa-search'}/>  {this.props.company.field_of_activity}</td>
+                                { this.props.company.kununu ?
+                                    <td><span className={'fa fa-star'}/> <a href={this.props.company.kununu}> Bewertungen auf kununu</a></td> : <td></td>
+                                }
+                                { this.props.company.locations ?
+                                    <td><span className={'fa fa-globe'}/> {this.props.company.locations}</td> : <td></td>
+                                }
                                 </tr>
                                 </tbody>
                             </table>

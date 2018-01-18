@@ -162,14 +162,23 @@ h5{
 
 .preview-logo{
     float:right;
-    margin-bottom: 10px;
-    margin-top: -50px;
+    margin-top: 50px;
+    /*margin-bottom: 10px;
+    /*margin-top: -50px;*/
 }
 
 
 .preview-headline{
     margin-top: 50px;
 
+}
+
+@media only screen and (min-device-width : 375px) and (max-device-width : 667px){
+
+    .preview-headline h2{
+
+            font-size:100%;
+    }
 
 }
 
@@ -184,8 +193,15 @@ h5{
 
 }
 
+.table-borderless-row tr{
+
+    border:none;
+
+}
+
 .recruiter-logo img{
-    height:200px;
+    /*height:200px;*/
+    width: 175px;
 }
 
 .logo-table{
@@ -207,4 +223,8 @@ h5{
 
 .description{
     text-align: center;
+}
+
+.posting-logo img{
+    height:80px;
 }
