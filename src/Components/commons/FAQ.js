@@ -73,15 +73,15 @@ class FAQ extends Component {
 					        <p>Melden Sie sich mit dem Namen Ihres Mutterunternehmens an. Dieses Unternehmen wird automatisch für Sie erstellt. Danach haben Sie die Möglichkeit in Ihrem Dashboard weitere Unternehmen anzulegen. Diese Funktion können Sie auch gerne für Ihre verschiedenen Marken verwenden.</p>
 					        <br />
 					        <h5>Welche Daten muss ich bei der Registrierung angeben?</h5>
-					        <p>Leider sind alle abgefragte Daten im Registrieungsprozess verpflichtend. Anhand dieser Daten wird der IBC entscheiden, ob Ihr Unternehmen eine geeignete Ergänzung für das IBC Job Portal ist.</p>
+					        <p>Leider sind alle abgefragte Daten im Registrieungsprozess verpflichtend. Anhand dieser Daten wird der IBC entscheiden, ob Ihr Unternehmen eine geeignete Ergänzung für das IBC Job Portal ist. Außerdem werden diese Daten von unserem System verwendet, um Ihr erstes Unternehmen und Ihren ersten Recruiter anzulegen.</p>
 					        <br />
 					        <h5>Was passiert nachdem ich die Registrieung abgeschlossen habe?</h5>
 					        <p>Nachdem Sie den Registrieungsprozess durchlaufen haben, wird Ihre Anfrage von einem IBC Mitarbeiter bearbeitet. Sie werden per E-Mail darüber informiert, ob Ihre Registrierung erfolgreich war. Wird Ihr Unternehmen akzeptiert, schicken wir Ihnen per Email ein Passwort zu, mit dem Sie sich auf dem Portal anmelden können. Ändern Sie dieses bitte sofort bei Ihrer ersten Anmeldung!</p>
 					        <br />
 					        <h5>Ich wurde abgelehnt? Was nun?</h5>	
-							<p> Wenn Sie nicht zum IBC Portal zugelassen wurden erfüllen Sie nicht die Anforderungen die oben beschrieben wurden. Sind Sie der Meinung, Sie erfüllen die Kriterien und wurden trotzdem abgelehnt, schreiben Sie uns eine Email an nfo@ibc-muenchen.com.</p>
+							<p> Wenn Sie nicht zum IBC Portal zugelassen wurden erfüllen Sie nicht die Anforderungen die oben beschrieben wurden. Sind Sie der Meinung, Sie erfüllen die Kriterien und wurden trotzdem abgelehnt, schreiben Sie uns eine Email an info@ibc-muenchen.com.</p>
 					        <br /><h5>Ich habe mein Passwort vergessen - was muss ich tun?</h5>
-					        <p>Auf der Login Seite finden Sie einen "Passwort vergessen" Link über den Sie ein neues Passwort anfordern können.</p>
+					        <p>Auf der Login Seite finden Sie einen "Passwort vergessen" Link über den Sie ein neues Passwort anfordern können. Hierfür brauchen Sie nur den Unternehmensnamen, über den Sie sich registriert haben. Sollten Sie hier Probleme haben, wenden Sie sich bitte an info@ibc-muenchen.com.</p>
 					        <br /><h5>Was bedeutet die Dreiteilung zwischen Unternehmen, Recruiter & Stellenanzeigen?</h5>
 					        <p>Unter dem Reiter "Unternehmen" können Sie Ihre verschiedenen Tochterunternehmen und Marken managen. Diese können Sie später einer Stellenanzeige zuweisen. Besitzen Sie ein einzelnes Unternehmen ohne weitere Tochterunternehmen oder Marken, so können Sie mit dem automatisch für Sie erstellten Unternehmen arbeiten. Fügen Sie fehlende Informationen zu Ihrem/n Unternehmen hinzu, damit Studenten sich ein genaues Bild über das Unternehmen machen können.  </p>
 					        <p>Unter dem Reiter "Recruiter" können Sie einen oder mehrere Recruiter anlegen und managen, die Sie anschließend Ihren Stellenanzeigen hinzufügen können. Studenten und Absolventen können Recruiter direkt kontaktieren und Fragen zu bestimmten Stellenanzeigen stellen. Wir erstellen für Sie automatische Ihren ersten Recruiter, der dem Ansprechpartner des Unternehmens entspricht. Sie können diese Informationen jedezeit bearbeiten.</p>
