@@ -23,6 +23,8 @@ class RecruiterPreview extends Component {
                                     </td>
                                     <td>
                                         <p><b>{this.props.recruiter.recruiter_name}</b></p>
+                                        <div className={'recruiter-info'}>
+
                                         { this.props.recruiter.location ?
                                             <p>{this.props.recruiter.position}, {this.props.recruiter.location}</p> : <p>{this.props.recruiter.position}</p>
                                         }
@@ -41,6 +43,7 @@ class RecruiterPreview extends Component {
                                         { this.props.recruiter.linked_in ? 
                                             <p>LinkedIn: {this.props.recruiter.linked_in}</p> : <p></p>
                                         }
+                                        </div>
                                     </td>
                                 </tr>
                                 </tbody>

@@ -74,6 +74,7 @@ class PostingPreview extends Component {
                                     </td>
                                     <td>
                                         <p><b>{this.state.recruiter.recruiter_name}</b></p>
+                                        <div className={'recruiter-info'}>
                                         { this.state.recruiter.location ?
                                             <p>{this.state.recruiter.position}, {this.state.recruiter.location}</p> : <p>{this.state.recruiter.position}</p>
                                         }
@@ -92,12 +93,13 @@ class PostingPreview extends Component {
                                         { this.state.recruiter.linked_in ? 
                                             <p>LinkedIn: {this.state.recruiter.linked_in}</p> : <p></p>
                                         }
+                                        </div>
                                     </td>
                                 </tr>
                                 </tbody>
                             </table>
                         </div>
-                        <div className={'table-responsive'}>
+                        <div className={'table-responsive'} style={{marginTop: -15}}>
                             <table className={'table table-borderless preview-table-posting'}>
                                 <tbody>
                                 <tr>

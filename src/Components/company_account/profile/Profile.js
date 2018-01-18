@@ -46,7 +46,7 @@ class Profile extends Component {
                                 </label>
                             </div>
                             <InputLabel
-                                label={'Kontakt'}
+                                label={'Kontaktperson'}
                                 required
                                 value={this.state.profile.contact_name}
                                 onChange={(contact_name) => this.setState({

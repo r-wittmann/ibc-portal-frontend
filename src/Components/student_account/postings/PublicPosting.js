@@ -27,6 +27,15 @@ class PublicPosting extends Component {
             <div className={'container'}>
                 {this.state.posting &&
                 <div>
+
+                <div className='float-right'>
+                <br/>
+                    <a className={'btn btn-primary buttons-form'}
+                            href={this.state.posting.application_link} target={'_blank'}>
+                        Bewerben
+                    </a>
+                </div>
+
                 <div className={'table-responsive'}>
                 <table className={'table table-borderless'}>
                                 <tbody>
@@ -73,6 +82,7 @@ class PublicPosting extends Component {
                                 </td>
                                 <td>
                                         <p><b>{this.state.posting.recruiter_name}</b></p>
+                                        <div className={'recruiter-info'}>
                                         { this.state.posting.location ?
                                             <p>{this.state.posting.position}, {this.state.posting.location}</p> : <p>{this.state.posting.position}</p>
                                         }
@@ -91,12 +101,13 @@ class PublicPosting extends Component {
                                         { this.state.posting.linked_in ? 
                                             <p>LinkedIn: {this.state.posting.linked_in}</p> : <p></p>
                                         }
+                                        </div>
                                     </td>
                             </tr>
                             </tbody>
                         </table>
                         </div>
-                        <div className={'table-responsive'}>
+                        <div className={'table-responsive'} style={{marginTop: -15}}>
                         <table className={'table table-borderless preview-table-posting'}>
                             <tbody>
                             <tr>

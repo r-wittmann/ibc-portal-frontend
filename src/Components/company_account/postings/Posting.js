@@ -266,6 +266,7 @@ class Posting extends Component {
                                                     posting: Object.assign({}, this.state.posting, { description })
                                                 })}/>
                                         </div>
+                                        <br/>
                                         <div className={"form-group row"}>
                                             <label className={'col-4 col-form-label'}>
                                                 Erstellen im Status
