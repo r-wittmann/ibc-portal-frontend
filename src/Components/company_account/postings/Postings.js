@@ -24,11 +24,20 @@ class Postings extends Component {
     };
 
     handleStatusChange = (id, status) => {
-        backendService.updatePosting(id, { status })
+
+        let expiryDate = new Date();
+        expiryDate.setDate(expiryDate.getDate() + 60);
+
+        let expiry_date = status === 'active'
+            ? expiryDate
+            : '';
+
+        backendService.updatePosting(id, { status, expiry_date })
             .then(() => this.setState({
                     posting: this.state.postings.map(posting => {
                         if (id === posting.id) {
                             posting.status = status;
+                            posting.expiry_date = expiry_date;
                         }
                         return posting;
                     })
@@ -137,8 +146,7 @@ class Postings extends Component {
                         <thead>
                         <tr>
                             <th>Titel</th>
-                            {/* no expiry date yet */}
-                            {/*<th>Ablaufdatum</th>*/}
+                            <th>Ablaufdatum</th>
                             <td className={'dropdown'} style={{ borderBottom: '2px solid #e9ecef' }}>
                                 <form>
                                     <button className={'btn btn-small btn-outline-dark'}

@@ -30,10 +30,19 @@ class Posting extends Component {
             }
         } else {
             event.preventDefault();
+
+            let expiryDate = new Date();
+            expiryDate.setDate(expiryDate.getDate() + 60);
+
             if (!this.state.create) {
                 let updatedPosting = this.state.posting;
                 delete(updatedPosting.created_at);
                 delete(updatedPosting.updated_at);
+                if (this.state.originalPostingStatus !== updatedPosting.status) {
+                    updatedPosting.expiry_date = updatedPosting.status === 'active'
+                        ? expiryDate
+                        : '';
+                }
                 backendService.updatePosting(this.props.match.params.id, updatedPosting)
                     .then(() => this.props.history.push(`/company/postings`))
                     .then(() => toast('Anzeige aktualisiert', { type: 'success' }))
@@ -42,6 +51,9 @@ class Posting extends Component {
                 let posting = this.state.posting;
                 if (posting.company_id === '') posting.company_id = this.state.companies[0].id;
                 if (posting.recruiter_id === '') posting.recruiter_id = this.state.recruiters[0].id;
+                posting.expiry_date = posting.status === 'active'
+                    ? expiryDate
+                    : '';
                 backendService.createPosting(posting)
                     .then(() => this.props.history.push(`/company/postings`))
                     .then(() => toast('Anzeige erstellt', { type: 'success' }))
@@ -64,7 +76,8 @@ class Posting extends Component {
             posting: undefined,
             create: this.props.match.params.id === 'create',
             companies: [],
-            recruiters: []
+            recruiters: [],
+            originalPostingStatus: ''
         };
     }
 
@@ -74,9 +87,9 @@ class Posting extends Component {
         }
         if (!this.state.create) {
             backendService.getPostingById(this.props.match.params.id)
-                .then(posting => this.setState({ posting }))
+                .then(posting => this.setState({ posting, originalPostingStatus: posting.status }))
         } else {
-            this.setState({ posting: defaultPosting });
+            this.setState({ posting: defaultPosting, originalPostingStatus: defaultPosting.status });
         }
         backendService.getCompanies().then(companies => this.setState({ companies }));
         backendService.getRecruiters().then(recruiters => this.setState({ recruiters }));

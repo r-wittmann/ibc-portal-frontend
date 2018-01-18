@@ -11,8 +11,9 @@ class PostingListItem extends Component {
                 <td>
                     <Link to={`/company/postings/${this.props.posting.id}`}>{this.props.posting.title}</Link>
                 </td>
-                {/* no expiry date yet */}
-                {/*<td>{this.props.posting.expiry_date}</td>*/}
+                <td>{this.props.posting.expiry_date
+                    ? new Date(this.props.posting.expiry_date).toLocaleDateString('de-DE')
+                    : '-' }</td>
                 <td>{this.props.posting.contract_type}</td>
                 <td>
                     <Link to={'/company/companies/' + this.props.posting.company_id + '/preview'}>{this.props.posting.company_name}</Link>
