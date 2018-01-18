@@ -35,7 +35,9 @@ class CompanyPreview extends Component {
                                     <td><span className={'fa fa-map-marker'}/> <span dangerouslySetInnerHTML={{ __html: this.props.company.munich_address.replace('\n', '<br>') }}/></td>
                                 </tr>
                                 <tr>
-                                    <td><span className={'fa fa-search'}/>  {this.props.company.field_of_activity}</td>
+                                { this.props.company.field_of_activity ?
+                                    <td><span className={'fa fa-search'}/>  {this.props.company.field_of_activity}</td> : <td></td>
+                                }
                                 { this.props.company.kununu ?
                                     <td><span className={'fa fa-star'}/> <a href={this.props.company.kununu}> Bewertungen auf kununu</a></td> : <td></td>
                                 }

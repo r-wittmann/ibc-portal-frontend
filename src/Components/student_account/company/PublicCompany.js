@@ -55,7 +55,9 @@ class PublicCompany extends Component {
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><span className={'fa fa-search'}/> {this.state.company.field_of_activity}</td>
+                                    { this.state.company.field_of_activity ?
+                                        <td><span className={'fa fa-search'}/> {this.state.company.field_of_activity}</td> : <td></td>
+                                    }
                                     { this.state.company.kununu ?
                                         <td><span className={'fa fa-star'}/> <a
                                         href={this.state.company.kununu}> Bewertungen auf kununu</a></td> : <td></td>
