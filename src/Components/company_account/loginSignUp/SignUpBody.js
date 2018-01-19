@@ -19,7 +19,7 @@ class SignUpBody extends Component {
                 backendService.register(reqBody)
                     .then(() => this.props.history.push('company/home'))
                     .then(() => toast('Registrierung abgeschlossen. Sie erhalten eine Email mit einem generierten Passwort, ' +
-                        'nachdem ihre Registrirung von uns überprüft wurde. Dies kann bis zu drei Werktage dauern.',
+                        'nachdem ihre Registrierung von uns überprüft wurde. Dies kann bis zu drei Werktage dauern.',
                         { type: 'success', autoClose: false }))
                     .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
                 break;
@@ -147,7 +147,7 @@ class SignUpBody extends Component {
                 {this.state.currentStep === 1 && (
                     <form onSubmit={(event) => this.handleSubmit(1, event)}>
                         <InputLabel
-                            label={'Kontakt'}
+                            label={'Kontaktperson'}
                             className="form-control"
                             required
                             value={this.state.contact_name}
