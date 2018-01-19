@@ -22,7 +22,7 @@ class Header extends Component {
         return (
 
             <nav className={'navbar navbar-expand-lg navbar-light bg-light'}>
-                <a className={'navbar-brand'} onClick={() => this.props.history.push('/company/home')}>
+                <a className={'navbar-brand'} onClick={() => this.props.history.push('/')}>
                     <img className={'logo'} src={image} alt={'blub'}/>
                 </a>
                 <button className={'navbar-toggler'} type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -35,7 +35,7 @@ class Header extends Component {
                             <a className={'nav-link'} onClick={() => this.props.history.push('/')}>Für Studenten</a>
                         </li>
                         <li className={this.getActiveLinkClassNames('/company/companies')}>
-                            <a className={'nav-link'} onClick={() => this.props.history.push('/company/companies')}>
+                            <a className={'nav-link'} onClick={() => this.props.history.push('/company/login')}>
                                 Für Unternehmen</a>
                         </li>
                     </ul>
