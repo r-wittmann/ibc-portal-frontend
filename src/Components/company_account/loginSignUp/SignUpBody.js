@@ -20,7 +20,7 @@ class SignUpBody extends Component {
                     .then(() => this.props.history.push('company/home'))
                     .then(() => toast('Registrierung abgeschlossen. Sie erhalten eine Email mit einem generierten Passwort, ' +
                         'nachdem ihre Registrierung von uns überprüft wurde. Dies kann bis zu drei Werktage dauern.',
-                        { type: 'success', autoClose: false }))
+                        { type: 'success' }))
                     .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
                 break;
             default:
