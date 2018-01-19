@@ -73,6 +73,7 @@ class TranslationService {
         let dictionary = {
             Studenten: 'Studenten',
             Masteranden: 'Masteranden',
+            Bacheloranden: 'Bacheloranden',
             Absolventen: 'Absolventen'
         };
         if (key) {
