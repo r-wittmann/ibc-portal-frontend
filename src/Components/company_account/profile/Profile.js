@@ -9,9 +9,14 @@ import translate from "../../../translationService";
 class Profile extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
-        backendService.updateProfile(this.state.profile)
-            .then(() => toast('Profil aktualisiert', { type: 'success' }))
-            .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
+        if (this.inputForm.hasAttribute('novalidate') && !this.inputForm.checkValidity()) {
+            event.stopPropagation();
+            this.inputForm.classList.add('was-validated')
+        } else {
+            backendService.updateProfile(this.state.profile)
+                .then(() => toast('Profil aktualisiert', { type: 'success' }))
+                .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
+        }
     };
 
     constructor(props) {
@@ -36,7 +41,9 @@ class Profile extends Component {
                 </div>
                 <div className={'container'}>
                     {this.state.profile && (
-                        <form onSubmit={this.handleSubmit}>
+                        <form onSubmit={this.handleSubmit}
+                              ref={(form) => this.inputForm = form}
+                              noValidate>
                             <div className='form-group row'>
                                 <label className='col-4 col-form-label'>
                                     Unternehmen
@@ -59,14 +66,17 @@ class Profile extends Component {
                                 value={this.state.profile.email}
                                 onChange={(email) => this.setState({
                                     profile: Object.assign({}, this.state.profile, { email })
-                                })}/>
+                                })}
+                                errorMessage={'Bitte eine valide Email-Adresse eingeben'}/>
                             <InputLabel
                                 label={'Telefon'}
                                 required
+                                type={'number'}
                                 value={this.state.profile.contact_phone}
                                 onChange={(contact_phone) => this.setState({
                                     profile: Object.assign({}, this.state.profile, { contact_phone })
-                                })}/>
+                                })}
+                                errorMessage={'Telefon ist ein Pflichtfeld'}/>
                             <div className='form-group row'>
                                 <label className='col-4 col-form-label'>
                                     Unternehmenstyp
@@ -81,8 +91,6 @@ class Profile extends Component {
                                     Passwort ändern
                                 </button>
                             </div>
-
-                            <PasswordModal/>
                             <div>
                                 <input type={'submit'} className={'btn btn-success float-right buttons-form'}
                                        value={'Speichern'}/>
@@ -94,6 +102,7 @@ class Profile extends Component {
                                 onClick={() => this.props.history.push('/company/home')}>Abbrechen
                         </button>
                     </div>
+                    <PasswordModal/>
                 </div>
             </div>
         );

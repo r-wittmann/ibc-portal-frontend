@@ -9,27 +9,33 @@ class PasswordModal extends Component {
             old: '',
             new: '',
             confirm: ''
-        })
+        });
+        this.inputForm.classList.remove('was-validated');
     };
+
     handleSubmit = (event) => {
         event.preventDefault();
-        this.resetState();
-        if (this.state.old === this.state.new) {
-            toast('Altes und neues Passwort dürfen nicht übereinstimmen', { type: 'error' })
-        } else if (this.state.new === this.state.confirm) {
-            backendService.updatePassword(this.state.old, this.state.new)
-                .then(() => toast('Passwort aktualisiert', { type: 'success' }))
-                .then(() => {
-                    let modal = document.getElementById('changePassword');
-                    modal.classList.remove('show');
-                    modal.style.display = 'none';
-                    document.body.classList.remove('modal-open');
-                    let backdrop = document.getElementsByClassName('modal-backdrop')[0];
-                    backdrop.parentNode.removeChild(backdrop);
-                })
-            .catch(() => toast('Das alte Passwort stimmt nicht mit dem von uns gespeicherten Passwort überein', { type: 'error' }));
+        if (this.inputForm.hasAttribute('novalidate') && !this.inputForm.checkValidity()) {
+            event.stopPropagation();
+            this.inputForm.classList.add('was-validated');
         } else {
-            toast('Neues Password und Bestätigung stimmen nicht überein', { type: 'error' })
+            if (this.state.old === this.state.new) {
+                toast('Altes und neues Passwort dürfen nicht übereinstimmen', { type: 'error' })
+            } else if (this.state.new === this.state.confirm) {
+                backendService.updatePassword(this.state.old, this.state.new)
+                    .then(() => toast('Passwort aktualisiert', { type: 'success' }))
+                    .then(() => {
+                        let modal = document.getElementById('changePassword');
+                        modal.classList.remove('show');
+                        modal.style.display = 'none';
+                        document.body.classList.remove('modal-open');
+                        let backdrop = document.getElementsByClassName('modal-backdrop')[0];
+                        backdrop.parentNode.removeChild(backdrop);
+                    })
+                    .catch(() => toast('Das alte Passwort stimmt nicht mit dem von uns gespeicherten Passwort überein', { type: 'error' }));
+            } else {
+                toast('Neues Password und Bestätigung stimmen nicht überein', { type: 'error' })
+            }
         }
     };
 
@@ -50,23 +56,31 @@ class PasswordModal extends Component {
                         <div className="modal-header">
                             <h5 className="modal-title">Passwort ändern</h5>
                         </div>
-                        <div className="modal-body">
+                        <form className="modal-body"
+                              ref={(form) => this.inputForm = form}
+                              noValidate>
                             <InputLabel
                                 label={'Altes Passwort'}
                                 type={'password'}
+                                required
                                 value={this.state.old}
-                                onChange={(old) => this.setState({ old })}/>
+                                onChange={(old) => this.setState({ old })}
+                                errorMessage={'Altes Passwort ist ein Pflichtfeld'}/>
                             <InputLabel
                                 label={'Neues Passwort'}
                                 type={'password'}
+                                required
                                 value={this.state.new}
-                                onChange={(newPW) => this.setState({ new: newPW })}/>
+                                onChange={(newPW) => this.setState({ new: newPW })}
+                                errorMessage={'Neues Passwort ist ein Pflichtfeld'}/>
                             <InputLabel
                                 label={'Bestätigen'}
                                 type={'password'}
+                                required
                                 value={this.state.confirm}
-                                onChange={(confirm) => this.setState({ confirm })}/>
-                        </div>
+                                onChange={(confirm) => this.setState({ confirm })}
+                                errorMessage={'Bitte Passwort bestätigen'}/>
+                        </form>
                         <div className="modal-footer">
                             <button type="button"
                                     onClick={this.resetState}
