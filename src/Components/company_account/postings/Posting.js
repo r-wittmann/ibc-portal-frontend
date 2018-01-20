@@ -11,56 +11,63 @@ import translate from "../../../translationService";
 
 class Posting extends Component {
     handleSubmit = (event) => {
-        if (event.target.getAttribute('id') === 'preview') {
-            if (this.inputForm.checkValidity()) {
-                this.setState({
-                    posting: Object.assign({}, this.state.posting,
-                        {
-                            company_id: this.state.posting.company_id === ''
-                                ? this.state.companies[0].id
-                                : this.state.posting.company_id,
-                            recruiter_id: this.state.posting.recruiter_id === ''
-                                ? this.state.recruiters[0].id
-                                : this.state.posting.recruiter_id
-                        })
-                });
-                this.setState({ preview: true });
-            } else {
-                return false;
-            }
+        event.preventDefault();
+        if (this.inputForm.hasAttribute('novalidate') && !this.inputForm.checkValidity()) {
+            event.stopPropagation();
+            this.inputForm.classList.add('was-validated')
+        } else if (event.target.getAttribute('id') === 'preview') {
+            this.startPreview();
         } else {
-            event.preventDefault();
-
-            let expiryDate = new Date();
-            expiryDate.setDate(expiryDate.getDate() + 60);
-
-            if (!this.state.create) {
-                let updatedPosting = this.state.posting;
-                delete(updatedPosting.created_at);
-                delete(updatedPosting.updated_at);
-                if (this.state.originalPostingStatus !== updatedPosting.status) {
-                    updatedPosting.expiry_date = updatedPosting.status === 'active'
-                        ? expiryDate
-                        : '';
-                }
-                backendService.updatePosting(this.props.match.params.id, updatedPosting)
-                    .then(() => this.props.history.push(`/company/postings`))
-                    .then(() => toast('Anzeige aktualisiert', { type: 'success' }))
-                    .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
-            } else {
-                let posting = this.state.posting;
-                if (posting.company_id === '') posting.company_id = this.state.companies[0].id;
-                if (posting.recruiter_id === '') posting.recruiter_id = this.state.recruiters[0].id;
-                posting.expiry_date = posting.status === 'active'
-                    ? expiryDate
-                    : '';
-                backendService.createPosting(posting)
-                    .then(() => this.props.history.push(`/company/postings`))
-                    .then(() => toast('Anzeige erstellt', { type: 'success' }))
-                    .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
-            }
+            this.savePosting();
         }
     };
+
+    startPreview = () => {
+        this.setState({
+            posting: Object.assign({}, this.state.posting,
+                {
+                    company_id: this.state.posting.company_id === ''
+                        ? this.state.companies[0].id
+                        : this.state.posting.company_id,
+                    recruiter_id: this.state.posting.recruiter_id === ''
+                        ? this.state.recruiters[0].id
+                        : this.state.posting.recruiter_id
+                })
+        });
+        this.setState({ preview: true });
+    };
+
+    savePosting = () => {
+        let expiryDate = new Date();
+        expiryDate.setDate(expiryDate.getDate() + 60);
+
+        if (!this.state.create) {
+            let updatedPosting = this.state.posting;
+            delete(updatedPosting.created_at);
+            delete(updatedPosting.updated_at);
+            if (this.state.originalPostingStatus !== updatedPosting.status) {
+                updatedPosting.expiry_date = updatedPosting.status === 'active'
+                    ? expiryDate
+                    : '';
+            }
+            backendService.updatePosting(this.props.match.params.id, updatedPosting)
+                .then(() => this.props.history.push(`/company/postings`))
+                .then(() => toast('Anzeige aktualisiert', { type: 'success' }))
+                .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
+        } else {
+            let posting = this.state.posting;
+            if (posting.company_id === '') posting.company_id = this.state.companies[0].id;
+            if (posting.recruiter_id === '') posting.recruiter_id = this.state.recruiters[0].id;
+            posting.expiry_date = posting.status === 'active'
+                ? expiryDate
+                : '';
+            backendService.createPosting(posting)
+                .then(() => this.props.history.push(`/company/postings`))
+                .then(() => toast('Anzeige erstellt', { type: 'success' }))
+                .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
+        }
+    };
+
     handleDelete = (event) => {
         event.preventDefault();
         backendService.deletePosting(this.state.posting.id)
@@ -98,7 +105,8 @@ class Posting extends Component {
     render() {
         return (
             <form onSubmit={this.handleSubmit}
-                  ref={(form) => { this.inputForm = form; }}>
+                  ref={(form) => this.inputForm = form}
+                  noValidate>
                 <Header history={this.props.history}/>
                 {this.state.posting &&
                 <div className={'container'}>
@@ -127,13 +135,13 @@ class Posting extends Component {
                                 <div>
                                     <div>
                                         <InputLabel
-                                            label={'Title'}
+                                            label={'Titel'}
                                             required
                                             value={this.state.posting.title}
                                             onChange={(title) => this.setState({
                                                 posting: Object.assign({}, this.state.posting, { title })
                                             })}
-                                        />
+                                            errorMessage={'Titel ist ein Pflichtfeld'}/>
                                         {this.state.companies.length > 0 &&
                                         <div className={"form-group row"}>
                                             <label className={'col-4 col-form-label'}>
@@ -164,7 +172,7 @@ class Posting extends Component {
                                             onChange={(place_of_employment) => this.setState({
                                                 posting: Object.assign({}, this.state.posting, { place_of_employment })
                                             })}
-                                        />
+                                            errorMessage={'Standort ist ein Pflichtfeld'}/>
                                         <InputLabel
                                             label={'Startdatum'}
                                             required
@@ -172,7 +180,7 @@ class Posting extends Component {
                                             onChange={(start_of_employment) => this.setState({
                                                 posting: Object.assign({}, this.state.posting, { start_of_employment })
                                             })}
-                                        />
+                                            errorMessage={'Startdatum ist ein Pflichtfeld'}/>
                                         <div className={"form-group row"}>
                                             <label className={'col-4 col-form-label'}>
                                                 Vertragslaufzeit
@@ -184,7 +192,8 @@ class Posting extends Component {
                                                             posting: Object.assign({}, this.state.posting, { contract_duration: event.target.value })
                                                         })}>
                                                     {Object.keys(translate.contractDuration()).map(key =>
-                                                        <option key={key} value={key}>{translate.contractDuration(key)}</option>
+                                                        <option key={key}
+                                                                value={key}>{translate.contractDuration(key)}</option>
                                                     )}
                                                 </select>
                                             </div>
@@ -196,7 +205,7 @@ class Posting extends Component {
                                             onChange={(working_hours) => this.setState({
                                                 posting: Object.assign({}, this.state.posting, { working_hours })
                                             })}
-                                        />
+                                            errorMessage={'Wochenstunden ist ein Pflichtfeld'}/>
                                         <div className={"form-group row"}>
                                             <label className={'col-4 col-form-label'}>
                                                 Vertragstyp
@@ -208,7 +217,8 @@ class Posting extends Component {
                                                             posting: Object.assign({}, this.state.posting, { contract_type: event.target.value })
                                                         })}>
                                                     {Object.keys(translate.contractType()).map(key =>
-                                                        <option key={key} value={key}>{translate.contractType(key)}</option>
+                                                        <option key={key}
+                                                                value={key}>{translate.contractType(key)}</option>
                                                     )}
                                                 </select>
                                             </div>
@@ -224,7 +234,8 @@ class Posting extends Component {
                                                             posting: Object.assign({}, this.state.posting, { entry_level: event.target.value })
                                                         })}>
                                                     {Object.keys(translate.entryLevel()).map(key =>
-                                                        <option key={key} value={key}>{translate.entryLevel(key)}</option>
+                                                        <option key={key}
+                                                                value={key}>{translate.entryLevel(key)}</option>
                                                     )}
                                                 </select>
                                             </div>
@@ -237,7 +248,7 @@ class Posting extends Component {
                                             onChange={(application_link) => this.setState({
                                                 posting: Object.assign({}, this.state.posting, { application_link })
                                             })}
-                                        />
+                                            errorMessage={'Bitte eine valide URL eingeben'}/>
                                         <div className={"form-group row"}>
                                             <label className={'col-4 col-form-label'}>
                                                 Recruiter
@@ -266,7 +277,8 @@ class Posting extends Component {
                                                             posting: Object.assign({}, this.state.posting, { field_of_employment: event.target.value })
                                                         })}>
                                                     {Object.keys(translate.fieldOfEmployment()).map(key =>
-                                                        <option key={key} value={key}>{translate.fieldOfEmployment(key)}</option>
+                                                        <option key={key}
+                                                                value={key}>{translate.fieldOfEmployment(key)}</option>
                                                     )}
                                                 </select>
                                             </div>
@@ -291,7 +303,8 @@ class Posting extends Component {
                                                             posting: Object.assign({}, this.state.posting, { status: event.target.value })
                                                         })}>
                                                     {Object.keys(translate.postingStatus()).map(key =>
-                                                        <option key={key} value={key}>{translate.postingStatus(key)}</option>
+                                                        <option key={key}
+                                                                value={key}>{translate.postingStatus(key)}</option>
                                                     )}
                                                 </select>
                                             </div>
