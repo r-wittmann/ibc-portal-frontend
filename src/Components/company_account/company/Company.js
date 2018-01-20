@@ -12,14 +12,11 @@ import translate from "../../../translationService";
 
 class Company extends Component {
     handleSubmit = (event) => {
-        if (event.target.getAttribute('id') === 'preview') {
-            if (this.inputForm.checkValidity()) {
-                this.setState({ preview: true });
-            } else {
-                return false;
-            }
+        event.preventDefault();
+        if (this.inputForm.hasAttribute('novalidate') && !this.inputForm.checkValidity()) {
+            event.stopPropagation();
+            this.inputForm.classList.add('was-validated')
         } else {
-            event.preventDefault();
             if (event.target.getAttribute('id') === 'preview') {
                 this.setState({ preview: true });
             } else {
@@ -76,7 +73,8 @@ class Company extends Component {
     render() {
         return (
             <form onSubmit={this.handleSubmit}
-                  ref={(form) => this.inputForm = form}>
+                  ref={(form) => this.inputForm = form}
+                  noValidate>
                 <Header history={this.props.history}/>
                 {this.state.company &&
                 <div className={'container'}>
@@ -109,7 +107,8 @@ class Company extends Component {
                                         value={this.state.company.company_name}
                                         onChange={(company_name) => this.setState({
                                             company: Object.assign({}, this.state.company, { company_name })
-                                        })}/>
+                                        })}
+                                        errorMessage={'Unternehmensname ist ein Pflichtfeld'}/>
                                     <div className='form-group row'>
                                         <label htmlFor={'address'} className='col-4 col-form-label'>
                                             Adresse in München
@@ -124,6 +123,7 @@ class Company extends Component {
                                                 onChange={(event) => this.setState({
                                                     company: Object.assign({}, this.state.company, { munich_address: event.target.value })
                                                 })}/>
+                                            <div className={'invalid-feedback'}>Adresse in München ist ein Pflichtfeld</div>
                                         </div>
                                     </div>
                                     <InputLabel
@@ -144,7 +144,8 @@ class Company extends Component {
                                                         company: Object.assign({}, this.state.company, { employees: event.target.value })
                                                     })}>
                                                 {Object.keys(translate.numberOfEmployees()).map(key =>
-                                                    <option key={key} value={key}>{translate.numberOfEmployees(key)}</option>
+                                                    <option key={key}
+                                                            value={key}>{translate.numberOfEmployees(key)}</option>
                                                 )}
                                             </select>
                                         </div>
@@ -156,7 +157,7 @@ class Company extends Component {
                                         onChange={(website) => this.setState({
                                             company: Object.assign({}, this.state.company, { website })
                                         })}
-                                    />
+                                        errorMessage={'Bitte eine valide URL eingeben'}/>
                                     <InputLabel
                                         label={'kununu Link'}
                                         value={this.state.company.kununu}
@@ -169,7 +170,8 @@ class Company extends Component {
                                         value={this.state.company.field_of_activity}
                                         onChange={(field_of_activity) => this.setState({
                                             company: Object.assign({}, this.state.company, { field_of_activity })
-                                        })}/>
+                                        })}
+                                        errorMessage={'Haupttätigkeitsbereich ist ein Pflichtfeld'}/>
                                     <div className='form-group row'>
                                         <label htmlFor={'logo'} className='col-4 col-form-label'>
                                             Firmenlogo
