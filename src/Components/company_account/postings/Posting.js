@@ -242,7 +242,7 @@ class Posting extends Component {
                                         </div>
                                         <InputLabel
                                             label={'Bewerbungslink'}
-                                            type={"text"}
+                                            type={"url"}
                                             required={true}
                                             value={this.state.posting.application_link}
                                             onChange={(application_link) => this.setState({
