@@ -10,33 +10,35 @@ import ConfirmModal from "../../commons/ConfirmModal";
 
 class Recruiter extends Component {
     handleSubmit = (event) => {
-        if (event.target.getAttribute('id') === 'preview') {
-            if (this.inputForm.checkValidity()) {
+        event.preventDefault();
+        if (this.inputForm.hasAttribute('novalidate') && !this.inputForm.checkValidity()) {
+            event.stopPropagation();
+            this.inputForm.classList.add('was-validated')
+        } else {
+            if (event.target.getAttribute('id') === 'preview') {
                 this.setState({ preview: true });
             } else {
-                return false;
-            }
-        } else {
-            event.preventDefault();
-            if (!this.state.create) {
-                let updatedRecruiter = this.state.recruiter;
-                delete(updatedRecruiter.created_at);
-                delete(updatedRecruiter.updated_at);
-                if (!this.state.photoChanged) {
-                    delete(updatedRecruiter.photo);
+                if (!this.state.create) {
+                    let updatedRecruiter = this.state.recruiter;
+                    delete(updatedRecruiter.created_at);
+                    delete(updatedRecruiter.updated_at);
+                    if (!this.state.photoChanged) {
+                        delete(updatedRecruiter.photo);
+                    }
+                    backendService.updateRecruiter(this.props.match.params.id, updatedRecruiter)
+                        .then(() => this.props.history.push(`/company/recruiters`))
+                        .then(() => toast('Recruiter aktualisiert', { type: 'success' }))
+                        .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
+                } else {
+                    backendService.createRecruiter(this.state.recruiter)
+                        .then(() => this.props.history.push(`/company/recruiters`))
+                        .then(() => toast('Recruiter erstellt', { type: 'success' }))
+                        .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
                 }
-                backendService.updateRecruiter(this.props.match.params.id, updatedRecruiter)
-                    .then(() => this.props.history.push(`/company/recruiters`))
-                    .then(() => toast('Recruiter aktualisiert', { type: 'success' }))
-                    .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
-            } else {
-                backendService.createRecruiter(this.state.recruiter)
-                    .then(() => this.props.history.push(`/company/recruiters`))
-                    .then(() => toast('Recruiter erstellt', { type: 'success' }))
-                    .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
             }
         }
     };
+
     handleDelete = (event) => {
         event.preventDefault();
         backendService.deleteRecruiter(this.props.match.params.id)
@@ -70,7 +72,8 @@ class Recruiter extends Component {
     render() {
         return (
             <form onSubmit={this.handleSubmit}
-                  ref={(form) => { this.inputForm = form; }}>
+                  ref={(form) => this.inputForm = form}
+                  noValidate>
                 <Header history={this.props.history}/>
                 {this.state.recruiter &&
                 <div className={'container'}>
@@ -103,7 +106,8 @@ class Recruiter extends Component {
                                         value={this.state.recruiter.recruiter_name}
                                         onChange={(recruiter_name) => this.setState({
                                             recruiter: Object.assign({}, this.state.recruiter, { recruiter_name })
-                                        })}/>
+                                        })}
+                                        errorMessage={'Name ist ein Pflichtfeld'}/>
                                     <InputLabel
                                         label={'Email'}
                                         required
@@ -111,7 +115,8 @@ class Recruiter extends Component {
                                         value={this.state.recruiter.recruiter_email}
                                         onChange={(recruiter_email) => this.setState({
                                             recruiter: Object.assign({}, this.state.recruiter, { recruiter_email })
-                                        })}/>
+                                        })}
+                                        errorMessage={'Bitte eine valide Email-Adresse eingeben'}/>
                                     <InputLabel
                                         label={'Telefon Mobile'}
                                         value={this.state.recruiter.mobile}
@@ -130,7 +135,8 @@ class Recruiter extends Component {
                                         value={this.state.recruiter.position}
                                         onChange={(position) => this.setState({
                                             recruiter: Object.assign({}, this.state.recruiter, { position })
-                                        })}/>
+                                        })}
+                                        errorMessage={'Position ist ein Pflichtfeld'}/>
                                     <InputLabel
                                         label={'Standort'}
                                         value={this.state.recruiter.location}
@@ -161,19 +167,23 @@ class Recruiter extends Component {
                                     </div>
                                     <InputLabel
                                         label={'XING-Profil'}
+                                        type={'url'}
                                         value={this.state.recruiter.xing}
                                         onChange={(xing) => this.setState({
                                             recruiter: Object.assign({}, this.state.recruiter, { xing })
-                                        })}/>
+                                        })}
+                                        errorMessage={'Bitte eine valide URL eingeben'}/>
                                     <InputLabel
                                         label={'LinkedIn-Profil'}
+                                        type={'url'}
                                         value={this.state.recruiter.linked_in}
                                         onChange={(linked_in) => this.setState({
                                             recruiter: Object.assign({}, this.state.recruiter, { linked_in })
-                                        })}/>
+                                        })}
+                                        errorMessage={'Bitte eine valide URL eingeben'}/>
                                     <div className='float-right'>
                                         {!this.state.create &&
-                                            <span>
+                                        <span>
                                                 <button className={'btn btn-danger buttons-form'}
                                                         type={'button'}
                                                         data-toggle={'modal'}
