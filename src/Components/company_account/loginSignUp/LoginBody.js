@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import backendService from '../../../backendService';
 import InputLabel from '../../commons/InputLabel';
 import { toast } from "react-toastify";
+import queryString from 'query-string';
 
 class LoginBody extends Component {
     handleSubmit = (event) => {
@@ -21,7 +22,7 @@ class LoginBody extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: '',
+            name: queryString.parse(location.search).name ? queryString.parse(location.search).name : '',
             password: '',
         };
     };
