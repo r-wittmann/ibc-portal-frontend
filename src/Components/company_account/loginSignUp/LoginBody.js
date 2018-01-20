@@ -7,9 +7,14 @@ import queryString from 'query-string';
 class LoginBody extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
-        backendService.login(this.state.name, this.state.password)
-            .then(() => this.props.history.push('/company/home'))
-            .catch(() => toast('Login nicht möglich. Unternehmensname oder Passwort sind falsch', { type: 'error' }));
+        if (event.target.hasAttribute('novalidate') && !event.target.checkValidity()) {
+            event.stopPropagation();
+            event.target.classList.add('was-validated')
+        } else {
+            backendService.login(this.state.name, this.state.password)
+                .then(() => this.props.history.push('/company/home'))
+                .catch(() => toast('Login nicht möglich. Unternehmensname oder Passwort sind falsch', { type: 'error' }));
+        }
     };
 
     handleForgotPassword = (event) => {
@@ -29,15 +34,17 @@ class LoginBody extends Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit} style={{ margin: 20 }}>
+            <form onSubmit={this.handleSubmit} style={{ margin: 20 }} noValidate>
                 <InputLabel
                     label={'Unternehmen'}
                     value={this.state.name}
+                    required
                     onChange={(name) => this.setState({ name })}/>
                 <InputLabel
                     label={'Passwort'}
                     type={'password'}
                     value={this.state.password}
+                    required
                     onChange={(password) => this.setState({ password })}/>
                 <div className={'float-right'}>
                     <button className={'btn btn-link'}
