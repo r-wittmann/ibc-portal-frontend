@@ -27,7 +27,7 @@ class UploadFileModal extends Component {
                         <div className="modal-body">
                             <input
                                 type={'file'}
-                                accept={'image/*'}
+                                accept={this.props.accept}
                                 onChange={this.handleFileChange}/>
                         </div>
                         <div className="modal-footer">

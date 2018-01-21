@@ -190,6 +190,7 @@ class Company extends Component {
                                         </div>
                                         <UploadFileModal
                                             title={'Logo ändern/hochladen'}
+                                            accept={'image/*'}
                                             returnFile={(logo) => this.setState({
                                                 company: Object.assign({}, this.state.company, { logo }),
                                                 logoChanged: true

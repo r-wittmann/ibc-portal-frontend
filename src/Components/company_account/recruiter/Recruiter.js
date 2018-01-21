@@ -160,6 +160,7 @@ class Recruiter extends Component {
                                         </div>
                                         <UploadFileModal
                                             title={'Foto ändern/hochladen'}
+                                            accept={'image/*'}
                                             returnFile={(photo) => this.setState({
                                                 recruiter: Object.assign({}, this.state.recruiter, { photo }),
                                                 photoChanged: true

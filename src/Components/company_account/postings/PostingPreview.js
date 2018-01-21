@@ -61,9 +61,14 @@ class PostingPreview extends Component {
                                 </tbody>
                             </table>
                         </div>
-                        <p><span
-                            dangerouslySetInnerHTML={{ __html: draftToHtml(JSON.parse(this.props.posting.description)) }}/>
-                        </p>
+                        {this.props.posting.pdf
+                            ? <div style={{ width: '100%', textAlign: 'center' }}>
+                                <embed style={{ width: '100%', maxWidth: 820, height: 1024}} src={this.props.posting.description} type={'application/pdf'}/>
+                            </div>
+                            : <p><span
+                                dangerouslySetInnerHTML={{ __html: draftToHtml(JSON.parse(this.props.posting.description)) }}/>
+                            </p>
+                        }
                         <div className={'table-responsive'}>
                             <table className={'table table-borderless preview-table'}>
                                 <tbody>

@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import ConfirmModal from "../../commons/ConfirmModal";
 import PostingPreview from "./PostingPreview";
 import translate from "../../../translationService";
+import UploadFileModal from "../../commons/UploadFileModal";
 
 class Posting extends Component {
     handleSubmit = (event) => {
@@ -283,18 +284,9 @@ class Posting extends Component {
                                                 </select>
                                             </div>
                                         </div>
-                                        <div>
-                                            Beschreibung
-                                            <TextEditor
-                                                value={this.state.posting.description}
-                                                onChange={(description) => this.setState({
-                                                    posting: Object.assign({}, this.state.posting, { description })
-                                                })}/>
-                                        </div>
-                                        <br/>
                                         <div className={"form-group row"}>
                                             <label className={'col-4 col-form-label'}>
-                                                Erstellen im Status
+                                                Stelle gleich im Portal veröffentlichen?
                                             </label>
                                             <div className={'col-8'}>
                                                 <select className={'form-control'}
@@ -302,12 +294,77 @@ class Posting extends Component {
                                                         onChange={(event) => this.setState({
                                                             posting: Object.assign({}, this.state.posting, { status: event.target.value })
                                                         })}>
-                                                    {Object.keys(translate.postingStatus()).map(key =>
-                                                        <option key={key}
-                                                                value={key}>{translate.postingStatus(key)}</option>
-                                                    )}
+                                                    <option value={'active'}>Ja (Ist sofort sichtbar für Studenten)
+                                                    </option>
+                                                    <option value={'deactivated'}>Nein (Wird Studenten noch nicht
+                                                        angezeigt)
+                                                    </option>
                                                 </select>
                                             </div>
+                                        </div>
+                                        <div className={'from-group row'}>
+                                            <label className={'col-4 col-form-label'}>
+                                                Beschreibung
+                                            </label>
+                                            <div className={'col-8'}>
+                                                <div className={'form-check form-check-inline'}
+                                                     style={{ marginLeft: 30 }}>
+                                                    <input id={'free-text'}
+                                                           className={'form-check-input'}
+                                                           type={'radio'}
+                                                           name={'pdf-radios'}
+                                                           checked={!this.state.posting.pdf}
+                                                           onChange={() => this.setState({
+                                                               posting: Object.assign({}, this.state.posting, { pdf: false, description: defaultPosting.description })
+                                                           })}/>
+                                                    <label htmlFor={'free-text'}
+                                                           className={'form-check-label'}>Freitext</label>
+                                                </div>
+                                                <div className={'form-check form-check-inline'}
+                                                     style={{ marginLeft: 30 }}>
+                                                    <input id={'pdf'}
+                                                           className={'form-check-input'}
+                                                           type={'radio'}
+                                                           name={'pdf-radios'}
+                                                           checked={this.state.posting.pdf}
+                                                           onChange={() => this.setState({
+                                                               posting: Object.assign({}, this.state.posting, { pdf: true, description: '' })
+                                                           })}/>
+                                                    <label htmlFor={'pdf'} className={'form-check-label'}>PDF
+                                                        Upload</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            {this.state.posting.pdf
+                                                ? <div className='form-group row'>
+                                                    <label htmlFor={'pdf'} className='col-4 col-form-label'>
+                                                    </label>
+                                                    <div className='col-8'>
+                                                        <button type={'button'} className='btn btn-primary'
+                                                                data-toggle="modal"
+                                                                data-target="#uploadFile">
+                                                            Beschreibung als PDF hochladen
+                                                        </button>
+                                                        <span style={this.state.posting.description
+                                                                  ? { marginLeft: 12, fontSize: 32, color: '#28a745'}
+                                                                  : { marginLeft: 12, fontSize: 32, color: '#dc3545'}}
+                                                              className={this.state.posting.description
+                                                                  ? 'far fa-check-circle align-middle is-valid'
+                                                                  : 'far fa-times-circle align-middle is-invalid'}/>
+                                                    </div>
+                                                    <UploadFileModal
+                                                        title={'Beschreibung als PDF hochladen'}
+                                                        accept={'application/pdf'}
+                                                        returnFile={(description) => this.setState({
+                                                            posting: Object.assign({}, this.state.posting, { description })
+                                                        })}/>
+                                                </div>
+                                                : <TextEditor value={this.state.posting.description}
+                                                              onChange={(description) => this.setState({
+                                                                  posting: Object.assign({}, this.state.posting, { description })
+                                                              })}/>
+                                            }
                                         </div>
                                     </div>
                                     <div className='float-right'>
