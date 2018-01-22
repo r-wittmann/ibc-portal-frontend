@@ -51,7 +51,7 @@ class PublicCompany extends Component {
                                     <td><span className={'fa fa-users'}/> {translate.numberOfEmployees(this.state.company.employees)} Mitarbeiter
                                     </td>
                                     <td><span className={'fa fa-map-marker'}/> <span
-                                        dangerouslySetInnerHTML={{ __html: this.state.company.munich_address.replace('\n', '<br>') }}/>
+                                        dangerouslySetInnerHTML={{ __html: this.props.company.munich_address.split('\n').join('<br>') }}/>
                                     </td>
                                 </tr>
                                 <tr>

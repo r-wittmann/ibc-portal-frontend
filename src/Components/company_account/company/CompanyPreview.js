@@ -32,7 +32,7 @@ class CompanyPreview extends Component {
                                 <tr>
                                     <td><span className={'fa fa-info-circle'}/> <a href={this.props.company.website}> {this.props.company.website}</a></td>
                                     <td><span className={'fa fa-users'}/> {translate.numberOfEmployees(this.props.company.employees)} Mitarbeiter</td>
-                                    <td><span className={'fa fa-map-marker'}/> <span dangerouslySetInnerHTML={{ __html: this.props.company.munich_address.replace('\n', '<br>') }}/></td>
+                                    <td><span className={'fa fa-map-marker'}/> <span dangerouslySetInnerHTML={{ __html: this.props.company.munich_address.split('\n').join('<br>') }}/></td>
                                 </tr>
                                 <tr>
                                 { this.props.company.field_of_activity ?
