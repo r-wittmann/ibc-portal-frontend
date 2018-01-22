@@ -36,10 +36,12 @@ class Registrations extends Component {
     };
 
     getAccounts() {
+        this.setState({ loading: true });
         backendService.getAccounts(location.hash)
             .then((accounts) => {
                 this.setState({
                     registeredAccounts: accounts.filter(account => account.status === 'registered'),
+                    loading: false,
                 })
             });
     };
@@ -96,7 +98,8 @@ class Registrations extends Component {
         super(props);
         this.state = {
             registeredAccounts: [],
-            filters: this.defaultFilters()
+            filters: this.defaultFilters(),
+            loading: true,
         };
     };
 
@@ -174,18 +177,22 @@ class Registrations extends Component {
                             </th>
                         </tr>
                         </thead>
-                        <tbody>
-                        {this.state.registeredAccounts.length > 0 && this.state.registeredAccounts.map((account) =>
-                            <RegistrationListItem
-                                key={account.id}
-                                account={account}
-                                handleChangeType={this.handleChangeType}
-                                handleAccept={this.acceptRegistration}
-                                handleDecline={this.declineRegistration}
-                                history={this.props.history}
-                            />
-                        )}
-                        </tbody>
+                        {this.state.loading
+                            ? <div className={'loader'}/>
+                            : <tbody>
+                            {this.state.registeredAccounts.map((account) =>
+                                <RegistrationListItem
+                                    key={account.id}
+                                    account={account}
+                                    handleChangeType={this.handleChangeType}
+                                    handleAccept={this.acceptRegistration}
+                                    handleDecline={this.declineRegistration}
+                                    history={this.props.history}
+                                />
+                            )}
+                            </tbody>
+                        }
+
                     </table>
                 </div>
             </div>

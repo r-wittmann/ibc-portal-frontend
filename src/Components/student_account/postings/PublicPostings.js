@@ -31,8 +31,9 @@ class PublicPostings extends Component {
     };
 
     getPostings() {
+        this.setState({ loading: true });
         backendService.getPublicPostings(location.hash)
-            .then((postings) => this.setState({ postings }));
+            .then((postings) => this.setState({ postings, loading: false }));
     };
 
     deleteFilters = (event) => {
@@ -50,7 +51,8 @@ class PublicPostings extends Component {
         this.state = {
             postings: [],
             companies: [],
-            filters: this.defaultFilters()
+            filters: this.defaultFilters(),
+            loading: false
         };
     };
 
@@ -64,7 +66,6 @@ class PublicPostings extends Component {
             }
             this.setState({ filters })
         }
-
         this.getPostings();
         backendService.getPublicCompanies()
             .then((companies) => this.setState({ companies }));
@@ -92,7 +93,7 @@ class PublicPostings extends Component {
                     <h1>Digitale Jobs in und um München</h1>
                 </div>
                 <div className={'container'}>
-                    <div className={'table-responsive'}>
+                    <div className={''}>
                         <div className={'row'}>
                             <div className={'col-6 col-sm-4 col-lg-4 col-xl-2 dropdown pb-2'}>
                                 <form>
@@ -190,14 +191,17 @@ class PublicPostings extends Component {
                                 </button>
                             </div>
                         </div>
-                        <table className={'table table-hover'}>
-                            <tbody>
-                            {this.state.postings && this.state.postings.map((posting) =>
-                                <PostingListItem key={posting.id}
-                                                 posting={posting}/>
-                            )}
-                            </tbody>
-                        </table>
+                        {this.state.loading
+                            ? <div className={'loader'} />
+                            : <table className={'table table-hover'}>
+                                <tbody>
+                                {this.state.postings && this.state.postings.map((posting) =>
+                                    <PostingListItem key={posting.id}
+                                                     posting={posting}/>
+                                )}
+                                </tbody>
+                            </table>
+                        }
                     </div>
                 </div>
             </div>

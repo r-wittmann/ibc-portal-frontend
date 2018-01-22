@@ -68,8 +68,9 @@ class Postings extends Component {
     };
 
     getPostings() {
+        this.setState({ loading: true });
         backendService.getPostings(location.hash)
-            .then((postings) => this.setState({ postings }));
+            .then((postings) => this.setState({ postings, loading: false }));
     };
 
     deleteFilters = (event) => {
@@ -88,7 +89,8 @@ class Postings extends Component {
             postings: [],
             companies: [],
             recruiters: [],
-            filters: this.defaultFilters()
+            filters: this.defaultFilters(),
+            loading: true,
         };
     };
 
@@ -133,8 +135,8 @@ class Postings extends Component {
                     <h1>Ihre Stellenanzeigen</h1>
                 </div>
                 <p className={'description'}>Legen Sie neue Stellenanzeigen an, fügen Sie diesen einem Unternehmen bzw.
-                                        Recruiter
-                                        hinzu und verwalten Sie diese.</p>
+                    Recruiter
+                    hinzu und verwalten Sie diese.</p>
                 <div className={'create-button'}>
                     <button className={'btn btn-primary'}
                             onClick={() => this.props.history.push('/company/postings/create')}>
@@ -244,15 +246,19 @@ class Postings extends Component {
                             </th>
                         </tr>
                         </thead>
-                        <tbody>
-                        {this.state.postings && this.state.postings.map((posting) =>
-                            <PostingListItem key={posting.id}
-                                             posting={posting}
-                                             history={this.props.history}
-                                             delete={this.handleDelete}
-                                             save={this.handleStatusChange}/>
-                        )}
-                        </tbody>
+                        {this.state.loading
+                            ? <div className={'loader'}/>
+                            : <tbody>
+                            {this.state.postings.map((posting) =>
+                                <PostingListItem key={posting.id}
+                                                 posting={posting}
+                                                 history={this.props.history}
+                                                 delete={this.handleDelete}
+                                                 save={this.handleStatusChange}/>
+                            )}
+                            </tbody>
+                        }
+
                     </table>
 
                 </div>

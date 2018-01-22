@@ -36,10 +36,12 @@ class Accounts extends Component {
     };
 
     getAccounts() {
+        this.setState({ loading: true });
         backendService.getAccounts(location.hash)
             .then((accounts) => {
                 this.setState({
                     accounts: accounts.filter(account => account.status !== 'registered'),
+                    loading: false,
                 })
             });
     };
@@ -99,7 +101,8 @@ class Accounts extends Component {
         super(props);
         this.state = {
             accounts: [],
-            filters: this.defaultFilters()
+            filters: this.defaultFilters(),
+            loading: true
         };
     };
 
@@ -201,17 +204,21 @@ class Accounts extends Component {
                             </th>
                         </tr>
                         </thead>
-                        <tbody>
-                        {this.state.accounts && this.state.accounts.map((account) =>
-                            <AccountListItem key={account.id}
-                                             account={account}
-                                             updateEmail={this.handleChangeEmail}
-                                             updateType={this.handleChangeType}
-                                             history={this.props.history}
-                                             handleSave={this.handleSave}
-                                             delete={this.handleDelete}/>
-                        )}
-                        </tbody>
+                        {this.state.loading
+                            ? <div className={'loader'}/>
+                            : <tbody>
+                            {this.state.accounts.map((account) =>
+                                <AccountListItem key={account.id}
+                                                 account={account}
+                                                 updateEmail={this.handleChangeEmail}
+                                                 updateType={this.handleChangeType}
+                                                 history={this.props.history}
+                                                 handleSave={this.handleSave}
+                                                 delete={this.handleDelete}/>
+                            )}
+                            </tbody>
+                        }
+
                     </table>
                 </div>
             </div>

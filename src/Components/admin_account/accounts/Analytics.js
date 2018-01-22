@@ -8,13 +8,15 @@ class Analytics extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            accounts: []
+            accounts: [],
+            loading: true
         };
     }
 
     componentDidMount() {
+        this.setState({ loading: true });
         backendService.getAnalytics()
-            .then((accounts) => this.setState({ accounts }));
+            .then((accounts) => this.setState({ accounts, loading: false }));
     }
 
     render() {
@@ -43,13 +45,17 @@ class Analytics extends Component {
                             <th>Aktive Postings</th>
                         </tr>
                         </thead>
-                        <tbody>
-                        {this.state.accounts && this.state.accounts.map((account) =>
-                            <AnalyticsListItem key={account.id}
-                                               account={account}
-                                               history={this.props.history}/>
-                        )}
-                        </tbody>
+                        {this.state.loading
+                            ? <div className={'loader'}/>
+                            : <tbody>
+                            {this.state.accounts.map((account) =>
+                                <AnalyticsListItem key={account.id}
+                                                   account={account}
+                                                   history={this.props.history}/>
+                            )}
+                            </tbody>
+                        }
+
                     </table>
 
                 </div>

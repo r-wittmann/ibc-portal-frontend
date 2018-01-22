@@ -15,13 +15,15 @@ class Companies extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            companies: []
+            companies: [],
+            loading: true
         };
     }
 
     componentDidMount() {
+        this.setState({ loading: true });
         backendService.getCompanies()
-            .then((companies) => this.setState({ companies }));
+            .then((companies) => this.setState({ companies, loading: false }));
     }
 
     render() {
@@ -32,14 +34,15 @@ class Companies extends Component {
                 <div className={'headline'}>
                     <h1>Ihre Unternehmen</h1>
                 </div>
-                <p className={'description'}>Legen Sie Ihre Tochterunternehmen an und erstellen Sie Stellenanzeigen für Ihre
-                                        Tochterunternehmen.</p>
+                <p className={'description'}>Legen Sie Ihre Tochterunternehmen an und erstellen Sie Stellenanzeigen für
+                    Ihre
+                    Tochterunternehmen.</p>
                 <div className={'create-button'}>
-                        <button className={'btn btn-primary'}
-                                onClick={() => this.props.history.push('/company/companies/create')}>
-                            Neues Unternehmen erstellen
-                        </button>
-                    </div>
+                    <button className={'btn btn-primary'}
+                            onClick={() => this.props.history.push('/company/companies/create')}>
+                        Neues Unternehmen erstellen
+                    </button>
+                </div>
                 <div className={'container'}>
                     <table className={'table table-hover'}>
                         <thead>
@@ -50,16 +53,20 @@ class Companies extends Component {
                             <th>gesamt</th>
                         </tr>
                         </thead>
-                        <tbody>
-                        {this.state.companies && this.state.companies.map((company) =>
-                            <CompanyListItem key={company.id}
-                                             company={company}
-                                             history={this.props.history}
-                                             delete={this.handleDelete}/>
-                        )}
-                        </tbody>
+                        {this.state.loading
+                            ? <div className={'loader'}/>
+                            : <tbody>
+                            {this.state.companies.map((company) =>
+                                <CompanyListItem key={company.id}
+                                                 company={company}
+                                                 history={this.props.history}
+                                                 delete={this.handleDelete}/>
+                            )}
+                            </tbody>
+                        }
+
                     </table>
-                    
+
                 </div>
             </div>
         );

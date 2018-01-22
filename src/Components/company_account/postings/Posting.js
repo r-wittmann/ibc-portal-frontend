@@ -85,7 +85,8 @@ class Posting extends Component {
             create: this.props.match.params.id === 'create',
             companies: [],
             recruiters: [],
-            originalPostingStatus: ''
+            originalPostingStatus: '',
+            loading: true
         };
     }
 
@@ -94,8 +95,9 @@ class Posting extends Component {
             this.setState({ preview: true })
         }
         if (!this.state.create) {
+            this.setState({ loading: true });
             backendService.getPostingById(this.props.match.params.id)
-                .then(posting => this.setState({ posting, originalPostingStatus: posting.status }))
+                .then(posting => this.setState({ posting, originalPostingStatus: posting.status, loading: false }))
         } else {
             this.setState({ posting: defaultPosting, originalPostingStatus: defaultPosting.status });
         }
@@ -109,267 +111,274 @@ class Posting extends Component {
                   ref={(form) => this.inputForm = form}
                   noValidate>
                 <Header history={this.props.history}/>
-                {this.state.posting &&
-                <div className={'container'}>
-                    {this.state.preview ? (
-                        <PostingPreview
-                            posting={this.state.posting}
-                            endPreview={this.props.preview
-                                ? () => this.props.history.goBack()
-                                : () => this.setState({ preview: false })
-                            }
-                            primaryAction={this.props.preview
-                                ? () => {
-                                    this.props.history.push(`/company/postings/${this.state.posting.id}`);
-                                    this.setState({ preview: false })
+                {this.state.loading
+                    ? <div className={'loader'}/>
+                    : <div className={'container'}>
+                        {this.state.preview ? (
+                            <PostingPreview
+                                posting={this.state.posting}
+                                endPreview={this.props.preview
+                                    ? () => this.props.history.goBack()
+                                    : () => this.setState({ preview: false })
                                 }
-                                : this.handleSubmit
-                            }
-                            primaryActionText={this.props.preview ? 'Editieren' : 'Speichern'}
-                        />
-                    ) : (
-                        <div>
-                            <div className={'headline'}>
-                                <h1>{this.state.create ? 'Neue Stellenanzeige erstellen' : 'Stellenanzeige bearbeiten'}</h1>
-                            </div>
-                            {this.state.posting && (
-                                <div>
+                                primaryAction={this.props.preview
+                                    ? () => {
+                                        this.props.history.push(`/company/postings/${this.state.posting.id}`);
+                                        this.setState({ preview: false })
+                                    }
+                                    : this.handleSubmit
+                                }
+                                primaryActionText={this.props.preview ? 'Editieren' : 'Speichern'}
+                            />
+                        ) : (
+                            <div>
+                                <div className={'headline'}>
+                                    <h1>{this.state.create ? 'Neue Stellenanzeige erstellen' : 'Stellenanzeige bearbeiten'}</h1>
+                                </div>
+                                {this.state.posting && (
                                     <div>
-                                        <InputLabel
-                                            label={'Titel'}
-                                            required
-                                            value={this.state.posting.title}
-                                            onChange={(title) => this.setState({
-                                                posting: Object.assign({}, this.state.posting, { title })
-                                            })}
-                                            errorMessage={'Titel ist ein Pflichtfeld'}/>
-                                        {this.state.companies.length > 0 &&
-                                        <div className={"form-group row"}>
-                                            <label className={'col-4 col-form-label'}>
-                                                Unternehmen:
-                                            </label>
-                                            <div className={'col-8'}>
-                                                <select className={'form-control'}
-                                                        value={this.state.posting.company_id !== ''
-                                                            ? this.state.posting.company_id
-                                                            : this.state.companies[0].id}
-                                                        onChange={(event) => this.setState({
-                                                            posting: Object.assign({}, this.state.posting, { company_id: event.target.value })
-                                                        })}>
-                                                    {this.state.companies.map(company => (
-                                                        <option key={company.id}
-                                                                value={company.id}>
-                                                            {company.company_name}
-                                                        </option>
-                                                    ))}
-                                                </select>
-                                            </div>
-                                        </div>
-                                        }
-                                        <InputLabel
-                                            label={'Standort'}
-                                            required
-                                            value={this.state.posting.place_of_employment}
-                                            onChange={(place_of_employment) => this.setState({
-                                                posting: Object.assign({}, this.state.posting, { place_of_employment })
-                                            })}
-                                            errorMessage={'Standort ist ein Pflichtfeld'}/>
-                                        <InputLabel
-                                            label={'Startdatum'}
-                                            required
-                                            value={this.state.posting.start_of_employment}
-                                            onChange={(start_of_employment) => this.setState({
-                                                posting: Object.assign({}, this.state.posting, { start_of_employment })
-                                            })}
-                                            errorMessage={'Startdatum ist ein Pflichtfeld'}/>
-                                        <div className={"form-group row"}>
-                                            <label className={'col-4 col-form-label'}>
-                                                Vertragslaufzeit
-                                            </label>
-                                            <div className={'col-8'}>
-                                                <select className={'form-control'}
-                                                        value={this.state.posting.contract_duration}
-                                                        onChange={(event) => this.setState({
-                                                            posting: Object.assign({}, this.state.posting, { contract_duration: event.target.value })
-                                                        })}>
-                                                    {Object.keys(translate.contractDuration()).map(key =>
-                                                        <option key={key}
-                                                                value={key}>{translate.contractDuration(key)}</option>
-                                                    )}
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <InputLabel
-                                            label={'Wochenstunden'}
-                                            required
-                                            value={this.state.posting.working_hours}
-                                            onChange={(working_hours) => this.setState({
-                                                posting: Object.assign({}, this.state.posting, { working_hours })
-                                            })}
-                                            errorMessage={'Wochenstunden ist ein Pflichtfeld'}/>
-                                        <div className={"form-group row"}>
-                                            <label className={'col-4 col-form-label'}>
-                                                Vertragstyp
-                                            </label>
-                                            <div className={'col-8'}>
-                                                <select className={'form-control'}
-                                                        value={this.state.posting.contract_type}
-                                                        onChange={(event) => this.setState({
-                                                            posting: Object.assign({}, this.state.posting, { contract_type: event.target.value })
-                                                        })}>
-                                                    {Object.keys(translate.contractType()).map(key =>
-                                                        <option key={key}
-                                                                value={key}>{translate.contractType(key)}</option>
-                                                    )}
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div className={"form-group row"}>
-                                            <label className={'col-4 col-form-label'}>
-                                                Zielgruppe
-                                            </label>
-                                            <div className={'col-8'}>
-                                                <select className={'form-control'}
-                                                        value={this.state.posting.entry_level}
-                                                        onChange={(event) => this.setState({
-                                                            posting: Object.assign({}, this.state.posting, { entry_level: event.target.value })
-                                                        })}>
-                                                    {Object.keys(translate.entryLevel()).map(key =>
-                                                        <option key={key}
-                                                                value={key}>{translate.entryLevel(key)}</option>
-                                                    )}
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <InputLabel
-                                            label={'Bewerbungslink'}
-                                            type={"url"}
-                                            required={true}
-                                            value={this.state.posting.application_link}
-                                            onChange={(application_link) => this.setState({
-                                                posting: Object.assign({}, this.state.posting, { application_link })
-                                            })}
-                                            errorMessage={'Bitte eine valide URL eingeben'}/>
-                                        <div className={"form-group row"}>
-                                            <label className={'col-4 col-form-label'}>
-                                                Recruiter
-                                            </label>
-                                            <div className={'col-8'}>
-                                                <select className={"form-control"}
-                                                        value={this.state.posting.recruiter_id}
-                                                        onChange={(event) => this.setState({
-                                                            posting: Object.assign({}, this.state.posting, { recruiter_id: event.target.value })
-                                                        })}>
-                                                    {this.state.recruiters.map(recruiter => (
-                                                        <option key={recruiter.id}
-                                                                value={recruiter.id}>{recruiter.recruiter_name}</option>
-                                                    ))}
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div className={"form-group row"}>
-                                            <label className={'col-4 col-form-label'}>
-                                                Tätigkeitsbereich
-                                            </label>
-                                            <div className={'col-8'}>
-                                                <select className={'form-control'}
-                                                        value={this.state.posting.field_of_employment}
-                                                        onChange={(event) => this.setState({
-                                                            posting: Object.assign({}, this.state.posting, { field_of_employment: event.target.value })
-                                                        })}>
-                                                    {Object.keys(translate.fieldOfEmployment()).map(key =>
-                                                        <option key={key}
-                                                                value={key}>{translate.fieldOfEmployment(key)}</option>
-                                                    )}
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div className={"form-group row"}>
-                                            <label className={'col-4 col-form-label'}>
-                                                Stelle gleich im Portal veröffentlichen?
-                                            </label>
-                                            <div className={'col-8'}>
-                                                <select className={'form-control'}
-                                                        value={this.state.posting.status}
-                                                        onChange={(event) => this.setState({
-                                                            posting: Object.assign({}, this.state.posting, { status: event.target.value })
-                                                        })}>
-                                                    <option value={'active'}>Ja (Ist sofort sichtbar für Studenten)
-                                                    </option>
-                                                    <option value={'deactivated'}>Nein (Wird Studenten noch nicht
-                                                        angezeigt)
-                                                    </option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div className={'from-group row'}>
-                                            <label className={'col-4 col-form-label'}>
-                                                Beschreibung
-                                            </label>
-                                            <div className={'col-8'}>
-                                                <div className={'form-check form-check-inline'}
-                                                     style={{ marginLeft: 30 }}>
-                                                    <input id={'free-text'}
-                                                           className={'form-check-input'}
-                                                           type={'radio'}
-                                                           name={'pdf-radios'}
-                                                           checked={!this.state.posting.pdf}
-                                                           onChange={() => this.setState({
-                                                               posting: Object.assign({}, this.state.posting, { pdf: false, description: defaultPosting.description })
-                                                           })}/>
-                                                    <label htmlFor={'free-text'}
-                                                           className={'form-check-label'}>Freitext</label>
-                                                </div>
-                                                <div className={'form-check form-check-inline'}
-                                                     style={{ marginLeft: 30 }}>
-                                                    <input id={'pdf'}
-                                                           className={'form-check-input'}
-                                                           type={'radio'}
-                                                           name={'pdf-radios'}
-                                                           checked={this.state.posting.pdf}
-                                                           onChange={() => this.setState({
-                                                               posting: Object.assign({}, this.state.posting, { pdf: true, description: '' })
-                                                           })}/>
-                                                    <label htmlFor={'pdf'} className={'form-check-label'}>PDF
-                                                        Upload</label>
-                                                </div>
-                                            </div>
-                                        </div>
                                         <div>
-                                            {this.state.posting.pdf
-                                                ? <div className='form-group row'>
-                                                    <label htmlFor={'pdf'} className='col-4 col-form-label'>
-                                                    </label>
-                                                    <div className='col-8'>
-                                                        <button type={'button'} className='btn btn-primary'
-                                                                data-toggle="modal"
-                                                                data-target="#uploadFile">
-                                                            Beschreibung als PDF hochladen
-                                                        </button>
-                                                        <span style={this.state.posting.description
-                                                                  ? { marginLeft: 12, fontSize: 32, color: '#28a745'}
-                                                                  : { marginLeft: 12, fontSize: 32, color: '#dc3545'}}
-                                                              className={this.state.posting.description
-                                                                  ? 'far fa-check-circle align-middle is-valid'
-                                                                  : 'far fa-times-circle align-middle is-invalid'}/>
-                                                    </div>
-                                                    <UploadFileModal
-                                                        title={'Beschreibung als PDF hochladen'}
-                                                        accept={'application/pdf'}
-                                                        returnFile={(description) => this.setState({
-                                                            posting: Object.assign({}, this.state.posting, { description })
-                                                        })}/>
+                                            <InputLabel
+                                                label={'Titel'}
+                                                required
+                                                value={this.state.posting.title}
+                                                onChange={(title) => this.setState({
+                                                    posting: Object.assign({}, this.state.posting, { title })
+                                                })}
+                                                errorMessage={'Titel ist ein Pflichtfeld'}/>
+                                            {this.state.companies.length > 0 &&
+                                            <div className={"form-group row"}>
+                                                <label className={'col-4 col-form-label'}>
+                                                    Unternehmen:
+                                                </label>
+                                                <div className={'col-8'}>
+                                                    <select className={'form-control'}
+                                                            value={this.state.posting.company_id !== ''
+                                                                ? this.state.posting.company_id
+                                                                : this.state.companies[0].id}
+                                                            onChange={(event) => this.setState({
+                                                                posting: Object.assign({}, this.state.posting, { company_id: event.target.value })
+                                                            })}>
+                                                        {this.state.companies.map(company => (
+                                                            <option key={company.id}
+                                                                    value={company.id}>
+                                                                {company.company_name}
+                                                            </option>
+                                                        ))}
+                                                    </select>
                                                 </div>
-                                                : <TextEditor value={this.state.posting.description}
-                                                              onChange={(description) => this.setState({
-                                                                  posting: Object.assign({}, this.state.posting, { description })
-                                                              })}/>
+                                            </div>
                                             }
+                                            <InputLabel
+                                                label={'Standort'}
+                                                required
+                                                value={this.state.posting.place_of_employment}
+                                                onChange={(place_of_employment) => this.setState({
+                                                    posting: Object.assign({}, this.state.posting, { place_of_employment })
+                                                })}
+                                                errorMessage={'Standort ist ein Pflichtfeld'}/>
+                                            <InputLabel
+                                                label={'Startdatum'}
+                                                required
+                                                value={this.state.posting.start_of_employment}
+                                                onChange={(start_of_employment) => this.setState({
+                                                    posting: Object.assign({}, this.state.posting, { start_of_employment })
+                                                })}
+                                                errorMessage={'Startdatum ist ein Pflichtfeld'}/>
+                                            <div className={"form-group row"}>
+                                                <label className={'col-4 col-form-label'}>
+                                                    Vertragslaufzeit
+                                                </label>
+                                                <div className={'col-8'}>
+                                                    <select className={'form-control'}
+                                                            value={this.state.posting.contract_duration}
+                                                            onChange={(event) => this.setState({
+                                                                posting: Object.assign({}, this.state.posting, { contract_duration: event.target.value })
+                                                            })}>
+                                                        {Object.keys(translate.contractDuration()).map(key =>
+                                                            <option key={key}
+                                                                    value={key}>{translate.contractDuration(key)}</option>
+                                                        )}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <InputLabel
+                                                label={'Wochenstunden'}
+                                                required
+                                                value={this.state.posting.working_hours}
+                                                onChange={(working_hours) => this.setState({
+                                                    posting: Object.assign({}, this.state.posting, { working_hours })
+                                                })}
+                                                errorMessage={'Wochenstunden ist ein Pflichtfeld'}/>
+                                            <div className={"form-group row"}>
+                                                <label className={'col-4 col-form-label'}>
+                                                    Vertragstyp
+                                                </label>
+                                                <div className={'col-8'}>
+                                                    <select className={'form-control'}
+                                                            value={this.state.posting.contract_type}
+                                                            onChange={(event) => this.setState({
+                                                                posting: Object.assign({}, this.state.posting, { contract_type: event.target.value })
+                                                            })}>
+                                                        {Object.keys(translate.contractType()).map(key =>
+                                                            <option key={key}
+                                                                    value={key}>{translate.contractType(key)}</option>
+                                                        )}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div className={"form-group row"}>
+                                                <label className={'col-4 col-form-label'}>
+                                                    Zielgruppe
+                                                </label>
+                                                <div className={'col-8'}>
+                                                    <select className={'form-control'}
+                                                            value={this.state.posting.entry_level}
+                                                            onChange={(event) => this.setState({
+                                                                posting: Object.assign({}, this.state.posting, { entry_level: event.target.value })
+                                                            })}>
+                                                        {Object.keys(translate.entryLevel()).map(key =>
+                                                            <option key={key}
+                                                                    value={key}>{translate.entryLevel(key)}</option>
+                                                        )}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <InputLabel
+                                                label={'Bewerbungslink'}
+                                                type={"url"}
+                                                required={true}
+                                                value={this.state.posting.application_link}
+                                                onChange={(application_link) => this.setState({
+                                                    posting: Object.assign({}, this.state.posting, { application_link })
+                                                })}
+                                                errorMessage={'Bitte eine valide URL eingeben'}/>
+                                            <div className={"form-group row"}>
+                                                <label className={'col-4 col-form-label'}>
+                                                    Recruiter
+                                                </label>
+                                                <div className={'col-8'}>
+                                                    <select className={"form-control"}
+                                                            value={this.state.posting.recruiter_id}
+                                                            onChange={(event) => this.setState({
+                                                                posting: Object.assign({}, this.state.posting, { recruiter_id: event.target.value })
+                                                            })}>
+                                                        {this.state.recruiters.map(recruiter => (
+                                                            <option key={recruiter.id}
+                                                                    value={recruiter.id}>{recruiter.recruiter_name}</option>
+                                                        ))}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div className={"form-group row"}>
+                                                <label className={'col-4 col-form-label'}>
+                                                    Tätigkeitsbereich
+                                                </label>
+                                                <div className={'col-8'}>
+                                                    <select className={'form-control'}
+                                                            value={this.state.posting.field_of_employment}
+                                                            onChange={(event) => this.setState({
+                                                                posting: Object.assign({}, this.state.posting, { field_of_employment: event.target.value })
+                                                            })}>
+                                                        {Object.keys(translate.fieldOfEmployment()).map(key =>
+                                                            <option key={key}
+                                                                    value={key}>{translate.fieldOfEmployment(key)}</option>
+                                                        )}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div className={"form-group row"}>
+                                                <label className={'col-4 col-form-label'}>
+                                                    Stelle gleich im Portal veröffentlichen?
+                                                </label>
+                                                <div className={'col-8'}>
+                                                    <select className={'form-control'}
+                                                            value={this.state.posting.status}
+                                                            onChange={(event) => this.setState({
+                                                                posting: Object.assign({}, this.state.posting, { status: event.target.value })
+                                                            })}>
+                                                        <option value={'active'}>Ja (Ist sofort sichtbar für Studenten)
+                                                        </option>
+                                                        <option value={'deactivated'}>Nein (Wird Studenten noch nicht
+                                                            angezeigt)
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div className={'from-group row'}>
+                                                <label className={'col-4 col-form-label'}>
+                                                    Beschreibung
+                                                </label>
+                                                <div className={'col-8'}>
+                                                    <div className={'form-check form-check-inline'}
+                                                         style={{ marginLeft: 30 }}>
+                                                        <input id={'free-text'}
+                                                               className={'form-check-input'}
+                                                               type={'radio'}
+                                                               name={'pdf-radios'}
+                                                               checked={!this.state.posting.pdf}
+                                                               onChange={() => this.setState({
+                                                                   posting: Object.assign({}, this.state.posting, {
+                                                                       pdf: false,
+                                                                       description: defaultPosting.description
+                                                                   })
+                                                               })}/>
+                                                        <label htmlFor={'free-text'}
+                                                               className={'form-check-label'}>Freitext</label>
+                                                    </div>
+                                                    <div className={'form-check form-check-inline'}
+                                                         style={{ marginLeft: 30 }}>
+                                                        <input id={'pdf'}
+                                                               className={'form-check-input'}
+                                                               type={'radio'}
+                                                               name={'pdf-radios'}
+                                                               checked={this.state.posting.pdf}
+                                                               onChange={() => this.setState({
+                                                                   posting: Object.assign({}, this.state.posting, {
+                                                                       pdf: true,
+                                                                       description: ''
+                                                                   })
+                                                               })}/>
+                                                        <label htmlFor={'pdf'} className={'form-check-label'}>PDF
+                                                            Upload</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                {this.state.posting.pdf
+                                                    ? <div className='form-group row'>
+                                                        <label htmlFor={'pdf'} className='col-4 col-form-label'>
+                                                        </label>
+                                                        <div className='col-8'>
+                                                            <button type={'button'} className='btn btn-primary'
+                                                                    data-toggle="modal"
+                                                                    data-target="#uploadFile">
+                                                                Beschreibung als PDF hochladen
+                                                            </button>
+                                                            <span style={this.state.posting.description
+                                                                ? { marginLeft: 12, fontSize: 32, color: '#28a745' }
+                                                                : { marginLeft: 12, fontSize: 32, color: '#dc3545' }}
+                                                                  className={this.state.posting.description
+                                                                      ? 'far fa-check-circle align-middle is-valid'
+                                                                      : 'far fa-times-circle align-middle is-invalid'}/>
+                                                        </div>
+                                                        <UploadFileModal
+                                                            title={'Beschreibung als PDF hochladen'}
+                                                            accept={'application/pdf'}
+                                                            returnFile={(description) => this.setState({
+                                                                posting: Object.assign({}, this.state.posting, { description })
+                                                            })}/>
+                                                    </div>
+                                                    : <TextEditor value={this.state.posting.description}
+                                                                  onChange={(description) => this.setState({
+                                                                      posting: Object.assign({}, this.state.posting, { description })
+                                                                  })}/>
+                                                }
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className='float-right'>
-                                        {!this.state.create && (
-                                            <span>
+                                        <div className='float-right'>
+                                            {!this.state.create && (
+                                                <span>
                                                 <button className={'btn btn-danger buttons-form'}
                                                         type={'button'}
                                                         data-toggle={'modal'}
@@ -385,24 +394,24 @@ class Posting extends Component {
                                                     }}
                                                     negativeText={'Abbrechen'}/>
                                             </span>
-                                        )}
-                                        <button type={'button'} className={'btn btn-warning buttons-form'}
-                                                onClick={() => this.props.history.goBack()}>
-                                            {this.state.create ? 'Abbrechen' : 'Zurück'}
-                                        </button>
-                                        <button id={'preview'} className={'btn btn-primary button-form'}
-                                                onClick={this.handleSubmit}>
-                                            Vorschau
-                                        </button>
-                                        <button className={'btn btn-success buttons-form'}>
-                                            {this.state.create ? 'Speichern' : 'Update'}
-                                        </button>
+                                            )}
+                                            <button type={'button'} className={'btn btn-warning buttons-form'}
+                                                    onClick={() => this.props.history.goBack()}>
+                                                {this.state.create ? 'Abbrechen' : 'Zurück'}
+                                            </button>
+                                            <button id={'preview'} className={'btn btn-primary button-form'}
+                                                    onClick={this.handleSubmit}>
+                                                Vorschau
+                                            </button>
+                                            <button className={'btn btn-success buttons-form'}>
+                                                {this.state.create ? 'Speichern' : 'Update'}
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
-                            )}
-                        </div>
-                    )}
-                </div>
+                                )}
+                            </div>
+                        )}
+                    </div>
                 }
             </form>
         );

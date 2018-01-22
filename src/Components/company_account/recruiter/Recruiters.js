@@ -15,13 +15,15 @@ class Recruiters extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            recruiters: []
+            recruiters: [],
+            loading: true
         };
     }
 
     componentDidMount() {
+        this.setState({ loading: true });
         backendService.getRecruiters()
-            .then((recruiters) => this.setState({ recruiters }));
+            .then((recruiters) => this.setState({ recruiters, loading: false }));
     }
 
     render() {
@@ -32,14 +34,15 @@ class Recruiters extends Component {
                 <div className={'headline'}>
                     <h1>Ihre Recruiter</h1>
                 </div>
-                <p className={'description'}>Legen Sie Recruiter-Profile an, fügen Sie diese Ihren Stellenanzeigen hinzu und
-                                        verwalten Sie diese. </p>
-                 <div className={'create-button'}>
-                        <button className={'btn btn-primary'}
-                                onClick={() => this.props.history.push('/company/recruiters/create')}>
-                            Neuen Recruiter erstellen
-                        </button>
-                    </div>
+                <p className={'description'}>Legen Sie Recruiter-Profile an, fügen Sie diese Ihren Stellenanzeigen hinzu
+                    und
+                    verwalten Sie diese. </p>
+                <div className={'create-button'}>
+                    <button className={'btn btn-primary'}
+                            onClick={() => this.props.history.push('/company/recruiters/create')}>
+                        Neuen Recruiter erstellen
+                    </button>
+                </div>
                 <div className={'container'}>
                     <table className={'table table-hover'}>
                         <thead>
@@ -50,16 +53,20 @@ class Recruiters extends Component {
                             <th>gesamt</th>
                         </tr>
                         </thead>
-                        <tbody>
-                        {this.state.recruiters && this.state.recruiters.map((recruiter) =>
-                            <RecruiterListItem key={recruiter.id}
-                                               recruiter={recruiter}
-                                               history={this.props.history}
-                                               delete={this.handleDelete}/>
-                        )}
-                        </tbody>
+                        {this.state.loading
+                            ? <div className={'loader'}/>
+                            : <tbody>
+                            {this.state.recruiters && this.state.recruiters.map((recruiter) =>
+                                <RecruiterListItem key={recruiter.id}
+                                                   recruiter={recruiter}
+                                                   history={this.props.history}
+                                                   delete={this.handleDelete}/>
+                            )}
+                            </tbody>
+                        }
+
                     </table>
-                   
+
                 </div>
             </div>
         );
