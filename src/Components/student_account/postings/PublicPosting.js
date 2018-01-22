@@ -67,7 +67,7 @@ class PublicPosting extends Component {
                                         </td>
                                         <td><span
                                             className={'fa fa-calendar'}/> {this.state.posting.start_of_employment}</td>
-                                        <td><span className={'fa fa-desktop'}/> {this.state.posting.field_of_activity}
+                                        <td><span className={'fa fa-desktop'}/> {this.state.posting.field_of_employment}
                                         </td>
                                     </tr>
                                     </tbody>

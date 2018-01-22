@@ -6,6 +6,7 @@ import translate from "../../../translationService";
 class PostingListItem extends Component {
 
     render() {
+
         return (
             <tr>
                 <td>
@@ -24,20 +25,20 @@ class PostingListItem extends Component {
                 <td>{translate.postingStatus(this.props.posting.status)}</td>
                 <td>
                     <div className={'btn-group'}>
-                        <button className={'btn btn-outline-dark'}
+                        <button className={'btn btn-outline-dark'} data-toggle="tooltip" data-placement="top" title="Vorschau"
                                 onClick={() => this.props.history.push(`/company/postings/${this.props.posting.id}/preview`)}>
                             <span className={'fa fa-eye'}/>
                         </button>
-                        <button className={'btn btn-outline-dark'}
+                        <button className={'btn btn-outline-dark'} data-toggle="tooltip" data-placement="top" title="Bearbeiten"
                                 onClick={() => this.props.history.push(`/company/postings/${this.props.posting.id}`)}>
                             <span className={'fa fa-pencil-alt'}/>
                         </button>
-                        <button className={'btn btn-outline-dark'}
+                        <button className={'btn btn-outline-dark'} data-toggle="tooltip" data-placement="top" title="Löschen"
                                 data-toggle='modal'
                                 data-target={`#confirm-modal-${this.props.posting.id}`}>
                             <span className={'fa fa-trash'}/>
                         </button>
-                        <button className={'btn btn-outline-dark'}
+                        <button className={'btn btn-outline-dark'} data-toggle="tooltip" data-placement="top" title="Aktivieren/Deaktivieren"
                                 onClick={() => this.props.save(this.props.posting.id,this.props.posting.status === 'active' ? 'deactivated' : 'active')}>
                             <span className={this.props.posting.status === 'active' ? 'fa fa-pause' : 'fa fa-play'}/>
                         </button>

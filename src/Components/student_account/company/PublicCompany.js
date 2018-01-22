@@ -62,8 +62,7 @@ class PublicCompany extends Component {
                                         </tr>
                                         <tr>
                                             {this.state.company.field_of_activity ?
-                                                <td><span
-                                                    className={'fa fa-search'}/> {this.state.company.field_of_activity}
+                                                <td><span className={'fa fa-search'}/> {this.state.company.field_of_activity}
                                                 </td> : <td></td>
                                             }
                                             {this.state.company.kununu ?

@@ -148,8 +148,8 @@ class Posting extends Component {
                                                 errorMessage={'Titel ist ein Pflichtfeld'}/>
                                             {this.state.companies.length > 0 &&
                                             <div className={"form-group row"}>
-                                                <label className={'col-4 col-form-label'}>
-                                                    Unternehmen:
+                                                <label className={'col-4 col-form-label'} data-toggle="tooltip" data-placement="top" title="Ihre angelegten Unternehmen">
+                                                    Unternehmen: <span className={'fa fa-info-circle'}/>
                                                 </label>
                                                 <div className={'col-8'}>
                                                     <select className={'form-control'}
