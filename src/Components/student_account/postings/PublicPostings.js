@@ -93,17 +93,10 @@ class PublicPostings extends Component {
                 </div>
                 <div className={'container'}>
                     <div className={'table-responsive'}>
-                    <table className={'table table-hover'}>
-                        <thead>
-                        <tr>
-                            <th></th>
-                            <th></th>
-                            <th>Titel</th>
-                            <th>Standort</th>
-                            <th>Startdatum</th>
-                            <td className={'dropdown'} style={{ borderBottom: '2px solid #e9ecef' }}>
+                        <div className={'row'}>
+                            <div className={'col-6 col-sm-4 col-lg-4 col-xl-2 dropdown pb-2'}>
                                 <form>
-                                    <button className={'btn btn-small btn-outline-dark'}
+                                    <button className={'btn btn-small btn-outline-dark btn-block'}
                                             data-toggle={'dropdown'}>
                                         <b>Vertragsart </b>
                                         <span className={'fa fa-filter'}
@@ -122,10 +115,10 @@ class PublicPostings extends Component {
                                         ))}
                                     </div>
                                 </form>
-                            </td>
-                            <td className={'dropdown'} style={{ borderBottom: '2px solid #e9ecef' }}>
+                            </div>
+                            <div className={'col-6 col-sm-4 col-lg-4 col-xl-2 dropdown pb-2'}>
                                 <form>
-                                    <button className={'btn btn-small btn-outline-dark'}
+                                    <button className={'btn btn-small btn-outline-dark btn-block'}
                                             data-toggle={'dropdown'}>
                                         <b>Tätigkeit </b>
                                         <span className={'fa fa-filter'}
@@ -144,10 +137,10 @@ class PublicPostings extends Component {
                                         ))}
                                     </div>
                                 </form>
-                            </td>
-                            <td className={'dropdown'} style={{ borderBottom: '2px solid #e9ecef' }}>
+                            </div>
+                            <div className={'col-6 col-sm-4 col-lg-4 col-xl-2 dropdown pb-2'}>
                                 <form>
-                                    <button className={'btn btn-small btn-outline-dark'}
+                                    <button className={'btn btn-small btn-outline-dark btn-block'}
                                             data-toggle={'dropdown'}>
                                         <b>Zielgruppe </b>
                                         <span className={'fa fa-filter'}
@@ -166,10 +159,10 @@ class PublicPostings extends Component {
                                         ))}
                                     </div>
                                 </form>
-                            </td>
-                            <td className={'dropdown'} style={{ borderBottom: '2px solid #e9ecef' }}>
+                            </div>
+                            <div className={'col-6 col-sm-4 col-lg-4 col-xl-2 dropdown pb-2'}>
                                 <form>
-                                    <button className={'btn btn-small btn-outline-dark'}
+                                    <button className={'btn btn-small btn-outline-dark btn-block'}
                                             data-toggle={'dropdown'}>
                                         <b>Unternehmen </b>
                                         <span className={'fa fa-filter'}
@@ -178,7 +171,8 @@ class PublicPostings extends Component {
                                     <div className={'dropdown-menu p-0 pl-4 pt-2'}>
                                         {this.state.companies.map(company => (
                                             <div className={'form-check'} key={company.id}>
-                                                <input className={'form-check-input'} type={'checkbox'} id={company.id}
+                                                <input className={'form-check-input'} type={'checkbox'}
+                                                       id={company.id}
                                                        checked={this.state.filters.company_id.includes(company.id.toString())}
                                                        onChange={(event) => this.handleChange(event, 'company_id', company.id.toString())}/>
                                                 <label className={'form-check-label'} htmlFor={company.id}>
@@ -188,22 +182,22 @@ class PublicPostings extends Component {
                                         ))}
                                     </div>
                                 </form>
-                            </td>
-                            <th>
-                                <button className={'btn btn-outline-dark'}
+                            </div>
+                            <div className={'col-12 col-sm-4 col-lg-4 col-xl-2 pb-2'}>
+                                <button className={'btn btn-outline-dark btn-block'}
                                         onClick={this.deleteFilters}>
                                     <b>Filter entfernen</b>
                                 </button>
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {this.state.postings && this.state.postings.map((posting) =>
-                            <PostingListItem key={posting.id}
-                                             posting={posting}/>
-                        )}
-                        </tbody>
-                    </table>
+                            </div>
+                        </div>
+                        <table className={'table table-hover'}>
+                            <tbody>
+                            {this.state.postings && this.state.postings.map((posting) =>
+                                <PostingListItem key={posting.id}
+                                                 posting={posting}/>
+                            )}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
