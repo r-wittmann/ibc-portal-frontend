@@ -54,7 +54,7 @@ class Recruiter extends Component {
             recruiter: undefined,
             photoChanged: false,
             create: this.props.match.params.id === 'create',
-            loading: true
+            loading: false
         };
     }
 

@@ -55,7 +55,7 @@ class Company extends Component {
             company: undefined,
             logoChanged: false,
             create: this.props.match.params.id === 'create',
-            loading: true,
+            loading: false,
         };
     }
 
