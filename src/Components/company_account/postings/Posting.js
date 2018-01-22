@@ -86,7 +86,7 @@ class Posting extends Component {
             companies: [],
             recruiters: [],
             originalPostingStatus: '',
-            loading: true
+            loading: false
         };
     }
 
