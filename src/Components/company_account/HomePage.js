@@ -4,25 +4,26 @@ import recruiters from '../../../resources/recruiters.jpeg';
 import jobs from '../../../resources/jobs.jpeg'
 import Header from "./Header";
 import backendService from "../../backendService";
+import { Link } from "react-router-dom";
 
 class HomePage extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            loading: true
+            postings: undefined
         };
     }
 
     componentDidMount() {
-        backendService.getProfile()
-            .then(() => this.setState({ loading: false }));
+        backendService.getPostings('#status=active')
+            .then((postings) => this.setState({ postings }));
     }
 
     render() {
         return (
             <div>
-                {this.state.loading
+                {!this.state.postings
                     ? <div className={'loader'}/>
                     : <div>
                         <Header history={this.props.history}/>
@@ -68,6 +69,35 @@ class HomePage extends Component {
                                             hinzu und verwalten Sie diese.</p>
                                     </div>
                                 </div>
+                            </div>
+                            <div>
+                                <div className={'headline text-center'}>
+                                    <h3>Aktive Stellenanzeigen</h3>
+                                </div>
+                                <p className={'text-center'}>
+                                    Aktiv sind gerade {this.state.postings.length} Stellenanzeigen
+                                </p>
+                                <table className={'table table-hover'}>
+                                    <thead>
+                                        <tr>
+                                            <th>Titel</th>
+                                            <th>Unternehmen</th>
+                                            <th>Recruiter</th>
+                                            <th>Gültig bis</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {this.state.postings.map(posting =>
+                                        <tr key={posting.id}>
+                                            <td><Link to={'/company/postings/' + posting.id}>{posting.title}</Link></td>
+                                            <td><Link to={'/company/companies/' + posting.company_id}>{posting.company_name}</Link></td>
+                                            <td><Link to={'/company/recruiters/' + posting.recruiter_id}>{posting.recruiter_name}</Link></td>
+                                            <td>{new Date(posting.expiry_date).toLocaleDateString('de-DE')}</td>
+                                        </tr>
+                                    )}
+                                    </tbody>
+                                </table>
+
                             </div>
                         </div>
                     </div>
