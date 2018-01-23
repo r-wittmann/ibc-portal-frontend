@@ -106,7 +106,7 @@ class Posting extends Component {
                     posting,
                     originalPostingStatus: posting.status,
                     loading: false,
-                    dateSelected: posting.start_of_employment !== 'Ab Sofort' && posting.start_of_employment !== 'Nach Absprache'
+                    dateSelected: posting.start_of_employment !== 'Ab Sofort' && posting.start_of_employment !== 'Nach Vereinbarung'
                 }))
         } else {
             this.setState({ posting: defaultPosting, originalPostingStatus: defaultPosting.status });

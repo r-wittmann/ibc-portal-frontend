@@ -65,8 +65,9 @@ class PublicPosting extends Component {
                                         <td><span className={'fa fa-map-marker'}/> <span
                                             dangerouslySetInnerHTML={{ __html: this.state.posting.munich_address.replace('\n', '<br>') }}/>
                                         </td>
-                                        <td><span
-                                            className={'fa fa-calendar'}/> {this.state.posting.start_of_employment}</td>
+                                        <td><span className={'fa fa-calendar'}/>&nbsp;
+                                            {translate.startOfEmployment(this.state.posting.start_of_employment)}
+                                        </td>
                                         <td><span className={'fa fa-desktop'}/> {translate.fieldOfEmployment(this.state.posting.field_of_employment)}
                                         </td>
                                     </tr>

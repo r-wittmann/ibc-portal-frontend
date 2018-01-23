@@ -111,6 +111,17 @@ class TranslationService {
         }
         return dictionary;
     }
+
+    static startOfEmployment(key) {
+        let dictionary = {
+            'Nach Vereinbarung': 'Nach Vereinbarung',
+            'Ab Sofort': 'Ab Sofort'
+        };
+        if (key) {
+            return dictionary[key] || `Ab ${new Date(key).toLocaleDateString('de-DE')}`;
+        }
+        return dictionary;
+    }
 }
 
 export default TranslationService;

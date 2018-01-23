@@ -55,10 +55,7 @@ class PostingPreview extends Component {
                                         dangerouslySetInnerHTML={{ __html: this.state.company.munich_address.replace('\n', '<br>') }}/>
                                     </td>
                                     <td><span className={'fa fa-calendar'}/>&nbsp;
-                                        {this.props.posting.start_of_employment !== 'Ab Sofort' && this.props.posting.start_of_employment !== 'Nach Vereinbarung'
-                                            ? 'Ab ' + new Date(this.props.posting.start_of_employment).toLocaleDateString('de-DE')
-                                            : this.props.posting.start_of_employment
-                                        }
+                                        {translate.startOfEmployment(this.props.posting.start_of_employment)}
                                     </td>
                                     <td><span className={'fa fa-desktop'}/> {translate.fieldOfEmployment(this.props.posting.field_of_employment)}</td>
                                 </tr>
