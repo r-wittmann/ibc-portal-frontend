@@ -34,7 +34,7 @@ class PasswordModal extends Component {
                     })
                     .catch(() => toast('Das alte Passwort stimmt nicht mit dem von uns gespeicherten Passwort überein', { type: 'error' }));
             } else {
-                toast('Neues Password und Bestätigung stimmen nicht überein', { type: 'error' })
+                toast('Neues Passwort und Bestätigung stimmen nicht überein', { type: 'error' })
             }
         }
     };
