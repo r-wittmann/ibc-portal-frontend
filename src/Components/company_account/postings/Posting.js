@@ -463,7 +463,7 @@ class Posting extends Component {
                                                 Vorschau
                                             </button>
                                             <button className={'btn btn-success buttons-form'}>
-                                                {this.state.create ? 'Speichern' : 'Speichern'}
+                                                Speichern
                                             </button>
                                         </div>
                                     </div>
