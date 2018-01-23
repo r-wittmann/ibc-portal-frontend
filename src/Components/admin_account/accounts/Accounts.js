@@ -142,71 +142,71 @@ class Accounts extends Component {
                 </div>
 
                 <div className={'container'}>
-                    <table className={'table table-hover'}>
-                        <thead>
-                        <tr>
-                            <th>Firmenname</th>
-                            <th>Kontakt</th>
-                            <th>E-Mail</th>
-                            <th>Telefon</th>
-                            <th>Webseite</th>
-                            <td className={'dropdown'} style={{ borderBottom: '2px solid #e9ecef' }}>
-                                <form>
-                                    <button className={'btn btn-small btn-outline-dark'}
-                                            data-toggle={'dropdown'}>
-                                        <b>Firmentyp </b>
-                                        <span className={'fa fa-filter'}
-                                              style={this.state.filters.company_type.length ? {} : { color: 'lightgrey' }}/>
-                                    </button>
-                                    <div className={'dropdown-menu p-0 pl-4 pt-2'}>
-                                        {Object.keys(translate.companyType()).map((key) => (
-                                            <div className={'form-check'} key={key}>
-                                                <input className={'form-check-input'} type={'checkbox'} id={key}
-                                                       checked={this.state.filters.company_type.includes(key)}
-                                                       onChange={(event) => this.handleFilterChange(event, 'company_type', key)}/>
-                                                <label className={'form-check-label'} htmlFor={key}>
-                                                    {translate.companyType(key)}
-                                                </label>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </form>
-                            </td>
-                            <td className={'dropdown'} style={{ borderBottom: '2px solid #e9ecef' }}>
-                                <form>
-                                    <button className={'btn btn-small btn-outline-dark'}
-                                            data-toggle={'dropdown'}>
-                                        <b>Status </b>
-                                        <span className={'fa fa-filter'}
-                                              style={this.state.filters.status.length ? {} : { color: 'lightgrey' }}/>
-                                    </button>
-                                    <div className={'dropdown-menu p-0 pl-4 pt-2'}>
-                                        {Object.keys(translate.registrationStatus()).map((key) =>
-                                            key !== 'registered' ? (
+                    {this.state.loading
+                        ? <div className={'loader'}/>
+                        : <table className={'table table-hover'}>
+                            <thead>
+                            <tr>
+                                <th>Firmenname</th>
+                                <th>Kontakt</th>
+                                <th>E-Mail</th>
+                                <th>Telefon</th>
+                                <th>Webseite</th>
+                                <td className={'dropdown'} style={{ borderBottom: '2px solid #e9ecef' }}>
+                                    <form>
+                                        <button className={'btn btn-small btn-outline-dark'}
+                                                data-toggle={'dropdown'}>
+                                            <b>Firmentyp </b>
+                                            <span className={'fa fa-filter'}
+                                                  style={this.state.filters.company_type.length ? {} : { color: 'lightgrey' }}/>
+                                        </button>
+                                        <div className={'dropdown-menu p-0 pl-4 pt-2'}>
+                                            {Object.keys(translate.companyType()).map((key) => (
                                                 <div className={'form-check'} key={key}>
                                                     <input className={'form-check-input'} type={'checkbox'} id={key}
-                                                           checked={this.state.filters.status.includes(key)}
-                                                           onChange={(event) => this.handleFilterChange(event, 'status', key)}/>
+                                                           checked={this.state.filters.company_type.includes(key)}
+                                                           onChange={(event) => this.handleFilterChange(event, 'company_type', key)}/>
                                                     <label className={'form-check-label'} htmlFor={key}>
-                                                        {translate.registrationStatus(key)}
+                                                        {translate.companyType(key)}
                                                     </label>
                                                 </div>
-                                            ) : null
-                                        )}
-                                    </div>
-                                </form>
-                            </td>
-                            <th>
-                                <button className={'btn btn-outline-dark'}
-                                        onClick={this.deleteFilters}>
-                                    <b>Filter entfernen</b>
-                                </button>
-                            </th>
-                        </tr>
-                        </thead>
-                        {this.state.loading
-                            ? <div className={'loader'}/>
-                            : <tbody>
+                                            ))}
+                                        </div>
+                                    </form>
+                                </td>
+                                <td className={'dropdown'} style={{ borderBottom: '2px solid #e9ecef' }}>
+                                    <form>
+                                        <button className={'btn btn-small btn-outline-dark'}
+                                                data-toggle={'dropdown'}>
+                                            <b>Status </b>
+                                            <span className={'fa fa-filter'}
+                                                  style={this.state.filters.status.length ? {} : { color: 'lightgrey' }}/>
+                                        </button>
+                                        <div className={'dropdown-menu p-0 pl-4 pt-2'}>
+                                            {Object.keys(translate.registrationStatus()).map((key) =>
+                                                key !== 'registered' ? (
+                                                    <div className={'form-check'} key={key}>
+                                                        <input className={'form-check-input'} type={'checkbox'} id={key}
+                                                               checked={this.state.filters.status.includes(key)}
+                                                               onChange={(event) => this.handleFilterChange(event, 'status', key)}/>
+                                                        <label className={'form-check-label'} htmlFor={key}>
+                                                            {translate.registrationStatus(key)}
+                                                        </label>
+                                                    </div>
+                                                ) : null
+                                            )}
+                                        </div>
+                                    </form>
+                                </td>
+                                <th>
+                                    <button className={'btn btn-outline-dark'}
+                                            onClick={this.deleteFilters}>
+                                        <b>Filter entfernen</b>
+                                    </button>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
                             {this.state.accounts.map((account) =>
                                 <AccountListItem key={account.id}
                                                  account={account}
@@ -217,9 +217,8 @@ class Accounts extends Component {
                                                  delete={this.handleDelete}/>
                             )}
                             </tbody>
-                        }
-
-                    </table>
+                        </table>
+                    }
                 </div>
             </div>
         );

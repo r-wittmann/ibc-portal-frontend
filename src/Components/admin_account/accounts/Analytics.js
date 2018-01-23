@@ -28,36 +28,34 @@ class Analytics extends Component {
                     <h1>Account Analytics</h1>
                 </div>
                 <div className={'container'}>
-                <p>
-                    <a className={'nav-link'}
-                       href={'https://analytics.google.com/analytics/web/#embed/report-home/a71308674w167653651p167860407/'}
-                       target={'_blank'}>
-                        Google Analytics
-                    </a>
-                </p>
-                    <table className={'table table-hover'}>
-                        <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Anzahl Unternehmen</th>
-                            <th>Anzahl Recruiter</th>
-                            <th>Anzahl Postings</th>
-                            <th>Aktive Postings</th>
-                        </tr>
-                        </thead>
-                        {this.state.loading
-                            ? <div className={'loader'}/>
-                            : <tbody>
+                    <p>
+                        <a className={'nav-link'}
+                           href={'https://analytics.google.com/analytics/web/#embed/report-home/a71308674w167653651p167860407/'}
+                           target={'_blank'}>
+                            Google Analytics
+                        </a>
+                    </p>
+                    {this.state.loading
+                        ? <div className={'loader'}/>
+                        : <table className={'table table-hover'}>
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Anzahl Unternehmen</th>
+                                <th>Anzahl Recruiter</th>
+                                <th>Anzahl Postings</th>
+                                <th>Aktive Postings</th>
+                            </tr>
+                            </thead>
+                            <tbody>
                             {this.state.accounts.map((account) =>
                                 <AnalyticsListItem key={account.id}
                                                    account={account}
                                                    history={this.props.history}/>
                             )}
                             </tbody>
-                        }
-
-                    </table>
-
+                        </table>
+                    }
                 </div>
             </div>
         );

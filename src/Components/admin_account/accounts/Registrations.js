@@ -139,47 +139,47 @@ class Registrations extends Component {
                 </div>
 
                 <div className={'container'}>
-                    <table className={"table table-hover"}>
-                        <thead>
-                        <tr>
-                            <th>Firmenname</th>
-                            <th>Kontakt</th>
-                            <th>E-Mail</th>
-                            <th>Telefon</th>
-                            <th>Webseite</th>
-                            <td className={'dropdown'} style={{ borderBottom: '2px solid #e9ecef' }}>
-                                <form>
-                                    <button className={'btn btn-small btn-outline-dark'}
-                                            data-toggle={'dropdown'}>
-                                        <b>Firmentyp </b>
-                                        <span className={'fa fa-filter'}
-                                              style={this.state.filters.company_type.length ? {} : { color: 'lightgrey' }}/>
+                    {this.state.loading
+                        ? <div className={'loader'}/>
+                        : <table className={"table table-hover"}>
+                            <thead>
+                            <tr>
+                                <th>Firmenname</th>
+                                <th>Kontakt</th>
+                                <th>E-Mail</th>
+                                <th>Telefon</th>
+                                <th>Webseite</th>
+                                <td className={'dropdown'} style={{ borderBottom: '2px solid #e9ecef' }}>
+                                    <form>
+                                        <button className={'btn btn-small btn-outline-dark'}
+                                                data-toggle={'dropdown'}>
+                                            <b>Firmentyp </b>
+                                            <span className={'fa fa-filter'}
+                                                  style={this.state.filters.company_type.length ? {} : { color: 'lightgrey' }}/>
+                                        </button>
+                                        <div className={'dropdown-menu p-0 pl-4 pt-2'}>
+                                            {Object.keys(translate.companyType()).map((key) => (
+                                                <div className={'form-check'} key={key}>
+                                                    <input className={'form-check-input'} type={'checkbox'} id={key}
+                                                           checked={this.state.filters.company_type.includes(key)}
+                                                           onChange={(event) => this.handleFilterChange(event, key)}/>
+                                                    <label className={'form-check-label'} htmlFor={key}>
+                                                        {translate.companyType(key)}
+                                                    </label>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </form>
+                                </td>
+                                <th>
+                                    <button className={'btn btn-outline-dark'}
+                                            onClick={this.deleteFilters}>
+                                        <b>Filter entfernen</b>
                                     </button>
-                                    <div className={'dropdown-menu p-0 pl-4 pt-2'}>
-                                        {Object.keys(translate.companyType()).map((key) => (
-                                            <div className={'form-check'} key={key}>
-                                                <input className={'form-check-input'} type={'checkbox'} id={key}
-                                                       checked={this.state.filters.company_type.includes(key)}
-                                                       onChange={(event) => this.handleFilterChange(event, key)}/>
-                                                <label className={'form-check-label'} htmlFor={key}>
-                                                    {translate.companyType(key)}
-                                                </label>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </form>
-                            </td>
-                            <th>
-                                <button className={'btn btn-outline-dark'}
-                                        onClick={this.deleteFilters}>
-                                    <b>Filter entfernen</b>
-                                </button>
-                            </th>
-                        </tr>
-                        </thead>
-                        {this.state.loading
-                            ? <div className={'loader'}/>
-                            : <tbody>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
                             {this.state.registeredAccounts.map((account) =>
                                 <RegistrationListItem
                                     key={account.id}
@@ -191,9 +191,8 @@ class Registrations extends Component {
                                 />
                             )}
                             </tbody>
-                        }
-
-                    </table>
+                        </table>
+                    }
                 </div>
             </div>
         );
