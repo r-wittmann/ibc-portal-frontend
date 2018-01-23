@@ -3,6 +3,7 @@ import backendService from '../../../backendService';
 import Header from "../Header";
 import RecruiterListItem from './RecruiterListItem';
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 class Recruiters extends Component {
     handleDelete = (recruiterId) => {
@@ -27,6 +28,8 @@ class Recruiters extends Component {
     }
 
     render() {
+        let activeArray = this.state.recruiters.length > 0 ? this.state.recruiters.map(recruiter => parseInt(recruiter.activeCount)) : [0];
+        let totalActiveCount = activeArray.reduce((total, num) => total + num);
         return (
             <div>
                 <Header history={this.props.history}/>
@@ -35,8 +38,11 @@ class Recruiters extends Component {
                     <h1>Ihre Recruiter</h1>
                 </div>
                 <p className={'description'}>Legen Sie Recruiter-Profile an, fügen Sie diese Ihren Stellenanzeigen hinzu
-                    und
-                    verwalten Sie diese. </p>
+                    und verwalten Sie diese. <br/>
+                    Aktiv sind gerade {totalActiveCount === 0 ? '0' : <Link to={'/company/postings#status=active'}>
+                        {totalActiveCount}
+                    </Link>} Stellenanzeigen
+                </p>
                 <div className={'create-button'}>
                     <button className={'btn btn-primary'}
                             onClick={() => this.props.history.push('/company/recruiters/create')}>

@@ -3,6 +3,7 @@ import backendService from '../../../backendService';
 import Header from "../Header";
 import CompanyListItem from "./CompanyListItem";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 class Companies extends Component {
     handleDelete = (companyId) => {
@@ -27,6 +28,8 @@ class Companies extends Component {
     }
 
     render() {
+        let activeArray = this.state.companies.length > 0 ? this.state.companies.map(company => parseInt(company.activeCount)) : [0];
+        let totalActiveCount = activeArray.reduce((total, num) => total + num);
         return (
             <div>
                 <Header history={this.props.history}/>
@@ -34,9 +37,13 @@ class Companies extends Component {
                 <div className={'headline'}>
                     <h1>Ihre Unternehmen</h1>
                 </div>
-                <p className={'description'}>Legen Sie Ihre Tochterunternehmen an und erstellen Sie Stellenanzeigen für
-                    Ihre
-                    Tochterunternehmen.</p>
+                <p className={'description'}>
+                    Legen Sie Ihre Tochterunternehmen an und erstellen Sie Stellenanzeigen für Ihre
+                    Tochterunternehmen.<br/>
+                    Aktiv sind gerade {totalActiveCount === 0 ? '0' : <Link to={'/company/postings#status=active'}>
+                    {totalActiveCount}
+                    </Link>} Stellenanzeigen
+                </p>
                 <div className={'create-button'}>
                     <button className={'btn btn-primary'}
                             onClick={() => this.props.history.push('/company/companies/create')}>
