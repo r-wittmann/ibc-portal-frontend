@@ -19,7 +19,7 @@ class Postings extends Component {
     handleDelete = (postingId) => {
         backendService.deletePosting(postingId)
             .then(() => this.setState({ postings: this.state.postings.filter(posting => posting.id !== postingId) }))
-            .then(() => toast('Anzeige erfolgreich gelöscht', { type: 'success' }))
+            .then(() => toast('Stellenanzeige erfolgreich gelöscht', { type: 'success' }))
             .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
     };
 
