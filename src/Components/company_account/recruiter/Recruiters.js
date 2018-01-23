@@ -50,18 +50,18 @@ class Recruiters extends Component {
                     </button>
                 </div>
                 <div className={'container'}>
-                    <table className={'table table-hover'}>
-                        <thead>
-                        <tr>
-                            <th>Recruitername</th>
-                            <th>Aktionen</th>
-                            <th>Stellenanzeigen aktiv</th>
-                            <th>gesamt</th>
-                        </tr>
-                        </thead>
-                        {this.state.loading
-                            ? <div className={'loader'}/>
-                            : <tbody>
+                    {this.state.loading
+                        ? <div className={'loader'}/>
+                        : <table className={'table table-hover'}>
+                            <thead>
+                            <tr>
+                                <th>Recruitername</th>
+                                <th>Aktionen</th>
+                                <th>Stellenanzeigen aktiv</th>
+                                <th>gesamt</th>
+                            </tr>
+                            </thead>
+                            <tbody>
                             {this.state.recruiters && this.state.recruiters.map((recruiter) =>
                                 <RecruiterListItem key={recruiter.id}
                                                    recruiter={recruiter}
@@ -69,10 +69,8 @@ class Recruiters extends Component {
                                                    delete={this.handleDelete}/>
                             )}
                             </tbody>
-                        }
-
-                    </table>
-
+                        </table>
+                    }
                 </div>
             </div>
         );

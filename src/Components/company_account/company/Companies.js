@@ -42,7 +42,7 @@ class Companies extends Component {
                     Tochterunternehmen.<br/>
                     Aktiv sind gerade {totalActiveCount === 0 ? '0' : <Link to={'/company/postings#status=active'}>
                     {totalActiveCount}
-                    </Link>} Stellenanzeigen
+                </Link>} Stellenanzeigen
                 </p>
                 <div className={'create-button'}>
                     <button className={'btn btn-primary'}
@@ -51,18 +51,18 @@ class Companies extends Component {
                     </button>
                 </div>
                 <div className={'container'}>
-                    <table className={'table table-hover'}>
-                        <thead>
-                        <tr>
-                            <th>Unternehmensname</th>
-                            <th>Aktionen</th>
-                            <th>Stellenanzeigen aktiv</th>
-                            <th>gesamt</th>
-                        </tr>
-                        </thead>
-                        {this.state.loading
-                            ? <div className={'loader'}/>
-                            : <tbody>
+                    {this.state.loading
+                        ? <div className={'loader'}/>
+                        : <table className={'table table-hover'}>
+                            <thead>
+                            <tr>
+                                <th>Unternehmensname</th>
+                                <th>Aktionen</th>
+                                <th>Stellenanzeigen aktiv</th>
+                                <th>gesamt</th>
+                            </tr>
+                            </thead>
+                            <tbody>
                             {this.state.companies.map((company) =>
                                 <CompanyListItem key={company.id}
                                                  company={company}
@@ -70,10 +70,8 @@ class Companies extends Component {
                                                  delete={this.handleDelete}/>
                             )}
                             </tbody>
-                        }
-
-                    </table>
-
+                        </table>
+                    }
                 </div>
             </div>
         );

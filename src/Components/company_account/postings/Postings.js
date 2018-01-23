@@ -144,111 +144,112 @@ class Postings extends Component {
                     </button>
                 </div>
                 <div className={'container'}>
-                    <table className={'table table-hover'}>
-                        <thead>
-                        <tr>
-                            <th>Titel</th>
-                            <th>Ablaufdatum</th>
-                            <td className={'dropdown'} style={{ borderBottom: '2px solid #e9ecef' }}>
-                                <form>
-                                    <button className={'btn btn-small btn-outline-dark'}
-                                            data-toggle={'dropdown'}>
-                                        <b>Vertragsart </b>
-                                        <span className={'fa fa-filter'}
-                                              style={this.state.filters.contract_type.length ? {} : { color: 'lightgrey' }}/>
+                    {this.state.loading
+                        ? <div className={'loader'}/>
+                        : <table className={'table table-hover'}>
+                            <thead>
+                            <tr>
+                                <th>Titel</th>
+                                <th>Ablaufdatum</th>
+                                <td className={'dropdown'} style={{ borderBottom: '2px solid #e9ecef' }}>
+                                    <form>
+                                        <button className={'btn btn-small btn-outline-dark'}
+                                                data-toggle={'dropdown'}>
+                                            <b>Vertragsart </b>
+                                            <span className={'fa fa-filter'}
+                                                  style={this.state.filters.contract_type.length ? {} : { color: 'lightgrey' }}/>
+                                        </button>
+                                        <div className={'dropdown-menu p-2 pl-4'}>
+                                            {Object.keys(translate.contractType()).map(key => (
+                                                <div className={'form-check'} key={key}>
+                                                    <input className={'form-check-input'} type={'checkbox'} id={key}
+                                                           checked={this.state.filters.contract_type.includes(key)}
+                                                           onChange={(event) => this.handleChange(event, 'contract_type', key)}/>
+                                                    <label className={'form-check-label'} htmlFor={key}>
+                                                        {translate.contractType(key)}
+                                                    </label>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </form>
+                                </td>
+                                <td className={'dropdown'} style={{ borderBottom: '2px solid #e9ecef' }}>
+                                    <form>
+                                        <button className={'btn btn-small btn-outline-dark'}
+                                                data-toggle={'dropdown'}>
+                                            <b>Unternehmen </b>
+                                            <span className={'fa fa-filter'}
+                                                  style={this.state.filters.company_id.length ? {} : { color: 'lightgrey' }}/>
+                                        </button>
+                                        <div className={'dropdown-menu p-0 pl-4 pt-2'}>
+                                            {this.state.companies.map(company => (
+                                                <div className={'form-check'} key={company.id}>
+                                                    <input className={'form-check-input'} type={'checkbox'}
+                                                           id={company.id}
+                                                           checked={this.state.filters.company_id.includes(company.id.toString())}
+                                                           onChange={(event) => this.handleChange(event, 'company_id', company.id.toString())}/>
+                                                    <label className={'form-check-label'} htmlFor={company.id}>
+                                                        {company.company_name}
+                                                    </label>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </form>
+                                </td>
+                                <td className={'dropdown'} style={{ borderBottom: '2px solid #e9ecef' }}>
+                                    <form>
+                                        <button className={'btn btn-small btn-outline-dark'}
+                                                data-toggle={'dropdown'}>
+                                            <b>Recruiter </b>
+                                            <span className={'fa fa-filter'}
+                                                  style={this.state.filters.recruiter_id.length ? {} : { color: 'lightgrey' }}/>
+                                        </button>
+                                        <div className={'dropdown-menu p-0 pl-4 pt-2'}>
+                                            {this.state.recruiters.map(recruiter => (
+                                                <div className={'form-check'} key={recruiter.id}>
+                                                    <input className={'form-check-input'} type={'checkbox'}
+                                                           id={recruiter.id}
+                                                           checked={this.state.filters.recruiter_id.includes(recruiter.id.toString())}
+                                                           onChange={(event) => this.handleChange(event, 'recruiter_id', recruiter.id.toString())}/>
+                                                    <label className={'form-check-label'} htmlFor={recruiter.id}>
+                                                        {recruiter.recruiter_name}
+                                                    </label>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </form>
+                                </td>
+                                <td className={'dropdown'} style={{ borderBottom: '2px solid #e9ecef' }}>
+                                    <form>
+                                        <button className={'btn btn-small btn-outline-dark'}
+                                                data-toggle={'dropdown'}>
+                                            <b>Status </b>
+                                            <span className={'fa fa-filter'}
+                                                  style={this.state.filters.status.length ? {} : { color: 'lightgrey' }}/>
+                                        </button>
+                                        <div className={'dropdown-menu p-0 pl-4 pt-2'}>
+                                            {Object.keys(translate.postingStatus()).map(key => (
+                                                <div className={'form-check'} key={key}>
+                                                    <input className={'form-check-input'} type={'checkbox'} id={key}
+                                                           checked={this.state.filters.status.includes(key)}
+                                                           onChange={(event) => this.handleChange(event, 'status', key)}/>
+                                                    <label className={'form-check-label'} htmlFor={key}>
+                                                        {translate.postingStatus(key)}
+                                                    </label>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </form>
+                                </td>
+                                <th>
+                                    <button className={'btn btn-outline-dark'}
+                                            onClick={this.deleteFilters}>
+                                        <b>Filter entfernen</b>
                                     </button>
-                                    <div className={'dropdown-menu p-2 pl-4'}>
-                                        {Object.keys(translate.contractType()).map(key => (
-                                            <div className={'form-check'} key={key}>
-                                                <input className={'form-check-input'} type={'checkbox'} id={key}
-                                                       checked={this.state.filters.contract_type.includes(key)}
-                                                       onChange={(event) => this.handleChange(event, 'contract_type', key)}/>
-                                                <label className={'form-check-label'} htmlFor={key}>
-                                                    {translate.contractType(key)}
-                                                </label>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </form>
-                            </td>
-                            <td className={'dropdown'} style={{ borderBottom: '2px solid #e9ecef' }}>
-                                <form>
-                                    <button className={'btn btn-small btn-outline-dark'}
-                                            data-toggle={'dropdown'}>
-                                        <b>Unternehmen </b>
-                                        <span className={'fa fa-filter'}
-                                              style={this.state.filters.company_id.length ? {} : { color: 'lightgrey' }}/>
-                                    </button>
-                                    <div className={'dropdown-menu p-0 pl-4 pt-2'}>
-                                        {this.state.companies.map(company => (
-                                            <div className={'form-check'} key={company.id}>
-                                                <input className={'form-check-input'} type={'checkbox'} id={company.id}
-                                                       checked={this.state.filters.company_id.includes(company.id.toString())}
-                                                       onChange={(event) => this.handleChange(event, 'company_id', company.id.toString())}/>
-                                                <label className={'form-check-label'} htmlFor={company.id}>
-                                                    {company.company_name}
-                                                </label>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </form>
-                            </td>
-                            <td className={'dropdown'} style={{ borderBottom: '2px solid #e9ecef' }}>
-                                <form>
-                                    <button className={'btn btn-small btn-outline-dark'}
-                                            data-toggle={'dropdown'}>
-                                        <b>Recruiter </b>
-                                        <span className={'fa fa-filter'}
-                                              style={this.state.filters.recruiter_id.length ? {} : { color: 'lightgrey' }}/>
-                                    </button>
-                                    <div className={'dropdown-menu p-0 pl-4 pt-2'}>
-                                        {this.state.recruiters.map(recruiter => (
-                                            <div className={'form-check'} key={recruiter.id}>
-                                                <input className={'form-check-input'} type={'checkbox'}
-                                                       id={recruiter.id}
-                                                       checked={this.state.filters.recruiter_id.includes(recruiter.id.toString())}
-                                                       onChange={(event) => this.handleChange(event, 'recruiter_id', recruiter.id.toString())}/>
-                                                <label className={'form-check-label'} htmlFor={recruiter.id}>
-                                                    {recruiter.recruiter_name}
-                                                </label>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </form>
-                            </td>
-                            <td className={'dropdown'} style={{ borderBottom: '2px solid #e9ecef' }}>
-                                <form>
-                                    <button className={'btn btn-small btn-outline-dark'}
-                                            data-toggle={'dropdown'}>
-                                        <b>Status </b>
-                                        <span className={'fa fa-filter'}
-                                              style={this.state.filters.status.length ? {} : { color: 'lightgrey' }}/>
-                                    </button>
-                                    <div className={'dropdown-menu p-0 pl-4 pt-2'}>
-                                        {Object.keys(translate.postingStatus()).map(key => (
-                                            <div className={'form-check'} key={key}>
-                                                <input className={'form-check-input'} type={'checkbox'} id={key}
-                                                       checked={this.state.filters.status.includes(key)}
-                                                       onChange={(event) => this.handleChange(event, 'status', key)}/>
-                                                <label className={'form-check-label'} htmlFor={key}>
-                                                    {translate.postingStatus(key)}
-                                                </label>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </form>
-                            </td>
-                            <th>
-                                <button className={'btn btn-outline-dark'}
-                                        onClick={this.deleteFilters}>
-                                    <b>Filter entfernen</b>
-                                </button>
-                            </th>
-                        </tr>
-                        </thead>
-                        {this.state.loading
-                            ? <div className={'loader'}/>
-                            : <tbody>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
                             {this.state.postings.map((posting) =>
                                 <PostingListItem key={posting.id}
                                                  posting={posting}
@@ -257,10 +258,8 @@ class Postings extends Component {
                                                  save={this.handleStatusChange}/>
                             )}
                             </tbody>
-                        }
-
-                    </table>
-
+                        </table>
+                    }
                 </div>
             </div>
         );
