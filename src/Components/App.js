@@ -17,6 +17,7 @@ import Postings from "./company_account/postings/Postings";
 import Posting from "./company_account/postings/Posting";
 
 import Profile from "./company_account/profile/Profile";
+import AdminProfile from './admin_account/profile/Profile';
 
 import Accounts from './admin_account/accounts/Accounts';
 import Registrations from './admin_account/accounts/Registrations';
@@ -86,6 +87,7 @@ class App extends Component {
                         <Route exact path={'/admin/registrations'} component={Registrations}/>
                         <Route exact path={'/admin/accounts'} component={Accounts}/>
                         <Route exact path={'/admin/analytics'} component={Analytics}/>
+                        <Route exact path={'/admin/profile/'} component={AdminProfile}/>
                         <Redirect from={'/admin'} to={'/admin/accounts'}/>
                         <Redirect to={'/'}/>
                     </Switch>

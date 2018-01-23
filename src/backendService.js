@@ -184,6 +184,43 @@ class BackendService {
         })
     }
 
+    static getAdminProfile() {
+        return fetch(`${baseUrl}/api/account`, {
+            method: 'GET',
+            headers: {
+                'x-access-token': localStorage.getItem('ibc-admin-token')
+            },
+        })
+            .then(checkStatus)
+            .then(convertResponseToJson);
+    }
+
+    static updateAdminProfile(profile) {
+        return fetch(`${baseUrl}/api/account`, {
+            method: 'PATCH',
+            headers: {
+                'x-access-token': localStorage.getItem('ibc-admin-token'),
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(profile)
+        })
+            .then(checkStatus)
+            .then(convertResponseToJson);
+    }
+
+    static updateAdminPassword(oldPassword, newPassword) {
+        return fetch(`${baseUrl}/api/account/password`, {
+            method: 'PATCH',
+            headers: {
+                'x-access-token': localStorage.getItem('ibc-admin-token'),
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({ oldPassword, newPassword })
+        })
+            .then(checkStatus)
+            .then(convertResponseToJson);
+    }
+
     // ============================ //
     // ==== Company endpoints ===== //
     // ============================ //
