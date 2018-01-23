@@ -2,7 +2,7 @@ const defaultPosting = {
     company_id: '',
     recruiter_id: '',
     title: '',
-    start_of_employment: '',
+    start_of_employment: 'Ab Sofort',
     contract_type: 'Direkteinstieg',
     contract_duration: 'to3',
     working_hours: '',

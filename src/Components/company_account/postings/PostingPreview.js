@@ -54,7 +54,11 @@ class PostingPreview extends Component {
                                     <td><span className={'fa fa-map-marker'}/> <span
                                         dangerouslySetInnerHTML={{ __html: this.state.company.munich_address.replace('\n', '<br>') }}/>
                                     </td>
-                                    <td><span className={'fa fa-calendar'}/> {this.props.posting.start_of_employment}
+                                    <td><span className={'fa fa-calendar'}/>&nbsp;
+                                        {this.props.posting.start_of_employment !== 'Ab Sofort' && this.props.posting.start_of_employment !== 'Nach Vereinbarung'
+                                            ? 'Ab ' + new Date(this.props.posting.start_of_employment).toLocaleDateString('de-DE')
+                                            : this.props.posting.start_of_employment
+                                        }
                                     </td>
                                     <td><span className={'fa fa-desktop'}/> {this.props.posting.field_of_employment}</td>
                                 </tr>

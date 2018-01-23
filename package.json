@@ -14,8 +14,10 @@
   "dependencies": {
     "draft-js": "^0.10.4",
     "draftjs-to-html": "^0.8.1",
+    "moment": "^2.20.1",
     "query-string": "^5.0.1",
     "react": "^15.5.4",
+    "react-datepicker": "^1.0.4",
     "react-dom": "^15.5.4",
     "react-draft-wysiwyg": "^1.10.12",
     "react-router-dom": "^4.2.2",

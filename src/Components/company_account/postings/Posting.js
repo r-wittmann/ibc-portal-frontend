@@ -9,6 +9,10 @@ import ConfirmModal from "../../commons/ConfirmModal";
 import PostingPreview from "./PostingPreview";
 import translate from "../../../translationService";
 import UploadFileModal from "../../commons/UploadFileModal";
+import DatePicker from 'react-datepicker'
+import moment from 'moment';
+
+import 'react-datepicker/dist/react-datepicker.css';
 
 class Posting extends Component {
     handleSubmit = (event) => {
@@ -86,7 +90,8 @@ class Posting extends Component {
             companies: [],
             recruiters: [],
             originalPostingStatus: '',
-            loading: false
+            loading: false,
+            dateSelected: false
         };
     }
 
@@ -97,7 +102,12 @@ class Posting extends Component {
         if (!this.state.create) {
             this.setState({ loading: true });
             backendService.getPostingById(this.props.match.params.id)
-                .then(posting => this.setState({ posting, originalPostingStatus: posting.status, loading: false }))
+                .then(posting => this.setState({
+                    posting,
+                    originalPostingStatus: posting.status,
+                    loading: false,
+                    dateSelected: posting.start_of_employment !== 'Ab Sofort' && posting.start_of_employment !== 'Nach Absprache'
+                }))
         } else {
             this.setState({ posting: defaultPosting, originalPostingStatus: defaultPosting.status });
         }
@@ -177,14 +187,61 @@ class Posting extends Component {
                                                     posting: Object.assign({}, this.state.posting, { place_of_employment })
                                                 })}
                                                 errorMessage={'Standort ist ein Pflichtfeld'}/>
-                                            <InputLabel
-                                                label={'Startdatum'}
-                                                required
-                                                value={this.state.posting.start_of_employment}
-                                                onChange={(start_of_employment) => this.setState({
-                                                    posting: Object.assign({}, this.state.posting, { start_of_employment })
-                                                })}
-                                                errorMessage={'Startdatum ist ein Pflichtfeld'}/>
+                                            <div className={"form-group row"}>
+                                                <label className={'col-4 col-form-label'}>
+                                                    Startdatum
+                                                </label>
+                                                <div className={'col-8'}>
+                                                    <div className={'form-check form-check-inline'}
+                                                         style={{ marginLeft: 30 }}>
+                                                        <input id={'abSofort'}
+                                                               className={'form-check-input'}
+                                                               type={'radio'}
+                                                               name={'startingDate'}
+                                                               checked={this.state.posting.start_of_employment === 'Ab Sofort'}
+                                                               onChange={() => this.setState({
+                                                                   dateSelected: false,
+                                                                   posting: Object.assign({}, this.state.posting, {
+                                                                       start_of_employment: 'Ab Sofort'
+                                                                   })
+                                                               })}/>
+                                                        <label htmlFor={'abSofort'}
+                                                               className={'form-check-label'}>Ab Sofort</label>
+                                                    </div>
+                                                    <div className={'form-check form-check-inline'}
+                                                         style={{ marginLeft: 30 }}>
+                                                        <input id={'nachAbsprache'}
+                                                               className={'form-check-input'}
+                                                               type={'radio'}
+                                                               name={'startingDate'}
+                                                               checked={this.state.posting.start_of_employment === 'Nach Vereinbarung'}
+                                                               onChange={() => this.setState({
+                                                                   dateSelected: false,
+                                                                   posting: Object.assign({}, this.state.posting, {
+                                                                       start_of_employment: 'Nach Vereinbarung'
+                                                                   })
+                                                               })}/>
+                                                        <label htmlFor={'nachAbsprache'} className={'form-check-label'}>Nach
+                                                            Vereinbarung</label>
+                                                    </div>
+                                                    <div className={'form-check form-check-inline'}
+                                                         style={{ marginLeft: 30 }}>
+                                                        <label htmlFor={'custom'}
+                                                               className={'form-check-label'}>
+                                                                <DatePicker
+                                                                    dateFormat={'DD.MM.YYYY'}
+                                                                    selected={this.state.dateSelected ? moment(new Date(this.state.posting.start_of_employment)) : moment()}
+                                                                    onChange={(date) => this.setState({
+                                                                        dateSelected: true,
+                                                                        posting: Object.assign({}, this.state.posting, {
+                                                                            start_of_employment: date
+                                                                        })
+                                                                    })}
+                                                                />
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div className={"form-group row"}>
                                                 <label className={'col-4 col-form-label'}>
                                                     Vertragslaufzeit
