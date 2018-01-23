@@ -74,7 +74,7 @@ class SignUpBody extends Component {
                     <form onSubmit={(event) => this.handleSubmit(0, event)}
                           className={'needs-validation'}
                           noValidate>
-                        <InputLabel className={'form-control'}
+                        <InputLabel className={'form-control'} data-toggle="tooltip" data-placement="top" title="Wählen Sie bitte die Option, die am besten zu Ihrem Unternehmen passt"
                                     label={'Unternehmen'}
                                     required
                                     value={this.state.name}
@@ -90,12 +90,12 @@ class SignUpBody extends Component {
                                     onChange={(email) => this.setState({ email })}
                                     errorMessage={'Bitte eine valide Email-Adresse eingeben'}/>
 
-                        <label style={{ fontSize: 14 }}>Sowohl Unternehmensname und E-Mail-Adresse können zum Login
-                            benutzt werden</label>
+                        <label style={{ fontSize: 14 }}>Sowohl Unternehmensname als auch E-Mail-Adresse können zum Login
+                            genutzt werden.</label>
                         <fieldset className={'form-group'}>
                             <div className={'row'}>
-                                <legend className={'col-form-legend col-4'}>Unternehmenstype</legend>
-                                <div className={'col-8 col-form-label'}>
+                                <legend className={'col-form-legend col-6'} data-toggle="tooltip" data-placement="top" title="Wählen Sie bitte die Option, die am besten zu Ihrem Unternehmen passt">Unternehmenstyp <span className={'fa fa-info-circle'}/></legend>
+                                <div className={'col-6 col-form-label'}>
                                     {Object.keys(translate.companyType()).map(key =>
                                         <div className={'form-check'} key={key}>
                                             <label className={'form-check-label'}>
@@ -183,6 +183,7 @@ class SignUpBody extends Component {
                             label={'Telefon'}
                             className={'form-control'}
                             required
+                            type={'tel'}
                             value={this.state.contact_phone}
                             onChange={(contact_phone) => this.setState({ contact_phone })}
                             errorMessage={'Telefonnummer ist ein Pflichtfeld'}/>
@@ -190,10 +191,11 @@ class SignUpBody extends Component {
                         <InputLabel
                             label={'Website'}
                             required
+                            type={'url'}
                             className={'form-control'}
                             value={this.state.website}
                             onChange={(website) => this.setState({ website })}
-                            errorMessage={'Bitte valide Website angeben'}/>
+                            errorMessage={'Bitte valide Website angeben (Format: http://www.xxxx.xx)'}/>
 
                         <div className='form-group row'>
                             <label htmlFor={'address'} className='col-4 col-form-label'>

@@ -20,8 +20,7 @@ class Header extends Component {
 
     render() {
         return (
-
-            <nav className={'navbar navbar-expand-lg navbar-light bg-light'}>
+            <nav className={'navbar fixed-top navbar-expand-lg navbar-light bg-light'}>
                 <a className={'navbar-brand'} onClick={() => this.props.history.push('/')}>
                     <img className={'logo'} src={image} alt={'blub'}/>
                 </a>
@@ -41,7 +40,6 @@ class Header extends Component {
                     </ul>
                 </div>
             </nav>
-
         );
     }
 }
