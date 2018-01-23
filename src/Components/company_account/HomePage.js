@@ -69,6 +69,7 @@ class HomePage extends Component {
                                     </div>
                                 </div>
                             </div>
+                            <iframe src={'/company/postings'} width={1110} height={800}/>
                         </div>
                     </div>
                 }
