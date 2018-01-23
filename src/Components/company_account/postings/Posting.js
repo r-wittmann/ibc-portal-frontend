@@ -231,6 +231,7 @@ class Posting extends Component {
                                                                 <DatePicker
                                                                     className={'form-control text-right'}
                                                                     dateFormat={'DD.MM.YYYY'}
+                                                                    minDate={moment()}
                                                                     selected={this.state.dateSelected ? moment(new Date(this.state.posting.start_of_employment)) : moment()}
                                                                     onChange={(date) => this.setState({
                                                                         dateSelected: true,
