@@ -229,6 +229,7 @@ class Posting extends Component {
                                                         <label htmlFor={'custom'}
                                                                className={'form-check-label'}>
                                                                 <DatePicker
+                                                                    className={'form-control text-right'}
                                                                     dateFormat={'DD.MM.YYYY'}
                                                                     selected={this.state.dateSelected ? moment(new Date(this.state.posting.start_of_employment)) : moment()}
                                                                     onChange={(date) => this.setState({
