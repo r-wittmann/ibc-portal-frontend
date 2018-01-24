@@ -180,16 +180,24 @@ class Registrations extends Component {
                             </tr>
                             </thead>
                             <tbody>
-                            {this.state.registeredAccounts.map((account) =>
-                                <RegistrationListItem
-                                    key={account.id}
-                                    account={account}
-                                    handleChangeType={this.handleChangeType}
-                                    handleAccept={this.acceptRegistration}
-                                    handleDecline={this.declineRegistration}
-                                    history={this.props.history}
-                                />
-                            )}
+                            {this.state.registeredAccounts.length > 0
+                                ? this.state.registeredAccounts.map((account) =>
+                                    <RegistrationListItem
+                                        key={account.id}
+                                        account={account}
+                                        handleChangeType={this.handleChangeType}
+                                        handleAccept={this.acceptRegistration}
+                                        handleDecline={this.declineRegistration}
+                                        history={this.props.history}
+                                    />
+                                )
+                                : <tr>
+                                    <td className={'text-center text-muted'} colSpan={9}>
+                                        Zu diesen Suchkriterien gibt es leider nichts anzuzeigen
+                                    </td>
+                                </tr>
+
+                            }
                             </tbody>
                         </table>
                     }

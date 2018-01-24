@@ -192,13 +192,19 @@ class PublicPostings extends Component {
                             </div>
                         </div>
                         {this.state.loading
-                            ? <div className={'loader'} />
+                            ? <div className={'loader'}/>
                             : <table className={'table table-hover'}>
                                 <tbody>
-                                {this.state.postings && this.state.postings.map((posting) =>
-                                    <PostingListItem key={posting.id}
-                                                     posting={posting}/>
-                                )}
+                                {this.state.postings.length > 0
+                                    ? this.state.postings.map((posting) =>
+                                        <PostingListItem key={posting.id}
+                                                         posting={posting}/>
+                                    ) : <tr>
+                                        <td className={'text-center text-muted'} colSpan={9}>Zu diesen Suchkriterien
+                                            gibt es leider nichts anzuzeigen
+                                        </td>
+                                    </tr>
+                                }
                                 </tbody>
                             </table>
                         }

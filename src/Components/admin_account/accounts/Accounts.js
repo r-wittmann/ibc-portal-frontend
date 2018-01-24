@@ -207,15 +207,22 @@ class Accounts extends Component {
                             </tr>
                             </thead>
                             <tbody>
-                            {this.state.accounts.map((account) =>
-                                <AccountListItem key={account.id}
-                                                 account={account}
-                                                 updateEmail={this.handleChangeEmail}
-                                                 updateType={this.handleChangeType}
-                                                 history={this.props.history}
-                                                 handleSave={this.handleSave}
-                                                 delete={this.handleDelete}/>
-                            )}
+                            {this.state.accounts.length > 0
+                                ? this.state.accounts.map((account) =>
+                                    <AccountListItem key={account.id}
+                                                     account={account}
+                                                     updateEmail={this.handleChangeEmail}
+                                                     updateType={this.handleChangeType}
+                                                     history={this.props.history}
+                                                     handleSave={this.handleSave}
+                                                     delete={this.handleDelete}/>
+                                )
+                                : <tr>
+                                    <td className={'text-center text-muted'} colSpan={9}>
+                                        Zu diesen Suchkriterien gibt es leider nichts anzuzeigen
+                                    </td>
+                                </tr>
+                            }
                             </tbody>
                         </table>
                     }
