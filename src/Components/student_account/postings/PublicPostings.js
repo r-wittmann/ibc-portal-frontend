@@ -89,6 +89,7 @@ class PublicPostings extends Component {
         return (
             <div>
                 <Header history={this.props.history}/>
+             <div className={'student-background'}>
                 <div className={'headline'}>
                     <h1>Digitale Jobs in und um München</h1>
                 </div>
@@ -193,16 +194,15 @@ class PublicPostings extends Component {
                         </div>
                         {this.state.loading
                             ? <div className={'loader'} />
-                            : <table className={'table table-hover'}>
-                                <tbody>
-                                {this.state.postings && this.state.postings.map((posting) =>
-                                    <PostingListItem key={posting.id}
-                                                     posting={posting}/>
-                                )}
-                                </tbody>
-                            </table>
+                            : <div className={"row"} style={{marginTop:20}}>
+                                  {this.state.postings && this.state.postings.map((posting) =>
+                                        <PostingListItem key={posting.id}
+                                                         posting={posting}/>
+                                    )}
+                            </div>
                         }
                     </div>
+                </div>
                 </div>
             </div>
         );

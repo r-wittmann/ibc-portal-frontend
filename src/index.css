@@ -161,15 +161,14 @@ h5{
 }
 
 .preview-logo{
-    float:right;
-    /*margin-top: 50px;
-    /*margin-bottom: 10px;
-    /*margin-top: -50px;*/
+    margin-top: 50px;
+    margin-bottom: 20px;
 }
 
 
 .preview-headline{
     margin-top: 50px;
+    margin-bottom: 20px;
 
 }
 
@@ -202,6 +201,7 @@ h5{
 .recruiter-logo img{
     /*height:200px;*/
     width: 175px;
+    margin-bottom: 10px;
 }
 
 .logo-table{
@@ -258,6 +258,19 @@ h5{
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+.student-background{
+    background: url(../resources/munich_students_opacity.jpeg) no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100%;
+    width: 100%;
+    height: auto;
+    position: absolute;
+    top: 65px;
+    left: 0;
+    margin-bottom: 56px;
+    padding-bottom: 50px;
 }
 
 
