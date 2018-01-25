@@ -25,93 +25,253 @@ class PublicPosting extends Component {
             <div>
                 <Header history={this.props.history}/>
                 <div className={'student-background'}>
-                    <div className={'container'}>
+                    <div className={'container mt-0 mt-sm-4 mb-0 mb-sm-4 p-5'} style={{ backgroundColor: 'white' }}>
                         {this.state.loading
                             ? <div className={'loader'}/>
                             :
-                            <div className={'row'}>
-
-                            <div className={"col-sm-8"}>
-
-                                <div className={'preview-headline'}>
-                                    <h2>{this.state.posting.title.toUpperCase()}</h2>
-                                </div>
-
-                                {this.state.posting.pdf
-                                    ? <div style={{ width: '100%', textAlign: 'center' }}>
-                                        <embed style={{ width: '100%', maxWidth: 820, height: 1024 }}
-                                               src={this.state.posting.description} type={'application/pdf'}/>
+                            <div>
+                                <div className={'row'}>
+                                    <div className={'d-none d-sm-none d-md-block col-md-8 my-auto'}>
+                                        <h2>{this.state.posting.title.toUpperCase()}</h2>
                                     </div>
-                                    : <p><span
-                                        dangerouslySetInnerHTML={{ __html: draftToHtml(JSON.parse(this.state.posting.description)) }}/>
-                                    </p>
-                                }
-
-
-                                    <div className='float-right'>
-                                        <button className={'btn btn-primary buttons-form'}
-                                                onClick={() => this.props.history.goBack()}>
-                                            Zurück
-                                        </button>
-                                        <a className={'btn btn-primary buttons-form'}
+                                    <div className={'col-4'}>
+                                        {this.state.posting.logo &&
+                                        <a className={'navbar-brand'}
+                                           onClick={() => this.props.history.push('/companies/' + this.state.posting.company_id)}>
+                                            <img src={this.state.posting.logo} alt={'logo'} className={'img-responsive'}
+                                                 style={{ maxHeight: 100, maxWidth: 200 }}/>
+                                        </a>}
+                                    </div>
+                                    <div className={'d-block d-sm-block d-md-none col-sm-12 my-auto'}>
+                                        <h2 style={{ fontSize: '120%' }}>{this.state.posting.title.toUpperCase()}</h2>
+                                    </div>
+                                </div>
+                                <div className={'row d-sm-block d-md-none'}>
+                                    <div className={'col-12 my-5'}
+                                         style={{
+                                             height: 1,
+                                             backgroundColor: '#9a9a9a'
+                                         }}/>
+                                </div>
+                                <div className={'d-sm-block d-md-none'}>
+                                    <div className={'col-8 offset-2 mb-4'}>
+                                        <a className={'btn btn-block btn-primary'} style={{ marginBottom: 20 }}
                                            href={this.state.posting.application_link} target={'_blank'}>
                                             Bewerben
                                         </a>
                                     </div>
-
-                            </div>
-
-
-                            <div className={"col-sm-4"}>
-
-                                <div className={'preview-logo'}>{this.state.posting.logo &&
-                                    <a className={'navbar-brand'} onClick={() => this.props.history.push('/companies/' + this.state.posting.company_id)}>
-                                        <img src={this.state.posting.logo} alt={'logo'}/>
-                                    </a>}
+                                    <div className={'row mb-2'}>
+                                        <div className={'col-2 text-center'}>
+                                            <span className={'fa fa-home'}/>
+                                        </div>
+                                        <div className={'col-10'}>
+                                            <Link
+                                                to={'/companies/' + this.state.posting.company_id}>{this.state.posting.company_name}</Link>
+                                        </div>
+                                    </div>
+                                    <div className={'row mb-2'}>
+                                        <div className={'col-2 text-center'}>
+                                            <span className={'fa fa-desktop'}/>
+                                        </div>
+                                        <div className={'col-9'}>
+                                            {translate.fieldOfEmployment(this.state.posting.field_of_employment)}
+                                        </div>
+                                    </div>
+                                    <div className={'row mb-2'}>
+                                        <div className={'col-2 text-center'}>
+                                            <span className={'fa fa-calendar'}/>
+                                        </div>
+                                        <div className={'col-9'}>
+                                            {translate.startOfEmployment(this.state.posting.start_of_employment)}
+                                        </div>
+                                    </div>
+                                    <div className={'row mb-2'}>
+                                        <div className={'col-2 text-center'}>
+                                            <span className={'fa fa-arrow-right'}/>
+                                        </div>
+                                        <div className={'col-9'}>
+                                            {translate.contractDuration(this.state.posting.contract_duration)}
+                                        </div>
+                                    </div>
                                 </div>
-
-                                <a className={'btn btn-primary'} style={{marginBottom:20}}
-                                       href={this.state.posting.application_link} target={'_blank'}>
-                                        Bewerben
-                                </a>
-                                <br/>
-                                <span className={'fa fa-home'}/>&nbsp;&nbsp;<Link to={'/companies/' + this.state.posting.company_id}>&nbsp;{this.state.posting.company_name}</Link><br/>
-                                <span className={'fa fa-map-marker'}/>&nbsp;&nbsp;<span dangerouslySetInnerHTML={{ __html: this.state.posting.munich_address.replace('\n', '<br>') }}/><br/>
-                                <span className={'fa fa-calendar'}/>&nbsp;&nbsp;{translate.startOfEmployment(this.state.posting.start_of_employment)}<br/>
-                                <span className={'fa fa-desktop'}/>&nbsp;&nbsp;{translate.fieldOfEmployment(this.state.posting.field_of_employment)}<br/> 
-                                <span className={'fa fa-arrow-right'}/>&nbsp;&nbsp;{translate.contractDuration(this.state.posting.contract_duration)}<br/>
-                                <span className={'fa fa-clock'}/>&nbsp;&nbsp;{this.state.posting.working_hours}<br/>
-                                <span className={'fa fa-edit'}/>&nbsp;&nbsp;{translate.contractType(this.state.posting.contract_type)}<br/>
-                                <span className={'fa fa-user'}/>&nbsp;&nbsp;{translate.entryLevel(this.state.posting.entry_level)}<br/><br/>
-                            
-                                <div className={'recruiter-logo'}>{this.state.posting.photo &&
-                                    <img src={this.state.posting.photo} alt={'recruiter'}/>}</div>
-                                    <p><b>{this.state.posting.recruiter_name}</b></p>
-                                    <div className={'recruiter-info'}>
-
-                                        {this.state.posting.location ?
-                                            <p>{this.state.posting.position}, {this.state.posting.location}</p> :
-                                            <p>{this.state.posting.position}</p>
-                                        }
-                                        {this.state.posting.recruiter_email ?
-                                            <p>E-Mail: {this.state.posting.recruiter_email}</p> : <p></p>
-                                        }
-                                        {this.state.posting.phone ?
-                                            <p>Festnetz: {this.state.posting.phone}</p> : <p></p>
-                                        }
-                                        {this.state.posting.mobile ?
-                                            <p>Mobil: {this.state.posting.mobile}</p> : <p></p>
-                                        }
-                                        {this.state.posting.xing ?
-                                            <p>Xing: {this.state.posting.xing}</p> : <p></p>
-                                        }
-                                        {this.state.posting.linked_in ?
-                                            <p>LinkedIn: {this.state.posting.linked_in}</p> : <p></p>
+                                <div className={'row'}>
+                                    <div className={'col-12 my-5'}
+                                         style={{
+                                             height: 1,
+                                             backgroundColor: '#9a9a9a'
+                                         }}/>
+                                </div>
+                                <div className={'row'}>
+                                    <div className={'col-sm-12 col-md-7 col-lg-8'}>
+                                        {this.state.posting.pdf
+                                            ? <div style={{ width: '100%', textAlign: 'center' }}>
+                                                <embed style={{ width: '100%', maxWidth: 820, height: 1024 }}
+                                                       src={this.state.posting.description} type={'application/pdf'}/>
+                                            </div>
+                                            : <span
+                                                dangerouslySetInnerHTML={{ __html: draftToHtml(JSON.parse(this.state.posting.description)) }}/>
                                         }
                                     </div>
-                                 
-                            </div>
+                                    <div className={'col-md-5 col-lg-4 d-none d-sm-none d-md-block row'}>
+                                        <div className={'col-10 offset-1'}>
+                                            <a className={'btn btn-block btn-primary'} style={{ marginBottom: 20 }}
+                                               href={this.state.posting.application_link} target={'_blank'}>
+                                                Bewerben
+                                            </a>
+                                        </div>
+                                        <div className={'row mb-2 ml-2'}>
+                                            <div className={'col-md-2 col-lg-2 col-xl-2 text-center'}>
+                                                <span className={'fa fa-home'}/>
+                                            </div>
+                                            <div className={'col-md-10 col-lg-10 col-xl-10'}>
+                                                <Link
+                                                    to={'/companies/' + this.state.posting.company_id}>{this.state.posting.company_name}</Link>
+                                            </div>
+                                        </div>
+                                        <div className={'row mb-2 ml-2'}>
+                                            <div className={'col-md-2 col-lg-2 col-xl-2 text-center'}>
+                                                <span className={'fa fa-map-marker'}/>
+                                            </div>
+                                            <div className={'col-md-10 col-lg-10 col-xl-10'}>
+                                                <span
+                                                    dangerouslySetInnerHTML={{ __html: this.state.posting.munich_address.replace('\n', '<br>') }}/>
+                                            </div>
+                                        </div>
+                                        <div className={'row mb-2 ml-2'}>
+                                            <div className={'col-md-2 col-lg-2 col-xl-2 text-center'}>
+                                                <span className={'fa fa-calendar'}/>
+                                            </div>
+                                            <div className={'col-md-10 col-lg-10 col-xl-10'}>
+                                                {translate.startOfEmployment(this.state.posting.start_of_employment)}
+                                            </div>
+                                        </div>
+                                        <div className={'row mb-2 ml-2'}>
+                                            <div className={'col-md-2 col-lg-2 col-xl-2 text-center'}>
+                                                <span className={'fa fa-desktop'}/>
+                                            </div>
+                                            <div className={'col-md-10 col-lg-10 col-xl-10'}>
+                                                {translate.fieldOfEmployment(this.state.posting.field_of_employment)}
+                                            </div>
+                                        </div>
+                                        <div className={'row mb-2 ml-2'}>
+                                            <div className={'col-md-2 col-lg-2 col-xl-2 text-center'}>
+                                                <span className={'fa fa-arrow-right'}/>
+                                            </div>
+                                            <div className={'col-md-10 col-lg-10 col-xl-10'}>
+                                                {translate.contractDuration(this.state.posting.contract_duration)}
+                                            </div>
+                                        </div>
+                                        <div className={'row mb-2 ml-2'}>
+                                            <div className={'col-md-2 col-lg-2 col-xl-2 text-center'}>
+                                                <span className={'fa fa-clock'}/>
+                                            </div>
+                                            <div className={'col-md-10 col-lg-10 col-xl-10'}>
+                                                {this.state.posting.working_hours}
+                                            </div>
+                                        </div>
+                                        <div className={'row mb-2 ml-2'}>
+                                            <div className={'col-md-2 col-lg-2 col-xl-2 text-center'}>
+                                                <span className={'fa fa-edit'}/>
+                                            </div>
+                                            <div className={'col-md-10 col-lg-10 col-xl-10'}>
+                                                {translate.contractType(this.state.posting.contract_type)}
+                                            </div>
+                                        </div>
+                                        <div className={'row mb-2 ml-2'}>
+                                            <div className={'col-md-2 col-lg-2 col-xl-2 text-center'}>
+                                                <span className={'fa fa-user'}/>
+                                            </div>
+                                            <div className={'col-md-10 col-lg-10 col-xl-10'}>
+                                                {translate.entryLevel(this.state.posting.entry_level)}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className={'row d-sm-block d-md-none'}>
+                                    <div className={'col-12 my-5'}
+                                         style={{
+                                             height: 1,
+                                             backgroundColor: '#9a9a9a'
+                                         }}/>
+                                </div>
+                                <div className={'d-sm-block d-md-none'}>
+                                    <div className={'row mb-2'}>
+                                        <div className={'col-2 text-center'}>
+                                            <span className={'fa fa-clock'}/>
+                                        </div>
+                                        <div className={'col-10'}>
+                                            {this.state.posting.working_hours}
+                                        </div>
+                                    </div>
+                                    <div className={'row mb-2'}>
+                                        <div className={'col-2 text-center'}>
+                                            <span className={'fa fa-edit'}/>
+                                        </div>
+                                        <div className={'col-9'}>
+                                            {translate.contractType(this.state.posting.contract_type)}
+                                        </div>
+                                    </div>
+                                    <div className={'row mb-2'}>
+                                        <div className={'col-2 text-center'}>
+                                            <span className={'fa fa-user'}/>
+                                        </div>
+                                        <div className={'col-9'}>
+                                            {translate.entryLevel(this.state.posting.entry_level)}
+                                        </div>
+                                    </div>
+                                    <div className={'row mb-2'}>
+                                        <div className={'col-2 text-center'}>
+                                            <span className={'fa fa-map-marker'}/>
+                                        </div>
+                                        <div className={'col-9'}>
+                                            <span
+                                                dangerouslySetInnerHTML={{ __html: this.state.posting.munich_address.replace('\n', '<br>') }}/>
+                                        </div>
+                                    </div>
+                                    <div className={'col-8 offset-2 mt-4'}>
+                                        <a className={'btn btn-block btn-primary'} style={{ marginBottom: 20 }}
+                                           href={this.state.posting.application_link} target={'_blank'}>
+                                            Bewerben
+                                        </a>
+                                    </div>
+                                </div>
+                                <div className={'row'}>
+                                    <div className={'col-12 my-5'}
+                                         style={{
+                                             height: 1,
+                                             backgroundColor: '#9a9a9a',
+                                         }}/>
+                                </div>
+                                <div className={'row'}>
+                                    <div className={'col-4 col-sm-4 col-md-3 offset-4 offset-sm-0 mb-3'}>
+                                        {this.state.posting.photo &&
+                                        <img src={this.state.posting.photo} className={'rounded-circle img-fluid'}
+                                             alt={'recruiter'}/>
+                                        }
+                                    </div>
+                                    <div className={'col-8 col-sm-8 col-md-9 offset-2 offset-sm-0'}>
+                                        <p><b>{this.state.posting.recruiter_name}</b></p>
+                                        {this.state.posting.position}{this.state.posting.location && ', ' + this.state.posting.location}<br/>
 
+                                        {this.state.posting.recruiter_email &&
+                                        <span>{this.state.posting.recruiter_email}<br/></span>}
+                                        {this.state.posting.phone && <span>Tel: {this.state.posting.phone}<br/></span>}
+                                        {this.state.posting.mobile &&
+                                        <span>Mobil: {this.state.posting.mobile}<br/></span>}
+                                        {this.state.posting.xing &&
+                                        <a href={this.state.posting.xing} target={'_blank'}>
+                                            <span className={'fab fa-xing-square mx-2'}
+                                                  style={{ fontSize: '150%', color: '#007575' }}/>
+                                        </a>
+                                        }
+                                        {this.state.posting.linked_in &&
+                                        <a href={this.state.posting.linked_in} target={'_blank'}>
+                                            <span className={'fab fa-linkedin mx-2'}
+                                                  style={{ fontSize: '150%', color: '#0084bf' }}/>
+                                        </a>
+                                        }
+                                    </div>
+                                </div>
                             </div>
                         }
 
