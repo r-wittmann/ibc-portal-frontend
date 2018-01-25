@@ -103,7 +103,7 @@ class Profile extends Component {
                         )}
                     <div className={'float-right'}>
                         <button className={'btn btn-warning buttons-form'}
-                                onClick={() => this.props.history.push('/company/home')}>Abbrechen
+                                onClick={() => this.props.history.goBack()}>Abbrechen
                         </button>
                     </div>
                     <PasswordModal/>
