@@ -193,7 +193,11 @@ class Registrations extends Component {
                                 )
                                 : <tr>
                                     <td className={'text-center text-muted'} colSpan={9}>
-                                        Zu diesen Suchkriterien gibt es leider nichts anzuzeigen
+                                        {this.state.filters.company_type.length === 0
+                                            ? 'Keine offenen Registrierungen'
+                                            : 'Zu diesen Suchkriterien gibt es leider nichts anzuzeigen'
+
+                                        }
                                     </td>
                                 </tr>
 
