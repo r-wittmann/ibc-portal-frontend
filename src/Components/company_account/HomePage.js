@@ -71,12 +71,9 @@ class HomePage extends Component {
                                 </div>
                             </div>
                             <div>
-                                <div className={'headline text-center'}>
-                                    <h3>Aktive Stellenanzeigen</h3>
-                                </div>
-                                <p className={'text-center'}>
-                                    Aktiv sind gerade {this.state.postings.length} Stellenanzeigen
-                                </p>
+                                <h4 className={'text-center mt-5 mb-4 align-baseline'}>
+                                    Aktiv sind gerade <span className={'badge badge-primary mb-1'}>{this.state.postings.length}</span> Stellenanzeigen
+                                </h4>
                                 <table className={'table table-hover'}>
                                     <thead>
                                         <tr>

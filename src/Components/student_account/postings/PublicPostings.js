@@ -89,120 +89,125 @@ class PublicPostings extends Component {
         return (
             <div>
                 <Header history={this.props.history}/>
-             <div className={'student-background'}>
-                <div className={'headline'}>
-                    <h1>Digitale Jobs in und um München</h1>
-                </div>
-                <div className={'container'}>
-                    <div className={''}>
-                        <div className={'row'}>
-                            <div className={'col-6 col-sm-4 col-lg-4 col-xl-2 dropdown pb-2'}>
-                                <form>
-                                    <button className={'btn btn-small btn-outline-dark btn-block'}
-                                            data-toggle={'dropdown'}>
-                                        <b>Vertragsart </b>
-                                        <span className={'fa fa-filter'}
-                                              style={this.state.filters.contract_type.length ? {} : { color: 'lightgrey' }}/>
-                                    </button>
-                                    <div className={'dropdown-menu p-0 pl-4 pt-2'}>
-                                        {Object.keys(translate.contractType()).map(key => (
-                                            <div className={'form-check'} key={key}>
-                                                <input className={'form-check-input'} type={'checkbox'} id={key}
-                                                       checked={this.state.filters.contract_type.includes(key)}
-                                                       onChange={(event) => this.handleChange(event, 'contract_type', key)}/>
-                                                <label className={'form-check-label'} htmlFor={key}>
-                                                    {translate.contractType(key)}
-                                                </label>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </form>
-                            </div>
-                            <div className={'col-6 col-sm-4 col-lg-4 col-xl-2 dropdown pb-2'}>
-                                <form>
-                                    <button className={'btn btn-small btn-outline-dark btn-block'}
-                                            data-toggle={'dropdown'}>
-                                        <b>Tätigkeit </b>
-                                        <span className={'fa fa-filter'}
-                                              style={this.state.filters.field_of_employment.length ? {} : { color: 'lightgrey' }}/>
-                                    </button>
-                                    <div className={'dropdown-menu p-0 pl-4 pt-2'}>
-                                        {Object.keys(translate.fieldOfEmployment()).map(key => (
-                                            <div className={'form-check'} key={key}>
-                                                <input className={'form-check-input'} type={'checkbox'} id={key}
-                                                       checked={this.state.filters.field_of_employment.includes(key)}
-                                                       onChange={(event) => this.handleChange(event, 'field_of_employment', key)}/>
-                                                <label className={'form-check-label'} htmlFor={key}>
-                                                    {translate.fieldOfEmployment(key)}
-                                                </label>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </form>
-                            </div>
-                            <div className={'col-6 col-sm-4 col-lg-4 col-xl-2 dropdown pb-2'}>
-                                <form>
-                                    <button className={'btn btn-small btn-outline-dark btn-block'}
-                                            data-toggle={'dropdown'}>
-                                        <b>Zielgruppe </b>
-                                        <span className={'fa fa-filter'}
-                                              style={this.state.filters.entry_level.length ? {} : { color: 'lightgrey' }}/>
-                                    </button>
-                                    <div className={'dropdown-menu p-0 pl-4 pt-2'}>
-                                        {Object.keys(translate.entryLevel()).map(key => (
-                                            <div className={'form-check'} key={key}>
-                                                <input className={'form-check-input'} type={'checkbox'} id={key}
-                                                       checked={this.state.filters.entry_level.includes(key)}
-                                                       onChange={(event) => this.handleChange(event, 'entry_level', key)}/>
-                                                <label className={'form-check-label'} htmlFor={key}>
-                                                    {translate.entryLevel(key)}
-                                                </label>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </form>
-                            </div>
-                            <div className={'col-6 col-sm-4 col-lg-4 col-xl-2 dropdown pb-2'}>
-                                <form>
-                                    <button className={'btn btn-small btn-outline-dark btn-block'}
-                                            data-toggle={'dropdown'}>
-                                        <b>Unternehmen </b>
-                                        <span className={'fa fa-filter'}
-                                              style={this.state.filters.company_id.length ? {} : { color: 'lightgrey' }}/>
-                                    </button>
-                                    <div className={'dropdown-menu p-0 pl-4 pt-2'}>
-                                        {this.state.companies.map(company => (
-                                            <div className={'form-check'} key={company.id}>
-                                                <input className={'form-check-input'} type={'checkbox'}
-                                                       id={company.id}
-                                                       checked={this.state.filters.company_id.includes(company.id.toString())}
-                                                       onChange={(event) => this.handleChange(event, 'company_id', company.id.toString())}/>
-                                                <label className={'form-check-label'} htmlFor={company.id}>
-                                                    {company.company_name}
-                                                </label>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </form>
-                            </div>
-                            <div className={'col-12 col-sm-4 col-lg-4 col-xl-2 pb-2'}>
-                                <button className={'btn btn-outline-dark btn-block'}
-                                        onClick={this.deleteFilters}>
-                                    <b>Filter entfernen</b>
-                                </button>
-                            </div>
-                        </div>
-                        {this.state.loading
-                            ? <div className={'loader'} />
-                            : <div className={"row"} style={{marginTop:20}}>
-                                  {this.state.postings && this.state.postings.map((posting) =>
-                                        <PostingListItem key={posting.id}
-                                                         posting={posting}/>
-                                    )}
-                            </div>
-                        }
+                <div className={'student-background'}>
+                    <div className={'headline'}>
+                        <h1>Digitale Jobs in und um München</h1>
                     </div>
-                </div>
+                    <div className={'container'}>
+                        <div className={''}>
+                            <div className={'row'}>
+                                <div className={'col-6 col-sm-4 col-lg-4 col-xl-2 dropdown pb-2'}>
+                                    <form>
+                                        <button className={'btn btn-small btn-outline-dark btn-block'}
+                                                data-toggle={'dropdown'}>
+                                            <b>Vertragsart </b>
+                                            <span className={'fa fa-filter'}
+                                                  style={this.state.filters.contract_type.length ? {} : { color: 'lightgrey' }}/>
+                                        </button>
+                                        <div className={'dropdown-menu p-0 pl-4 pt-2'}>
+                                            {Object.keys(translate.contractType()).map(key => (
+                                                <div className={'form-check'} key={key}>
+                                                    <input className={'form-check-input'} type={'checkbox'} id={key}
+                                                           checked={this.state.filters.contract_type.includes(key)}
+                                                           onChange={(event) => this.handleChange(event, 'contract_type', key)}/>
+                                                    <label className={'form-check-label'} htmlFor={key}>
+                                                        {translate.contractType(key)}
+                                                    </label>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </form>
+                                </div>
+                                <div className={'col-6 col-sm-4 col-lg-4 col-xl-2 dropdown pb-2'}>
+                                    <form>
+                                        <button className={'btn btn-small btn-outline-dark btn-block'}
+                                                data-toggle={'dropdown'}>
+                                            <b>Tätigkeit </b>
+                                            <span className={'fa fa-filter'}
+                                                  style={this.state.filters.field_of_employment.length ? {} : { color: 'lightgrey' }}/>
+                                        </button>
+                                        <div className={'dropdown-menu p-0 pl-4 pt-2'}>
+                                            {Object.keys(translate.fieldOfEmployment()).map(key => (
+                                                <div className={'form-check'} key={key}>
+                                                    <input className={'form-check-input'} type={'checkbox'} id={key}
+                                                           checked={this.state.filters.field_of_employment.includes(key)}
+                                                           onChange={(event) => this.handleChange(event, 'field_of_employment', key)}/>
+                                                    <label className={'form-check-label'} htmlFor={key}>
+                                                        {translate.fieldOfEmployment(key)}
+                                                    </label>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </form>
+                                </div>
+                                <div className={'col-6 col-sm-4 col-lg-4 col-xl-2 dropdown pb-2'}>
+                                    <form>
+                                        <button className={'btn btn-small btn-outline-dark btn-block'}
+                                                data-toggle={'dropdown'}>
+                                            <b>Zielgruppe </b>
+                                            <span className={'fa fa-filter'}
+                                                  style={this.state.filters.entry_level.length ? {} : { color: 'lightgrey' }}/>
+                                        </button>
+                                        <div className={'dropdown-menu p-0 pl-4 pt-2'}>
+                                            {Object.keys(translate.entryLevel()).map(key => (
+                                                <div className={'form-check'} key={key}>
+                                                    <input className={'form-check-input'} type={'checkbox'} id={key}
+                                                           checked={this.state.filters.entry_level.includes(key)}
+                                                           onChange={(event) => this.handleChange(event, 'entry_level', key)}/>
+                                                    <label className={'form-check-label'} htmlFor={key}>
+                                                        {translate.entryLevel(key)}
+                                                    </label>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </form>
+                                </div>
+                                <div className={'col-6 col-sm-4 col-lg-4 col-xl-2 dropdown pb-2'}>
+                                    <form>
+                                        <button className={'btn btn-small btn-outline-dark btn-block'}
+                                                data-toggle={'dropdown'}>
+                                            <b>Unternehmen </b>
+                                            <span className={'fa fa-filter'}
+                                                  style={this.state.filters.company_id.length ? {} : { color: 'lightgrey' }}/>
+                                        </button>
+                                        <div className={'dropdown-menu p-0 pl-4 pt-2'}>
+                                            {this.state.companies.map(company => (
+                                                <div className={'form-check'} key={company.id}>
+                                                    <input className={'form-check-input'} type={'checkbox'}
+                                                           id={company.id}
+                                                           checked={this.state.filters.company_id.includes(company.id.toString())}
+                                                           onChange={(event) => this.handleChange(event, 'company_id', company.id.toString())}/>
+                                                    <label className={'form-check-label'} htmlFor={company.id}>
+                                                        {company.company_name}
+                                                    </label>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </form>
+                                </div>
+                                <div className={'col-12 col-sm-4 col-lg-4 col-xl-2 pb-2'}>
+                                    <button className={'btn btn-outline-dark btn-block'}
+                                            onClick={this.deleteFilters}>
+                                        <b>Filter entfernen</b>
+                                    </button>
+                                </div>
+                            </div>
+                            {this.state.loading
+                                ? <div className={'loader'}/>
+                                : <div className={'row'} style={{ marginTop: 20 }}>
+                                    {this.state.postings.length > 0
+                                        ? this.state.postings.map((posting) =>
+                                            <PostingListItem key={posting.id}
+                                                             posting={posting}/>
+                                        )
+                                        : <div className={'text-center text-muted'}>
+                                            Zu diesen Suchkriterien gibt es leider nichts anzuzeigen
+                                        </div>
+                                    }
+                                </div>
+                            }
+                        </div>
+                    </div>
                 </div>
             </div>
         );

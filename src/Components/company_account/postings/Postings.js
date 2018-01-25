@@ -250,13 +250,19 @@ class Postings extends Component {
                             </tr>
                             </thead>
                             <tbody>
-                            {this.state.postings.map((posting) =>
-                                <PostingListItem key={posting.id}
-                                                 posting={posting}
-                                                 history={this.props.history}
-                                                 delete={this.handleDelete}
-                                                 save={this.handleStatusChange}/>
-                            )}
+                            {this.state.postings.length > 0
+                                ? this.state.postings.map((posting) =>
+                                    <PostingListItem key={posting.id}
+                                                     posting={posting}
+                                                     history={this.props.history}
+                                                     delete={this.handleDelete}
+                                                     save={this.handleStatusChange}/>
+                                ) : <tr>
+                                    <td className={'text-center text-muted'} colSpan={9}>
+                                        Zu diesen Suchkriterien gibt es leider nichts anzuzeigen
+                                    </td>
+                                </tr>
+                            }
                             </tbody>
                         </table>
                     }

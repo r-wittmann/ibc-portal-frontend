@@ -36,7 +36,12 @@ class LoginBody extends Component {
         return (
             <form onSubmit={this.handleSubmit} style={{ margin: 20 }} noValidate>
                 <InputLabel
-                    label={'Unternehmen'}
+                    label={
+                        <span data-toggle="tooltip" data-placement="top" title="Sowohl Unternehmensname als auch E-Mail-Adresse können zum Login
+                            genutzt werden">Unternehmen <span className={'fa fa-info-circle'}/>
+
+                        </span>
+                    }
                     value={this.state.name}
                     required
                     onChange={(name) => this.setState({ name })}/>
