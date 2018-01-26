@@ -70,6 +70,7 @@ class PublicCompany extends Component {
                                                     {translate.numberOfEmployees(this.state.company.employees)} Mitarbeiter
                                                 </div>
                                             </div>
+                                            {this.state.company.field_of_activity &&
                                             <div className={'row mb-2'}>
                                                 <div className={'col-2 text-center'}>
                                                     <span className={'fa fa-search'}/>
@@ -78,6 +79,7 @@ class PublicCompany extends Component {
                                                     Haupttätigkeitsbereich: {this.state.company.field_of_activity}
                                                 </div>
                                             </div>
+                                            }
                                             {this.state.company.kununu &&
                                             <div className={'row mb-2'}>
                                                 <div className={'col-2 text-center'}>

@@ -49,6 +49,7 @@ class CompanyPreview extends Component {
                                     {translate.numberOfEmployees(this.props.company.employees)} Mitarbeiter
                                 </div>
                             </div>
+                            {this.props.company.field_of_activity &&
                             <div className={'row mb-2'}>
                                 <div className={'col-2 text-center'}>
                                     <span className={'fa fa-search'}/>
@@ -57,6 +58,7 @@ class CompanyPreview extends Component {
                                     Haupttätigkeitsbereich: {this.props.company.field_of_activity}
                                 </div>
                             </div>
+                            }
                             {this.props.company.kununu &&
                             <div className={'row mb-2'}>
                                 <div className={'col-2 text-center'}>
