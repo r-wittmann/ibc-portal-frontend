@@ -20,8 +20,10 @@ class RecruiterListItem extends Component {
                                 onClick={() => this.props.history.push(`/company/recruiters/${this.props.recruiter.id}`)}>
                             <span className={'fa fa-pencil-alt'}/>
                         </button>
-                        <button className={'btn btn-outline-dark'} data-toggle="tooltip" data-placement="top" title="Löschen"
-                                data-toggle='modal'
+                        <button className={'btn btn-outline-dark'}
+                                data-toggle="tooltip" data-toggle='modal' // eslint-disable-line react/jsx-no-duplicate-props
+                                data-placement="top"
+                                title="Löschen"
                                 data-target={`#confirm-modal-${this.props.recruiter.id}`}>
                             <span className={'fa fa-trash'}/>
                         </button>
