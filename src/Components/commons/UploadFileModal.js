@@ -8,6 +8,13 @@ class UploadFileModal extends Component {
             let reader = new FileReader();
             reader.onloadend = () => {
                 this.props.returnFile(reader.result);
+
+                let modal = document.getElementById('uploadFile');
+                modal.classList.remove('show');
+                modal.style.display = 'none';
+                document.body.classList.remove('modal-open');
+                let backdrop = document.getElementsByClassName('modal-backdrop')[0];
+                backdrop.parentNode.removeChild(backdrop);
             };
             reader.readAsDataURL(file);
         } else {
