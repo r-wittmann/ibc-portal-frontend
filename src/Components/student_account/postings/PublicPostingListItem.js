@@ -14,7 +14,7 @@ class PublicPostingListItem extends Component {
                         {this.props.posting.logo &&
                         <img src={this.props.posting.logo}
                              style={{ maxWidth: 200, maxHeight: 100 }}
-                             alt={"Card image cap"}/>
+                             alt={"Card cap"}/>
                         }
                     </div>
                     <div className={"card-body"} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around' }}>
