@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import backendService from '../../../backendService';
-import PostingListItem from "./PublicPostingListItem";
+import PostingListItem from './PublicPostingListItem';
 import queryString from 'query-string';
-import Header from "../Header";
-import translate from "../../../translationService";
+import Header from '../Header';
+import translate from '../../../translationService';
+import Fuse from 'fuse.js';
+import { Link } from "react-router-dom";
 
 class PublicPostings extends Component {
     defaultFilters = () => {
@@ -46,13 +48,42 @@ class PublicPostings extends Component {
         location.hash = ''
     };
 
+    handleSearch = (event) => {
+        this.setState({ searchString: event.target.value });
+
+        let options = {
+            shouldSort: true,
+            threshold: 0.3,
+            minMatchCharLength: 3,
+            keys: [{
+                name: 'title',
+                weight: 0.6
+            }, {
+                name: 'description',
+                weight: 0.2
+            }, {
+                name: 'company_name',
+                weight: 0.1
+            }, {
+                name: 'field_of_employment',
+                weight: 0.1
+            }]
+        };
+
+        let fuse = new Fuse(this.state.postings, options);
+
+        this.setState({ searchResult: fuse.search(event.target.value) });
+    };
+
     constructor(props) {
         super(props);
         this.state = {
             postings: [],
             companies: [],
             filters: this.defaultFilters(),
-            loading: false
+            loading: false,
+            searchString: '',
+            searchResult: []
         };
     };
 
@@ -96,12 +127,16 @@ class PublicPostings extends Component {
                     <div className={'container'}>
                         <div className={'card p-1 p-sm-2 p-md-3'}>
                             <div className={'row no-gutters p-1'}>
-                                <div className={'col'}>
+                                <div className={'col-12'}>
                                     <div className={'input-group'}>
-                                        <input className={'form-control'}/>
+                                        <input className={'form-control'}
+                                               value={this.state.searchString}
+                                               onChange={this.handleSearch}/>
                                         <span className={'input-group-btn'}>
                                             <button className={'btn btn-secondary'} type={'button'}>
-                                                <span className={'fa fa-search'}/>
+                                                <span
+                                                    className={this.state.searchString ? 'fa fa-times' : 'fa fa-search'}
+                                                    style={{ width: 16, textAlign: 'center' }}/>
                                             </button>
                                         </span>
                                         <span className={'input-group-addon'} style={{ padding: 1 }}/>
@@ -116,6 +151,28 @@ class PublicPostings extends Component {
                                         </span>
                                     </div>
                                 </div>
+                                {this.state.searchResult.length > 0 && this.state.searchResult.slice(0, 5).map(result =>
+                                    <div key={result.id} className={'col-12 row'}>
+                                        <div className={'col-3 col-sm-3 col-md-3 col-lg-2 text-center'}>
+                                            {result.logo &&
+                                            <Link to={'/companies/' + result.company_id}>
+                                                <img src={result.logo} className={'img-fluid'}
+                                                     style={{ maxHeight: 52, maxWidth: 84 }} alt={'company'}/>
+                                            </Link>
+                                            }
+                                        </div>
+                                        <div className={'col-9 col-sm-9 col-md-9 col-lg-10 my-auto'}>
+                                            <Link to={'/postings/' + result.id}>
+                                                {result.title}
+                                            </Link>
+                                        </div>
+                                        <div className={'ml-3 ml-sm-3 ml-md-3 ml-lg-3 col-12'}
+                                             style={{
+                                                 height: 1,
+                                                 backgroundColor: '#cacaca'
+                                             }}/>
+                                    </div>
+                                )}
                             </div>
                             <div id={'filters'} className={'collapse'}>
                                 <div className={'row no-gutters mt-sm-1 mt-md-2'}>
@@ -211,7 +268,8 @@ class PublicPostings extends Component {
                                     <div className={'col-md-12 col-lg p-1'}>
                                         <button className={'btn btn-outline-dark btn-block'}
                                                 onClick={this.deleteFilters}>
-                                            <b>Filter entfernen&nbsp;&nbsp;<span className={'fa fa-times'} style={{ fontSize: '110%'}}/></b>
+                                            <b>Filter entfernen&nbsp;&nbsp;<span className={'fa fa-times'}
+                                                                                 style={{ fontSize: '110%' }}/></b>
                                         </button>
                                     </div>
                                 </div>
