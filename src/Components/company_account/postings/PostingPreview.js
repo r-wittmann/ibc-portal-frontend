@@ -275,6 +275,18 @@ class PostingPreview extends Component {
                             </div>
                         </div>
                     }
+                    <div className='float-right'>
+                        <button type={'button'} className={'btn btn-warning buttons-form'}
+                                onClick={this.props.endPreview}>
+                            Zurück
+                        </button>
+
+
+                        <button type={'button'} className={'btn btn-success buttons-form'}
+                                onClick={this.props.primaryAction}>
+                            {this.props.primaryActionText}
+                        </button>
+                    </div>
 
                 </div>
             </div>
