@@ -5,51 +5,36 @@ class RecruiterPreview extends Component {
     render() {
         return (
             <div>
-                <div className={'headline'}>
-                    <h1>Vorschau</h1>
-                </div>
                 {this.props.recruiter && (
-                    <div>
-                        <div className={'attributes'}>
-                            <div className={'table-responsive'}>
-                                <table className={'table table-borderless preview-table'}>
-                                    <tbody>
-                                    <tr>
-                                        <td className={'logo-table'}>
-                                            <div className={'recruiter-logo'}>{this.props.recruiter.photo &&
-                                            <img src={this.props.recruiter.photo} alt={'recruiter'}/>}</div>
-                                        </td>
-                                        <td>
-                                            <p><b>{this.props.recruiter.recruiter_name}</b></p>
-                                            <div className={'recruiter-info'}>
-
-                                                {this.props.recruiter.location ?
-                                                    <p>{this.props.recruiter.position}, {this.props.recruiter.location}</p> :
-                                                    <p>{this.props.recruiter.position}</p>
-                                                }
-                                                {this.props.recruiter.recruiter_email ?
-                                                    <p>E-Mail: {this.props.recruiter.recruiter_email}</p> : <p></p>
-                                                }
-                                                {this.props.recruiter.phone ?
-                                                    <p>Festnetz: {this.props.recruiter.phone}</p> : <p></p>
-                                                }
-                                                {this.props.recruiter.mobile ?
-                                                    <p>Mobil: {this.props.recruiter.mobile}</p> : <p></p>
-                                                }
-                                                {this.props.recruiter.xing ?
-                                                    <p>Xing: {this.props.recruiter.xing}</p> : <p></p>
-                                                }
-                                                {this.props.recruiter.linked_in ?
-                                                    <p>LinkedIn: {this.props.recruiter.linked_in}</p> : <p></p>
-                                                }
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                    <div className={'row'}>
+                        <div className={'col-4 col-sm-4 col-md-3 offset-4 offset-sm-0 mb-3'}>
+                            {this.props.recruiter.photo &&
+                            <img src={this.props.recruiter.photo} className={'rounded-circle img-fluid'}
+                                 alt={'recruiter'}/>
+                            }
                         </div>
+                        <div className={'col-8 col-sm-8 col-md-9 offset-2 offset-sm-0'}>
+                            <p><b>{this.props.recruiter.recruiter_name}</b></p>
+                            {this.props.recruiter.position}{this.props.recruiter.location && ', ' + this.props.recruiter.location}<br/>
 
+                            {this.props.recruiter.recruiter_email &&
+                            <span>{this.props.recruiter.recruiter_email}<br/></span>}
+                            {this.props.recruiter.phone && <span>Tel: {this.props.recruiter.phone}<br/></span>}
+                            {this.props.recruiter.mobile &&
+                            <span>Mobil: {this.props.recruiter.mobile}<br/></span>}
+                            {this.props.recruiter.xing &&
+                            <a href={this.props.recruiter.xing} target={'_blank'}>
+                                            <span className={'fab fa-xing-square mx-2'}
+                                                  style={{ fontSize: '150%', color: '#007575' }}/>
+                            </a>
+                            }
+                            {this.props.recruiter.linked_in &&
+                            <a href={this.props.recruiter.linked_in} target={'_blank'}>
+                                            <span className={'fab fa-linkedin mx-2'}
+                                                  style={{ fontSize: '150%', color: '#0084bf' }}/>
+                            </a>
+                            }
+                        </div>
                     </div>
                 )}
                 <div className='float-right'>
