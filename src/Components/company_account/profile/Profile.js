@@ -5,6 +5,7 @@ import PasswordModal from "./PasswordModal";
 import Header from "../Header";
 import { toast } from "react-toastify";
 import translate from "../../../translationService";
+import queryString from 'query-string';
 
 class Profile extends Component {
     handleSubmit = (event) => {
@@ -29,8 +30,25 @@ class Profile extends Component {
 
     componentDidMount() {
         this.setState({ loading: true });
+        if (location.hash){
+            backendService.getProfile(queryString.parse(location.hash)['token'])
+                .then(profile => this.setState({ profile, loading: false }))
+                .then(() => {
+                    location.hash = '';
+
+                    let modal = document.getElementById('changePassword');
+                    modal.classList.add('show');
+                    modal.style.display = 'block';
+
+                    document.body.classList.add('modal-open');
+                    let div = document.createElement('div');
+                    div.setAttribute('class', 'modal-backdrop fade show');
+                    document.body.appendChild(div);
+                });
+        } else {
         backendService.getProfile()
             .then(profile => this.setState({ profile, loading: false }));
+        }
     }
 
     render() {
