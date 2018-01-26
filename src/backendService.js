@@ -413,11 +413,14 @@ class BackendService {
     // ==== Profile endpoints ===== //
     // ============================ //
 
-    static getProfile() {
+    static getProfile(token) {
+        if (token) {
+            localStorage.setItem('ibc-user-token', token);
+        }
         return fetch(`${baseUrl}/api/account`, {
             method: 'GET',
             headers: {
-                'x-access-token': localStorage.getItem('ibc-user-token')
+                'x-access-token': token || localStorage.getItem('ibc-user-token')
             },
         })
             .then(checkStatus)
