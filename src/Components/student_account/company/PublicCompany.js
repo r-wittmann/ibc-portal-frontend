@@ -88,6 +88,7 @@ class PublicCompany extends Component {
                                                 </div>
                                             </div>
                                             }
+                                            {this.state.company.locations &&
                                             <div className={'row mb-2'}>
                                                 <div className={'col-2 text-center'}>
                                                     <span className={'fa fa-globe'}/>
@@ -96,6 +97,7 @@ class PublicCompany extends Component {
                                                     {this.state.company.locations}
                                                 </div>
                                             </div>
+                                            }
                                             <div className={'row mb-2'}>
                                                 <div className={'col-2 text-center'}>
                                                     <span className={'fa fa-map-marker'}/>

@@ -8,7 +8,7 @@ class PublicPostingListItem extends Component {
     render() {
         return (
 
-            <div className={'col-12 col-sm-10 col-md-6 col-lg-4 col-xl-3 offset-0 offset-sm-1 offset-md-0'}>
+            <div className={'col-12 col-sm-10 col-md-6 col-lg-4 offset-0 offset-sm-1 offset-md-0'}>
                 <div className={'card text-center'} style={{ height: 320, marginBottom: 15 }}>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 128 }}>
                         {this.props.posting.logo &&
