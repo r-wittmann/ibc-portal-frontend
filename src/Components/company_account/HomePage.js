@@ -29,7 +29,7 @@ class HomePage extends Component {
                         <Header history={this.props.history}/>
 
                         <div className={'headline'}>
-                            <h1>Dein persönlicher Bereich</h1>
+                            <h1>Ihr persönlicher Bereich</h1>
                         </div>
                         <div className={'container'}>
                             <div className={'row'} style={{ cursor: 'pointer' }}>
