@@ -1,5 +1,5 @@
 //
-// BackendService
+// TranslationService
 //
 class TranslationService {
     static companyType(key) {

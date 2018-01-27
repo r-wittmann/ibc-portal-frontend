@@ -29,19 +29,18 @@ class PostingPreview extends Component {
                 <div className={'container mt-0 mt-sm-4 mb-0 mb-sm-4 p-5'} style={{ backgroundColor: 'white' }}>
                     {!this.props.posting || !this.state.company || !this.state.recruiter
                         ? <div className={'loader'}/>
-                        :
-                        <div>
+                        : <div>
                             <div className={'row'}>
                                 <div className={'d-none d-sm-none d-md-block col-md-8 my-auto'}>
                                     <h2>{this.props.posting.title.toUpperCase()}</h2>
                                 </div>
                                 <div className={'col-4'}>
                                     {this.state.company.logo &&
-                                    <a className={'navbar-brand'}
-                                       onClick={() => this.props.history.push('/companies/' + this.state.company.id)}>
+                                    <Link className={'navbar-brand'}
+                                          to={'/companies/' + this.state.company.id}>
                                         <img src={this.state.company.logo} alt={'logo'} className={'img-responsive'}
                                              style={{ maxHeight: 100, maxWidth: 200 }}/>
-                                    </a>}
+                                    </Link>}
                                 </div>
                                 <div className={'d-block d-sm-block d-md-none col-sm-12 my-auto'}>
                                     <h2 style={{ fontSize: '120%' }}>{this.props.posting.title.toUpperCase()}</h2>
@@ -56,18 +55,19 @@ class PostingPreview extends Component {
                             </div>
                             <div className={'d-sm-block d-md-none'}>
                                 <div className={'col-8 offset-2 mb-4'}>
-                                    <a className={'btn btn-block btn-primary'} style={{ marginBottom: 20 }}
-                                       href={this.props.posting.application_link} target={'_blank'}>
+                                    <Link className={'btn btn-block btn-primary'} style={{ marginBottom: 20 }}
+                                          to={this.props.posting.application_link} target={'_blank'}>
                                         Bewerben
-                                    </a>
+                                    </Link>
                                 </div>
                                 <div className={'row mb-2'}>
                                     <div className={'col-2 text-center'}>
                                         <span className={'fa fa-home'}/>
                                     </div>
                                     <div className={'col-10'}>
-                                        <Link
-                                            to={'/companies/' + this.state.company.id}>{this.state.company.company_name}</Link>
+                                        <Link to={'/companies/' + this.state.company.id}>
+                                            {this.state.company.company_name}
+                                        </Link>
                                     </div>
                                 </div>
                                 <div className={'row mb-2'}>
@@ -115,18 +115,19 @@ class PostingPreview extends Component {
                                 </div>
                                 <div className={'col-md-5 col-lg-4 d-none d-sm-none d-md-block row'}>
                                     <div className={'col-10 offset-1'}>
-                                        <a className={'btn btn-block btn-primary'} style={{ marginBottom: 20 }}
-                                           href={this.props.posting.application_link} target={'_blank'}>
+                                        <Link className={'btn btn-block btn-primary'} style={{ marginBottom: 20 }}
+                                              to={this.props.posting.application_link} target={'_blank'}>
                                             Bewerben
-                                        </a>
+                                        </Link>
                                     </div>
                                     <div className={'row mb-2 ml-2'}>
                                         <div className={'col-md-2 col-lg-2 col-xl-2 text-center'}>
                                             <span className={'fa fa-home'}/>
                                         </div>
                                         <div className={'col-md-10 col-lg-10 col-xl-10'}>
-                                            <Link
-                                                to={'/companies/' + this.state.company.id}>{this.state.company.company_name}</Link>
+                                            <Link to={'/companies/' + this.state.company.id}>
+                                                {this.state.company.company_name}
+                                            </Link>
                                         </div>
                                     </div>
                                     <div className={'row mb-2 ml-2'}>
@@ -230,10 +231,10 @@ class PostingPreview extends Component {
                                     </div>
                                 </div>
                                 <div className={'col-8 offset-2 mt-4'}>
-                                    <a className={'btn btn-block btn-primary'} style={{ marginBottom: 20 }}
-                                       href={this.props.posting.application_link} target={'_blank'}>
+                                    <Link className={'btn btn-block btn-primary'} style={{ marginBottom: 20 }}
+                                          to={this.props.posting.application_link} target={'_blank'}>
                                         Bewerben
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                             <div className={'row'}>
@@ -256,20 +257,21 @@ class PostingPreview extends Component {
 
                                     {this.state.recruiter.recruiter_email &&
                                     <span>{this.state.recruiter.recruiter_email}<br/></span>}
-                                    {this.state.recruiter.phone && <span>Tel: {this.state.recruiter.phone}<br/></span>}
+                                    {this.state.recruiter.phone &&
+                                    <span>Tel: {this.state.recruiter.phone}<br/></span>}
                                     {this.state.recruiter.mobile &&
                                     <span>Mobil: {this.state.recruiter.mobile}<br/></span>}
                                     {this.state.recruiter.xing &&
-                                    <a href={this.state.recruiter.xing} target={'_blank'}>
+                                    <Link to={this.state.recruiter.xing} target={'_blank'}>
                                             <span className={'fab fa-xing-square mx-2'}
                                                   style={{ fontSize: '150%', color: '#007575' }}/>
-                                    </a>
+                                    </Link>
                                     }
                                     {this.state.recruiter.linked_in &&
-                                    <a href={this.state.recruiter.linked_in} target={'_blank'}>
+                                    <Link to={this.state.recruiter.linked_in} target={'_blank'}>
                                             <span className={'fab fa-linkedin mx-2'}
                                                   style={{ fontSize: '150%', color: '#0084bf' }}/>
-                                    </a>
+                                    </Link>
                                     }
                                 </div>
                             </div>
@@ -280,7 +282,6 @@ class PostingPreview extends Component {
                                 onClick={this.props.endPreview}>
                             Zurück
                         </button>
-
 
                         <button type={'button'} className={'btn btn-success buttons-form'}
                                 onClick={this.props.primaryAction}>

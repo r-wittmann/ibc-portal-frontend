@@ -22,8 +22,8 @@ const checkStatus = (response) => {
 const convertResponseToJson = (response) => response.json();
 
 const baseUrl = process.env.NODE_ENV === 'development'
-  ? 'http://localhost:9090'
-  : 'https://ibc-backend.cfapps.io';
+    ? 'http://localhost:9090'
+    : 'https://ibc-backend.cfapps.io';
 
 //
 // BackendService

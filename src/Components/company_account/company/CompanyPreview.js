@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import draftToHtml from 'draftjs-to-html';
 import translate from '../../../translationService';
+import { Link } from 'react-router-dom';
 
 class CompanyPreview extends Component {
 
@@ -38,7 +39,9 @@ class CompanyPreview extends Component {
                                     <span className={'fa fa-info-circle'}/>
                                 </div>
                                 <div className={'col-10'}>
-                                    <a href={this.props.company.website}>{this.props.company.website.split('//')[1]}</a>
+                                    <Link to={this.props.company.website}>
+                                        {this.props.company.website.split('//')[1]}
+                                    </Link>
                                 </div>
                             </div>
                             <div className={'row mb-2'}>
@@ -65,7 +68,7 @@ class CompanyPreview extends Component {
                                     <span className={'fa fa-star'}/>
                                 </div>
                                 <div className={'col-9'}>
-                                    <a href={this.props.company.kununu}>Bewertung auf kununu</a>
+                                    <Link to={this.props.company.kununu}>Bewertung auf kununu</Link>
                                 </div>
                             </div>
                             }

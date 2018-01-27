@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import image from '../../../resources/ibc_logo-long.png';
-import backendService from "../../backendService";
+import backendService from '../../backendService';
+import { Link } from 'react-router-dom';
 
 class Header extends Component {
 
@@ -21,43 +22,42 @@ class Header extends Component {
         return (
 
             <nav className={'navbar fixed-top navbar-expand-lg navbar-light bg-light'}>
-                <a className={'navbar-brand'} onClick={() => this.props.history.push('/admin/registrations')}>
+                <Link className={'navbar-brand'} to={'/admin/registrations'}>
                     <img className={'logo'} src={image} alt={'blub'}/>
-                </a>
-                <button className={'navbar-toggler'} type="button" data-toggle="collapse" data-target="#navbarNav"
-                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                </Link>
+                <button className={'navbar-toggler'} type='button' data-toggle='collapse' data-target='#navbarNav'
+                        aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation'>
                     <span className={'navbar-toggler-icon'}/>
                 </button>
-                <div className={'collapse navbar-collapse'} id="navbarNav">
+                <div className={'collapse navbar-collapse'} id='navbarNav'>
                     <ul className={'navbar-nav mr-auto mt-2 mt-lg-0'}>
                         <li className={this.getActiveLinkClassNames('/admin/registrations')}>
-                            <a className={'nav-link'}
-                               onClick={() => this.props.history.push('/admin/registrations')}>
+                            <Link className={'nav-link'}
+                                  to={'/admin/registrations'}>
                                 Anfragen
-                            </a>
+                            </Link>
                         </li>
                         <li className={this.getActiveLinkClassNames('/admin/accounts')}>
-                            <a className={'nav-link'} onClick={() => this.props.history.push('/admin/accounts')}>
+                            <Link className={'nav-link'} to={'/admin/accounts'}>
                                 Alle Accounts
-                            </a>
+                            </Link>
                         </li>
                         <li className={this.getActiveLinkClassNames('/admin/analytics')}>
-                            <a className={'nav-link'} onClick={() => this.props.history.push('/admin/analytics')}>
+                            <Link className={'nav-link'} to={'/admin/analytics'}>
                                 Analytics
-                            </a>
+                            </Link>
                         </li>
                     </ul>
 
                     <ul className={'navbar-nav my-2 my-lg-0'}>
                         <li className={this.getActiveLinkClassNames('/admin/profile')}>
-                            <a className={'nav-link'} onClick={() => this.props.history.push('/admin/profile')}>
-                                Ihr Profil</a>
+                            <Link className={'nav-link'} to={'/admin/profile'}>
+                                Ihr Profil</Link>
                         </li>
                         <li className={'nav-item'}>
                             <a className={'nav-link'} onClick={this.handleLogout}>Logout</a>
                         </li>
                     </ul>
-
                 </div>
             </nav>
         );

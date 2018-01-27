@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import backendService from '../../../backendService';
-import Header from "../Header";
-import CompanyListItem from "./CompanyListItem";
-import { toast } from "react-toastify";
+import Header from '../Header';
+import CompanyListItem from './CompanyListItem';
+import { toast } from 'react-toastify';
 
 class Companies extends Component {
     handleDelete = (companyId) => {

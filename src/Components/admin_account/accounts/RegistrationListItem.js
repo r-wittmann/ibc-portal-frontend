@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import translate from "../../../translationService";
+import translate from '../../../translationService';
 
 class RegistrationListItem extends Component {
     render() {
@@ -13,7 +13,7 @@ class RegistrationListItem extends Component {
                 <td>
                     <select id={'company_type'}
                             value={this.props.account.company_type}
-                            className="form-control"
+                            className='form-control'
                             onChange={(event) => this.props.handleChangeType(event, this.props.account.id)}>
                         {Object.keys(translate.companyType()).map(key =>
                             <option key={key} value={key}>{translate.companyType(key)}</option>

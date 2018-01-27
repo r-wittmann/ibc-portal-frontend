@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import backendService from '../../../backendService';
-import InputLabel from "../../commons/InputLabel";
+import InputLabel from '../../commons/InputLabel';
 import defaultRecruiter from '../../commons/defaultRecruiter';
-import UploadFileModal from "../../commons/UploadFileModal";
-import Header from "../Header";
-import { toast } from "react-toastify";
-import RecruiterPreview from "./RecruiterPreview";
-import ConfirmModal from "../../commons/ConfirmModal";
+import UploadFileModal from '../../commons/UploadFileModal';
+import Header from '../Header';
+import { toast } from 'react-toastify';
+import RecruiterPreview from './RecruiterPreview';
+import ConfirmModal from '../../commons/ConfirmModal';
 
 class Recruiter extends Component {
     handleSubmit = (event) => {
@@ -80,8 +80,8 @@ class Recruiter extends Component {
                 {this.state.loading
                     ? <div className={'loader'}/>
                     : <div className={'container'}>
-                        {this.state.preview ? (
-                            <RecruiterPreview
+                        {this.state.preview
+                            ? <RecruiterPreview
                                 recruiter={this.state.recruiter}
                                 endPreview={this.props.preview
                                     ? () => this.props.history.goBack()
@@ -96,130 +96,130 @@ class Recruiter extends Component {
                                 }
                                 primaryActionText={this.props.preview ? 'Editieren' : 'Speichern'}
                             />
-                        ) : (
-                            <div>
+                            : <div>
                                 <div className={'headline'}>
                                     <h1>{this.state.create ? 'Neuen Recruiter erstellen' : 'Recruiter bearbeiten'}</h1>
                                 </div>
-                                {this.state.recruiter && (
-                                    <div>
-                                        <InputLabel
-                                            label={'Name'}
-                                            required
-                                            value={this.state.recruiter.recruiter_name}
-                                            onChange={(recruiter_name) => this.setState({
-                                                recruiter: Object.assign({}, this.state.recruiter, { recruiter_name })
-                                            })}
-                                            errorMessage={'Name ist ein Pflichtfeld'}/>
-                                        <InputLabel
-                                            label={'Email'}
-                                            required
-                                            type="Email"
-                                            value={this.state.recruiter.recruiter_email}
-                                            onChange={(recruiter_email) => this.setState({
-                                                recruiter: Object.assign({}, this.state.recruiter, { recruiter_email })
-                                            })}
-                                            errorMessage={'Bitte eine valide Email-Adresse eingeben'}/>
-                                        <InputLabel
-                                            label={'Telefon Mobile'}
-                                            value={this.state.recruiter.mobile}
-                                            onChange={(mobile) => this.setState({
-                                                recruiter: Object.assign({}, this.state.recruiter, { mobile })
-                                            })}/>
-                                        <InputLabel
-                                            label={'Telefon Festnetz'}
-                                            value={this.state.recruiter.phone}
-                                            onChange={(phone) => this.setState({
-                                                recruiter: Object.assign({}, this.state.recruiter, { phone })
-                                            })}/>
-                                        <InputLabel
-                                            label={'Position'}
-                                            required
-                                            value={this.state.recruiter.position}
-                                            onChange={(position) => this.setState({
-                                                recruiter: Object.assign({}, this.state.recruiter, { position })
-                                            })}
-                                            errorMessage={'Position ist ein Pflichtfeld'}/>
-                                        <InputLabel
-                                            label={'Standort'}
-                                            value={this.state.recruiter.location}
-                                            onChange={(location) => this.setState({
-                                                recruiter: Object.assign({}, this.state.recruiter, { location })
-                                            })}/>
-                                        <div className='form-group row'>
-                                            <label htmlFor={'photo'} className='col-4 col-form-label'>
-                                                Foto Upload
-                                            </label>
-                                            <div className='col-8'>
-                                                <button type={'button'} className='btn btn-primary' data-toggle="modal"
-                                                        data-target="#uploadFile">
-                                                    Foto ändern/hochladen
-                                                </button>
-                                                {this.state.recruiter.photo &&
-                                                <img src={this.state.recruiter.photo} style={{ marginLeft: 12 }}
-                                                     height={38}
-                                                     alt={'logo'}/>
-                                                }
-                                            </div>
-                                            <UploadFileModal
-                                                title={'Foto ändern/hochladen'}
-                                                accept={'image/*'}
-                                                returnFile={(photo) => this.setState({
-                                                    recruiter: Object.assign({}, this.state.recruiter, { photo }),
-                                                    photoChanged: true
-                                                })}/>
-                                        </div>
-                                        <InputLabel
-                                            label={'XING-Profil'}
-                                            type={'url'}
-                                            value={this.state.recruiter.xing}
-                                            onChange={(xing) => this.setState({
-                                                recruiter: Object.assign({}, this.state.recruiter, { xing })
-                                            })}
-                                            errorMessage={'Bitte eine valide URL eingeben'}/>
-                                        <InputLabel
-                                            label={'LinkedIn-Profil'}
-                                            type={'url'}
-                                            value={this.state.recruiter.linked_in}
-                                            onChange={(linked_in) => this.setState({
-                                                recruiter: Object.assign({}, this.state.recruiter, { linked_in })
-                                            })}
-                                            errorMessage={'Bitte eine valide URL eingeben'}/>
-                                        <div className='float-right'>
-                                            {!this.state.create &&
-                                            <span>
-                                                <button className={'btn btn-danger buttons-form'}
-                                                        type={'button'}
-                                                        data-toggle={'modal'}
-                                                        data-target={'#confirm-modal'}>
-                                                    Recruiter löschen
-                                                </button>
-                                                <ConfirmModal
-                                                    id={'confirm-modal'}
-                                                    message={`Wollen Sie den Recruiter ${this.state.recruiter.recruiter_name} wirklich löschen?`}
-                                                    positiveAction={this.handleDelete}
-                                                    positiveText={'Löschen'}
-                                                    negativeAction={() => {/*closes the modal*/
-                                                    }}
-                                                    negativeText={'Abbrechen'}/>
-                                            </span>
+                                {this.state.recruiter &&
+                                <div>
+                                    <InputLabel
+                                        label={'Name'}
+                                        required
+                                        value={this.state.recruiter.recruiter_name}
+                                        onChange={(recruiter_name) => this.setState({
+                                            recruiter: Object.assign({}, this.state.recruiter, { recruiter_name })
+                                        })}
+                                        errorMessage={'Name ist ein Pflichtfeld'}/>
+                                    <InputLabel
+                                        label={'Email'}
+                                        required
+                                        type={'Email'}
+                                        value={this.state.recruiter.recruiter_email}
+                                        onChange={(recruiter_email) => this.setState({
+                                            recruiter: Object.assign({}, this.state.recruiter, { recruiter_email })
+                                        })}
+                                        errorMessage={'Bitte eine valide Email-Adresse eingeben'}/>
+                                    <InputLabel
+                                        label={'Telefon Mobile'}
+                                        value={this.state.recruiter.mobile}
+                                        onChange={(mobile) => this.setState({
+                                            recruiter: Object.assign({}, this.state.recruiter, { mobile })
+                                        })}/>
+                                    <InputLabel
+                                        label={'Telefon Festnetz'}
+                                        value={this.state.recruiter.phone}
+                                        onChange={(phone) => this.setState({
+                                            recruiter: Object.assign({}, this.state.recruiter, { phone })
+                                        })}/>
+                                    <InputLabel
+                                        label={'Position'}
+                                        required
+                                        value={this.state.recruiter.position}
+                                        onChange={(position) => this.setState({
+                                            recruiter: Object.assign({}, this.state.recruiter, { position })
+                                        })}
+                                        errorMessage={'Position ist ein Pflichtfeld'}/>
+                                    <InputLabel
+                                        label={'Standort'}
+                                        value={this.state.recruiter.location}
+                                        onChange={(location) => this.setState({
+                                            recruiter: Object.assign({}, this.state.recruiter, { location })
+                                        })}/>
+                                    <div className='form-group row'>
+                                        <label htmlFor={'photo'} className='col-4 col-form-label'>
+                                            Foto Upload
+                                        </label>
+                                        <div className='col-8'>
+                                            <button type={'button'} className='btn btn-primary'
+                                                    data-toggle={'modal'}
+                                                    data-target={'#uploadFile'}>
+                                                Foto ändern/hochladen
+                                            </button>
+                                            {this.state.recruiter.photo &&
+                                            <img src={this.state.recruiter.photo} style={{ marginLeft: 12 }}
+                                                 height={38}
+                                                 alt={'logo'}/>
                                             }
-                                            <button type={'button'} className={'btn btn-warning buttons-form'}
-                                                    onClick={() => this.props.history.goBack()}>
-                                                {this.state.create ? 'Abbrechen' : 'Zurück'}
-                                            </button>
-                                            <button id={'preview'} className={'btn btn-primary button-form'}
-                                                    onClick={this.handleSubmit}>
-                                                Vorschau
-                                            </button>
-                                            <button className={'btn btn-success buttons-form'}>
-                                                Speichern
-                                            </button>
                                         </div>
+                                        <UploadFileModal
+                                            title={'Foto ändern/hochladen'}
+                                            accept={'image/*'}
+                                            returnFile={(photo) => this.setState({
+                                                recruiter: Object.assign({}, this.state.recruiter, { photo }),
+                                                photoChanged: true
+                                            })}/>
                                     </div>
-                                )}
+                                    <InputLabel
+                                        label={'XING-Profil'}
+                                        type={'url'}
+                                        value={this.state.recruiter.xing}
+                                        onChange={(xing) => this.setState({
+                                            recruiter: Object.assign({}, this.state.recruiter, { xing })
+                                        })}
+                                        errorMessage={'Bitte eine valide URL eingeben'}/>
+                                    <InputLabel
+                                        label={'LinkedIn-Profil'}
+                                        type={'url'}
+                                        value={this.state.recruiter.linked_in}
+                                        onChange={(linked_in) => this.setState({
+                                            recruiter: Object.assign({}, this.state.recruiter, { linked_in })
+                                        })}
+                                        errorMessage={'Bitte eine valide URL eingeben'}/>
+                                    <div className='float-right'>
+                                        {!this.state.create &&
+                                        <span>
+                                            <button className={'btn btn-danger buttons-form'}
+                                                    type={'button'}
+                                                    data-toggle={'modal'}
+                                                    data-target={'#confirm-modal'}>
+                                                Recruiter löschen
+                                            </button>
+                                            <ConfirmModal
+                                                id={'confirm-modal'}
+                                                message={`Wollen Sie den Recruiter ${this.state.recruiter.recruiter_name} wirklich löschen?`}
+                                                positiveAction={this.handleDelete}
+                                                positiveText={'Löschen'}
+                                                negativeAction={() => {/*closes the modal*/
+                                                }}
+                                                negativeText={'Abbrechen'}/>
+                                        </span>
+                                        }
+                                        <button type={'button'} className={'btn btn-warning buttons-form'}
+                                                onClick={() => this.props.history.goBack()}>
+                                            {this.state.create ? 'Abbrechen' : 'Zurück'}
+                                        </button>
+                                        <button id={'preview'} className={'btn btn-primary button-form'}
+                                                onClick={this.handleSubmit}>
+                                            Vorschau
+                                        </button>
+                                        <button className={'btn btn-success buttons-form'}>
+                                            Speichern
+                                        </button>
+                                    </div>
+                                </div>
+                                }
                             </div>
-                        )}
+                        }
                     </div>
                 }
             </form>

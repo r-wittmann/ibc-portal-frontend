@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import ConfirmModal from "../../commons/ConfirmModal";
-import translate from "../../../translationService";
+import ConfirmModal from '../../commons/ConfirmModal';
+import translate from '../../../translationService';
 
 class AccountListItem extends Component {
 
@@ -30,7 +30,7 @@ class AccountListItem extends Component {
                     {this.state.editMode
                         ? <select id={'company_type'}
                                   value={this.props.account.company_type}
-                                  className="form-control"
+                                  className='form-control'
                                   onChange={(event) => this.props.updateType(event, this.props.account.id)}>
                             {Object.keys(translate.companyType()).map(key =>
                                 <option key={key} value={key}>{translate.companyType(key)}</option>
@@ -41,8 +41,8 @@ class AccountListItem extends Component {
                 </td>
                 <td>{translate.registrationStatus(this.props.account.status)}</td>
                 <td>
-                    {!this.state.editMode ?
-                        <div className={'btn-group'}>
+                    {!this.state.editMode
+                        ? <div className={'btn-group'}>
                             <button className={'btn btn-outline-dark'}
                                     onClick={() => this.setState({ editMode: true })}>
                                 <span className={'fa fa-pencil-alt'}/>
@@ -53,13 +53,12 @@ class AccountListItem extends Component {
                                 <span className={'fa fa-trash'}/>
                             </button>
                         </div>
-                        :
-                        <div className={'btn-group'}>
+                        : <div className={'btn-group'}>
                             <button className={'btn btn-outline-dark'}
-                            onClick={() => {
-                                this.setState({ editMode: false });
-                                this.props.handleSave(this.props.account.id);
-                            }}>
+                                    onClick={() => {
+                                        this.setState({ editMode: false });
+                                        this.props.handleSave(this.props.account.id);
+                                    }}>
                                 <span className={'fa fa-check'}/>
                             </button>
                             <button className={'btn btn-outline-dark'}

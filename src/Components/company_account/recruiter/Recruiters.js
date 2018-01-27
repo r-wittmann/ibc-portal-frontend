@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import backendService from '../../../backendService';
-import Header from "../Header";
+import Header from '../Header';
 import RecruiterListItem from './RecruiterListItem';
-import { toast } from "react-toastify";
+import { toast } from 'react-toastify';
 
 class Recruiters extends Component {
     handleDelete = (recruiterId) => {

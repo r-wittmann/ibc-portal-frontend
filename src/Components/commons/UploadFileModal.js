@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { toast } from 'react-toastify';
 
 class UploadFileModal extends Component {
 
@@ -18,30 +19,30 @@ class UploadFileModal extends Component {
             };
             reader.readAsDataURL(file);
         } else {
-            // TODO: display error for to big a file
+            toast('Die Datei ist größer als 2 MB. Bitte wählen Sie eine kleinere Datei aus', { type: 'error' })
         }
     };
 
     render() {
         return (
-            <div className="modal fade"
-                 id="uploadFile">
-                <div className="modal-dialog">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h5 className="modal-title">{this.props.title}</h5>
+            <div className='modal fade'
+                 id='uploadFile'>
+                <div className='modal-dialog'>
+                    <div className='modal-content'>
+                        <div className='modal-header'>
+                            <h5 className='modal-title'>{this.props.title}</h5>
                         </div>
-                        <div className="modal-body">
+                        <div className='modal-body'>
                             <input
                                 type={'file'}
                                 accept={this.props.accept}
                                 onChange={this.handleFileChange}/>
                         </div>
-                        <div className="modal-footer">
-                            <button type="button"
+                        <div className='modal-footer'>
+                            <button type='button'
                                     onClick={this.handleClose}
-                                    className="btn btn-secondary"
-                                    data-dismiss="modal">Schließen
+                                    className='btn btn-secondary'
+                                    data-dismiss='modal'>Schließen
                             </button>
                         </div>
                     </div>

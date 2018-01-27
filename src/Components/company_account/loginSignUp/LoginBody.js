@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import backendService from '../../../backendService';
 import InputLabel from '../../commons/InputLabel';
-import { toast } from "react-toastify";
-import queryString from 'query-string';
+import { toast } from 'react-toastify';
 
 class LoginBody extends Component {
     handleSubmit = (event) => {
@@ -27,7 +26,7 @@ class LoginBody extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: queryString.parse(location.search).name ? queryString.parse(location.search).name : '',
+            name: '',
             password: '',
         };
     };
@@ -37,9 +36,9 @@ class LoginBody extends Component {
             <form onSubmit={this.handleSubmit} style={{ margin: 20 }} noValidate>
                 <InputLabel
                     label={
-                        <span data-toggle="tooltip" data-placement="top" title="Sowohl Unternehmensname als auch E-Mail-Adresse können zum Login
-                            genutzt werden">Unternehmen <span className={'fa fa-info-circle'}/>
-
+                        <span data-toggle={'tooltip'} data-placement={'top'}
+                              title={'Sowohl Unternehmensname als auch E-Mail-Adresse können zum Login genutzt werden'}>
+                            Unternehmen <span className={'fa fa-info-circle'}/>
                         </span>
                     }
                     value={this.state.name}

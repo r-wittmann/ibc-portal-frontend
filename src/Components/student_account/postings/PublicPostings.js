@@ -134,9 +134,10 @@ class PublicPostings extends Component {
                                             <button className={'btn btn-secondary'}
                                                     type={'button'}
                                                     onClick={() => this.setState({ searchString: '' })}>
-                                                <span
-                                                    className={this.state.searchString ? 'fa fa-times' : 'fa fa-search'}
-                                                    style={{ width: 16, textAlign: 'center' }}/>
+                                                <span className={this.state.searchString
+                                                    ? 'fa fa-times'
+                                                    : 'fa fa-search'}
+                                                      style={{ width: 16, textAlign: 'center' }}/>
                                             </button>
                                         </span>
                                         <span className={'input-group-addon'} style={{ padding: 1 }}/>
@@ -163,7 +164,7 @@ class PublicPostings extends Component {
                                                       style={this.state.filters.contract_type.length ? {} : { color: 'lightgrey' }}/>
                                             </button>
                                             <div className={'dropdown-menu p-0 pl-4 pt-2'}>
-                                                {Object.keys(translate.contractType()).map(key => (
+                                                {Object.keys(translate.contractType()).map(key =>
                                                     <div className={'form-check'} key={key}>
                                                         <input className={'form-check-input'} type={'checkbox'} id={key}
                                                                checked={this.state.filters.contract_type.includes(key)}
@@ -172,7 +173,7 @@ class PublicPostings extends Component {
                                                             {translate.contractType(key)}
                                                         </label>
                                                     </div>
-                                                ))}
+                                                )}
                                             </div>
                                         </form>
                                     </div>
@@ -185,7 +186,7 @@ class PublicPostings extends Component {
                                                       style={this.state.filters.field_of_employment.length ? {} : { color: 'lightgrey' }}/>
                                             </button>
                                             <div className={'dropdown-menu p-0 pl-4 pt-2'}>
-                                                {Object.keys(translate.fieldOfEmployment()).map(key => (
+                                                {Object.keys(translate.fieldOfEmployment()).map(key =>
                                                     <div className={'form-check'} key={key}>
                                                         <input className={'form-check-input'} type={'checkbox'} id={key}
                                                                checked={this.state.filters.field_of_employment.includes(key)}
@@ -194,7 +195,7 @@ class PublicPostings extends Component {
                                                             {translate.fieldOfEmployment(key)}
                                                         </label>
                                                     </div>
-                                                ))}
+                                                )}
                                             </div>
                                         </form>
                                     </div>
@@ -207,7 +208,7 @@ class PublicPostings extends Component {
                                                       style={this.state.filters.entry_level.length ? {} : { color: 'lightgrey' }}/>
                                             </button>
                                             <div className={'dropdown-menu p-0 pl-4 pt-2'}>
-                                                {Object.keys(translate.entryLevel()).map(key => (
+                                                {Object.keys(translate.entryLevel()).map(key =>
                                                     <div className={'form-check'} key={key}>
                                                         <input className={'form-check-input'} type={'checkbox'} id={key}
                                                                checked={this.state.filters.entry_level.includes(key)}
@@ -216,7 +217,7 @@ class PublicPostings extends Component {
                                                             {translate.entryLevel(key)}
                                                         </label>
                                                     </div>
-                                                ))}
+                                                )}
                                             </div>
                                         </form>
                                     </div>
@@ -229,7 +230,7 @@ class PublicPostings extends Component {
                                                       style={this.state.filters.company_id.length ? {} : { color: 'lightgrey' }}/>
                                             </button>
                                             <div className={'dropdown-menu p-0 pl-4 pt-2'}>
-                                                {this.state.companies.map(company => (
+                                                {this.state.companies.map(company =>
                                                     <div className={'form-check'} key={company.id}>
                                                         <input className={'form-check-input'} type={'checkbox'}
                                                                id={company.id}
@@ -239,15 +240,16 @@ class PublicPostings extends Component {
                                                             {company.company_name}
                                                         </label>
                                                     </div>
-                                                ))}
+                                                )}
                                             </div>
                                         </form>
                                     </div>
                                     <div className={'col-md-12 col-lg p-1'}>
                                         <button className={'btn btn-outline-dark btn-block'}
                                                 onClick={this.deleteFilters}>
-                                            <b>Filter entfernen&nbsp;&nbsp;<span className={'fa fa-times'}
-                                                                                 style={{ fontSize: '110%' }}/></b>
+                                            <b>Filter entfernen&nbsp;&nbsp;
+                                                <span className={'fa fa-times'} style={{ fontSize: '110%' }}/>
+                                            </b>
                                         </button>
                                     </div>
                                 </div>

@@ -9,18 +9,18 @@ class InputLabel extends Component {
                     {this.props.label}
                 </label>
                 <div className={'col-8'}>
-                        <input
-                            id={this.props.label}
-                            className={'form-control'}
-                            type={this.props.type ? this.props.type : 'text'}
-                            required={this.props.required}
-                            value={this.props.value}
-                            onChange={(event) => this.props.onChange(event.target.value)}
-                            onBlur={this.props.onBlur ? (event) => this.props.onBlur(event) : null}
-                        />
-                        {this.props.errorMessage &&
-                            <div className={'invalid-feedback'}>{this.props.errorMessage}</div>
-                        }
+                    <input
+                        id={this.props.label}
+                        className={'form-control'}
+                        type={this.props.type ? this.props.type : 'text'}
+                        required={this.props.required}
+                        value={this.props.value}
+                        onChange={(event) => this.props.onChange(event.target.value)}
+                        onBlur={this.props.onBlur ? (event) => this.props.onBlur(event) : null}
+                    />
+                    {this.props.errorMessage &&
+                    <div className={'invalid-feedback'}>{this.props.errorMessage}</div>
+                    }
                 </div>
 
 

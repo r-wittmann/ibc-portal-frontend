@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import backendService from '../../../backendService';
-import draftToHtml from "draftjs-to-html";
-import { Link } from "react-router-dom";
-import Header from "../Header";
-import translate from "../../../translationService";
+import draftToHtml from 'draftjs-to-html';
+import Header from '../Header';
+import translate from '../../../translationService';
+import { Link } from 'react-router-dom';
 
 class PublicPosting extends Component {
     constructor(props) {
@@ -28,22 +28,23 @@ class PublicPosting extends Component {
                     <div className={'container mt-0 mt-sm-4 mb-0 mb-sm-4 p-5'} style={{ backgroundColor: 'white' }}>
                         {this.state.loading
                             ? <div className={'loader'}/>
-                            :
-                            <div>
+                            : <div>
                                 <div className={'row'}>
                                     <div className={'d-none d-sm-none d-md-block col-md-8 my-auto'}>
                                         <h2>{this.state.posting.title.toUpperCase()}</h2>
                                     </div>
                                     <div className={'col-4'}>
                                         {this.state.posting.logo &&
-                                        <a className={'navbar-brand'}
-                                           onClick={() => this.props.history.push('/companies/' + this.state.posting.company_id)}>
+                                        <Link className={'navbar-brand'}
+                                              to={'/companies/' + this.state.posting.company_id}>
                                             <img src={this.state.posting.logo} alt={'logo'} className={'img-responsive'}
                                                  style={{ maxHeight: 100, maxWidth: 200 }}/>
-                                        </a>}
+                                        </Link>}
                                     </div>
                                     <div className={'d-block d-sm-block d-md-none col-sm-12 my-auto'}>
-                                        <h2 style={{ fontSize: '120%' }}>{this.state.posting.title.toUpperCase()}</h2>
+                                        <h2 style={{ fontSize: '120%' }}>
+                                            {this.state.posting.title.toUpperCase()}
+                                        </h2>
                                     </div>
                                 </div>
                                 <div className={'row d-sm-block d-md-none'}>
@@ -55,18 +56,19 @@ class PublicPosting extends Component {
                                 </div>
                                 <div className={'d-sm-block d-md-none'}>
                                     <div className={'col-8 offset-2 mb-4'}>
-                                        <a className={'btn btn-block btn-primary'} style={{ marginBottom: 20 }}
-                                           href={this.state.posting.application_link} target={'_blank'}>
+                                        <Link className={'btn btn-block btn-primary'} style={{ marginBottom: 20 }}
+                                              to={this.state.posting.application_link} target={'_blank'}>
                                             Bewerben
-                                        </a>
+                                        </Link>
                                     </div>
                                     <div className={'row mb-2'}>
                                         <div className={'col-2 text-center'}>
                                             <span className={'fa fa-home'}/>
                                         </div>
                                         <div className={'col-10'}>
-                                            <Link
-                                                to={'/companies/' + this.state.posting.company_id}>{this.state.posting.company_name}</Link>
+                                            <Link to={'/companies/' + this.state.posting.company_id}>
+                                                {this.state.posting.company_name}
+                                            </Link>
                                         </div>
                                     </div>
                                     <div className={'row mb-2'}>
@@ -108,24 +110,27 @@ class PublicPosting extends Component {
                                                 <embed style={{ width: '100%', maxWidth: 820, height: 1024 }}
                                                        src={this.state.posting.description} type={'application/pdf'}/>
                                             </div>
-                                            : <span
-                                                dangerouslySetInnerHTML={{ __html: draftToHtml(JSON.parse(this.state.posting.description)) }}/>
+                                            : <span dangerouslySetInnerHTML={{
+                                                __html: draftToHtml(JSON.parse(this.state.posting.description))
+                                            }}
+                                            />
                                         }
                                     </div>
                                     <div className={'col-md-5 col-lg-4 d-none d-sm-none d-md-block row'}>
                                         <div className={'col-10 offset-1'}>
-                                            <a className={'btn btn-block btn-primary'} style={{ marginBottom: 20 }}
-                                               href={this.state.posting.application_link} target={'_blank'}>
+                                            <Link className={'btn btn-block btn-primary'} style={{ marginBottom: 20 }}
+                                                  to={this.state.posting.application_link} target={'_blank'}>
                                                 Bewerben
-                                            </a>
+                                            </Link>
                                         </div>
                                         <div className={'row mb-2 ml-2'}>
                                             <div className={'col-md-2 col-lg-2 col-xl-2 text-center'}>
                                                 <span className={'fa fa-home'}/>
                                             </div>
                                             <div className={'col-md-10 col-lg-10 col-xl-10'}>
-                                                <Link
-                                                    to={'/companies/' + this.state.posting.company_id}>{this.state.posting.company_name}</Link>
+                                                <Link to={'/companies/' + this.state.posting.company_id}>
+                                                    {this.state.posting.company_name}
+                                                </Link>
                                             </div>
                                         </div>
                                         <div className={'row mb-2 ml-2'}>
@@ -133,8 +138,10 @@ class PublicPosting extends Component {
                                                 <span className={'fa fa-map-marker'}/>
                                             </div>
                                             <div className={'col-md-10 col-lg-10 col-xl-10'}>
-                                                <span
-                                                    dangerouslySetInnerHTML={{ __html: this.state.posting.munich_address.replace('\n', '<br>') }}/>
+                                                <span dangerouslySetInnerHTML={{
+                                                    __html: this.state.posting.munich_address.replace('\n', '<br>')
+                                                }}
+                                                />
                                             </div>
                                         </div>
                                         <div className={'row mb-2 ml-2'}>
@@ -224,15 +231,17 @@ class PublicPosting extends Component {
                                             <span className={'fa fa-map-marker'}/>
                                         </div>
                                         <div className={'col-9'}>
-                                            <span
-                                                dangerouslySetInnerHTML={{ __html: this.state.posting.munich_address.replace('\n', '<br>') }}/>
+                                            <span dangerouslySetInnerHTML={{
+                                                __html: this.state.posting.munich_address.replace('\n', '<br>')
+                                            }}
+                                            />
                                         </div>
                                     </div>
                                     <div className={'col-8 offset-2 mt-4'}>
-                                        <a className={'btn btn-block btn-primary'} style={{ marginBottom: 20 }}
-                                           href={this.state.posting.application_link} target={'_blank'}>
+                                        <Link className={'btn btn-block btn-primary'} style={{ marginBottom: 20 }}
+                                              to={this.state.posting.application_link} target={'_blank'}>
                                             Bewerben
-                                        </a>
+                                        </Link>
                                     </div>
                                 </div>
                                 <div className={'row'}>
@@ -246,8 +255,7 @@ class PublicPosting extends Component {
                                     <div className={'col-4 col-sm-4 col-md-3 offset-4 offset-sm-0 mb-3'}>
                                         {this.state.posting.photo &&
                                         <img src={this.state.posting.photo} className={'rounded-circle img-fluid'}
-                                             alt={'recruiter'}/>
-                                        }
+                                             alt={'recruiter'}/>}
                                     </div>
                                     <div className={'col-8 col-sm-8 col-md-9 offset-2 offset-sm-0'}>
                                         <p><b>{this.state.posting.recruiter_name}</b></p>
@@ -259,22 +267,19 @@ class PublicPosting extends Component {
                                         {this.state.posting.mobile &&
                                         <span>Mobil: {this.state.posting.mobile}<br/></span>}
                                         {this.state.posting.xing &&
-                                        <a href={this.state.posting.xing} target={'_blank'}>
+                                        <Link to={this.state.posting.xing} target={'_blank'}>
                                             <span className={'fab fa-xing-square mx-2'}
                                                   style={{ fontSize: '150%', color: '#007575' }}/>
-                                        </a>
-                                        }
+                                        </Link>}
                                         {this.state.posting.linked_in &&
-                                        <a href={this.state.posting.linked_in} target={'_blank'}>
+                                        <Link to={this.state.posting.linked_in} target={'_blank'}>
                                             <span className={'fab fa-linkedin mx-2'}
                                                   style={{ fontSize: '150%', color: '#0084bf' }}/>
-                                        </a>
-                                        }
+                                        </Link>}
                                     </div>
                                 </div>
                             </div>
                         }
-
                     </div>
                 </div>
             </div>

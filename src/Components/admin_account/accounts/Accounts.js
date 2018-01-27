@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import backendService from '../../../backendService';
-import AccountListItem from "./AccountListItem";
-import { toast } from "react-toastify";
-import queryString from "query-string";
-import translate from "../../../translationService";
-import Header from "../Header";
+import AccountListItem from './AccountListItem';
+import { toast } from 'react-toastify';
+import queryString from 'query-string';
+import translate from '../../../translationService';
+import Header from '../Header';
 
 class Accounts extends Component {
     defaultFilters = () => {
@@ -12,12 +12,6 @@ class Accounts extends Component {
             status: [],
             company_type: []
         }
-    };
-
-    handleLogout = (event) => {
-        event.preventDefault();
-        backendService.adminLogout();
-        this.props.history.push('/admin/login');
     };
 
     handleFilterChange = (event, key, value) => {
@@ -184,16 +178,15 @@ class Accounts extends Component {
                                         </button>
                                         <div className={'dropdown-menu p-0 pl-4 pt-2'}>
                                             {Object.keys(translate.registrationStatus()).map((key) =>
-                                                key !== 'registered' ? (
-                                                    <div className={'form-check'} key={key}>
-                                                        <input className={'form-check-input'} type={'checkbox'} id={key}
-                                                               checked={this.state.filters.status.includes(key)}
-                                                               onChange={(event) => this.handleFilterChange(event, 'status', key)}/>
-                                                        <label className={'form-check-label'} htmlFor={key}>
-                                                            {translate.registrationStatus(key)}
-                                                        </label>
-                                                    </div>
-                                                ) : null
+                                                key !== 'registered' &&
+                                                <div className={'form-check'} key={key}>
+                                                    <input className={'form-check-input'} type={'checkbox'} id={key}
+                                                           checked={this.state.filters.status.includes(key)}
+                                                           onChange={(event) => this.handleFilterChange(event, 'status', key)}/>
+                                                    <label className={'form-check-label'} htmlFor={key}>
+                                                        {translate.registrationStatus(key)}
+                                                    </label>
+                                                </div>
                                             )}
                                         </div>
                                     </form>

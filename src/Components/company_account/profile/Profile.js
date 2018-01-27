@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import backendService from '../../../backendService';
-import InputLabel from "../../commons/InputLabel";
-import PasswordModal from "./PasswordModal";
-import Header from "../Header";
-import { toast } from "react-toastify";
-import translate from "../../../translationService";
+import InputLabel from '../../commons/InputLabel';
+import PasswordModal from './PasswordModal';
+import Header from '../Header';
+import { toast } from 'react-toastify';
+import translate from '../../../translationService';
 import queryString from 'query-string';
 
 class Profile extends Component {
@@ -30,7 +30,7 @@ class Profile extends Component {
 
     componentDidMount() {
         this.setState({ loading: true });
-        if (location.hash){
+        if (location.hash) {
             backendService.getProfile(queryString.parse(location.hash)['token'])
                 .then(profile => this.setState({ profile, loading: false }))
                 .then(() => {
@@ -46,8 +46,8 @@ class Profile extends Component {
                     document.body.appendChild(div);
                 });
         } else {
-        backendService.getProfile()
-            .then(profile => this.setState({ profile, loading: false }));
+            backendService.getProfile()
+                .then(profile => this.setState({ profile, loading: false }));
         }
     }
 
@@ -108,20 +108,22 @@ class Profile extends Component {
                                     </label>
                                 </div>
                                 <div className='col-8 offset-4'>
-                                    <button type={'button'} className='btn btn-primary' data-toggle="modal"
-                                            data-target="#changePassword">
+                                    <button type={'button'} className={'btn btn-primary'} data-toggle={'modal'}
+                                            data-target={'#changePassword'}>
                                         Passwort ändern
                                     </button>
                                 </div>
                                 <div>
-                                    <input type={'submit'} className={'btn btn-success float-right buttons-form'}
+                                    <input type={'submit'}
+                                           className={'btn btn-success float-right buttons-form'}
                                            value={'Speichern'}/>
                                 </div>
                             </form>
                         )}
                     <div className={'float-right'}>
                         <button className={'btn btn-warning buttons-form'}
-                                onClick={() => this.props.history.push('/company/home')}>Abbrechen
+                                onClick={() => this.props.history.push('/company/home')}>
+                            Abbrechen
                         </button>
                     </div>
                     <PasswordModal/>

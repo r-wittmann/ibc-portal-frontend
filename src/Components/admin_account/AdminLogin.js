@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import backendService from '../../backendService';
-import InputLabel from "../commons/InputLabel";
-import { toast } from "react-toastify";
+import InputLabel from '../commons/InputLabel';
+import { toast } from 'react-toastify';
 
 class AdminLogin extends Component {
     handleSubmit = (event) => {
@@ -27,7 +27,6 @@ class AdminLogin extends Component {
                 <div style={{ textAlign: 'center' }}>
                     <h1 className={'headline-login'}>IBC Jobportal</h1>
                     <div className={'login-container'}>
-
                         <form onSubmit={this.handleSubmit} style={{ padding: 30 }}>
                             <InputLabel
                                 label={'Name'}

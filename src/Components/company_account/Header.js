@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import image from '../../../resources/ibc_logo-long.png';
-import backendService from "../../backendService";
+import backendService from '../../backendService';
+import { Link } from 'react-router-dom';
 
 class Header extends Component {
 
@@ -19,47 +20,53 @@ class Header extends Component {
 
     render() {
         return (
-
             <nav className={'navbar fixed-top navbar-expand-lg navbar-light bg-light'}>
-                <a className={'navbar-brand'} onClick={() => this.props.history.push('/company/home')}>
+                <Link className={'navbar-brand'} to={'/company/home'}>
                     <img className={'logo'} src={image} alt={'blub'}/>
-                </a>
-                <button className={'navbar-toggler'} type="button" data-toggle="collapse" data-target="#navbarNav"
-                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                </Link>
+                <button className={'navbar-toggler'} type={'button'} data-toggle={'collapse'} data-target={'#navbarNav'}
+                        aria-controls={'navbarNav'} aria-expanded={'false'} aria-label={'Toggle navigation'}>
                     <span className={'navbar-toggler-icon'}/>
                 </button>
-                <div className={'collapse navbar-collapse'} id="navbarNav">
+                <div className={'collapse navbar-collapse'} id={'navbarNav'}>
                     <ul className={'navbar-nav mr-auto mt-2 mt-lg-0'}>
                         <li className={this.getActiveLinkClassNames('/company/home')}>
-                            <a className={'nav-link'} onClick={() => this.props.history.push('/company/home')}>Home</a>
+                            <Link className={'nav-link'} to={'/company/home'}>
+                                Home
+                            </Link>
                         </li>
                         <li className={this.getActiveLinkClassNames('/company/companies')}>
-                            <a className={'nav-link'} onClick={() => this.props.history.push('/company/companies')}>
-                                Ihre Unternehmen</a>
+                            <Link className={'nav-link'} to={'/company/companies'}>
+                                Ihre Unternehmen
+                            </Link>
                         </li>
                         <li className={this.getActiveLinkClassNames('/company/recruiters')}>
-                            <a className={'nav-link'} onClick={() => this.props.history.push('/company/recruiters')}>
-                                Ihre Recruiter</a>
+                            <Link className={'nav-link'} to={'/company/recruiters'}>
+                                Ihre Recruiter
+                            </Link>
                         </li>
                         <li className={this.getActiveLinkClassNames('/company/postings')}>
-                            <a className={'nav-link'} onClick={() => this.props.history.push('/company/postings')}>
-                                Ihre Stellenanzeigen</a>
+                            <Link className={'nav-link'} to={'/company/postings'}>
+                                Ihre Stellenanzeigen
+                            </Link>
                         </li>
                     </ul>
 
                     <ul className={'navbar-nav my-2 my-lg-0'}>
                         <li className={this.getActiveLinkClassNames('/company/profile')}>
-                            <a className={'nav-link'} onClick={() => this.props.history.push('/company/profile')}>
-                                Ihr Profil</a>
+                            <Link className={'nav-link'} to={'/company/profile'}>
+                                Ihr Profil
+                            </Link>
                         </li>
                         <li className={'nav-item'}>
-                            <a className={'nav-link'} onClick={this.handleLogout}>Logout</a>
+                            <a className={'nav-link'} onClick={this.handleLogout}>
+                                Logout
+                            </a>
                         </li>
                     </ul>
 
                 </div>
             </nav>
-
         );
     }
 }

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import backendService from '../../../backendService';
-import Header from "../Header";
-import { toast } from "react-toastify";
-import PostingListItem from "./PostingListItem";
+import Header from '../Header';
+import { toast } from 'react-toastify';
+import PostingListItem from './PostingListItem';
 import queryString from 'query-string';
-import translate from "../../../translationService";
+import translate from '../../../translationService';
 
 class Postings extends Component {
     defaultFilters = () => {
@@ -257,7 +257,8 @@ class Postings extends Component {
                                                      history={this.props.history}
                                                      delete={this.handleDelete}
                                                      save={this.handleStatusChange}/>
-                                ) : <tr>
+                                )
+                                : <tr>
                                     <td className={'text-center text-muted'} colSpan={9}>
                                         Zu diesen Suchkriterien gibt es leider nichts anzuzeigen
                                     </td>

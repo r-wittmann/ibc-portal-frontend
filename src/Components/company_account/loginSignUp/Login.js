@@ -27,12 +27,10 @@ class Login extends Component {
                                href={'#'}
                                style={{ borderTopRightRadius: 8 }}>Registrieren</a>
                         </nav>
-                        {this.state.login ? (
-                            <LoginBody history={this.props.history}/>
-                        ) : (
-                            <SignUpBody history={this.props.history}/>
-                        )}
-
+                        {this.state.login
+                            ? <LoginBody history={this.props.history}/>
+                            : <SignUpBody history={this.props.history}/>
+                        }
                         <button className={'btn btn-link'} style={{ marginLeft: 20, padding: 0 }}/>
 
                     </div>

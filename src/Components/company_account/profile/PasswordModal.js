@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import backendService from '../../../backendService';
-import InputLabel from "../../commons/InputLabel";
-import { toast } from "react-toastify";
+import InputLabel from '../../commons/InputLabel';
+import { toast } from 'react-toastify';
 
 class PasswordModal extends Component {
     resetState = () => {
@@ -50,13 +50,13 @@ class PasswordModal extends Component {
 
     render() {
         return (
-            <div className="modal fade" id="changePassword">
-                <div className="modal-dialog">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h5 className="modal-title">Passwort ändern</h5>
+            <div className={'modal fade'} id={'changePassword'}>
+                <div className={'modal-dialog'}>
+                    <div className={'modal-content'}>
+                        <div className={'modal-header'}>
+                            <h5 className={'modal-title'}>Passwort ändern</h5>
                         </div>
-                        <form className="modal-body"
+                        <form className={'modal-body'}
                               ref={(form) => this.inputForm = form}
                               noValidate>
                             <InputLabel
@@ -81,16 +81,16 @@ class PasswordModal extends Component {
                                 onChange={(confirm) => this.setState({ confirm })}
                                 errorMessage={'Bitte Passwort bestätigen'}/>
                         </form>
-                        <div className="modal-footer">
-                            <button type="button"
+                        <div className={'modal-footer'}>
+                            <button type={'button'}
                                     onClick={this.resetState}
-                                    className="btn btn-secondary"
-                                    data-dismiss="modal">
+                                    className={'btn btn-secondary'}
+                                    data-dismiss={'modal'}>
                                 Abbrechen
                             </button>
-                            <button type="button"
+                            <button type={'button'}
                                     onClick={this.handleSubmit}
-                                    className="btn btn-primary">
+                                    className={'btn btn-primary'}>
                                 Speichern
                             </button>
                         </div>

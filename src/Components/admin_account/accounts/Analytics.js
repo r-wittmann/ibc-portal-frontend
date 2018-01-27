@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import backendService from '../../../backendService';
-import Header from "../Header";
-import AnalyticsListItem from "./AnalyticsListItem";
+import Header from '../Header';
+import AnalyticsListItem from './AnalyticsListItem';
 
 class Analytics extends Component {
 

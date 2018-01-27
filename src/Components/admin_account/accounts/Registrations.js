@@ -1,22 +1,16 @@
 import React, { Component } from 'react';
 import backendService from '../../../backendService';
 import RegistrationListItem from './RegistrationListItem';
-import { toast } from "react-toastify";
-import queryString from "query-string";
-import translate from "../../../translationService";
-import Header from "../Header";
+import { toast } from 'react-toastify';
+import queryString from 'query-string';
+import translate from '../../../translationService';
+import Header from '../Header';
 
 class Registrations extends Component {
     defaultFilters = () => {
         return {
             company_type: []
         }
-    };
-
-    handleLogout = (event) => {
-        event.preventDefault();
-        backendService.adminLogout();
-        this.props.history.push('/admin/login');
     };
 
     handleFilterChange = (event, value) => {
@@ -91,7 +85,7 @@ class Registrations extends Component {
     sendEmail = (account) => {
         const subject = 'Default Subject';
         const emailBody = 'Default Body';
-        document.location = "mailto:" + account.email + "?subject=" + subject + "&body=" + emailBody;
+        document.location = 'mailto:' + account.email + '?subject=' + subject + '&body=' + emailBody;
     };
 
     constructor(props) {
@@ -141,7 +135,7 @@ class Registrations extends Component {
                 <div className={'container'}>
                     {this.state.loading
                         ? <div className={'loader'}/>
-                        : <table className={"table table-hover"}>
+                        : <table className={'table table-hover'}>
                             <thead>
                             <tr>
                                 <th>Firmenname</th>
@@ -158,7 +152,7 @@ class Registrations extends Component {
                                                   style={this.state.filters.company_type.length ? {} : { color: 'lightgrey' }}/>
                                         </button>
                                         <div className={'dropdown-menu p-0 pl-4 pt-2'}>
-                                            {Object.keys(translate.companyType()).map((key) => (
+                                            {Object.keys(translate.companyType()).map((key) =>
                                                 <div className={'form-check'} key={key}>
                                                     <input className={'form-check-input'} type={'checkbox'} id={key}
                                                            checked={this.state.filters.company_type.includes(key)}
@@ -167,7 +161,7 @@ class Registrations extends Component {
                                                         {translate.companyType(key)}
                                                     </label>
                                                 </div>
-                                            ))}
+                                            )}
                                         </div>
                                     </form>
                                 </td>
@@ -200,7 +194,6 @@ class Registrations extends Component {
                                         }
                                     </td>
                                 </tr>
-
                             }
                             </tbody>
                         </table>

@@ -13,7 +13,7 @@ h1 {
     text-align: center;
 }
 
-h5{
+h5 {
     font-weight: bold;
 }
 
@@ -148,98 +148,94 @@ h5{
     margin: 10px;
 }
 
-.registrierungskriterien{
+.registrierungskriterien {
     font-size: 14px;
 }
 
-
-.preview-logo img{
+.preview-logo img {
 
     height: 100px;
 
-
 }
 
-.preview-logo{
+.preview-logo {
     margin-top: 50px;
     margin-bottom: 20px;
 }
 
-
-.preview-headline{
+.preview-headline {
     margin-top: 50px;
     margin-bottom: 20px;
 
 }
 
-@media only screen and (min-device-width : 375px) and (max-device-width : 667px){
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
 
-    .preview-headline h2{
+    .preview-headline h2 {
 
-            font-size:100%;
+        font-size: 100%;
     }
 
 }
 
-.preview-table{
+.preview-table {
     border-top: 1px solid grey;
     border-bottom: 1px solid grey;
 }
 
-.table-borderless td{
+.table-borderless td {
 
-    border:none;
-
-}
-
-.table-borderless-row tr{
-
-    border:none;
+    border: none;
 
 }
 
-.recruiter-logo img{
+.table-borderless-row tr {
+
+    border: none;
+
+}
+
+.recruiter-logo img {
     /*height:200px;*/
     width: 175px;
     margin-bottom: 10px;
 }
 
-.logo-table{
-    width:250px;
+.logo-table {
+    width: 250px;
 }
 
-.preview-table-posting{
+.preview-table-posting {
     border-bottom: 1px solid grey;
 }
 
-.footer{
-    margin-top:100px;
+.footer {
+    margin-top: 100px;
 }
 
-.cont{
+.cont {
     margin-bottom: 150px;
     margin-top: 100px;
 }
 
-
-.description{
+.description {
     text-align: center;
 }
 
-.posting-logo img{
-    height:80px;
+.posting-logo img {
+    height: 80px;
 }
 
-@media only screen and (min-device-width : 375px) and (max-device-width : 667px){
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
 
-    .recruiter-info{
+    .recruiter-info {
         line-height: 1;
     }
 
 }
 
-@media only screen and (min-device-width : 667px){
-    .recruiter-info{
+@media only screen and (min-device-width: 667px) {
+    .recruiter-info {
         line-height: 0.5;
     }
 }
@@ -260,7 +256,7 @@ h5{
     100% { transform: rotate(360deg); }
 }
 
-.student-background{
+.student-background {
     background: url(../resources/munich_students_opacity.jpeg) no-repeat center center fixed;
     background-size: cover;
     min-height: 100%;
