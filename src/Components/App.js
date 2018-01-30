@@ -50,7 +50,7 @@ class App extends Component {
                             <Route exact path={'/impressum'} component={Impressum}/>
                             <Route exact path={'/privacy'} component={Privacy}/>
                             <Route exact path={'/company/login'} component={Login}/>
-                            <Route exact path={'/company/profile/'} component={Profile}/>
+                            <Route exact path={'/company/profile?token'} component={Profile}/>
                             <Route exact path={'/admin/login'} component={AdminLogin}/>
                             <Redirect from={'/admin'} to={'/admin/login'}/>
                             <Redirect from={'/company'} to={'/company/login'}/>

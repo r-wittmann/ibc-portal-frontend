@@ -29,7 +29,7 @@ class Postings extends Component {
         expiryDate.setDate(expiryDate.getDate() + 60);
 
         let expiry_date = status === 'active'
-            ? expiryDate
+            ? expiryDate.toISOString()
             : '';
 
         backendService.updatePosting(id, { status, expiry_date })

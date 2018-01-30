@@ -23,18 +23,18 @@ class RecruiterPreview extends Component {
                         {this.props.recruiter.phone && <span>Tel: {this.props.recruiter.phone}<br/></span>}
                         {this.props.recruiter.mobile &&
                         <span>Mobil: {this.props.recruiter.mobile}<br/></span>}
-                        {this.props.recruiter.xing &&
-                        <Link to={this.props.recruiter.xing} target={'_blank'}>
+                        <div className={'mt-2'}>
+                            {this.props.recruiter.xing &&
+                            <Link to={this.props.recruiter.xing} target={'_blank'}>
                                 <span className={'fab fa-xing-square mx-2'}
                                       style={{ fontSize: '150%', color: '#007575' }}/>
-                        </Link>
-                        }
-                        {this.props.recruiter.linked_in &&
-                        <Link to={this.props.recruiter.linked_in} target={'_blank'}>
+                            </Link>}
+                            {this.props.recruiter.linked_in &&
+                            <Link to={this.props.recruiter.linked_in} target={'_blank'}>
                                 <span className={'fab fa-linkedin mx-2'}
                                       style={{ fontSize: '150%', color: '#0084bf' }}/>
-                        </Link>
-                        }
+                            </Link>}
+                        </div>
                     </div>
                 </div>
                 }

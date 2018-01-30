@@ -123,7 +123,7 @@ class PublicPostings extends Component {
                         <h1>Digitale Jobs in und um München</h1>
                     </div>
                     <div className={'container'}>
-                        <div className={'card p-1 p-sm-2 p-md-3'}>
+                        <div>
                             <div className={'row no-gutters p-1'}>
                                 <div className={'col-12'}>
                                     <div className={'input-group'}>
@@ -140,24 +140,14 @@ class PublicPostings extends Component {
                                                       style={{ width: 16, textAlign: 'center' }}/>
                                             </button>
                                         </span>
-                                        <span className={'input-group-addon'} style={{ padding: 1 }}/>
-                                        <span className={'input-group-btn'}>
-                                            <button className={'btn btn-secondary'}
-                                                    type={'button'}
-                                                    data-toggle={'collapse'}
-                                                    data-target={'#filters'}
-                                                    onClick={(event) => event.target.blur()}>
-                                                <span className={'fa fa-filter'}/>
-                                            </button>
-                                        </span>
                                     </div>
                                 </div>
                             </div>
-                            <div id={'filters'} className={'collapse'}>
+                            <div id={'filters'}>
                                 <div className={'row no-gutters mt-sm-1 mt-md-2'}>
-                                    <div className={'col-12 col-sm-6 col-md-6 col-lg dropdown p-1'}>
+                                    <div className={'col-12 col-sm-6 col-md-6 col-lg dropdown m-1'}>
                                         <form>
-                                            <button className={'btn btn-small btn-outline-dark btn-block'}
+                                            <button className={'btn btn-small btn-light btn-block border'}
                                                     data-toggle={'dropdown'}>
                                                 <b>Vertragsart </b>
                                                 <span className={'fa fa-filter'}
@@ -177,9 +167,9 @@ class PublicPostings extends Component {
                                             </div>
                                         </form>
                                     </div>
-                                    <div className={'col-12 col-sm-6 col-md-6 col-lg dropdown p-1'}>
+                                    <div className={'col-12 col-sm-6 col-md-6 col-lg dropdown m-1'}>
                                         <form>
-                                            <button className={'btn btn-small btn-outline-dark btn-block'}
+                                            <button className={'btn btn-small btn-light btn-block border'}
                                                     data-toggle={'dropdown'}>
                                                 <b>Tätigkeit </b>
                                                 <span className={'fa fa-filter'}
@@ -199,9 +189,9 @@ class PublicPostings extends Component {
                                             </div>
                                         </form>
                                     </div>
-                                    <div className={'col-12 col-sm-6 col-md-6 col-lg dropdown p-1'}>
+                                    <div className={'col-12 col-sm-6 col-md-6 col-lg dropdown m-1'}>
                                         <form>
-                                            <button className={'btn btn-small btn-outline-dark btn-block'}
+                                            <button className={'btn btn-small btn-light btn-block border'}
                                                     data-toggle={'dropdown'}>
                                                 <b>Zielgruppe </b>
                                                 <span className={'fa fa-filter'}
@@ -221,9 +211,9 @@ class PublicPostings extends Component {
                                             </div>
                                         </form>
                                     </div>
-                                    <div className={'col-12 col-sm-6 col-md-6 col-lg dropdown p-1'}>
+                                    <div className={'col-12 col-sm-6 col-md-6 col-lg dropdown m-1'}>
                                         <form>
-                                            <button className={'btn btn-small btn-outline-dark btn-block'}
+                                            <button className={'btn btn-small btn-light btn-block border'}
                                                     data-toggle={'dropdown'}>
                                                 <b>Unternehmen </b>
                                                 <span className={'fa fa-filter'}
@@ -244,8 +234,8 @@ class PublicPostings extends Component {
                                             </div>
                                         </form>
                                     </div>
-                                    <div className={'col-md-12 col-lg p-1'}>
-                                        <button className={'btn btn-outline-dark btn-block'}
+                                    <div className={'col-md-12 col-lg m-1'}>
+                                        <button className={'btn btn-light btn-block border'}
                                                 onClick={this.deleteFilters}>
                                             <b>Filter entfernen&nbsp;&nbsp;
                                                 <span className={'fa fa-times'} style={{ fontSize: '110%' }}/>

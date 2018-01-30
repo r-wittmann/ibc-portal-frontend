@@ -25,10 +25,11 @@ class PublicPosting extends Component {
             <div>
                 <Header history={this.props.history}/>
                 <div className={'student-background'}>
-                    <div className={'container mt-0 mt-sm-4 mb-0 mb-sm-4 p-5'} style={{ backgroundColor: 'white' }}>
-                        {this.state.loading
-                            ? <div className={'loader'}/>
-                            : <div>
+                    {this.state.loading
+                        ? <div className={'loader mt-5'}/>
+                        : <div className={'container mt-0 mt-sm-4 mb-0 mb-sm-4 p-5'}
+                               style={{ backgroundColor: 'white' }}>
+                            <div>
                                 <div className={'row'}>
                                     <div className={'d-none d-sm-none d-md-block col-md-8 my-auto'}>
                                         <h2>{this.state.posting.title.toUpperCase()}</h2>
@@ -266,21 +267,23 @@ class PublicPosting extends Component {
                                         {this.state.posting.phone && <span>Tel: {this.state.posting.phone}<br/></span>}
                                         {this.state.posting.mobile &&
                                         <span>Mobil: {this.state.posting.mobile}<br/></span>}
-                                        {this.state.posting.xing &&
-                                        <Link to={this.state.posting.xing} target={'_blank'}>
-                                            <span className={'fab fa-xing-square mx-2'}
-                                                  style={{ fontSize: '150%', color: '#007575' }}/>
-                                        </Link>}
-                                        {this.state.posting.linked_in &&
-                                        <Link to={this.state.posting.linked_in} target={'_blank'}>
-                                            <span className={'fab fa-linkedin mx-2'}
-                                                  style={{ fontSize: '150%', color: '#0084bf' }}/>
-                                        </Link>}
+                                        <div className={'mt-2'}>
+                                            {this.state.posting.xing &&
+                                            <Link to={this.state.posting.xing} target={'_blank'}>
+                                                <span className={'fab fa-xing-square mx-2'}
+                                                      style={{ fontSize: '150%', color: '#007575' }}/>
+                                            </Link>}
+                                            {this.state.posting.linked_in &&
+                                            <Link to={this.state.posting.linked_in} target={'_blank'}>
+                                                <span className={'fab fa-linkedin mx-2'}
+                                                      style={{ fontSize: '150%', color: '#0084bf' }}/>
+                                            </Link>}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        }
-                    </div>
+                        </div>
+                    }
                 </div>
             </div>
         );

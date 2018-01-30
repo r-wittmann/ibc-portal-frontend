@@ -6,24 +6,26 @@ import { Link } from 'react-router-dom';
 class PostingListItem extends Component {
 
     render() {
-    	var today = new Date();
+    	let today = new Date();
     	today.setDate(today.getDate() + 7);
 
-    	if (this.props.posting.expiry_date){
-	    	var expiry_date = this.props.posting.expiry_date;
-	    	var ex = expiry_date.split("-");
-	    	var exx= ex[2];
-	    	var ex2 = exx.split("T");
-	    	var year = ex[0];
-	    	var month = ex[1];
-	    	var day = ex2[0];
+    	let expiry = '';
 
-	    	var expiry = new Date(year + '-' + month + '-' + day);
+    	if (this.props.posting.expiry_date){
+	    	let expiry_date = this.props.posting.expiry_date;
+	    	let ex = expiry_date.split("-");
+	    	let exx= ex[2];
+	    	let ex2 = exx.split("T");
+	    	let year = ex[0];
+	    	let month = ex[1];
+	    	let day = ex2[0];
+
+	    	expiry = new Date(year + '-' + month + '-' + day);
 
 	    }
 
         return (
-				<tr className={this.props.posting.status == 'deactivated' ? 'row_deactivated' : expiry < today  ? 'row_expiry' : null}>   
+				<tr className={this.props.posting.status === 'deactivated' ? 'row_deactivated' : expiry < today  ? 'row_expiry' : null}>
 	                <td>
 	                    <Link to={`/company/postings/${this.props.posting.id}`}>
 	                        {this.props.posting.title}
