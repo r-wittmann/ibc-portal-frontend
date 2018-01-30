@@ -23,7 +23,7 @@ class PostingListItem extends Component {
 	    }
 
         return (
-				<tr className={'{this.props.posting.status=deactivated ? row_deactivated : {expiry < today  ? row_expiry : null}'}>   
+				<tr className={this.props.posting.status == 'deactivated' ? 'row_deactivated' : expiry < today  ? 'row_expiry' : null}>   
 	                <td>
 	                    <Link to={`/company/postings/${this.props.posting.id}`}>
 	                        {this.props.posting.title}

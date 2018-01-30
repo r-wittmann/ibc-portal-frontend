@@ -146,7 +146,7 @@ class Postings extends Component {
                 <div className={'container'}>
                     {this.state.loading
                         ? <div className={'loader'}/>
-                        : <table className={'table table-hover'}>
+                        : <table className={'table'}>
                             <thead>
                             <tr>
                                 <th>Titel</th>
