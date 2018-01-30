@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 class PostingListItem extends Component {
 
     render() {
+
+        // code to check for soon to expire job postings
     	let today = new Date();
     	today.setDate(today.getDate() + 7);
 
@@ -59,7 +61,8 @@ class PostingListItem extends Component {
 	                            <span className={'fa fa-pencil-alt'}/>
 	                        </button>
 	                        <button className={'btn btn-outline-dark'}
-	                                data-toggle={'tooltip'} data-toggle='modal' // eslint-disable-line react/jsx-no-duplicate-props
+									// double prop 'data-toggle' is needed to allow both tooltip and the opening of a modal on click
+                                    data-toggle={'tooltip'} data-toggle='modal' // eslint-disable-line react/jsx-no-duplicate-props
 	                                data-placement={'top'}
 	                                title={'Löschen'}
 	                                data-target={`#confirm-modal-${this.props.posting.id}`}>

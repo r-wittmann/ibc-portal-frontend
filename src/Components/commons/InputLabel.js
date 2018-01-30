@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 
 class InputLabel extends Component {
-
+    // creates a label and input with specified props
+    // can be used in every context
     render() {
         return (
             <div className='form-group row'>

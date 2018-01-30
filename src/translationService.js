@@ -1,6 +1,9 @@
 //
 // TranslationService
 //
+// all methods of the translation service take a key and return the corresponding value
+// is no key provided, the list of possible key value pairs is returned
+// this is used for generating the content of the dropdowns, for example
 class TranslationService {
     static companyType(key) {
         let dictionary = {
@@ -112,6 +115,8 @@ class TranslationService {
         return dictionary;
     }
 
+    // in this case also a date can be provided as a key. As it is not found as a key in the dictionary,
+    // it is returned as a localised date string
     static startOfEmployment(key) {
         let dictionary = {
             'Nach Vereinbarung': 'Nach Vereinbarung',

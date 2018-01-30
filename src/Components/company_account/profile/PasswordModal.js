@@ -25,6 +25,7 @@ class PasswordModal extends Component {
                 backendService.updatePassword(this.state.old, this.state.new)
                     .then(() => toast('Passwort aktualisiert', { type: 'success' }))
                     .then(() => {
+                        // hack to close the modal programmatically as bootstraps .modal('close') didn't work
                         let modal = document.getElementById('changePassword');
                         modal.classList.remove('show');
                         modal.style.display = 'none';

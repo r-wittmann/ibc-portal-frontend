@@ -7,6 +7,8 @@ const checkStatus = (response) => {
     if (response.status >= 200 && response.status < 300) {
         return response;
     }
+    // should a 403 - forbidden error be returned (which should only happen, if the token is invalid)
+    // the token is removed and the page reloaded (routing handles the rest)
     if (response.status === 403) {
         localStorage.removeItem('ibc-user-token');
         localStorage.removeItem('ibc-admin-token');

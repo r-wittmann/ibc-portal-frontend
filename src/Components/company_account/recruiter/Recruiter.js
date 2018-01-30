@@ -11,6 +11,7 @@ import ConfirmModal from '../../commons/ConfirmModal';
 class Recruiter extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
+        // check the validity of the form before continuing to save the recruiter
         if (this.inputForm.hasAttribute('novalidate') && !this.inputForm.checkValidity()) {
             event.stopPropagation();
             this.inputForm.classList.add('was-validated')
@@ -20,6 +21,7 @@ class Recruiter extends Component {
             } else {
                 if (!this.state.create) {
                     let updatedRecruiter = this.state.recruiter;
+                    // remove values that can't be updated from the object
                     delete(updatedRecruiter.created_at);
                     delete(updatedRecruiter.updated_at);
                     if (!this.state.photoChanged) {

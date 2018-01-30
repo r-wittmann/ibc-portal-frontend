@@ -34,6 +34,9 @@ class SignUpBody extends Component {
 
     };
 
+    // backend returns 200 if the name is valid, 400 if it is already taken
+    // immediately add validation classes for user feedback
+    // method is called on the blur event of the name field
     checkUsername = (event) => {
         event.persist();
         this.setState({ name: event.target.value });

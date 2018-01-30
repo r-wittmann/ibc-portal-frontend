@@ -40,6 +40,7 @@ class App extends Component {
         return (
             <div>
                 <div className={'cont'}>
+                    {/*toast notifications are included here to allow route independent messaging*/}
                     <Notification/>
                     {!backendService.isAuthenticated() ?
                         <Switch>

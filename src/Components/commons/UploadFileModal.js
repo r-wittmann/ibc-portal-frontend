@@ -10,6 +10,7 @@ class UploadFileModal extends Component {
             reader.onloadend = () => {
                 this.props.returnFile(reader.result);
 
+                // hack to close the modal programmatically as bootstraps .modal('close') didn't work
                 let modal = document.getElementById('uploadFile');
                 modal.classList.remove('show');
                 modal.style.display = 'none';

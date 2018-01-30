@@ -13,6 +13,7 @@ import translate from '../../../translationService';
 class Company extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
+        // check for form validity before continuing to save the company
         if (this.inputForm.hasAttribute('novalidate') && !this.inputForm.checkValidity()) {
             event.stopPropagation();
             this.inputForm.classList.add('was-validated')
@@ -22,6 +23,7 @@ class Company extends Component {
             } else {
                 if (!this.state.create) {
                     let updatedCompany = this.state.company;
+                    // remove values that can't be updated
                     delete(updatedCompany.created_at);
                     delete(updatedCompany.updated_at);
                     if (!this.state.logoChanged) {

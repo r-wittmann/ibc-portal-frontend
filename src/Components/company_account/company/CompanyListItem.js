@@ -23,6 +23,7 @@ class CompanyListItem extends Component {
                             <span className={'fa fa-pencil-alt'}/>
                         </button>
                         <button className={'btn btn-outline-dark'}
+                                // double prop 'data-toggle' is needed to allow both tooltip and the opening of a modal on click
                                 data-toggle='tooltip' data-toggle='modal' // eslint-disable-line react/jsx-no-duplicate-props
                                 data-placement='top'
                                 title='Löschen'

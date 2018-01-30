@@ -28,6 +28,7 @@ class Postings extends Component {
         let expiryDate = new Date();
         expiryDate.setDate(expiryDate.getDate() + 60);
 
+        // additional to the status itself also the expiry_date needs to be updated
         let expiry_date = status === 'active'
             ? expiryDate.toISOString()
             : '';
@@ -52,6 +53,7 @@ class Postings extends Component {
             .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
     };
 
+    // receives the click event and key and value of the filter attribute to be added or removed
     handleChange = (event, key, value) => {
         event.stopPropagation();
         let filters = Object.assign({}, this.state.filters);
@@ -95,6 +97,7 @@ class Postings extends Component {
     };
 
     componentDidMount() {
+        // check for a hash value and if there is one, apply the filters
         if (location.hash) {
             let filters = Object.assign({}, this.state.filters, queryString.parse(location.hash));
             for (let key in filters) {
@@ -112,6 +115,9 @@ class Postings extends Component {
             .then((recruiters) => this.setState({ recruiters }));
     };
 
+    // check for a hash value and if there is one, apply the filters
+    // this method is called every time the hash value of the location changes (react does that for us)
+    // to keep filters and displayed accounts in sync
     componentWillUpdate(nextProps) {
         if (nextProps.location.hash !== this.props.location.hash) {
             let filters = Object.assign({}, this.defaultFilters(), queryString.parse(nextProps.location.hash));

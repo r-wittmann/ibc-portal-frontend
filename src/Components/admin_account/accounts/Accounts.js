@@ -14,6 +14,7 @@ class Accounts extends Component {
         }
     };
 
+    // receives the click event and key and value of the filter attribute to be added or removed
     handleFilterChange = (event, key, value) => {
         event.stopPropagation();
         let filters = Object.assign({}, this.state.filters);
@@ -34,6 +35,7 @@ class Accounts extends Component {
         backendService.getAccounts(location.hash)
             .then((accounts) => {
                 this.setState({
+                    // get only the accounts with status not equal to 'registered'
                     accounts: accounts.filter(account => account.status !== 'registered'),
                     loading: false,
                 })
@@ -101,6 +103,7 @@ class Accounts extends Component {
     };
 
     componentDidMount() {
+        // check for a hash value and if there is one, apply the filters
         if (location.hash) {
             let filters = Object.assign({}, this.state.filters, queryString.parse(location.hash));
             for (let key in filters) {
@@ -113,6 +116,9 @@ class Accounts extends Component {
         this.getAccounts();
     };
 
+    // check for a hash value and if there is one, apply the filters
+    // this method is called every time the hash value of the location changes (react does that for us)
+    // to keep filters and displayed accounts in sync
     componentWillUpdate(nextProps) {
         if (nextProps.location.hash !== this.props.location.hash) {
             let filters = Object.assign({}, this.defaultFilters(), queryString.parse(nextProps.location.hash));

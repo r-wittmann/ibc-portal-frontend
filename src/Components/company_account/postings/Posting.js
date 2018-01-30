@@ -17,6 +17,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 class Posting extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
+        // check the form for validity before continuing to save the posting
         if (this.inputForm.hasAttribute('novalidate') && !this.inputForm.checkValidity()) {
             event.stopPropagation();
             this.inputForm.classList.add('was-validated')
@@ -28,6 +29,7 @@ class Posting extends Component {
     };
 
     startPreview = () => {
+        // if company and recruiter weren't selected than we select the one displayed in the drop down
         this.setState({
             posting: Object.assign({}, this.state.posting,
                 {
@@ -48,11 +50,13 @@ class Posting extends Component {
 
         if (!this.state.create) {
             let updatedPosting = this.state.posting;
+            // remove values that can not be updated from the object
             delete(updatedPosting.created_at);
             delete(updatedPosting.updated_at);
+            // set the expiry date to $expiryDate or '' depending on status change and status
             if (this.state.originalPostingStatus !== updatedPosting.status) {
                 updatedPosting.expiry_date = updatedPosting.status === 'active'
-                    ? expiryDate
+                    ? expiryDate.toISOString()
                     : '';
             }
             backendService.updatePosting(this.props.match.params.id, updatedPosting)
@@ -63,8 +67,9 @@ class Posting extends Component {
             let posting = this.state.posting;
             if (posting.company_id === '') posting.company_id = this.state.companies[0].id;
             if (posting.recruiter_id === '') posting.recruiter_id = this.state.recruiters[0].id;
+            // set the expiry date to $expiryDate or '' depending on the status
             posting.expiry_date = posting.status === 'active'
-                ? expiryDate
+                ? expiryDate.toISOString()
                 : '';
             backendService.createPosting(posting)
                 .then(() => this.props.history.push(`/company/postings`))
