@@ -76,14 +76,14 @@ class SignUpBody extends Component {
                       noValidate>
                     <InputLabel className={'form-control'} data-toggle={'tooltip'} data-placement={'top'}
                                 title={'Wählen Sie bitte die Option, die am besten zu Ihrem Unternehmen passt'}
-                                label={'Unternehmen'}
+                                label={'Unternehmen *'}
                                 required
                                 value={this.state.name}
                                 onChange={(name) => this.setState({ name })}
                                 onBlur={this.checkUsername}
                                 errorMessage={'Bitte Unternehmensname auswählen'}
                     />
-                    <InputLabel label={'Email'}
+                    <InputLabel label={'Email *'}
                                 required
                                 className={'form-control'}
                                 type={'email'}
@@ -176,7 +176,7 @@ class SignUpBody extends Component {
                 <form onSubmit={(event) => this.handleSubmit(1, event)}
                       noValidate>
                     <InputLabel
-                        label={'Kontaktperson'}
+                        label={'Kontaktperson *'}
                         className={'form-control'}
                         required
                         value={this.state.contact_name}
@@ -184,7 +184,7 @@ class SignUpBody extends Component {
                         errorMessage={'Kontaktperson ist ein Pflichtfeld'}/>
 
                     <InputLabel
-                        label={'Telefon'}
+                        label={'Telefon *'}
                         className={'form-control'}
                         required
                         type={'tel'}
@@ -193,7 +193,7 @@ class SignUpBody extends Component {
                         errorMessage={'Telefonnummer ist ein Pflichtfeld'}/>
 
                     <InputLabel
-                        label={'Website'}
+                        label={'Website *'}
                         required
                         type={'url'}
                         className={'form-control'}
@@ -203,7 +203,7 @@ class SignUpBody extends Component {
 
                     <div className='form-group row'>
                         <label htmlFor={'address'} className='col-4 col-form-label'>
-                            Ihre Adresse in München und Umgebung
+                            Ihre Adresse in München und Umgebung *
                         </label>
                         <div className='col-8'>
                             <textarea

@@ -108,20 +108,20 @@ class Profile extends Component {
                                     </label>
                                 </div>
                                 <div className='col-8 offset-4'>
-                                    <button type={'button'} className={'btn btn-primary'} data-toggle={'modal'}
+                                    <button type={'button'} className={'btn btn-light'} data-toggle={'modal'}
                                             data-target={'#changePassword'}>
                                         Passwort ändern
                                     </button>
                                 </div>
                                 <div>
                                     <input type={'submit'}
-                                           className={'btn btn-success float-right buttons-form'}
+                                           className={'btn btn-primary float-right buttons-form'}
                                            value={'Speichern'}/>
                                 </div>
                             </form>
                         )}
                     <div className={'float-right'}>
-                        <button className={'btn btn-warning buttons-form'}
+                        <button className={'btn btn-secondary buttons-form'}
                                 onClick={() => this.props.history.push('/company/home')}>
                             Abbrechen
                         </button>

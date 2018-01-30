@@ -148,7 +148,7 @@ class Posting extends Component {
                                 <div>
                                     <div>
                                         <InputLabel
-                                            label={'Titel'}
+                                            label={'Titel *'}
                                             required
                                             value={this.state.posting.title}
                                             onChange={(title) => this.setState({
@@ -179,7 +179,7 @@ class Posting extends Component {
                                         </div>
                                         }
                                         <InputLabel
-                                            label={'Standort'}
+                                            label={'Standort *'}
                                             required
                                             value={this.state.posting.place_of_employment}
                                             onChange={(place_of_employment) => this.setState({
@@ -263,7 +263,7 @@ class Posting extends Component {
                                             </div>
                                         </div>
                                         <InputLabel
-                                            label={'Wochenstunden'}
+                                            label={'Wochenstunden *'}
                                             required
                                             value={this.state.posting.working_hours}
                                             onChange={(working_hours) => this.setState({
@@ -307,14 +307,14 @@ class Posting extends Component {
                                             </div>
                                         </div>
                                         <InputLabel
-                                            label={'Bewerbungslink'}
+                                            label={'Bewerbungslink *'}
                                             type={'url'}
                                             required={true}
                                             value={this.state.posting.application_link}
                                             onChange={(application_link) => this.setState({
                                                 posting: Object.assign({}, this.state.posting, { application_link })
                                             })}
-                                            errorMessage={'Bitte eine valide URL eingeben'}/>
+                                            errorMessage={'Bitte eine valide URL eingeben (Format: http://www.xxxx.xx)'}/>
                                         <div className={'form-group row'}>
                                             <label className={'col-4 col-form-label'}>
                                                 Recruiter
@@ -461,15 +461,15 @@ class Posting extends Component {
                                                 negativeText={'Abbrechen'}/>
                                         </span>
                                         }
-                                        <button type={'button'} className={'btn btn-warning buttons-form'}
+                                        <button type={'button'} className={'btn btn-secondary buttons-form'}
                                                 onClick={() => this.props.history.goBack()}>
                                             {this.state.create ? 'Abbrechen' : 'Zurück'}
                                         </button>
-                                        <button id={'preview'} className={'btn btn-primary button-form'}
+                                        <button id={'preview'} className={'btn btn-light button-form'}
                                                 onClick={this.handleSubmit}>
                                             Vorschau
                                         </button>
-                                        <button className={'btn btn-success buttons-form'}>
+                                        <button className={'btn btn-primary buttons-form'}>
                                             Speichern
                                         </button>
                                     </div>

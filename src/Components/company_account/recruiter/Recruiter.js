@@ -103,7 +103,7 @@ class Recruiter extends Component {
                                 {this.state.recruiter &&
                                 <div>
                                     <InputLabel
-                                        label={'Name'}
+                                        label={'Name *'}
                                         required
                                         value={this.state.recruiter.recruiter_name}
                                         onChange={(recruiter_name) => this.setState({
@@ -111,7 +111,7 @@ class Recruiter extends Component {
                                         })}
                                         errorMessage={'Name ist ein Pflichtfeld'}/>
                                     <InputLabel
-                                        label={'Email'}
+                                        label={'Email *'}
                                         required
                                         type={'Email'}
                                         value={this.state.recruiter.recruiter_email}
@@ -132,7 +132,7 @@ class Recruiter extends Component {
                                             recruiter: Object.assign({}, this.state.recruiter, { phone })
                                         })}/>
                                     <InputLabel
-                                        label={'Position'}
+                                        label={'Position *'}
                                         required
                                         value={this.state.recruiter.position}
                                         onChange={(position) => this.setState({
@@ -176,7 +176,7 @@ class Recruiter extends Component {
                                         onChange={(xing) => this.setState({
                                             recruiter: Object.assign({}, this.state.recruiter, { xing })
                                         })}
-                                        errorMessage={'Bitte eine valide URL eingeben'}/>
+                                        errorMessage={'Bitte eine valide URL eingeben (Format: http://www.xxxx.xx)'}/>
                                     <InputLabel
                                         label={'LinkedIn-Profil'}
                                         type={'url'}
@@ -184,7 +184,7 @@ class Recruiter extends Component {
                                         onChange={(linked_in) => this.setState({
                                             recruiter: Object.assign({}, this.state.recruiter, { linked_in })
                                         })}
-                                        errorMessage={'Bitte eine valide URL eingeben'}/>
+                                        errorMessage={'Bitte eine valide URL eingeben (Format: http://www.xxxx.xx)'}/>
                                     <div className='float-right'>
                                         {!this.state.create &&
                                         <span>
@@ -204,15 +204,15 @@ class Recruiter extends Component {
                                                 negativeText={'Abbrechen'}/>
                                         </span>
                                         }
-                                        <button type={'button'} className={'btn btn-warning buttons-form'}
+                                        <button type={'button'} className={'btn btn-secondary buttons-form'}
                                                 onClick={() => this.props.history.goBack()}>
                                             {this.state.create ? 'Abbrechen' : 'Zurück'}
                                         </button>
-                                        <button id={'preview'} className={'btn btn-primary button-form'}
+                                        <button id={'preview'} className={'btn btn-light button-form'}
                                                 onClick={this.handleSubmit}>
                                             Vorschau
                                         </button>
-                                        <button className={'btn btn-success buttons-form'}>
+                                        <button className={'btn btn-primary buttons-form'}>
                                             Speichern
                                         </button>
                                     </div>

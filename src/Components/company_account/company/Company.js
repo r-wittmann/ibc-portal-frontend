@@ -104,7 +104,7 @@ class Company extends Component {
                                 {this.state.company &&
                                 <div>
                                     <InputLabel
-                                        label={'Unternehmensname'}
+                                        label={'Unternehmensname *'}
                                         required
                                         value={this.state.company.company_name}
                                         onChange={(company_name) => this.setState({
@@ -113,7 +113,7 @@ class Company extends Component {
                                         errorMessage={'Unternehmensname ist ein Pflichtfeld'}/>
                                     <div className='form-group row'>
                                         <label htmlFor={'address'} className='col-4 col-form-label'>
-                                            Adresse in München
+                                            Adresse in München *
                                         </label>
                                         <div className='col-8'>
                                             <textarea
@@ -155,13 +155,14 @@ class Company extends Component {
                                         </div>
                                     </div>
                                     <InputLabel
-                                        label={'Webseite'}
+                                        label={'Webseite *'}
                                         required
+                                        type={'url'}
                                         value={this.state.company.website}
                                         onChange={(website) => this.setState({
                                             company: Object.assign({}, this.state.company, { website })
                                         })}
-                                        errorMessage={'Bitte eine valide URL eingeben'}/>
+                                        errorMessage={'Bitte eine valide URL eingeben (Format: http://www.xxxx.xx)'}/>
                                     <InputLabel
                                         label={'kununu Link'}
                                         value={this.state.company.kununu}
@@ -169,7 +170,7 @@ class Company extends Component {
                                             company: Object.assign({}, this.state.company, { kununu })
                                         })}/>
                                     <InputLabel
-                                        label={'Haupttätigkeitsbereich'}
+                                        label={'Haupttätigkeitsbereich *'}
                                         required
                                         value={this.state.company.field_of_activity}
                                         onChange={(field_of_activity) => this.setState({
@@ -230,15 +231,15 @@ class Company extends Component {
                                                 negativeText={'Abbrechen'}/>
                                         </span>
                                         }
-                                        <button type={'button'} className={'btn btn-warning buttons-form'}
+                                        <button type={'button'} className={'btn btn-secondary buttons-form'}
                                                 onClick={() => this.props.history.goBack()}>
                                             {this.state.create ? 'Abbrechen' : 'Zurück'}
                                         </button>
-                                        <button id={'preview'} className={'btn btn-primary button-form'}
+                                        <button id={'preview'} className={'btn btn-light button-form'}
                                                 onClick={this.handleSubmit}>
                                             Vorschau
                                         </button>
-                                        <button className={'btn btn-success buttons-form'}>
+                                        <button className={'btn btn-primary buttons-form'}>
                                             Speichern
                                         </button>
                                     </div>

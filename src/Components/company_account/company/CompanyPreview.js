@@ -107,11 +107,11 @@ class CompanyPreview extends Component {
                 </div>
                 }
                 <div className='float-right'>
-                    <button type={'button'} className={'btn btn-warning buttons-form'}
+                    <button type={'button'} className={'btn btn-secondary buttons-form'}
                             onClick={this.props.endPreview}>
                         Zurück
                     </button>
-                    <button className={'btn btn-success buttons-form'}
+                    <button className={'btn btn-primary buttons-form'}
                             onClick={this.props.primaryAction}>
                         {this.props.primaryActionText}
                     </button>

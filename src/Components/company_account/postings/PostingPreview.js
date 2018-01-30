@@ -24,12 +24,50 @@ class PostingPreview extends Component {
     }
 
     render() {
+        console.log(this.state.company);
         return (
             <div>
-                <div className={'container mt-0 mt-sm-4 mb-0 mb-sm-4 p-5'} style={{ backgroundColor: 'white' }}>
-                    {!this.props.posting || !this.state.company || !this.state.recruiter
+
+            {!this.props.posting || !this.state.company || !this.state.recruiter
                         ? <div className={'loader'}/>
                         : <div>
+
+            <h1>Listenansicht</h1>
+
+            <div className={'col-12 col-sm-10 col-md-6 col-lg-4 offset-0 offset-sm-1 offset-md-0'}>
+                <div className={'card text-center'} style={{ height: 320, marginBottom: 15 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 128 }}>
+                        {this.state.company.logo &&
+                        <Link to={'/companies/' + this.props.posting.company_id}>
+                            <img src={this.state.company.logo}
+                                 style={{ maxWidth: 200, maxHeight: 100 }}
+                                 alt={'Card cap'}/>
+                        </Link>
+                        }
+                    </div>
+                    <div className={'card-body'}
+                         style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around' }}>
+                        <h5 className={'card-title'}>
+                            <Link to={`/postings/${this.props.posting.id}`}>
+                                {this.props.posting.title}
+                            </Link>
+                        </h5>
+                        <h6 className={'card-subtitle mb-2 text-muted'}><span
+                            className={'fa fa-map-marker'}/> {this.props.posting.place_of_employment} &nbsp; <span
+                            className={'fa fa-calendar-alt'}/> {translate.startOfEmployment(this.props.posting.start_of_employment)}
+                        </h6>
+                        <p className={'card-text'}>
+                            <Link to={`/postings/${this.props.posting.id}`} className={'btn btn-primary'}>Mehr
+                                Details</Link>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        <h1>Detailansicht</h1>
+
+
+                <div className={'container mt-0 mt-sm-4 mb-0 mb-sm-4 p-5'} style={{ backgroundColor: 'white' }}>
                             <div className={'row'}>
                                 <div className={'d-none d-sm-none d-md-block col-md-8 my-auto'}>
                                     <h2>{this.props.posting.title.toUpperCase()}</h2>
@@ -276,20 +314,22 @@ class PostingPreview extends Component {
                                 </div>
                             </div>
                         </div>
-                    }
-                    <div className='float-right'>
-                        <button type={'button'} className={'btn btn-warning buttons-form'}
+
+                         <div className='float-right'>
+                        <button type={'button'} className={'btn btn-secondary buttons-form'}
                                 onClick={this.props.endPreview}>
                             Zurück
                         </button>
 
-                        <button type={'button'} className={'btn btn-success buttons-form'}
+                        <button type={'button'} className={'btn btn-primary buttons-form'}
                                 onClick={this.props.primaryAction}>
                             {this.props.primaryActionText}
                         </button>
                     </div>
 
                 </div>
+                    }
+                   
             </div>
         );
     }
