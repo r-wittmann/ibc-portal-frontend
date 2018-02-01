@@ -4,6 +4,7 @@ import draftToHtml from 'draftjs-to-html';
 import Header from '../Header';
 import translate from '../../../translationService';
 import { Link } from 'react-router-dom';
+import queryString from 'query-string';
 
 class PublicCompany extends Component {
 
@@ -18,7 +19,10 @@ class PublicCompany extends Component {
     componentDidMount() {
         this.setState({ loading: true });
         backendService.getPublicCompanyById(this.props.match.params.id)
-            .then(company => this.setState({ company, loading: false }));
+            .then(company => {
+                this.setState({ company, loading: false });
+                location.hash = queryString.stringify({ company: company.company_name.replace(/ /g, '_') });
+            })
     }
 
     render() {

@@ -4,6 +4,7 @@ import draftToHtml from 'draftjs-to-html';
 import Header from '../Header';
 import translate from '../../../translationService';
 import { Link } from 'react-router-dom';
+import queryString from 'query-string';
 
 class PublicPosting extends Component {
     constructor(props) {
@@ -17,7 +18,13 @@ class PublicPosting extends Component {
     componentDidMount() {
         this.setState({ loading: true });
         backendService.getPublicPostingById(this.props.match.params.id)
-            .then(posting => this.setState({ posting, loading: false }));
+            .then(posting => {
+                this.setState({ posting, loading: false });
+                location.hash = queryString.stringify({
+                    title: posting.title.replace(/ /g, '_'),
+                    company: posting.company_name.replace(/ /g, '_')
+                });
+            });
     }
 
     render() {
