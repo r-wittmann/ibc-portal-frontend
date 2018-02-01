@@ -23,11 +23,11 @@ class RegistrationListItem extends Component {
                 <td>
                     <div className={'btn-group'}>
                         <button className={'btn btn-outline-dark'}
-                                onClick={() => this.props.handleAccept(this.props.account.id, this.props.account.company_type)}>
+                                onClick={(event) => this.props.handleAccept(event, this.props.account.id, this.props.account.company_type)}>
                             <span className={'fa fa-check'}/>
                         </button>
                         <button className={'btn btn-outline-dark'}
-                                onClick={() => this.props.handleDecline(this.props.account.id)}>
+                                onClick={(event) => this.props.handleDecline(event, this.props.account.id)}>
                             <span className={'fa fa-times'}/>
                         </button>
                     </div>

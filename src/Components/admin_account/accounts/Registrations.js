@@ -63,7 +63,7 @@ class Registrations extends Component {
         });
     };
 
-    acceptRegistration = (id, companyType) => {
+    acceptRegistration = (event, id, companyType) => {
         event.preventDefault();
         backendService.acceptAccount(id, companyType)
             .then(() => this.setState({
@@ -73,7 +73,7 @@ class Registrations extends Component {
             .catch(() => toast('Es ist ein Fehler aufgetreten', { type: 'error' }));
     };
 
-    declineRegistration = (id) => {
+    declineRegistration = (event, id) => {
         event.preventDefault();
         backendService.declineAccount(id)
             .then(() => this.sendEmail(this.state.registeredAccounts.find(account => account.id === id)))
