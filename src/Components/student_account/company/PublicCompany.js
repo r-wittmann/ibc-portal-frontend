@@ -65,7 +65,7 @@ class PublicCompany extends Component {
                                                 <span className={'fa fa-info-circle'}/>
                                             </div>
                                             <div className={'col-10'}>
-                                                <Link to={this.state.company.website}>
+                                                <Link to={this.state.company.website} target={'_blank'}>
                                                     {this.state.company.website.split('//')[1]}
                                                 </Link>
                                             </div>
