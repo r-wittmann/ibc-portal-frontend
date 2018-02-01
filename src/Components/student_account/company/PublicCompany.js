@@ -21,7 +21,9 @@ class PublicCompany extends Component {
         backendService.getPublicCompanyById(this.props.match.params.id)
             .then(company => {
                 this.setState({ company, loading: false });
-                location.hash = queryString.stringify({ company: company.company_name.replace(/ /g, '_') });
+                this.props.history.replace(location.pathname.split('/').pop() + '#' +  queryString.stringify({
+                    company: company.company_name.replace(/ /g, '_')
+                }));
             })
     }
 

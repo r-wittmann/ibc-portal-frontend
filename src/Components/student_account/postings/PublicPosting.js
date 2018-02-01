@@ -20,10 +20,10 @@ class PublicPosting extends Component {
         backendService.getPublicPostingById(this.props.match.params.id)
             .then(posting => {
                 this.setState({ posting, loading: false });
-                location.hash = queryString.stringify({
+                this.props.history.replace(location.pathname.split('/').pop() + '#' +  queryString.stringify({
                     title: posting.title.replace(/ /g, '_'),
                     company: posting.company_name.replace(/ /g, '_')
-                });
+                }));
             });
     }
 
