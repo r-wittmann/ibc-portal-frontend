@@ -95,13 +95,13 @@ class Profile extends Component {
                                 </button>
                             </div>
                             <div>
-                                <input type={'submit'} className={'btn btn-success float-right buttons-form'}
+                                <input type={'submit'} className={'btn btn-primary float-right buttons-form'}
                                        value={'Speichern'}/>
                             </div>
                         </form>
                     }
                     <div className={'float-right'}>
-                        <button className={'btn btn-warning buttons-form'}
+                        <button className={'btn btn-secondary buttons-form'}
                                 onClick={() => this.props.history.goBack()}>Abbrechen
                         </button>
                     </div>
