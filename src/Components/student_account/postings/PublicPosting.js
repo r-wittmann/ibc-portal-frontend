@@ -65,7 +65,8 @@ class PublicPosting extends Component {
                                 <div className={'d-sm-block d-md-none'}>
                                     <div className={'col-8 offset-2 mb-4'}>
                                         <Link className={'btn btn-block btn-primary'} style={{ marginBottom: 20 }}
-                                              to={this.state.posting.application_link} target={'_blank'}>
+                                              to={this.state.posting.application_link} target={'_blank'}  
+                                              onClick={javascript:_gaq.push(['_trackEvent', 'Button', 'klick','Bewerbung',1])}
                                             Bewerben
                                         </Link>
                                     </div>
